@@ -1,0 +1,51 @@
+/* 
+npm i -D -E \
+  eslint prettier \
+  eslint-config-airbnb eslint-config-prettier  \
+  eslint-plugin-import \
+  eslint-config-airbnb-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-import-resolver-typescript
+*/
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": ["airbnb/base", "airbnb-typescript/base", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "import/order": [
+      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
+      "warn",
+      {
+        "alphabetize": { "order": "desc", "caseInsensitive": false },
+        "groups": [
+          "type",
+          "object",
+          ["builtin", "external"],
+          ["internal", "parent", "sibling", "index"]
+        ],
+        "newlines-between": "always",
+        "pathGroups": [
+          { "pattern": "@/**", "group": "internal", "position": "before" }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      // https://github.com/alexgorbatchev/eslint-import-resolver-typescript
+      "typescript": {
+        "alwaysTryTypes": true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+        "project": ["./tsconfig.json"]
+      }
+    }
+  }
+}
