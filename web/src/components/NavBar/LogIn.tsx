@@ -26,11 +26,13 @@ function LogIn() {
       // si no hay cuenta conectamos
       try {
         activate(injected).then(() => {
-          setLoading(false);
-          Swal.fire({
-            title: "Wallet connected",
-            icon: "success",
-          });
+          setLoading(false)
+          if(account){
+            Swal.fire({
+              title: "Wallet connected",
+              icon: "success",
+            });
+          }
         });
       } catch (e: any) {
         setError(e);
