@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import SearchBar from "../SearchBar/SearchBar";
 import Link from "next/link";
+import LogIn from "./LogIn";
 const NavBar = () => {
   return (
     <Flex
@@ -26,17 +27,7 @@ const NavBar = () => {
           padding={1}
           marginRight={450}
         >
-          <Button //login button
-            variant="solid"
-            colorScheme="pink"
-            isLoading={false}
-            h={50}
-            w={100}
-            fontSize={25}
-            fontWeight={700}
-          >
-            Login
-          </Button>
+          <LogIn />
         </Flex>
         <Link href="/help" passHref>
           <Text
