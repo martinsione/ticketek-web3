@@ -4,15 +4,18 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
 import { IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 
-import injected from "../../Wallet/connector";
+import injected from "../Wallet/connector";
 
 function LogIn() {
   const router = useRouter();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
+
   const [metamask, setMetamask] = useState(false);
   const [setError] = useState<any>();
+
 
   useEffect(() => {
     setMetamask(window.ethereum && true);
@@ -25,6 +28,7 @@ function LogIn() {
     else if (!account) {
       // si no hay cuenta conectamos
       try {
+
         activate(injected).then(() => {
           setLoading(false)
           if(account){
@@ -36,6 +40,8 @@ function LogIn() {
         });
       } catch (e: any) {
         setError(e);
+
+    
       }
     }
     // si hay cuenta desconectamos
@@ -43,24 +49,25 @@ function LogIn() {
       try {
         deactivate();
         setLoading(false);
-        Swal.fire({
-          title: "Wallet disconected",
-          icon: "success",
-          iconColor: "orange",
-        });
-      } catch (e: any) {
-        setError(e);
+      } catch (e) {
+        setError(true);
       }
     }
   };
 
   return (
-    <IconButton
-      aria-label=""
-      icon={account ? <FaUserCircle /> : <FaUser />}
+    <Button
+      variant="solid"
+      colorScheme="pink"
+      h={50}
+      w={100}
+      fontSize={25}
+      fontWeight={700}
       isLoading={loading}
       onClick={handleConnect}
-    />
+    >
+      Login
+    </Button>
   );
 }
 

@@ -1,7 +1,7 @@
-import { Box } from "@chakra-ui/react";
+import NavBar from "../components/NavBar/NavBar";
 
 const Home = () => {
-  return <Box textStyle="h1">Home</Box>;
+  return <NavBar />;
 };
 
 export default Home;
