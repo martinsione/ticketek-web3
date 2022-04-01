@@ -16,7 +16,6 @@ function LogIn() {
 
   const [error, setError] = useState(false);
 
-
   useEffect(() => {
     setMetamask(window.ethereum && true);
   }, []);
@@ -37,8 +36,8 @@ function LogIn() {
             });
           }
         });
-      } catch (e: any)
-       setError(true);
+      } catch (e: any) {
+        setError(true);
       }
     }
     // si hay cuenta desconectamos
