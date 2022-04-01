@@ -1,51 +1,53 @@
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
-import SearchBar from "../SearchBar/SearchBar";
 import Link from "next/link";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+
 import LogIn from "./LogIn";
-const NavBar = () => {
+import SearchBar from "../SearchBar/SearchBar";
+
+function NavBar() {
   return (
     <Flex
       bg="#f00"
-      h={600}
-      w="100%"
       bgGradient="linear(to-r, green.200, pink.500)"
-      overflow={"hidden"}
+      flexDirection="column"
+      h={600}
+      overflow="hidden"
       position="relative"
-      flexDirection={"column"}
+      w="100%"
     >
-      <Flex //nav bar
-        w={"100%"}
-        h={100}
+      <Flex // nav bar
         alignItems="center"
+        h={100}
         justifyContent="flex-end"
+        w="100%"
       >
         <Flex // Login button container
-          cursor="pointer"
-          alignItems={"center"}
-          justifyContent="center"
+          alignItems="center"
           borderRadius={10}
-          padding={1}
+          cursor="pointer"
+          justifyContent="center"
           marginRight={450}
+          padding={1}
         >
           <LogIn />
         </Flex>
-        <Link href="/help" passHref>
+        <Link passHref href="/help">
           <Text
-            fontSize={25}
-            fontWeight={800}
             color="white"
             cursor="pointer"
+            fontSize={25}
+            fontWeight={800}
             marginRight={70}
           >
             Help
           </Text>
         </Link>
-        <Link href="/about" passHref>
+        <Link passHref href="/about">
           <Text
-            fontSize={25}
-            fontWeight={800}
             color="white"
             cursor="pointer"
+            fontSize={25}
+            fontWeight={800}
             marginRight={70}
           >
             About us
@@ -53,51 +55,51 @@ const NavBar = () => {
         </Link>
         <SearchBar />
       </Flex>
-      <Box //container of "more than tickets"
-        w={800}
-        h={400}
-        position="absolute"
-        left="0"
-        bottom="0"
-        marginLeft={50}
-        marginBottom={50}
-        borderRadius={100}
-        overflow="hidden"
+      <Box // container of "more than tickets"
         bg="rgb(167, 138, 173)"
+        borderRadius={100}
+        bottom="0"
+        h={400}
+        left="0"
+        marginBottom={50}
+        marginLeft={50}
+        overflow="hidden"
+        position="absolute"
+        w={800}
       >
         <Box>
           <Text // text "more than tickets"
+            color="white"
             fontSize={40}
             fontWeight={800}
-            color="white"
             marginLeft={90}
             marginTop={30}
           >
             More than just tickets.
           </Text>
-          <Text marginLeft={90} fontSize={20} color="white" fontWeight={600}>
+          <Text color="white" fontSize={20} fontWeight={600} marginLeft={90}>
             Purchase your NFT ticket today, hold it forever
           </Text>
         </Box>
-        <Image src={"/wave.svg"} position="absolute" bottom={0} />
+        <Image bottom={0} position="absolute" src="/wave.svg" />
       </Box>
-      <Image //svg of people cheering
-        src="/crowd3.svg"
+      <Image // svg of people cheering
         alt="crowd3"
-        position={"absolute"}
-        right={0}
         bottom={-320}
+        position="absolute"
+        right={0}
+        src="/crowd3.svg"
         w={800}
       />
       <Image // second svg of people cheering
-        src="/crowd2.svg"
         alt="crowd2"
-        position={"absolute"}
-        right={800}
         bottom={-350}
+        position="absolute"
+        right={800}
+        src="/crowd2.svg"
         w={300}
       />
     </Flex>
   );
-};
+}
 export default NavBar;

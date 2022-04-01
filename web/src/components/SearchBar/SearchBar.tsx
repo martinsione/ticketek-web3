@@ -1,20 +1,20 @@
 import { Flex, Image, Input } from "@chakra-ui/react";
 
-const SearchBar = () => {
+function SearchBar() {
   return (
     <Flex
-      bg="gray.200"
-      w={400}
-      h={50}
-      borderRadius="30"
       alignItems="center"
+      bg="gray.200"
+      borderRadius="30"
+      h={50}
       justifyContent="flex-start"
       marginRight={200}
+      w={400}
     >
-      <Image src="/searchIcon.svg" alt="search" w={19} marginLeft={30} />
-      <Input placeholder="Search" w="200" />
+      <Image alt="search" marginLeft={30} src="/searchIcon.svg" w={19} />
+      <Input placeholder="Buscar eventos, escenarios o artistas" w="200" />
     </Flex>
   );
-};
+}
 
 export default SearchBar;

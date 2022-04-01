@@ -3,8 +3,7 @@ import { FaUser, FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
-import { IconButton } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { IconButton, Button } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
 
@@ -14,7 +13,9 @@ function LogIn() {
   const [loading, setLoading] = useState(false);
 
   const [metamask, setMetamask] = useState(false);
+
   const [error, setError] = useState(false);
+
 
   useEffect(() => {
     setMetamask(window.ethereum && true);
@@ -36,8 +37,8 @@ function LogIn() {
             });
           }
         });
-      } catch (e: any) {
-        setError(true);
+      } catch (e: any)
+       setError(true);
       }
     }
     // si hay cuenta desconectamos
@@ -58,13 +59,13 @@ function LogIn() {
 
   return (
     <Button
-      variant="solid"
       colorScheme="pink"
-      h={50}
-      w={100}
       fontSize={25}
       fontWeight={700}
+      h={50}
       isLoading={loading}
+      variant="solid"
+      w={100}
       onClick={handleConnect}
     >
       Login

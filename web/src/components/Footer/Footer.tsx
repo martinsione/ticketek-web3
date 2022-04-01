@@ -1,7 +1,3 @@
-
-const Card = () => {
-    return (
-        <h1>Card</h1>
-    )
+export default function Footer() {
+  return <h1>Footer</h1>;
 }
-export default Card
