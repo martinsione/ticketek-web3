@@ -14,8 +14,7 @@ function LogIn() {
   const [loading, setLoading] = useState(false);
 
   const [metamask, setMetamask] = useState(false);
-  const [setError] = useState<any>();
-
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     setMetamask(window.ethereum && true);
@@ -28,10 +27,9 @@ function LogIn() {
     else if (!account) {
       // si no hay cuenta conectamos
       try {
-
         activate(injected).then(() => {
-          setLoading(false)
-          if(account){
+          setLoading(false);
+          if (account) {
             Swal.fire({
               title: "Wallet connected",
               icon: "success",
@@ -39,9 +37,7 @@ function LogIn() {
           }
         });
       } catch (e: any) {
-        setError(e);
-
-    
+        setError(true);
       }
     }
     // si hay cuenta desconectamos
@@ -49,7 +45,12 @@ function LogIn() {
       try {
         deactivate();
         setLoading(false);
-      } catch (e) {
+        Swal.fire({
+          title: "Wallet disconected",
+          icon: "success",
+          iconColor: "orange",
+        });
+      } catch (e: any) {
         setError(true);
       }
     }
