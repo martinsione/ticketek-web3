@@ -11,10 +11,9 @@ function LogIn() {
   const router = useRouter();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
-
   const [metamask, setMetamask] = useState(false);
-
   const [error, setError] = useState(false);
+  const estado: string = account ? "Disconnect" : "Login";
 
   useEffect(() => {
     setMetamask(window.ethereum && true);
@@ -67,7 +66,7 @@ function LogIn() {
       w={100}
       onClick={handleConnect}
     >
-      Login
+      {estado}
     </Button>
   );
 }
