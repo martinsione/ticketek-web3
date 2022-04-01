@@ -13,10 +13,10 @@ export function fakeEvents() {
 
   const event0: Event = {
     imageURL:
-      "https://s1.ticketm.net/dam/a/6ed/8f781d8c-ab5a-4b78-b22b-d97f74f076ed_1166671_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
-    artist: "Jesus and Mary Chain",
-    location: "Estadio Central",
-    city: "Buenos Aires",
+      "https://imagenes.elpais.com/resizer/uH9SGrtzfjp_NHQBiwyNsCesEn0=/1960x0/filters:focal(3632x1874:3642x1884)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/2SYY662JDFGLLCAEM6VWAGV6BY.jpg",
+    artist: "Delfin hasta el fin",
+    location: "Madison Square Garden",
+    city: "New York",
     type: "concierto",
     date: "3 ago 2022",
     tickets_available: 100,
