@@ -39,7 +39,15 @@ contract Ticket is ERC721, Ownable {
         eventDate = newEventDate;
     }
 
+    function getDate() public view returns (uint256) {
+        return eventDate;
+    }
+
     function changePlace(string memory newPlace) public onlyOwner {
         place = newPlace;
+    }
+
+    function getPlace() public view returns (string memory) {
+        return place;
     }
 }
