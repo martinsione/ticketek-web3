@@ -12,7 +12,7 @@ interface Props {
   range: [number, number];
 }
 
-const adrress: string = '0xfdAaeeaD0c2b78E5B06a650D8271dE0A30CE24F2'
+const adrress: string = '0x945eD39416121076ADB07c493e306b6D9E541b09'
 
 const web = new Web3('https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f')
 
@@ -33,9 +33,16 @@ export default function EventCardViewer({ title, range }: Props) {
   const [min, max] = range;
   const [namecontrato, setNamecontrato] = useState("")
   const [symbol, setSymbol] = useState("")
+  const [place, setPlace] = useState("")
+  const [eventDate, setEventDate] = useState("")
+
 
   contract.methods.name().call().then(res => setNamecontrato(res))
   contract.methods.symbol().call().then(res => setSymbol(res))
+  contract.methods.place().call().then(res => setPlace(res))
+  contract.methods.eventDate().call().then(res => setEventDate(res))
+
+
 
   return (
     <div>
@@ -51,6 +58,8 @@ export default function EventCardViewer({ title, range }: Props) {
         >
           <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
+          <h1>{place}</h1>
+          <h1>{eventDate}</h1>
           {events.map(
             (ev, ndx) =>
               ndx >= min &&
