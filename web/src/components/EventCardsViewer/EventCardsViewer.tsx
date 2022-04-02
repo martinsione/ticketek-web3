@@ -36,13 +36,27 @@ export default function EventCardViewer({ title, range }: Props) {
   const [place, setPlace] = useState("")
   const [eventDate, setEventDate] = useState("")
 
-
   contract.methods.name().call().then(res => setNamecontrato(res))
   contract.methods.symbol().call().then(res => setSymbol(res))
   contract.methods.place().call().then(res => setPlace(res))
   contract.methods.eventDate().call().then(res => setEventDate(res))
 
+  const unixTimestamp: string = eventDate
 
+  const milliseconds = Number(unixTimestamp) * 1000
+
+  const dateObject = new Date(milliseconds)
+
+  const humanDateFormat = dateObject.toLocaleString().split(" ")[0] // 2019-12-9 10:30:15
+
+  // dateObject.toLocaleString("en-US", { weekday: "long" }) // Monday
+  // dateObject.toLocaleString("en-US", { month: "long" }) // December
+  // dateObject.toLocaleString("en-US", { day: "numeric" }) // 9
+  // dateObject.toLocaleString("en-US", { year: "numeric" }) // 2019
+  // dateObject.toLocaleString("en-US", { hour: "numeric" }) // 10 AM
+  // dateObject.toLocaleString("en-US", { minute: "numeric" }) // 30
+  // dateObject.toLocaleString("en-US", { second: "numeric" }) // 15
+  // dateObject.toLocaleString("en-US", { timeZoneName: "short" }) // 12/9/2019, 10:30:15 AM CST
 
   return (
     <div>
@@ -59,7 +73,7 @@ export default function EventCardViewer({ title, range }: Props) {
           <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
           <h1>{place}</h1>
-          <h1>{eventDate}</h1>
+          <h1>{humanDateFormat}</h1>
           {events.map(
             (ev, ndx) =>
               ndx >= min &&
