@@ -9,8 +9,18 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Ticket is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
+    uint256 public eventDate;
+    string public place;
 
-    constructor(string memory name, string memory symb) ERC721(name, symb) {}
+    constructor(
+        string memory name,
+        string memory symb,
+        string memory _place,
+        uint256 _eventDate
+    ) ERC721(name, symb) {
+        eventDate = _eventDate;
+        place = _place;
+    }
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
@@ -23,5 +33,13 @@ contract Ticket is ERC721, Ownable {
         uint256 tokenId = _tokenIdCounter.current();
         console.log(tokenId);
         _safeMint(msg.sender, tokenId);
+    }
+
+    function changeDate(uint256 newEventDate) public onlyOwner {
+        eventDate = newEventDate;
+    }
+
+    function changePlace(string memory newPlace) public onlyOwner {
+        place = newPlace;
     }
 }

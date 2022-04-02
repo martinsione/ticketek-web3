@@ -15,9 +15,14 @@ async function main() {
   // We get the contract to deploy
 
   const Ticket = await ethers.getContractFactory("Ticket");
-  const ticket = await Ticket.deploy("Queen", "QNN");
+  const ticket = await Ticket.deploy(
+    "Queen",
+    "QNN",
+    "Teatro Colón",
+    1648863014
+  );
   await ticket.deployed();
-  console.log("Greeter deployed to:", ticket.address);
+  console.log("Ticket deployed to:", ticket.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
