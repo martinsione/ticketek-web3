@@ -1,3 +1,4 @@
+import FilterBar from "../components/FilterBar/FilterBar";
 import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 
 function Home() {
@@ -5,6 +6,9 @@ function Home() {
 
   return (
     <div>
+      <nav>
+        <FilterBar />
+      </nav>
       <main>
         <EventCardViewer range={[0, 4]} title="Destacados" />
         <EventCardViewer range={[4, 8]} title="En tu ciudad" />
