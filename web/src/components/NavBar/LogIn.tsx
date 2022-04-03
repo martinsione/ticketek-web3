@@ -1,18 +1,14 @@
-import Swal from "sweetalert2";
-import { FaUser, FaUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
-import { IconButton, Button } from "@chakra-ui/react";
+import {  Button, useToast } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
 
 function LogIn() {
-  const router = useRouter();
+  const toast = useToast()
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
   const [metamask, setMetamask] = useState(false);
-  const [error, setError] = useState(false);
   const estado: string = account ? "Disconnect" : "Login";
 
   useEffect(() => {
@@ -22,36 +18,44 @@ function LogIn() {
   const handleConnect = () => {
     setLoading(true);
     // si no tiene metamask redireccionamos a que se instale
-    if (!metamask) router.push("https://metamask.io/download/");
+    if (!metamask) {
+      window.open("https://metamask.io/download/", "_blank")
+      setLoading(false)
+  }
     else if (!account) {
       // si no hay cuenta conectamos
-      try {
-        activate(injected).then(() => {
-          setLoading(false);
-          if (account) {
-            Swal.fire({
-              title: "Wallet connected",
-              icon: "success",
-            });
-          }
-        });
-      } catch (e: any) {
-        setError(true);
-      }
+        activate(injected, undefined, true).then(()=>{
+          setLoading(false)
+          toast({
+            title: 'Wallet connected',
+            status: 'success',
+            duration: 1000,
+            isClosable: true,
+          
+        })
+        },()=>{
+          setLoading(false)
+          toast({
+            title: 'Oops, something went wrong',
+            status: 'error',
+            duration: 1000,
+            isClosable: true,
+          
+        })})
+      
     }
     // si hay cuenta desconectamos
     if (account) {
-      try {
-        deactivate();
-        setLoading(false);
-        Swal.fire({
-          title: "Wallet disconected",
-          icon: "success",
-          iconColor: "orange",
-        });
-      } catch (e: any) {
-        setError(true);
-      }
+        deactivate()
+        setLoading(false)
+        toast({
+          title: 'Wallet disconected',
+          status: 'warning',
+          duration: 1000,
+          isClosable: true,
+        
+      })
+     
     }
   };
 
