@@ -1,9 +1,9 @@
 import Web3 from "web3";
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 import { fakeEvents } from "../fakeEvents";
-import { abi } from "../Ticket.json"
+import { abi } from "../Ticket.json";
 import Card from "../Card/Card";
 
 interface Props {
@@ -12,11 +12,13 @@ interface Props {
   range: [number, number];
 }
 
-const adrress: string = '0x945eD39416121076ADB07c493e306b6D9E541b09'
+const adrress: string = "0x945eD39416121076ADB07c493e306b6D9E541b09";
 
-const web = new Web3('https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f')
+const web = new Web3(
+  "https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f"
+);
 
-const contract = new web.eth.Contract(abi, adrress)
+const contract = new web.eth.Contract(abi, adrress);
 
 // const arrContratos = contract.methods.getArr().call().then(res)
 // // aqui traeriamos el arreglo con todos los contratitos
@@ -31,23 +33,35 @@ export default function EventCardViewer({ title, range }: Props) {
   const events = fakeEvents();
   // const events = fakeEvents().filter((ev) => ev.city === "Bogota");
   const [min, max] = range;
-  const [namecontrato, setNamecontrato] = useState("")
-  const [symbol, setSymbol] = useState("")
-  const [place, setPlace] = useState("")
-  const [eventDate, setEventDate] = useState("")
+  const [namecontrato, setNamecontrato] = useState("");
+  const [symbol, setSymbol] = useState("");
+  const [place, setPlace] = useState("");
+  const [eventDate, setEventDate] = useState("");
 
-  contract.methods.name().call().then(res => setNamecontrato(res))
-  contract.methods.symbol().call().then(res => setSymbol(res))
-  contract.methods.place().call().then(res => setPlace(res))
-  contract.methods.eventDate().call().then(res => setEventDate(res))
+  contract.methods
+    .name()
+    .call()
+    .then((res: SetStateAction<string>) => setNamecontrato(res));
+  contract.methods
+    .symbol()
+    .call()
+    .then((res: SetStateAction<string>) => setSymbol(res));
+  contract.methods
+    .place()
+    .call()
+    .then((res: SetStateAction<string>) => setPlace(res));
+  contract.methods
+    .eventDate()
+    .call()
+    .then((res: SetStateAction<string>) => setEventDate(res));
 
-  const unixTimestamp: string = eventDate
+  const unixTimestamp: string = eventDate;
 
-  const milliseconds = Number(unixTimestamp) * 1000
+  const milliseconds = Number(unixTimestamp) * 1000;
 
-  const dateObject = new Date(milliseconds)
+  const dateObject = new Date(milliseconds);
 
-  const humanDateFormat = dateObject.toLocaleString().split(" ")[0] // 2019-12-9 10:30:15
+  const humanDateFormat = dateObject.toLocaleString().split(" ")[0]; // 2019-12-9 10:30:15
 
   // dateObject.toLocaleString("en-US", { weekday: "long" }) // Monday
   // dateObject.toLocaleString("en-US", { month: "long" }) // December
@@ -64,12 +78,7 @@ export default function EventCardViewer({ title, range }: Props) {
         <Text borderBottom="2px" fontSize="3xl">
           {title}
         </Text>
-        <Flex
-          align="flex-start"
-          direction="row"
-          justify="space-around"
-          wrap="wrap"
-        >
+        <Flex align="center" direction="row" justify="flex-start" wrap="wrap">
           <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
           <h1>{place}</h1>

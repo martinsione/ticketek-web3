@@ -4,8 +4,8 @@ import { Web3ReactProvider } from "@web3-react/core";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import "../styles/globals.css";
-import Layout from "../components/estructura/Layout";
 import getLibrary from "../components/Wallet/library";
+import Footer from "../components/Footer/Footer";
 
 const theme = extendTheme({
   fonts: {
@@ -18,9 +18,8 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
       <ChakraProvider theme={theme}>
-        <Layout>
         <Component {...pageProps} />
-        </Layout>
+        <Footer />
       </ChakraProvider>
     </Web3ReactProvider>
   );
