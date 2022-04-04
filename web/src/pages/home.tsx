@@ -1,3 +1,4 @@
+import FilterBar from "../components/FilterBar/FilterBar";
 import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 import NavBar from "../components/NavBar/NavBar";
 
@@ -11,6 +12,7 @@ function Home({ json }: JSON) {
   return (
     <div>
       <NavBar long={false} />
+      <FilterBar />
       <main>
         <EventCardViewer range={[0, 3]} title="Destacados" json={json} />
         <EventCardViewer range={[4, 7]} title="En tu ciudad" json={json} />
