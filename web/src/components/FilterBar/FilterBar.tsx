@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Image, Input, Select } from "@chakra-ui/react";
+import { Flex, Input, Select } from "@chakra-ui/react";
 
 export default function filterBar() {
   // const dateInput = useRef();
