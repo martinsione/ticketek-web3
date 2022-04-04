@@ -2,7 +2,6 @@ import React from "react";
 import { Flex, Input, Select } from "@chakra-ui/react";
 
 export default function filterBar() {
-  // const dateInput = useRef();
   return (
     <div>
       <Flex
@@ -32,12 +31,10 @@ export default function filterBar() {
           name="date"
           p="10px"
           placeholder="Enter your date"
-          // ref={dateInput}
-          type="date"
+          type="text"
           w="15%"
-          // onBlur={() => (dateInput.current.type = "text")}
-          // onFocus={() => (dateInput.current.type = "date")}
-          // onFocus="(this.type='date')"
+          onBlur={(e) => (e.target.type = "text")}
+          onFocus={(e) => (e.target.type = "date")}
         />
         <Select bg="gray.100" borderRadius="30" name="city" p="10px" w="25%">
           <option>ALL CITIES</option>
