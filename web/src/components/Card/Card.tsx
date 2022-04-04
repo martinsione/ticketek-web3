@@ -104,7 +104,7 @@ export default function Card({ name, image, date, location, id }: Props) {
             <Text cursor="pointer">{date}</Text>
           </Link>
           <Link href={`/events/${id}`} passHref>
-            <Text cursor="pointer" color="blue" fontWeight={500}>
+            <Text cursor="pointer" fontWeight={500}>
               {location}
             </Text>
           </Link>
