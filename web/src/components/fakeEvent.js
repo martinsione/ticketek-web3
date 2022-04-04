@@ -5,11 +5,16 @@ export const data = [
     artist: "Delfin hasta el fin",
     location: "Madison Square Garden",
     city: "New York",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "United States",
     type: "concierto",
-    date: "3 ago 2022",
+    date: "2019-12-9",
     tickets_available: 100,
     tickets_left: 90,
     id: "1",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.010
   },
   {
     imageURL:
@@ -17,11 +22,16 @@ export const data = [
     artist: "Sepultura",
     location: "Estadio Central",
     city: "Buenos Aires",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Argentina",
     type: "concierto",
-    date: "3 ago 2022",
+    date: "2019-12-9",
     tickets_available: 100,
     tickets_left: 90,
     id: "2",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.040
   },
   {
     imageURL:
@@ -29,11 +39,16 @@ export const data = [
     artist: "Katy Perry",
     location: "Auditorio Maxx",
     city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "United States",
     type: "concierto",
-    date: "13 sep 2022",
+    date: "2019-12-9",
     tickets_available: 200,
     tickets_left: 70,
     id: "3",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015
   },
   {
     imageURL:
@@ -41,11 +56,16 @@ export const data = [
     artist: "Weird Al Yankovic",
     location: "Bar Las palomas",
     city: "Bogotá",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 ene 2023",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 40,
     id: "4",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.050
   },
   {
     imageURL:
@@ -53,11 +73,16 @@ export const data = [
     artist: "Fatboy Slim",
     location: "Auditorio Imaginario",
     city: "Bogotá",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "30 dic 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "5",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005
   },
   {
     imageURL:
@@ -65,11 +90,16 @@ export const data = [
     artist: "Pixies",
     location: "Estadio Mundial",
     city: "Buenos Aires",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Argentina",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "6",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.045
   },
   {
     imageURL:
@@ -77,11 +107,16 @@ export const data = [
     artist: "Kiss",
     location: "Tu mente",
     city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "7",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005
   },
   {
     imageURL:
@@ -89,11 +124,16 @@ export const data = [
     artist: "Olivia Rodrigo",
     location: "Tu mente",
     city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "8",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.035
   },
   {
     imageURL:
@@ -101,11 +141,16 @@ export const data = [
     artist: "Raime",
     location: "Bar El tufo",
     city: "Bogotá",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "9",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.025
   },
   {
     imageURL:
@@ -113,11 +158,16 @@ export const data = [
     artist: "Milli Vanilli",
     location: "Matik Matik",
     city: "Bogotá",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "10",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015
   },
   {
     imageURL:
@@ -125,11 +175,16 @@ export const data = [
     artist: "Babymetal",
     location: "Café Tin",
     city: "Buenos Aires",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Argentina",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "11",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.010
   },
   {
     imageURL:
@@ -137,10 +192,15 @@ export const data = [
     artist: "Blackpink",
     location: "Estadio El Campín",
     city: "Bogotá",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
     type: "concierto",
-    date: "31 jul 2022",
+    date: "2019-12-9",
     tickets_available: 110,
     tickets_left: 30,
     id: "12",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02
   },
 ];
