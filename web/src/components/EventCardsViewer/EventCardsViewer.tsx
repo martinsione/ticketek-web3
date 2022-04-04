@@ -1,9 +1,10 @@
+import { AbiItem } from "web3-utils";
 import Web3 from "web3";
 import React, { SetStateAction, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
+
 import { abi } from "../Ticket.json";
 import Card from "../Card/Card";
-import { AbiItem } from "web3-utils";
 
 interface Props {
   title: string;
@@ -85,26 +86,25 @@ export default function EventCardViewer({ title, range, json }: Props) {
         <Text borderBottom="2px" fontSize="3xl">
           {title}
         </Text>
-        <Flex align="center" direction="row" justify="flex-start" wrap="wrap">
-          <h1>{namecontrato}</h1>
+        <Flex align="center" direction="row" justify="space-evenly" wrap="wrap">
+          {/* <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
           <h1>{place}</h1>
-          <h1>{humanDateFormat}</h1>
-          {json.map((ev: EV, ndx: number) => {
-            return (
+          <h1>{humanDateFormat}</h1> */}
+          {json.map(
+            (ev: EV, ndx: number) =>
               ndx >= min &&
               ndx <= max && (
                 <Card
                   key={ev.imageURL}
                   date={ev.date}
+                  id={ev.id}
                   image={ev.imageURL}
                   location={ev.location}
                   name={ev.artist}
-                  id={ev.id}
                 />
               )
-            );
-          })}
+          )}
         </Flex>
       </Box>
     </div>
