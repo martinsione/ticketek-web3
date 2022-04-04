@@ -13,6 +13,7 @@ import {
   useColorModeValue,
   Box,
 } from "@chakra-ui/react";
+
 import NavBar from "../components/NavBar/NavBar";
 
 interface FeatureProps {
