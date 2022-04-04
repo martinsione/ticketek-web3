@@ -40,7 +40,7 @@ interface Props {
 
 export default function Card({ name, image, date, location }: Props) {
   return (
-    <Center py={12}>
+    <Center py={12} margin={30}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
         boxShadow="2xl"
