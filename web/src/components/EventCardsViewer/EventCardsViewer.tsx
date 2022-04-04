@@ -76,6 +76,7 @@ export default function EventCardViewer({ title, range, json }: Props) {
     date: string;
     location: string;
     artist: string;
+    id: string;
   }
 
   return (
@@ -90,7 +91,6 @@ export default function EventCardViewer({ title, range, json }: Props) {
           <h1>{place}</h1>
           <h1>{humanDateFormat}</h1>
           {json.map((ev: EV, ndx: number) => {
-            console.log(ev);
             return (
               ndx >= min &&
               ndx <= max && (
@@ -100,6 +100,7 @@ export default function EventCardViewer({ title, range, json }: Props) {
                   image={ev.imageURL}
                   location={ev.location}
                   name={ev.artist}
+                  id={ev.id}
                 />
               )
             );

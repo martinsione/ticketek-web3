@@ -30,15 +30,17 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
 interface Props {
   name: string;
   image: string;
   date: string;
   location: string;
+  id: string;
 }
 
-export default function Card({ name, image, date, location }: Props) {
+export default function Card({ name, image, date, location, id }: Props) {
   return (
     <Center py={12} margin={30}>
       <Box
@@ -76,22 +78,36 @@ export default function Card({ name, image, date, location }: Props) {
           pos="relative"
           rounded="lg"
         >
-          <Image
-            height={230}
-            objectFit="cover"
-            rounded="lg"
-            src={image}
-            width={282}
-          />
+          <Link href={`/events/${id}`} passHref>
+            <Image
+              height={230}
+              objectFit="cover"
+              rounded="lg"
+              src={image}
+              width={282}
+              cursor="pointer"
+            />
+          </Link>
         </Box>
         <Stack align="center" pt={10}>
-          <Heading fontFamily="body" fontSize="2xl" fontWeight={600}>
-            {name}
-          </Heading>
-          <Text>{date}</Text>
-          <Text color="blue" fontWeight={500}>
-            {location}
-          </Text>
+          <Link href={`/events/${id}`} passHref>
+            <Heading
+              cursor="pointer"
+              fontFamily="body"
+              fontSize="2xl"
+              fontWeight={600}
+            >
+              {name}
+            </Heading>
+          </Link>
+          <Link href={`/events/${id}`} passHref>
+            <Text cursor="pointer">{date}</Text>
+          </Link>
+          <Link href={`/events/${id}`} passHref>
+            <Text cursor="pointer" color="blue" fontWeight={500}>
+              {location}
+            </Text>
+          </Link>
           <Stack align="center" direction="row">
             <Button marginTop={3} variant="ghost">
               Get Ticket
