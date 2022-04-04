@@ -10,7 +10,7 @@ export default function filterBar() {
         direction="row"
         h={50}
         justifyContent="space-evenly"
-        // w="80%"
+        bg="gray.200"
       >
         <Select
           bg="gray.100"
