@@ -43,7 +43,7 @@ function NavBar({ long }: NAVBAR) {
             fontWeight={800}
             marginRight={70}
           >
-            Help
+            Quick Start
           </Text>
         </Link>
         <Link passHref href="/about">
