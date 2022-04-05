@@ -3,8 +3,8 @@ const initialState = {
 };
 
 function rootReducer(
-  { type, payload }: { type: String; payload: {} },
-  state = initialState
+  state = initialState,
+  { type, payload }: { type: String; payload: {} }
 ) {
   switch (type) {
     case "GET_EVENTS":
