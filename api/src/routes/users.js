@@ -44,9 +44,11 @@ router.get("/", async (req, res) => {
     }
 });
 
+//  Ruta para obtener usuario según su dirección de wallet
 router.get("/:walletAddress", async (req, res) => {
     const { walletAddress } = req.params;
 
+    // TryCatch, intento encontrar un usuario con esa wallet, si no lo hay, devuelvo error
     try {
         const user = await User.findOne({
             where: { walletAddress },
@@ -61,6 +63,7 @@ router.get("/:walletAddress", async (req, res) => {
     }
 });
 
+// Control de parámetros para la creación de un nuevo usuario
 function areCorrectParams(params) {
     const { walletAddress, name, location } = params;
     if (
@@ -76,11 +79,13 @@ function areCorrectParams(params) {
     return true;
 }
 
+// Creación de un nuevo usuario
 router.post("/", async (req, res) => {
     if (areCorrectParams(req.body)) {
         const existing = await User.findOne({
             where: { walletAddress: req.body.walletAddress },
         });
+        //   Reviso primero si esa wallet ya está registrada o no
         if (existing) {
             return res.status(400).send({
                 error: "wallet address already registered",
@@ -114,8 +119,10 @@ router.post("/", async (req, res) => {
 //     return res.send(pokemon.dataValues);
 // });
 
+// Ruta para eliminar usuario a través de su wallet
 router.delete("/:walletAddress", async (req, res) => {
     const { walletAddress } = req.params;
+    //     TryCatch para la eliminación
     try {
         const userForDelete = await User.findOne({ where: { walletAddress } });
         await userForDelete.destroy();
@@ -127,6 +134,7 @@ router.delete("/:walletAddress", async (req, res) => {
     return res.sendStatus(200);
 });
 
+// Ruta que devuelve una imagen por defecto para la creacion de usuario sin imagen
 router.get("/image/default-user", (req, res) => {
     var filepath = path.join(__dirname, "../img/default_user.jpg");
     res.sendFile(filepath);
