@@ -114,19 +114,18 @@ router.post("/", async (req, res) => {
 //     return res.send(pokemon.dataValues);
 // });
 
-// router.delete("/:id", async (req, res) => {
-//     const { id } = req.params;
-//     try {
-//         const pokemonForDelete = await Pokemon.findByPk(id);
-//         await pokemonForDelete.destroy();
-//     } catch (error) {
-//         return res.status(404).send({
-//             error: error.message,
-//             description: "failed to delete the specified pokemon",
-//         });
-//     }
-//     return res.sendStatus(200);
-// });
+router.delete("/:walletAddress", async (req, res) => {
+    const { walletAddress } = req.params;
+    try {
+        const userForDelete = await User.findOne({ where: { walletAddress } });
+        await userForDelete.destroy();
+    } catch (error) {
+        return res.status(404).send({
+            error: "failed to delete the specified user",
+        });
+    }
+    return res.sendStatus(200);
+});
 
 router.get("/image/default-user", (req, res) => {
     var filepath = path.join(__dirname, "../img/default_user.jpg");
