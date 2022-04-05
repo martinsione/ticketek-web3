@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/prefer-default-export
 export const data = [
   {
     imageURL:
@@ -13,8 +14,9 @@ export const data = [
     tickets_available: 100,
     tickets_left: 90,
     id: "1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.010
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.01,
   },
   {
     imageURL:
@@ -30,8 +32,9 @@ export const data = [
     tickets_available: 100,
     tickets_left: 90,
     id: "2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.040
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.04,
   },
   {
     imageURL:
@@ -47,8 +50,9 @@ export const data = [
     tickets_available: 200,
     tickets_left: 70,
     id: "3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.015
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015,
   },
   {
     imageURL:
@@ -64,8 +68,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 40,
     id: "4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.050
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.05,
   },
   {
     imageURL:
@@ -81,8 +86,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "5",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.005
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005,
   },
   {
     imageURL:
@@ -98,8 +104,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "6",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.045
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.045,
   },
   {
     imageURL:
@@ -115,8 +122,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "7",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.005
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005,
   },
   {
     imageURL:
@@ -132,8 +140,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "8",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.035
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.035,
   },
   {
     imageURL:
@@ -149,8 +158,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "9",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.025
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.025,
   },
   {
     imageURL:
@@ -166,8 +176,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "10",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.015
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015,
   },
   {
     imageURL:
@@ -183,8 +194,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "11",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.010
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.01,
   },
   {
     imageURL:
@@ -200,7 +212,62 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "12",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.02
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02,
+  },
+  {
+    imageURL:
+      "https://s1.ticketm.net/dam/a/3e2/6a93fa81-f9b7-4c59-90df-b732cab543e2_1296091_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
+    artist: "Arca",
+    location: "Estadio Superior",
+    city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
+    type: "concierto",
+    date: "2019-12-9",
+    tickets_available: 110,
+    tickets_left: 30,
+    id: "13",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02,
+  },
+  {
+    imageURL:
+      "https://s1.ticketm.net/dam/c/fbc/b293c0ad-c904-4215-bc59-8d7f2414dfbc_106141_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
+    artist: "Los Punsetes",
+    location: "Estadio Superior",
+    city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
+    type: "concierto",
+    date: "2019-12-9",
+    tickets_available: 110,
+    tickets_left: 30,
+    id: "13",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02,
+  },
+  {
+    imageURL:
+      "https://s1.ticketm.net/dam/a/3b9/d81d3922-8082-4012-9696-cecc3b6683b9_1591641_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
+    artist: "Animal Collective",
+    location: "Estadio Superior",
+    city: "Cali",
+    seat: 10,
+    direction: "Fake Street 12345",
+    country: "Colombia",
+    type: "concierto",
+    date: "2019-12-9",
+    tickets_available: 110,
+    tickets_left: 30,
+    id: "14",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02,
   },
 ];
