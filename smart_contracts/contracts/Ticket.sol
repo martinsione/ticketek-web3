@@ -11,40 +11,45 @@ contract Ticket is ERC721, Ownable {
     Counters.Counter private _tokenIdCounter;
     uint256 public eventDate;
     string public place;
-    address payable Owner;//
-    uint public tiketsLeft = 5;//
-
+    address payable public Owner;//
+    uint private totalTikets;//
+    uint public precio;
+    address payable private constant Nosotros = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
-        uint256 _eventDate
+        uint256 _eventDate,
+        uint _precio,
+        uint tikets
     ) ERC721(name, symb) {
         eventDate = _eventDate;
         place = _place;
-        Owner = owner();//
+        precio = _precio;
+        Owner = payable(msg.sender);//
+        totalTikets = tikets;
+        _tokenIdCounter.increment();
     }
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
-        require(tiketsLeft != 0, "No podes hacer mas");
+        require(totalTikets >= tokenId , "No more tickets left");
         _;
     }
 
     modifier hasFounds(){
-        require(msg.value == price, "Insufficient funds.");
+        require(msg.value/1000000000 == price, "Insufficient funds.");
         _;
     }//
 
     function safeMint() public payable hasFounds puede {
-        _tokenIdCounter.increment();
+        
         uint256 tokenId = _tokenIdCounter.current();
-        console.log(tokenId);
-
+        
         _safeMint(msg.sender, tokenId);
 
         Fees();
-        tiketsLeft -= 1;
+        _tokenIdCounter.increment();
         
     }
 
@@ -67,7 +72,8 @@ contract Ticket is ERC721, Ownable {
     }
 
     function getStock() public view returns (uint){
-        return tiketsLeft;
+        uint256 tokenId = _tokenIdCounter.current();
+        return totalTikets >= tokenId ? totalTikets - tokenId + 1 : 0;
     }
 
     function changePlace(string memory newPlace) public onlyOwner {
