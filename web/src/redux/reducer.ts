@@ -2,7 +2,10 @@ const initialState = {
   events: [],
 };
 
-function rootReducer(state = initialState, { type, payload }) {
+function rootReducer(
+  { type, payload }: { type: String; payload: {} },
+  state = initialState
+) {
   switch (type) {
     case "GET_EVENTS":
       return { ...state, events: payload };
