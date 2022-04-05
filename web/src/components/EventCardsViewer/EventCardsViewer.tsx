@@ -33,23 +33,9 @@ const contract = new web.eth.Contract(abi as AbiItem[], adrress);
 export default function EventCardViewer({ title, range, json }: Props) {
   // const events = fakeEvents().filter((ev) => ev.city === "Bogota");
   const [min, max] = range;
-  const [namecontrato, setNamecontrato] = useState("");
-  const [symbol, setSymbol] = useState("");
-  const [place, setPlace] = useState("");
+
   const [eventDate, setEventDate] = useState("");
 
-  contract.methods
-    .name()
-    .call()
-    .then((res: SetStateAction<string>) => setNamecontrato(res));
-  contract.methods
-    .symbol()
-    .call()
-    .then((res: SetStateAction<string>) => setSymbol(res));
-  contract.methods
-    .place()
-    .call()
-    .then((res: SetStateAction<string>) => setPlace(res));
   contract.methods
     .eventDate()
     .call()
