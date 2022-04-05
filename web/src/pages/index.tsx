@@ -3,14 +3,19 @@ import Link from "next/link";
 import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
 
 import NavBar from "../components/NavBar/NavBar";
-import { userBalance } from "../components/Functional Components/UserCommands";
-import Card from "../components/Card/Card";
+import { userBalance, buyTicket } from "../components/Functional Components/UserCommands";
 
 export default function Home() {
   const [balance, setBalance] = useState("")
 
   const getBalance = () => {
-    userBalance().then(r => setBalance(r))
+    userBalance().then(r => {
+      setBalance(r)
+    })
+  }
+
+  const buyT = () => {
+    buyTicket()
   }
 
   return (
@@ -57,6 +62,11 @@ export default function Home() {
               </Button>
             </Stack>
             <Text>{balance}</Text>
+            <Stack align="center" direction="row">
+              <Button marginTop={3} variant="ghost" onClick={buyT}>
+                Comprar Ticket
+              </Button>
+            </Stack>
           </Stack>
         </Stack>
       </Container>
