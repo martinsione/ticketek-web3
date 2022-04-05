@@ -12,28 +12,28 @@ contract Ticket is ERC721, Ownable {
     uint256 public eventDate;
     string public place;
     address payable public Owner;//
-    uint private totalTikets;//
+    uint private totalTickets;//
     uint public precio;
-    address payable private constant Nosotros = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
+    address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
         uint256 _eventDate,
         uint _precio,
-        uint tikets
+        uint tickets
     ) ERC721(name, symb) {
         eventDate = _eventDate;
         place = _place;
         precio = _precio;
         Owner = payable(msg.sender);//
-        totalTikets = tikets;
+        totalTickets = tickets;
         _tokenIdCounter.increment();
     }
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
-        require(totalTikets >= tokenId , "No more tickets left");
+        require(totalTickets >= tokenId , "No more tickets left");
         _;
     }
 
@@ -58,7 +58,7 @@ contract Ticket is ERC721, Ownable {
         uint us = msg.value * 0.1;
         uint owner = msg.value - us;
         Owner.transfer(owner);
-        Nosotros.transfer(us);
+        NFTickets.transfer(us);
 
         
     }//
@@ -73,7 +73,7 @@ contract Ticket is ERC721, Ownable {
 
     function getStock() public view returns (uint){
         uint256 tokenId = _tokenIdCounter.current();
-        return totalTikets >= tokenId ? totalTikets - tokenId + 1 : 0;
+        return totalTickets >= tokenId ? totalTickets - tokenId + 1 : 0;
     }
 
     function changePlace(string memory newPlace) public onlyOwner {
