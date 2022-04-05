@@ -12,17 +12,17 @@ contract Ticket is ERC721, Ownable {
     string public place;
     address payable public Owner;//
     uint private totalTickets;//
-    uint public precio;
+    uint public price;
     address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
-        uint _precio,
+        uint _price,
         uint tickets
     ) ERC721(name, symb) {
         place = _place;
-        precio = _precio;
+        price = _price;
         Owner = payable(msg.sender);//
         totalTickets = tickets;
         _tokenIdCounter.increment();
@@ -72,5 +72,9 @@ contract Ticket is ERC721, Ownable {
 
     function getPlace() public view returns (string memory) {
         return place;
+    }
+
+    function getPrice() public view returns (uint) {
+        return price * 1000000000;
     }
 }
