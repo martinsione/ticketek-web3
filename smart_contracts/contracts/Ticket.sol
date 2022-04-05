@@ -9,7 +9,6 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Ticket is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
-    uint256 public eventDate;
     string public place;
     address payable public Owner;//
     uint private totalTickets;//
@@ -19,11 +18,9 @@ contract Ticket is ERC721, Ownable {
         string memory name,
         string memory symb,
         string memory _place,
-        uint256 _eventDate,
         uint _precio,
         uint tickets
     ) ERC721(name, symb) {
-        eventDate = _eventDate;
         place = _place;
         precio = _precio;
         Owner = payable(msg.sender);//
@@ -63,13 +60,6 @@ contract Ticket is ERC721, Ownable {
         
     }//
 
-    function changeDate(uint256 newEventDate) public onlyOwner {
-        eventDate = newEventDate;
-    }
-
-    function getDate() public view returns (uint256) {
-        return eventDate;
-    }
 
     function getStock() public view returns (uint){
         uint256 tokenId = _tokenIdCounter.current();
