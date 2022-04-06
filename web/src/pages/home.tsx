@@ -1,12 +1,12 @@
-import type { AppState } from '../redux/store';
+import type { AppState } from "../redux/store";
 
-import { useDispatch, useSelector } from 'react-redux';
-import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
 
-import { getEvents } from '../redux/actions';
-import NavBar from '../components/NavBar/NavBar';
-import FilterBar from '../components/FilterBar/FilterBar';
-import EventCardViewer from '../components/EventCardsViewer/EventCardsViewer';
+import { getEvents } from "../redux/actions";
+import NavBar from "../components/NavBar/NavBar";
+import FilterBar from "../components/FilterBar/FilterBar";
+import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 
 // interface JSON {
 //   json: [];
@@ -41,7 +41,7 @@ function Home() {
 export default Home;
 
 // export async function getStaticProps() {
-//   const data = await fetch("http://localhost:3000/api/events");
+//   const data = await fetch("/api/events");
 //   const json = await data.json();
 //   return {
 //     props: {

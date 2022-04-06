@@ -1,6 +1,6 @@
-import { Box } from '@chakra-ui/react';
+import { Box } from "@chakra-ui/react";
 
-import NavBar from '../../components/NavBar/NavBar';
+import NavBar from "../../components/NavBar/NavBar";
 
 export default function Search({ json }: { json: { data: [] } }) {
   // console.log("DESDE SEARCH", { RESULTADO: json });
@@ -26,12 +26,12 @@ export default function Search({ json }: { json: { data: [] } }) {
 
 export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
-  let searchLink: string = '';
+  let searchLink: string = "";
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const key in query) {
     searchLink += `${key}=${query[key]}&`;
   }
-  const data = await fetch(`http://localhost:3000/api/search?${searchLink}`);
+  const data = await fetch(`/api/search?${searchLink}`);
   const json = await data.json();
   return {
     props: {

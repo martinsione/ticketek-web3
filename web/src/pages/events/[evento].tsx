@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   List,
   ListItem,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export default function Evento({ data }: { data: [] }) {
   return (
@@ -42,7 +42,7 @@ export default function Evento({ data }: { data: [] }) {
                 align="center"
                 alt="product image"
                 fit="cover"
-                h={{ base: '100%', sm: '400px', lg: '500px' }}
+                h={{ base: "100%", sm: "400px", lg: "500px" }}
                 rounded="md"
                 src={imageURL}
                 w="100%"
@@ -51,14 +51,14 @@ export default function Evento({ data }: { data: [] }) {
             <Stack spacing={{ base: 6, md: 10 }}>
               <Box as="header">
                 <Heading
-                  fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}
+                  fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   fontWeight={600}
                   lineHeight={1.1}
                 >
                   {artist}
                 </Heading>
                 <Text
-                  color={useColorModeValue('gray.900', 'gray.400')}
+                  color={useColorModeValue("gray.900", "gray.400")}
                   fontSize="2xl"
                   fontWeight={300}
                 >
@@ -69,7 +69,7 @@ export default function Evento({ data }: { data: [] }) {
                 direction="column"
                 divider={
                   <StackDivider
-                    borderColor={useColorModeValue('gray.200', 'gray.600')}
+                    borderColor={useColorModeValue("gray.200", "gray.600")}
                   />
                 }
                 spacing={{ base: 4, sm: 6 }}
@@ -79,8 +79,8 @@ export default function Evento({ data }: { data: [] }) {
                 </VStack>
                 <Box>
                   <Text
-                    color={useColorModeValue('yellow.500', 'yellow.300')}
-                    fontSize={{ base: '16px', lg: '18px' }}
+                    color={useColorModeValue("yellow.500", "yellow.300")}
+                    fontSize={{ base: "16px", lg: "18px" }}
                     fontWeight="500"
                     mb="4"
                     textTransform="uppercase"
@@ -90,25 +90,25 @@ export default function Evento({ data }: { data: [] }) {
                   <List spacing={2}>
                     <ListItem>
                       <Text as="span" fontWeight="bold">
-                        Location:{' '}
+                        Location:{" "}
                       </Text>
                       {location}
                     </ListItem>
                     <ListItem>
                       <Text as="span" fontWeight="bold">
-                        Country:{' '}
+                        Country:{" "}
                       </Text>
                       {country}
                     </ListItem>
                     <ListItem>
                       <Text as="span" fontWeight="bold">
-                        City:{' '}
+                        City:{" "}
                       </Text>
                       {city}
                     </ListItem>
                     <ListItem>
                       <Text as="span" fontWeight="bold">
-                        Date:{' '}
+                        Date:{" "}
                       </Text>
                       {date}
                     </ListItem>
@@ -117,12 +117,12 @@ export default function Evento({ data }: { data: [] }) {
               </Stack>
               <Button
                 _hover={{
-                  transform: 'translateY(2px)',
-                  boxShadow: 'lg',
+                  transform: "translateY(2px)",
+                  boxShadow: "lg",
                 }}
-                bg={useColorModeValue('gray.900', 'gray.50')}
+                bg={useColorModeValue("gray.900", "gray.50")}
                 borderRadius="10px"
-                color={useColorModeValue('white', 'gray.900')}
+                color={useColorModeValue("white", "gray.900")}
                 mt={8}
                 py="7"
                 size="lg"
@@ -139,14 +139,14 @@ export default function Evento({ data }: { data: [] }) {
             </Stack>
           </SimpleGrid>
         </Container>
-      ),
+      )
     )
   );
 }
 
 export async function getStaticProps(context: { params: { evento: string } }) {
   const { params } = context;
-  const data = await fetch(`http://localhost:3000/api/events/${params.evento}`);
+  const data = await fetch(`/api/events/${params.evento}`);
   const json = await data.json();
 
   if (!json.length) return { notFound: true };
@@ -162,7 +162,7 @@ export async function getStaticPaths() {
   interface EVENT {
     id: number;
   }
-  const data = await fetch('http://localhost:3000/api/events');
+  const data = await fetch("/api/events");
   const json = await data.json();
 
   const paths = json.map((event: EVENT) => ({
