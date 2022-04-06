@@ -1,13 +1,14 @@
+/* eslint-disable */
 import { NextApiRequest, NextApiResponse } from "next";
 
 import { data } from "../../../components/fakeEvent";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
-  const querySplit = query.searchTerm.split(" ");
+  const querySplit = query.searchTerm.toString().split(" ");
 
-  const matches: [] = [];
-  data.filter((event: {}) => {
+  const matches: any[] = [];
+  data.filter((event: any) => {
     // a = key of the object data
     for (const a in event) {
       const aSplit =
@@ -28,6 +29,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     }
   });
+  // @ts-ignore
   const arrUniq = [...new Map(matches.map((v) => [v.id, v])).values()];
   res.json({ data: arrUniq });
 }
