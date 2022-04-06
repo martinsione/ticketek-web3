@@ -13,7 +13,7 @@ import {
   useColorModeValue,
   List,
   ListItem,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 export default function Evento({ data }: { data: [] }) {
   return (
@@ -28,85 +28,86 @@ export default function Evento({ data }: { data: [] }) {
         country,
         location,
         imageURL,
-        tickets_available,
-        tickets_left,
+        // tickets_available,
+        // tickets_left,
       }) => (
-        <Container maxW={'7xl'}>
+        <Container maxW="7xl">
           <SimpleGrid
             columns={{ base: 1, lg: 2 }}
+            py={{ base: 18, md: 24 }}
             spacing={{ base: 8, md: 10 }}
-            py={{ base: 18, md: 24 }}>
+          >
             <Flex>
               <Image
-                rounded={'md'}
-                alt={'product image'}
-                src={
-                  imageURL
-                }
-                fit={'cover'}
-                align={'center'}
-                w={'100%'}
-                h={{ base: '100%', sm: '400px', lg: '500px' }}
+                align="center"
+                alt="product image"
+                fit="cover"
+                h={{ base: "100%", sm: "400px", lg: "500px" }}
+                rounded="md"
+                src={imageURL}
+                w="100%"
               />
             </Flex>
             <Stack spacing={{ base: 6, md: 10 }}>
-              <Box as={'header'}>
+              <Box as="header">
                 <Heading
-                  lineHeight={1.1}
+                  fontSize={{ base: "2xl", sm: "4xl", lg: "5xl" }}
                   fontWeight={600}
-                  fontSize={{ base: '2xl', sm: '4xl', lg: '5xl' }}>
+                  lineHeight={1.1}
+                >
                   {artist}
                 </Heading>
                 <Text
-                  color={useColorModeValue('gray.900', 'gray.400')}
+                  color={useColorModeValue("gray.900", "gray.400")}
+                  fontSize="2xl"
                   fontWeight={300}
-                  fontSize={'2xl'}>
+                >
                   {price} ETH
                 </Text>
               </Box>
               <Stack
-                spacing={{ base: 4, sm: 6 }}
-                direction={'column'}
+                direction="column"
                 divider={
                   <StackDivider
-                    borderColor={useColorModeValue('gray.200', 'gray.600')}
+                    borderColor={useColorModeValue("gray.200", "gray.600")}
                   />
-                }>
+                }
+                spacing={{ base: 4, sm: 6 }}
+              >
                 <VStack spacing={{ base: 4, sm: 6 }}>
-                  <Text fontSize={'lg'}>
-                    {description}
-                  </Text>
+                  <Text fontSize="lg">{description}</Text>
                 </VStack>
                 <Box>
                   <Text
-                    fontSize={{ base: '16px', lg: '18px' }}
-                    color={useColorModeValue('yellow.500', 'yellow.300')}
-                    fontWeight={'500'}
-                    textTransform={'uppercase'}
-                    mb={'4'}>
+                    color={useColorModeValue("yellow.500", "yellow.300")}
+                    fontSize={{ base: "16px", lg: "18px" }}
+                    fontWeight="500"
+                    mb="4"
+                    textTransform="uppercase"
+                  >
                     Event Details
                   </Text>
                   <List spacing={2}>
                     <ListItem>
-                      <Text as={'span'} fontWeight={'bold'}>
+                      <Text as="span" fontWeight="bold">
                         Location:{" "}
                       </Text>
                       {location}
                     </ListItem>
                     <ListItem>
-                      <Text as={'span'} fontWeight={'bold'}>
+                      <Text as="span" fontWeight="bold">
                         Country:{" "}
                       </Text>
                       {country}
                     </ListItem>
                     <ListItem>
-                      <Text as={'span'} fontWeight={'bold'}>
+                      <Text as="span" fontWeight="bold">
                         City:{" "}
                       </Text>
                       {city}
                     </ListItem>
                     <ListItem>
-                      <Text as={'span'} fontWeight={'bold'}>
+                      <Text as="span" fontWeight="bold">
                         Date:{" "}
                       </Text>
                       {date}
@@ -115,22 +116,26 @@ export default function Evento({ data }: { data: [] }) {
                 </Box>
               </Stack>
               <Button
-                borderRadius="10px"
-                w={'full'}
-                mt={8}
-                size={'lg'}
-                py={'7'}
-                bg={useColorModeValue('gray.900', 'gray.50')}
-                color={useColorModeValue('white', 'gray.900')}
-                textTransform={'uppercase'}
                 _hover={{
-                  transform: 'translateY(2px)',
-                  boxShadow: 'lg',
-                }}>
+                  transform: "translateY(2px)",
+                  boxShadow: "lg",
+                }}
+                bg={useColorModeValue("gray.900", "gray.50")}
+                borderRadius="10px"
+                color={useColorModeValue("white", "gray.900")}
+                mt={8}
+                py="7"
+                size="lg"
+                textTransform="uppercase"
+                w="full"
+              >
                 Add to cart
               </Button>
-              <Stack direction="row" alignItems="center" justifyContent={'center'}>
-              </Stack>
+              <Stack
+                alignItems="center"
+                direction="row"
+                justifyContent="center"
+              />
             </Stack>
           </SimpleGrid>
         </Container>
@@ -160,13 +165,11 @@ export async function getStaticPaths() {
   const data = await fetch("http://localhost:3000/api/events");
   const json = await data.json();
 
-  const paths = json.map((event: EVENT) => {
-    return {
-      params: {
-        evento: `${event.id}`,
-      },
-    };
-  });
+  const paths = json.map((event: EVENT) => ({
+    params: {
+      evento: `${event.id}`,
+    },
+  }));
   return {
     paths,
     fallback: false,

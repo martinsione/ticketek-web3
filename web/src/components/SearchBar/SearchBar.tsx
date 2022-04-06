@@ -15,9 +15,9 @@ function SearchBar() {
       .map((element) => element.toLowerCase());
     let query = "";
 
-    for (let a of normalized) {
-      query += a.toLowerCase() + " ";
-
+    // eslint-disable-next-line no-restricted-syntax
+    for (const a of normalized) {
+      query += `${a.toLowerCase()} `;
     }
     if (!search) return;
     if (router.pathname === "/search") {
@@ -46,7 +46,13 @@ function SearchBar() {
                 setSearch(e.target.value)
               }
             />
-              <IconButton aria-label='Search' bg="none" fontSize="1.5rem" icon={<IoIosSearch />} type="submit" />
+            <IconButton
+              aria-label="Search"
+              bg="none"
+              fontSize="1.5rem"
+              icon={<IoIosSearch />}
+              type="submit"
+            />
           </Flex>
           {/* <Input marginRight={50} type="submit" w={150} /> */}
         </Flex>

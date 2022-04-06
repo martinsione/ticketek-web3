@@ -1,5 +1,6 @@
 import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
+import Link from "next/link";
 import {
   Box,
   chakra,
@@ -10,7 +11,6 @@ import {
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import Link from "next/link";
 
 function SocialButton({
   children,
@@ -56,7 +56,7 @@ export default function Footer() {
         py={4}
         spacing={4}
       >
-        <Link href={"/home"} passHref>
+        <Link passHref href="/home">
           <Image
             height={10}
             src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"

@@ -20,6 +20,7 @@
 
 // export default Card
 
+import Link from "next/link";
 import {
   Box,
   Center,
@@ -30,7 +31,6 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import Link from "next/link";
 
 interface Props {
   name: string;
@@ -42,7 +42,7 @@ interface Props {
 
 export default function Card({ name, image, date, location, id }: Props) {
   return (
-    <Center py={12} margin={30}>
+    <Center margin={30} py={12}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
         boxShadow="2xl"
@@ -78,19 +78,19 @@ export default function Card({ name, image, date, location, id }: Props) {
           pos="relative"
           rounded="lg"
         >
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Image
+              cursor="pointer"
               height={230}
               objectFit="cover"
               rounded="lg"
               src={image}
               width={282}
-              cursor="pointer"
             />
           </Link>
         </Box>
         <Stack align="center" pt={10}>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Heading
               cursor="pointer"
               fontFamily="body"
@@ -100,10 +100,10 @@ export default function Card({ name, image, date, location, id }: Props) {
               {name}
             </Heading>
           </Link>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Text cursor="pointer">{date}</Text>
           </Link>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Text cursor="pointer" fontWeight={500}>
               {location}
             </Text>

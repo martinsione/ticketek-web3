@@ -1,4 +1,3 @@
-import { AbiItem } from "web3-utils";
 import Web3 from "web3";
 import React, { SetStateAction, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
@@ -19,7 +18,7 @@ const web = new Web3(
   "https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f"
 );
 
-const contract = new web.eth.Contract(abi as AbiItem[], adrress);
+const contract = new web.eth.Contract(abi as any, adrress);
 
 // const arrContratos = contract.methods.getArr().call().then(res)
 // // aqui traeriamos el arreglo con todos los contratitos
@@ -87,10 +86,10 @@ export default function EventCardViewer({ title, range, json }: Props) {
           {title}
         </Text>
         <Flex align="center" direction="row" justify="space-evenly" wrap="wrap">
-          {/* <h1>{namecontrato}</h1>
+          <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
           <h1>{place}</h1>
-          <h1>{humanDateFormat}</h1> */}
+          <h1>{humanDateFormat}</h1>
           {json.map(
             (ev: EV, ndx: number) =>
               ndx >= min &&

@@ -9,3 +9,5 @@ export const store: any = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+export type AppState = ReturnType<typeof rootReducer>;

@@ -2,16 +2,12 @@ const initialState = {
   events: [],
 };
 
-function rootReducer(
-  state = initialState,
-  { type, payload }: { type: String; payload: {} }
-) {
-  switch (type) {
+// eslint-disable-next-line @typescript-eslint/default-param-last
+export default function rootReducer(state = initialState, action: any) {
+  switch (action.type) {
     case "GET_EVENTS":
-      return { ...state, events: payload };
+      return { ...state, events: action.payload };
     default:
       return state;
   }
 }
-
-export default rootReducer;

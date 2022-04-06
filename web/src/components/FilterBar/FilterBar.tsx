@@ -6,10 +6,10 @@ export default function filterBar() {
     <div>
       <Flex
         alignItems="center"
+        bg="gray.200"
         direction="row"
         h={50}
         justifyContent="space-evenly"
-        bg="gray.200"
       >
         <Select
           bg="gray.100"
@@ -33,8 +33,12 @@ export default function filterBar() {
           placeholder="Enter your date"
           type="text"
           w="15%"
-          onBlur={(e) => (e.target.type = "text")}
-          onFocus={(e) => (e.target.type = "date")}
+          onBlur={(e) => {
+            e.target.type = "text";
+          }}
+          onFocus={(e) => {
+            e.target.type = "date";
+          }}
         />
         <Select bg="gray.100" borderRadius="30" name="city" p="10px" w="25%">
           <option>ALL CITIES</option>

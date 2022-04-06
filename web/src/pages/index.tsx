@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
+
 import NavBar from "../components/NavBar/NavBar";
 
 export default function Home() {

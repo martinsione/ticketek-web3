@@ -1,8 +1,11 @@
+/* eslint-disable */
 import { NextApiRequest, NextApiResponse } from "next";
-import { data } from "../../../components/fakeEvent";
+
+import data from "../../../components/fakeEvent.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
+
   const querySplit = (query.searchTerm as string).split(" ");
 
   interface EVENT {
@@ -29,8 +32,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         typeof value === "string"
           ? value.split(" ").map((element: string) => element.toLowerCase())
           : value;
+
       // b = word of searchTerm string
-      for (let b of querySplit) {
+      for (const b of querySplit) {
         if (
           a === "artist" ||
           a === "location" ||
@@ -43,8 +47,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     }
   });
+
   const arrUniq = [
     ...new Map(matches.map((v: { id: string }) => [v.id, v])).values(),
   ];
+
   res.json({ data: arrUniq });
 }
