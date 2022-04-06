@@ -9,16 +9,16 @@ function SearchBar() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const normalized = search.trim().split(" ");
+    const normalized = search
+      .trim()
+      .split(" ")
+      .map((element) => element.toLowerCase());
     let query = "";
-    if (normalized.length > 1) {
-      for (const a of normalized) {
-        query += `${a[0].toUpperCase() + a.slice(1)  } `;
-      }
-    } else {
-      query = normalized[0].charAt(0).toUpperCase() + normalized[0].slice(1);
+
+    for (let a of normalized) {
+      query += a.toLowerCase() + " ";
+
     }
-    console.log(query);
     if (!search) return;
     if (router.pathname === "/search") {
       router.query.searchTerm = query.trim();
