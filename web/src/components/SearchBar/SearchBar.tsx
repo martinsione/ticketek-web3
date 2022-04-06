@@ -1,6 +1,7 @@
-import { Flex, Image, Input } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { IoIosSearch } from "react-icons/io";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/router";
+import { Flex, IconButton, Input } from "@chakra-ui/react";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
@@ -13,8 +14,10 @@ function SearchBar() {
       .split(" ")
       .map((element) => element.toLowerCase());
     let query = "";
+
     for (let a of normalized) {
       query += a.toLowerCase() + " ";
+
     }
     if (!search) return;
     if (router.pathname === "/search") {
@@ -24,28 +27,28 @@ function SearchBar() {
     router.push(`http://localhost:3000/search?searchTerm=${query.trim()}`);
   }
   return (
-    <Flex flexDirection={"row"} h={70} alignItems="center">
+    <Flex alignItems="center" flexDirection="row" h={70}>
       <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-        <Flex flexDirection={"row"} h={70} alignItems="center">
+        <Flex alignItems="center" flexDirection="row" h={70}>
           <Flex
             alignItems="center"
             bg="gray.200"
             borderRadius="30"
             h={50}
-            justifyContent="flex-start"
+            justifyContent="space-around"
             w={400}
           >
-            <Image alt="search" marginLeft={30} src="/searchIcon.svg" w={19} />
             <Input
               placeholder="Buscar eventos, escenarios o artistas"
-              w="200"
               value={search}
+              w="200"
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setSearch(e.target.value)
               }
             />
+              <IconButton aria-label='Search' bg="none" fontSize="1.5rem" icon={<IoIosSearch />} type="submit" />
           </Flex>
-          <Input type={"submit"} w={150} marginRight={50} />
+          {/* <Input marginRight={50} type="submit" w={150} /> */}
         </Flex>
       </form>
     </Flex>

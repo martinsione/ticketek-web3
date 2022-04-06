@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
 import SearchBar from "../SearchBar/SearchBar";
@@ -33,7 +33,13 @@ function NavBar({ long }: NAVBAR) {
           marginRight={450}
           padding={1}
         >
-          <LogIn />
+           <Link passHref href="/home">
+          <Image
+             height={15}
+            src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
         </Flex>
         <Link passHref href="/help">
           <Text
@@ -128,7 +134,13 @@ function NavBar({ long }: NAVBAR) {
           marginRight={450}
           padding={1}
         >
-          <LogIn />
+          <Link passHref href="/home">
+          <Image
+            height={20}
+            src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
+            style={{ cursor: "pointer" }}
+          />
+        </Link>
         </Flex>
         <Link passHref href="/help">
           <Text
@@ -138,7 +150,7 @@ function NavBar({ long }: NAVBAR) {
             fontWeight={800}
             marginRight={70}
           >
-            Help
+            Quick Start
           </Text>
         </Link>
         <Link passHref href="/about">
@@ -153,6 +165,9 @@ function NavBar({ long }: NAVBAR) {
           </Text>
         </Link>
         <SearchBar />
+        <Box margin="2rem">
+          <LogIn />
+        </Box>
       </Flex>
     </Flex>
   );
