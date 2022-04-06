@@ -1,11 +1,56 @@
+/* eslint-disable */
 import { NextApiRequest, NextApiResponse } from "next";
-import { data } from "../../../components/fakeEvent";
+
+import data from "../../../components/fakeEvent.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
-  //console.log({ DESDEAPI: query });
-  const filtered = data.filter((event: {}) => {
-    return Object.values(event).includes(query.searchTerm);
+
+  const querySplit = (query.searchTerm as string).split(" ");
+
+  interface EVENT {
+    imageURL: string;
+    artist: string;
+    location: string;
+    city: string;
+    direction: string;
+    country: string;
+    type: string;
+    date: string;
+    id: string;
+    description: string;
+  }
+
+  const matches: EVENT[] = [];
+  data.filter((event: EVENT) => {
+    // a = key of the object data
+    // let a: keyof EVENT
+    for (let a in event) {
+      let key = a as keyof EVENT;
+      let value = event[key];
+      let aSplit =
+        typeof value === "string"
+          ? value.split(" ").map((element: string) => element.toLowerCase())
+          : value;
+
+      // b = word of searchTerm string
+      for (const b of querySplit) {
+        if (
+          a === "artist" ||
+          a === "location" ||
+          a === "city" ||
+          a === "country" ||
+          a === "type"
+        ) {
+          if (aSplit.includes(b.toLowerCase())) matches.push(event);
+        }
+      }
+    }
   });
-  res.json({ data: filtered });
+
+  const arrUniq = [
+    ...new Map(matches.map((v: { id: string }) => [v.id, v])).values(),
+  ];
+
+  res.json({ data: arrUniq });
 }

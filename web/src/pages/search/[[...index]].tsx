@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
+
 import NavBar from "../../components/NavBar/NavBar";
 
 export default function Search({ json }: { json: { data: [] } }) {
-  //console.log("DESDE SEARCH", { RESULTADO: json });
   return (
     <>
       <NavBar long={false} />
@@ -10,7 +10,7 @@ export default function Search({ json }: { json: { data: [] } }) {
         {json.data.map(({ id, imageURL, artist, date, city }) => (
           <div key={id}>
             <Box w={200}>
-              <img src={imageURL} />
+              <img alt="" src={imageURL} />
             </Box>
             <div>Artist: {artist}</div>
             <div>Date: {date}</div>
@@ -26,7 +26,8 @@ export default function Search({ json }: { json: { data: [] } }) {
 export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
   let searchLink: string = "";
-  for (let key in query) {
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
+  for (const key in query) {
     searchLink += `${key}=${query[key]}&`;
   }
   const data = await fetch(`http://localhost:3000/api/search?${searchLink}`);

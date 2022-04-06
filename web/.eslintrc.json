@@ -6,16 +6,38 @@ npm i -D -E \
   eslint-config-airbnb-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser 
 */
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "node": true
-    },
-    "extends": [
+
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+ "extends": [
         "airbnb",
         "airbnb-typescript",
         "plugin:@next/next/recommended",
         "prettier"
+    ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["airbnb-typescript", "prettier"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["./tsconfig.json"]
+      }
+    }
+  ],
+
+  "rules": {
+    "jsx-a11y/anchor-is-valid": [
+      // Workaround for next/link https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/402
+      "error",
+      {
+        "components": ["Link"],
+        "specialLink": ["hrefLeft", "hrefRight"],
+        "aspects": ["invalidHref", "preferButton"]
+      }
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
