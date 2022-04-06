@@ -2,7 +2,7 @@ export const data = [
   {
     imageURL:
       "https://imagenes.elpais.com/resizer/uH9SGrtzfjp_NHQBiwyNsCesEn0=/1960x0/filters:focal(3632x1874:3642x1884)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/2SYY662JDFGLLCAEM6VWAGV6BY.jpg",
-    artist: "Delfin hasta el fin",
+    artist: "Delfin Hasta el fin",
     location: "Madison Square Garden",
     city: "New York",
     seat: 10,
@@ -13,8 +13,9 @@ export const data = [
     tickets_available: 100,
     tickets_left: 90,
     id: "1",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.010
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.01,
   },
   {
     imageURL:
@@ -30,8 +31,9 @@ export const data = [
     tickets_available: 100,
     tickets_left: 90,
     id: "2",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.040
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.04,
   },
   {
     imageURL:
@@ -47,8 +49,9 @@ export const data = [
     tickets_available: 200,
     tickets_left: 70,
     id: "3",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.015
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015,
   },
   {
     imageURL:
@@ -64,8 +67,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 40,
     id: "4",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.050
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.05,
   },
   {
     imageURL:
@@ -81,8 +85,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "5",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.005
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005,
   },
   {
     imageURL:
@@ -98,8 +103,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "6",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.045
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.045,
   },
   {
     imageURL:
@@ -115,8 +121,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "7",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.005
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.005,
   },
   {
     imageURL:
@@ -132,8 +139,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "8",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.035
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.035,
   },
   {
     imageURL:
@@ -149,8 +157,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "9",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.025
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.025,
   },
   {
     imageURL:
@@ -166,8 +175,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "10",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.015
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.015,
   },
   {
     imageURL:
@@ -183,8 +193,9 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "11",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.010
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.01,
   },
   {
     imageURL:
@@ -200,7 +211,8 @@ export const data = [
     tickets_available: 110,
     tickets_left: 30,
     id: "12",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
-    price: 0.02
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
+    price: 0.02,
   },
 ];
