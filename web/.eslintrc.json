@@ -6,59 +6,63 @@ npm i -D -E \
   eslint-config-airbnb-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser 
 */
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "node": true
-  },
-  "extends": [
-    "airbnb",
-    "airbnb-typescript",
-    "plugin:@next/next/recommended",
-    "prettier"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "rules": {
-    "jsx-a11y/anchor-is-valid": [
-      // Workaround for next/link https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/402
-      "error",
-      {
-        "components": ["Link"],
-        "specialLink": ["hrefLeft", "hrefRight"],
-        "aspects": ["invalidHref", "preferButton"]
-      }
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "plugin:@next/next/recommended",
+        "prettier"
     ],
-    "import/order": [
-      // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
-      "warn",
-      {
-        "alphabetize": { "order": "desc", "caseInsensitive": false },
-        "groups": [
-          "type",
-          "object",
-          ["builtin", "external"],
-          ["internal", "parent", "sibling", "index"]
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "jsx-a11y/anchor-is-valid": [
+            // Workaround for next/link https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/402
+            "error",
+            {
+                "components": ["Link"],
+                "specialLink": ["hrefLeft", "hrefRight"],
+                "aspects": ["invalidHref", "preferButton"]
+            }
         ],
-        "newlines-between": "always",
-        "pathGroups": [
-          { "pattern": "@/**", "group": "internal", "position": "before" }
-        ]
-      }
-    ],
-    "react/jsx-props-no-spreading": "off",
-    "react/jsx-sort-props": [
-      "warn",
-      {
-        "callbacksLast": true,
-        "shorthandFirst": true,
-        "noSortAlphabetically": false,
-        "reservedFirst": true
-      }
-    ],
-    "react/react-in-jsx-scope": "off",
-    "react/require-default-props": "off"
-  }
+        "import/order": [
+            // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/order.md
+            "warn",
+            {
+                "alphabetize": { "order": "desc", "caseInsensitive": false },
+                "groups": [
+                    "type",
+                    "object",
+                    ["builtin", "external"],
+                    ["internal", "parent", "sibling", "index"]
+                ],
+                "newlines-between": "always",
+                "pathGroups": [
+                    {
+                        "pattern": "@/**",
+                        "group": "internal",
+                        "position": "before"
+                    }
+                ]
+            }
+        ],
+        "react/jsx-props-no-spreading": "off",
+        "react/jsx-sort-props": [
+            "warn",
+            {
+                "callbacksLast": true,
+                "shorthandFirst": true,
+                "noSortAlphabetically": false,
+                "reservedFirst": true
+            }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "react/require-default-props": "off"
+    }
 }
