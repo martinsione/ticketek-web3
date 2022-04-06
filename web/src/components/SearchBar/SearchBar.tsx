@@ -15,8 +15,8 @@ function SearchBar() {
       .map((element) => element.toLowerCase());
     let query = "";
 
-    for (let a of normalized) {
-      query += a.toLowerCase() + " ";
+    for (const a of normalized) {
+      query += `${a.toLowerCase()  } `;
 
     }
     if (!search) return;

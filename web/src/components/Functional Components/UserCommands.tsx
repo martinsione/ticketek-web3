@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+
 import {abi} from '../Ticket.json'
 
 const address: string = '0x945eD39416121076ADB07c493e306b6D9E541b09'

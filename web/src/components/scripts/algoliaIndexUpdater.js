@@ -1,4 +1,5 @@
 const algoliasearch = require("algoliasearch");
+
 const events = require("../fakeEvent.json");
 
 const ALGOLIA_APPLICATION_ID = "973COYUGE2";

@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+
 import { data } from "../../../components/fakeEvent";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -8,13 +9,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const matches: [] = [];
   data.filter((event: {}) => {
     // a = key of the object data
-    for (let a in event) {
-      let aSplit =
+    for (const a in event) {
+      const aSplit =
         typeof event[a] === "string"
           ? event[a].split(" ").map((element: string) => element.toLowerCase())
           : event[a];
       // b = word of searchTerm string
-      for (let b of querySplit) {
+      for (const b of querySplit) {
         if (
           a === "artist" ||
           a === "location" ||

@@ -1,4 +1,5 @@
 import { Box } from "@chakra-ui/react";
+
 import NavBar from "../../components/NavBar/NavBar";
 
 export default function Search({ json }: { json: { data: [] } }) {
@@ -25,7 +26,7 @@ export default function Search({ json }: { json: { data: [] } }) {
 export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
   let searchLink: string = "";
-  for (let key in query) {
+  for (const key in query) {
     searchLink += `${key}=${query[key]}&`;
   }
   const data = await fetch(`http://localhost:3000/api/search?${searchLink}`);
