@@ -5,7 +5,9 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./reducer";
 
 // eslint-disable-next-line import/prefer-default-export
-export const store: any = createStore(
+export const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
+
+export type AppState = ReturnType<typeof rootReducer>;

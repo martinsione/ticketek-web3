@@ -1,4 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from 'react-hook-form';
 import {
   Stack,
   Image,
@@ -12,7 +12,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
 interface InputProps {
   city: string;
@@ -23,7 +23,7 @@ interface InputProps {
   title: string;
   tickets_available: number;
   tickets_left: number;
-  type: "concierto" | "festival" | "exposicion";
+  type: 'concierto' | 'festival' | 'exposicion';
 }
 
 export default function Form() {
@@ -58,9 +58,9 @@ export default function Form() {
           <FormLabel htmlFor="title">Name</FormLabel>
           <Input
             placeholder="title"
-            {...register("title", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
+            {...register('title', {
+              required: 'This is required',
+              minLength: { value: 4, message: 'Minimum length should be 4' },
             })}
           />
           <FormErrorMessage>
@@ -72,9 +72,9 @@ export default function Form() {
           <FormLabel htmlFor="city">City</FormLabel>
           <Input
             placeholder="City"
-            {...register("city", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
+            {...register('city', {
+              required: 'This is required',
+              minLength: { value: 4, message: 'Minimum length should be 4' },
             })}
           />
           <FormErrorMessage>
@@ -86,12 +86,12 @@ export default function Form() {
           <FormLabel htmlFor="image">Image</FormLabel>
           <Input
             placeholder="Image"
-            {...register("image", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
+            {...register('image', {
+              required: 'This is required',
+              minLength: { value: 4, message: 'Minimum length should be 4' },
             })}
           />
-          <Image src={watch("image")} />
+          <Image src={watch('image')} />
           <FormErrorMessage>
             {errors.image && errors.image.message}
           </FormErrorMessage>
@@ -101,9 +101,9 @@ export default function Form() {
           <FormLabel htmlFor="Location">Location</FormLabel>
           <Input
             placeholder="Location"
-            {...register("location", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
+            {...register('location', {
+              required: 'This is required',
+              minLength: { value: 4, message: 'Minimum length should be 4' },
             })}
           />
           <FormErrorMessage>
@@ -116,10 +116,10 @@ export default function Form() {
           <NumberInput min={1}>
             <NumberInputField
               placeholder="Tickets available"
-              {...register("tickets_available", {
-                minLength: { value: 4, message: "Minimum length should be 4" },
+              {...register('tickets_available', {
+                minLength: { value: 4, message: 'Minimum length should be 4' },
                 min: 1,
-                required: "This is required",
+                required: 'This is required',
                 valueAsNumber: true,
               })}
             />

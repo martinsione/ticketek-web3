@@ -1,11 +1,11 @@
-import { IoIosHeartEmpty, IoIosTrendingUp}  from "react-icons/io";
-import { useWeb3React } from "@web3-react/core";
-import { Avatar, Tab, TabList, Tabs, TabPanel, TabPanels, VStack, HStack, Box, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Text, Tag, Link, Icon } from "@chakra-ui/react"
+import { IoIosHeartEmpty, IoIosTrendingUp }  from 'react-icons/io';
+import { useWeb3React } from '@web3-react/core';
+import { Avatar, Tab, TabList, Tabs, TabPanel, TabPanels, VStack, HStack, Box, TableContainer, Table, Thead, Tr, Th, Tbody, Td, Text, Tag, Link, Icon } from '@chakra-ui/react';
 
-import NavBar from "../components/NavBar/NavBar"
+import NavBar from '../components/NavBar/NavBar';
 
 function user() {
-  const { account } = useWeb3React()
+  const { account } = useWeb3React();
 
   return (
     <>
@@ -13,9 +13,9 @@ function user() {
     <VStack bgColor="#B2C1B5" height="40vh"  />
     <VStack  flexDirection="column" justifyContent="center" textAlign="center" >
       <Box bottom="10" position="relative"> 
-          <Avatar  boxSize='8rem'  cursor="pointer" src={account ? "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png" : ""}/>
+          <Avatar  boxSize='8rem'  cursor="pointer" src={account ? 'https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png' : ''}/>
           <Text fontSize="2rem" >User</Text>
-          <Tag padding="3">{account || "address..."} </Tag>
+          <Tag padding="3">{account || 'address...'} </Tag>
       </Box>
     </VStack>
     <HStack width="100vw">
@@ -100,7 +100,7 @@ function user() {
     </HStack>
     </>
     
-  )
+  );
 }
 
-export default user 
+export default user; 

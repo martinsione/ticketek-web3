@@ -1,26 +1,27 @@
-import { IoIosSearch } from "react-icons/io";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useRouter } from "next/router";
-import { Flex, IconButton, Input } from "@chakra-ui/react";
+import { IoIosSearch } from 'react-icons/io';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import { Flex, IconButton, Input } from '@chakra-ui/react';
 
 function SearchBar() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const router = useRouter();
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const normalized = search.trim().split(" ");
-    let query = "";
+    const normalized = search.trim().split(' ');
+    let query = '';
     if (normalized.length > 1) {
+      // eslint-disable-next-line no-restricted-syntax
       for (const a of normalized) {
-        query += `${a[0].toUpperCase() + a.slice(1)  } `;
+        query += `${a[0].toUpperCase() + a.slice(1)} `;
       }
     } else {
       query = normalized[0].charAt(0).toUpperCase() + normalized[0].slice(1);
     }
     console.log(query);
     if (!search) return;
-    if (router.pathname === "/search") {
+    if (router.pathname === '/search') {
       router.query.searchTerm = query.trim();
       router.reload();
     }
@@ -46,7 +47,13 @@ function SearchBar() {
                 setSearch(e.target.value)
               }
             />
-              <IconButton aria-label='Search' bg="none" fontSize="1.5rem" icon={<IoIosSearch />} type="submit" />
+            <IconButton
+              aria-label="Search"
+              bg="none"
+              fontSize="1.5rem"
+              icon={<IoIosSearch />}
+              type="submit"
+            />
           </Flex>
           {/* <Input marginRight={50} type="submit" w={150} /> */}
         </Flex>

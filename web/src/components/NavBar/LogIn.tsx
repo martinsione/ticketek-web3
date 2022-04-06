@@ -1,10 +1,10 @@
 import { FaEthereum, FaRegUserCircle } from 'react-icons/fa';
-import { useEffect, useState } from "react";
-import NextLink from "next/link";
-import { useWeb3React } from "@web3-react/core";
-import { Button, Popover, IconButton, PopoverBody, PopoverContent, PopoverTrigger, Portal, useToast } from "@chakra-ui/react";
+import { useEffect, useState } from 'react';
+import NextLink from 'next/link';
+import { useWeb3React } from '@web3-react/core';
+import { Button, Popover, IconButton, PopoverBody, PopoverContent, PopoverTrigger, Portal, useToast } from '@chakra-ui/react';
 
-import injected from "../Wallet/connector";
+import injected from '../Wallet/connector';
 
 function LogIn() {
   const toast = useToast();
@@ -20,7 +20,7 @@ function LogIn() {
     setLoading(true);
     // si no tiene metamask redireccionamos a que se instale
     if (!metamask) {
-      window.open("https://metamask.io/download/", "_blank");
+      window.open('https://metamask.io/download/', '_blank');
       setLoading(false);
     } else if (!account) {
       // si no hay cuenta conectamos
@@ -28,8 +28,8 @@ function LogIn() {
         () => {
           setLoading(false);
           toast({
-            title: "Wallet connected",
-            status: "success",
+            title: 'Wallet connected',
+            status: 'success',
             duration: 3000,
             isClosable: true,
           });
@@ -37,12 +37,12 @@ function LogIn() {
         () => {
           setLoading(false);
           toast({
-            title: "Oops, something went wrong",
-            status: "error",
+            title: 'Oops, something went wrong',
+            status: 'error',
             duration: 3000,
             isClosable: true,
           });
-        }
+        },
       );
     }
     // si hay cuenta desconectamos
@@ -50,8 +50,8 @@ function LogIn() {
       deactivate();
       setLoading(false);
       toast({
-        title: "Wallet disconected",
-        status: "warning",
+        title: 'Wallet disconected',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
@@ -66,7 +66,7 @@ function LogIn() {
       <Portal >
         <PopoverContent>
           <PopoverBody>
-              <Button bg="none" fontSize="1.2rem" isLoading={loading} margin="5px" width="100%" onClick={handleConnect} >{account ? "Log out" : "Log in"}</Button>
+              <Button bg="none" fontSize="1.2rem" isLoading={loading} margin="5px" width="100%" onClick={handleConnect} >{account ? 'Log out' : 'Log in'}</Button>
               <NextLink passHref href="/user">
                 <Button bg="none" fontSize="1.2rem" margin="5px" width="100%" >My profile</Button>
               </NextLink>
@@ -77,7 +77,7 @@ function LogIn() {
         </PopoverContent>
       </Portal>
   </Popover>
-  )
+  );
 }
 
 export default LogIn;

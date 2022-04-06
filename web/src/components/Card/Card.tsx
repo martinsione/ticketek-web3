@@ -20,6 +20,7 @@
 
 // export default Card
 
+import Link from 'next/link';
 import {
   Box,
   Center,
@@ -29,8 +30,7 @@ import {
   Stack,
   Image,
   Text,
-} from "@chakra-ui/react";
-import Link from "next/link";
+} from '@chakra-ui/react';
 
 interface Props {
   name: string;
@@ -42,9 +42,9 @@ interface Props {
 
 export default function Card({ name, image, date, location, id }: Props) {
   return (
-    <Center py={12} margin={30}>
+    <Center margin={30} py={12}>
       <Box
-        bg={useColorModeValue("white", "gray.800")}
+        bg={useColorModeValue('white', 'gray.800')}
         boxShadow="2xl"
         maxW="330px"
         p={6}
@@ -56,21 +56,21 @@ export default function Card({ name, image, date, location, id }: Props) {
       >
         <Box
           _after={{
-            transition: "all .3s ease",
+            transition: 'all .3s ease',
             content: '""',
-            w: "full",
-            h: "full",
-            pos: "absolute",
+            w: 'full',
+            h: 'full',
+            pos: 'absolute',
             top: 5,
             left: 0,
             backgroundImage: `url(${image})`,
-            opacity: "75%",
-            filter: "blur(15px)",
+            opacity: '75%',
+            filter: 'blur(15px)',
             zIndex: -1,
           }}
           _groupHover={{
             _after: {
-              filter: "blur(20px)",
+              filter: 'blur(20px)',
             },
           }}
           height="230px"
@@ -78,19 +78,19 @@ export default function Card({ name, image, date, location, id }: Props) {
           pos="relative"
           rounded="lg"
         >
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Image
+              cursor="pointer"
               height={230}
               objectFit="cover"
               rounded="lg"
               src={image}
               width={282}
-              cursor="pointer"
             />
           </Link>
         </Box>
         <Stack align="center" pt={10}>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Heading
               cursor="pointer"
               fontFamily="body"
@@ -100,10 +100,10 @@ export default function Card({ name, image, date, location, id }: Props) {
               {name}
             </Heading>
           </Link>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Text cursor="pointer">{date}</Text>
           </Link>
-          <Link href={`/events/${id}`} passHref>
+          <Link passHref href={`/events/${id}`}>
             <Text cursor="pointer" fontWeight={500}>
               {location}
             </Text>

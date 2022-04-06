@@ -1,4 +1,4 @@
-import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
+import EventCardViewer from '../../components/EventCardsViewer/EventCardsViewer';
 
 export default function City({ data, city }: { data: []; city: string }) {
   return data && <EventCardViewer json={data} range={[0, 5]} title={city} />;
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
   interface EVENT {
     city: string;
   }
-  const data = await fetch("http://localhost:3000/api/cities");
+  const data = await fetch('http://localhost:3000/api/cities');
   const json = await data.json();
 
   const paths = json.map((event: EVENT) => ({

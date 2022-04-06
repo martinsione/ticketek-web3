@@ -1,10 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import type { AppState } from '../redux/store';
 
-import { getEvents } from "../redux/actions";
-import NavBar from "../components/NavBar/NavBar";
-import FilterBar from "../components/FilterBar/FilterBar";
-import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+
+import { getEvents } from '../redux/actions';
+import NavBar from '../components/NavBar/NavBar';
+import FilterBar from '../components/FilterBar/FilterBar';
+import EventCardViewer from '../components/EventCardsViewer/EventCardsViewer';
 
 // interface JSON {
 //   json: [];
@@ -13,7 +15,7 @@ import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 function Home() {
   //  { json }: JSON
   const dispatch = useDispatch();
-  const data: [] = useSelector((state) => state.events);
+  const data: [] = useSelector((state: AppState) => state.events);
 
   useEffect(() => {
     dispatch(getEvents());

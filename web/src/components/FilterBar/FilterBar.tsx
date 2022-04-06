@@ -1,3 +1,4 @@
+/* eslint-disable no-return-assign */
 import React from "react";
 import { Flex, Input, Select } from "@chakra-ui/react";
 
@@ -6,10 +7,10 @@ export default function filterBar() {
     <div>
       <Flex
         alignItems="center"
+        bg="gray.200"
         direction="row"
         h={50}
         justifyContent="space-evenly"
-        bg="gray.200"
       >
         <Select
           bg="gray.100"

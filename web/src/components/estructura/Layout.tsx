@@ -1,7 +1,7 @@
-import Head from "next/head";
+import Head from 'next/head';
 
-import NavBar from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
+import NavBar from '../NavBar/NavBar';
+import Footer from '../Footer/Footer';
 
 interface LAYOUT {
   long: boolean;

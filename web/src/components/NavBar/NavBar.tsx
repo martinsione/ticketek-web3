@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import Link from 'next/link';
+import { Box, Flex, Image, Text } from '@chakra-ui/react';
 
-import LogIn from "./LogIn";
-import SearchBar from "../SearchBar/SearchBar";
+import LogIn from './LogIn';
+import SearchBar from '../SearchBar/SearchBar';
 
 interface NAVBAR {
   long: boolean;
@@ -37,7 +37,7 @@ function NavBar({ long }: NAVBAR) {
           <Image
              height={15}
             src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           />
         </Link>
         </Flex>
@@ -138,7 +138,7 @@ function NavBar({ long }: NAVBAR) {
           <Image
             height={20}
             src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           />
         </Link>
         </Flex>

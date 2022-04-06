@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { data } from "../../../components/fakeEvent";
+import { data } from '../../../components/fakeEvent';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { city } = req.query;

@@ -12,7 +12,7 @@ export default function Evento({ data }: { data: [] }) {
 }
 
 export async function getStaticProps() {
-  const data = await fetch("http://localhost:3000/api/cities");
+  const data = await fetch('http://localhost:3000/api/cities');
   const json = await data.json();
   return {
     props: {

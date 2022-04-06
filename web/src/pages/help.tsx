@@ -1,5 +1,6 @@
-import { Box, Heading, Container, Text, Stack, Link } from "@chakra-ui/react";
-import NavBar from "../components/NavBar/NavBar";
+import { Box, Heading, Container, Text, Stack, Link } from '@chakra-ui/react';
+
+import NavBar from '../components/NavBar/NavBar';
 
 export default function Help() {
   return (
@@ -13,7 +14,7 @@ export default function Help() {
           textAlign="center"
         >
           <Heading
-            fontSize={{ base: "2xl", sm: "4xl", md: "6xl" }}
+            fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
             fontWeight={600}
             lineHeight="110%"
           >

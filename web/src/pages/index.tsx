@@ -1,6 +1,7 @@
-import Link from "next/link";
-import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
-import NavBar from "../components/NavBar/NavBar";
+import Link from 'next/link';
+import { Container, Heading, Stack, Text, Button } from '@chakra-ui/react';
+
+import NavBar from '../components/NavBar/NavBar';
 
 export default function Home() {
   return (
@@ -14,11 +15,11 @@ export default function Home() {
           textAlign="center"
         >
           <Heading
-            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
+            fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
             fontWeight={600}
             lineHeight="110%"
           >
-            A new era of buying{" "}
+            A new era of buying{' '}
             <Text as="span" color="green.300">
               tickets
             </Text>
@@ -32,7 +33,7 @@ export default function Home() {
           <Stack direction="row" spacing={6}>
             <Link passHref href="/home">
               <Button
-                _hover={{ bg: "pink.300" }}
+                _hover={{ bg: 'pink.300' }}
                 bg="pink.400"
                 colorScheme="pink"
                 px={6}
