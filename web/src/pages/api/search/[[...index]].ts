@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { NextApiRequest, NextApiResponse } from "next";
 
-import { data } from "../../../components/fakeEvent";
+import data from "../../../components/fakeEvent.json";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;

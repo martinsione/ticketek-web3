@@ -1,4 +1,4 @@
-import { data } from "../fakeEvent";
+import data from "../fakeEvent.json";
 
 interface Args {
   categoria: string;
