@@ -3,7 +3,7 @@ export const data = [
   {
     imageURL:
       "https://imagenes.elpais.com/resizer/uH9SGrtzfjp_NHQBiwyNsCesEn0=/1960x0/filters:focal(3632x1874:3642x1884)/cloudfront-eu-central-1.images.arcpublishing.com/prisa/2SYY662JDFGLLCAEM6VWAGV6BY.jpg",
-    artist: "Delfin hasta el fin",
+    artist: "Delfin Hasta el fin",
     location: "Madison Square Garden",
     city: "New York",
     seat: 10,
@@ -215,6 +215,7 @@ export const data = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
     price: 0.02,
+
   },
   {
     imageURL:
