@@ -3,16 +3,32 @@ import { data } from "../../../components/fakeEvent";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
-  const querySplit = query.searchTerm.split(" ");
+  const querySplit = (query.searchTerm as string).split(" ");
 
-  const matches: [] = [];
-  data.filter((event: {}) => {
+  interface EVENT {
+    imageURL: string;
+    artist: string;
+    location: string;
+    city: string;
+    direction: string;
+    country: string;
+    type: string;
+    date: string;
+    id: string;
+    description: string;
+  }
+
+  const matches: EVENT[] = [];
+  data.filter((event: EVENT) => {
     // a = key of the object data
+    // let a: keyof EVENT
     for (let a in event) {
+      let key = a as keyof EVENT;
+      let value = event[key];
       let aSplit =
-        typeof event[a] === "string"
-          ? event[a].split(" ").map((element: string) => element.toLowerCase())
-          : event[a];
+        typeof value === "string"
+          ? value.split(" ").map((element: string) => element.toLowerCase())
+          : value;
       // b = word of searchTerm string
       for (let b of querySplit) {
         if (
@@ -27,6 +43,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     }
   });
-  const arrUniq = [...new Map(matches.map((v) => [v.id, v])).values()];
+  const arrUniq = [
+    ...new Map(matches.map((v: { id: string }) => [v.id, v])).values(),
+  ];
   res.json({ data: arrUniq });
 }
