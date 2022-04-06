@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export default function Evento({ data }: { data: [] }) {
   return data.map(({ artist, city, date, id, location }) => (
     <div key={id}>
@@ -12,11 +14,10 @@ export default function Evento({ data }: { data: [] }) {
 }
 
 export async function getStaticProps() {
-  const data = await fetch("/api/cities");
-  const json = await data.json();
+  const { data } = await axios("/api/cities");
   return {
     props: {
-      data: json,
+      data,
     },
   };
 }

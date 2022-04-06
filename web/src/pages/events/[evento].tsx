@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Box,
   Container,
@@ -146,14 +147,13 @@ export default function Evento({ data }: { data: [] }) {
 
 export async function getStaticProps(context: { params: { evento: string } }) {
   const { params } = context;
-  const data = await fetch(`/api/events/${params.evento}`);
-  const json = await data.json();
+  const { data } = await axios(`/api/events/${params.evento}`);
 
-  if (!json.length) return { notFound: true };
+  if (!data.length) return { notFound: true };
 
   return {
     props: {
-      data: json,
+      data,
     },
   };
 }
@@ -162,10 +162,9 @@ export async function getStaticPaths() {
   interface EVENT {
     id: number;
   }
-  const data = await fetch("/api/events");
-  const json = await data.json();
+  const { data } = await axios("/api/events");
 
-  const paths = json.map((event: EVENT) => ({
+  const paths = data.map((event: EVENT) => ({
     params: {
       evento: `${event.id}`,
     },

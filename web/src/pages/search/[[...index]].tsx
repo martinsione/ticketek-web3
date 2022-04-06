@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Box } from "@chakra-ui/react";
 
 import NavBar from "../../components/NavBar/NavBar";
@@ -31,11 +32,10 @@ export async function getServerSideProps(context: { query: any }) {
   for (const key in query) {
     searchLink += `${key}=${query[key]}&`;
   }
-  const data = await fetch(`/api/search?${searchLink}`);
-  const json = await data.json();
+  const { data } = await axios(`/api/search?${searchLink}`);
   return {
     props: {
-      json,
+      data,
     },
   };
 }

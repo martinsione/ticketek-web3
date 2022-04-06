@@ -2,6 +2,7 @@ import type { AppState } from "../redux/store";
 
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
+import axios from "axios";
 
 import { getEvents } from "../redux/actions";
 import NavBar from "../components/NavBar/NavBar";
@@ -41,7 +42,7 @@ function Home() {
 export default Home;
 
 // export async function getStaticProps() {
-//   const data = await fetch("/api/events");
+//   const data = await axios("/api/events");
 //   const json = await data.json();
 //   return {
 //     props: {
