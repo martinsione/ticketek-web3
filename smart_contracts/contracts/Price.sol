@@ -16,7 +16,7 @@ contract Price is ERC721 {
     function updatePrice(uint256 _price) public payable {
         require(owner == msg.sender, "Only owner can update price.");
         price = _price;
-    }
+    } 
 
     function getPrice() public view returns (uint256) {
         return price;

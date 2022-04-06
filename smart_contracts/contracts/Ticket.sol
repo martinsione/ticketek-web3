@@ -9,38 +9,61 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract Ticket is ERC721, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
-    uint256 public eventDate;
     string public place;
-
+    address payable public Owner;//
+    uint private totalTickets;//
+    uint public precio;
+    address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
-        uint256 _eventDate
+        uint _precio,
+        uint tickets
     ) ERC721(name, symb) {
-        eventDate = _eventDate;
         place = _place;
+        precio = _precio;
+        Owner = payable(msg.sender);//
+        totalTickets = tickets;
+        _tokenIdCounter.increment();
     }
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
-        require(tokenId <= 5, "No podes hacer mas");
+        require(totalTickets >= tokenId , "No more tickets left");
         _;
     }
 
-    function safeMint() public puede {
-        _tokenIdCounter.increment();
+    modifier hasFounds(){
+        require(msg.value/1000000000 == price, "Insufficient funds.");
+        _;
+    }//
+
+    function safeMint() public payable hasFounds puede {
+        
         uint256 tokenId = _tokenIdCounter.current();
-        console.log(tokenId);
+        
         _safeMint(msg.sender, tokenId);
+
+        Fees();
+        _tokenIdCounter.increment();
+        
     }
 
-    function changeDate(uint256 newEventDate) public onlyOwner {
-        eventDate = newEventDate;
-    }
+    function Fees() internal{
+        
+        uint us = msg.value * 0.1;
+        uint owner = msg.value - us;
+        Owner.transfer(owner);
+        NFTickets.transfer(us);
 
-    function getDate() public view returns (uint256) {
-        return eventDate;
+        
+    }//
+
+
+    function getStock() public view returns (uint){
+        uint256 tokenId = _tokenIdCounter.current();
+        return totalTickets >= tokenId ? totalTickets - tokenId + 1 : 0;
     }
 
     function changePlace(string memory newPlace) public onlyOwner {
