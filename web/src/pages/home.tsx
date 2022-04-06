@@ -1,3 +1,5 @@
+import type { AppState } from "../redux/store";
+
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 
@@ -13,7 +15,7 @@ import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 function Home() {
   //  { json }: JSON
   const dispatch = useDispatch();
-  const data: [] = useSelector((state) => state.events);
+  const data = useSelector((state: AppState) => state.events);
 
   useEffect(() => {
     dispatch(getEvents());

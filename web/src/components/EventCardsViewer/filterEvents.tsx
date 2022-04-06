@@ -1,4 +1,4 @@
-import { data } from "../fakeEvent";
+import data from "../fakeEvent.json";
 
 interface Args {
   categoria: string;
@@ -23,10 +23,8 @@ interface Event {
   price: number;
 }
 
-export default function filterEvents({ categoria, fecha, ciudad }: Args) {
-  let response = data;
+export default function filterEvents({ categoria }: Args) {
+  const response = data;
 
-  response = categoria && response.filter((ev: Event) => ev.type === categoria);
-
-  return response;
+  return categoria && response.filter((ev: Event) => ev.type === categoria);
 }
