@@ -10,7 +10,7 @@ export default function Search({ json }: { json: { data: [] } }) {
         {json.data.map(({ id, imageURL, artist, date, city }) => (
           <div key={id}>
             <Box w={200}>
-              <img src={imageURL} />
+              <img alt="" src={imageURL} />
             </Box>
             <div>Artist: {artist}</div>
             <div>Date: {date}</div>
@@ -26,6 +26,7 @@ export default function Search({ json }: { json: { data: [] } }) {
 export async function getServerSideProps(context: { query: any }) {
   const { query } = context;
   let searchLink: string = "";
+  // eslint-disable-next-line no-restricted-syntax, guard-for-in
   for (const key in query) {
     searchLink += `${key}=${query[key]}&`;
   }
