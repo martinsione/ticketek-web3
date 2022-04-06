@@ -5,25 +5,29 @@ import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract Ticket is ERC721, Ownable {
+contract Ticket is ERC721, Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     string public place;
-    address payable public Owner;//
-    uint private totalTickets;//
+    address payable public Owner;
+    uint private totalTickets;
     uint public price;
+    string private uri;
     address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
         uint _price,
-        uint tickets
-    ) ERC721(name, symb) {
+        uint tickets,
+        string memory _uri
+    ) ERC721(name, symb) { //y el basee uri
         place = _place;
         price = _price;
-        Owner = payable(msg.sender);//
+        uri = _uri;
+        Owner = payable(msg.sender);
         totalTickets = tickets;
         _tokenIdCounter.increment();
     }
@@ -37,7 +41,24 @@ contract Ticket is ERC721, Ownable {
     modifier hasFounds(){
         require(msg.value/1000000000 == price, "Insufficient funds.");
         _;
-    }//
+    }
+
+    function _baseURI() internal pure override returns (string memory) {
+        return uri;
+    }
+
+    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+        super._burn(tokenId);
+    }
+
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
+        return super.tokenURI(tokenId);
+    }
 
     function safeMint() public payable hasFounds puede {
         
@@ -58,7 +79,7 @@ contract Ticket is ERC721, Ownable {
         NFTickets.transfer(us);
 
         
-    }//
+    }
 
 
     function getStock() public view returns (uint){
