@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import NavBar from "../../components/NavBar/NavBar";
 
 export default function Search({ json }: { json: { data: [] } }) {
-  //console.log("DESDE SEARCH", { RESULTADO: json });
   return (
     <>
       <NavBar long={false} />
