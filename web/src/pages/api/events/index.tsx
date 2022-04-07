@@ -8,6 +8,9 @@ export default async function handler(
 ) {
     const { address, city, name, symbol } = req.body;
     try {
+
+        //     POST para crear un evento
+
         if (req.method === "POST") {
             const response = await prisma.contract.create({
                 data: {
@@ -19,6 +22,7 @@ export default async function handler(
             });
             return res.status(200).json(response);
         }
+        //   GET para traer todos los eventos
         const response = await prisma.contract.findMany();
         return res.status(200).json(response);
     } catch (error) {

@@ -8,17 +8,16 @@ datasource db {
 }
 
 model User {
-  id            Int     @id @default(autoincrement())
-  email         String  @unique
-  name          String?
-  walletAddress String  @unique
-  image         String?
+      walletAddress String  @id @unique
+      email         String  @unique
+      name          String? @default("Unknown")
+      image         String? @default("https://i1.sndcdn.com/avatars-000437232558-yuo0mv-t500x500.jpg")
 }
 
 model Contract {
-  id      Int    @id @default(autoincrement())
-  address String @unique
-  city    String
-  name    String
-  symbol  String
+      address String @id @unique
+      city    String
+      name    String
+      symbol  String
+
 }
