@@ -14,8 +14,6 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import NavBar from "../components/NavBar/NavBar";
-
 interface FeatureProps {
   text: string;
   iconBg: string;
@@ -43,7 +41,6 @@ function Feature({ text, icon, iconBg }: FeatureProps) {
 export default function About() {
   return (
     <>
-      <NavBar long={false} />
       <Container maxW="5xl" py={12}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Stack spacing={4}>
