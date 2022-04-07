@@ -1,4 +1,4 @@
-import { users } from "./data";
+import { users, contracts } from "./data";
 
 const { PrismaClient } = require("@prisma/client");
 
@@ -7,18 +7,16 @@ const prisma = new PrismaClient();
 const load = async () => {
   try {
     await prisma.user.deleteMany();
-    console.log("Deleted records in category table");
-
-    await prisma.user.deleteMany();
-    console.log("Deleted records in product table");
+    await prisma.contract.deleteMany();
+    console.log("Deleted records");
 
     await prisma.$queryRaw`ALTER TABLE User AUTO_INCREMENT = 1`;
-    console.log("reset users auto increment to 1");
+    await prisma.$queryRaw`ALTER TABLE Contract AUTO_INCREMENT = 1`;
+    console.log("reset auto increment to 1");
 
-    await prisma.user.createMany({
-      data: users,
-    });
-    console.log("Added users data");
+    await prisma.user.createMany({ data: users });
+    await prisma.contract.createMany({ data: contracts });
+    console.log("Added data");
   } catch (e) {
     console.error(e);
     process.exit(1);
