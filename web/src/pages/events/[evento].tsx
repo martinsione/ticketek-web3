@@ -160,13 +160,11 @@ export async function getStaticPaths() {
   const data = await fetch("http://localhost:3000/api/events");
   const json = await data.json();
 
-  const paths = json.map((event: EVENT) => {
-    return {
-      params: {
-        evento: `${event.id}`,
-      },
-    };
-  });
+  const paths = json.map((event: EVENT) => ({
+    params: {
+      evento: `${event.id}`,
+    },
+  }));
   return {
     paths,
     fallback: false,

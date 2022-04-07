@@ -8,7 +8,6 @@ import Card from "../Card/Card";
 
 interface Props {
   title: string;
-  // filter(): void;
   range: [number, number];
   json: [];
 }
@@ -31,7 +30,6 @@ const contract = new web.eth.Contract(abi as AbiItem[], adrress);
 // // este seria el arreglito que mapeariamos, con todos los datos de los eventos
 
 export default function EventCardViewer({ title, range, json }: Props) {
-  // const events = fakeEvents().filter((ev) => ev.city === "Bogota");
   const [min, max] = range;
   const [namecontrato, setNamecontrato] = useState("");
   const [symbol, setSymbol] = useState("");

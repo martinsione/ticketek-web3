@@ -56,8 +56,8 @@ export const data = [
   },
   {
     imageURL:
-      "https://s1.ticketm.net/dam/a/1e8/1a5a6417-5a9b-4dd1-ac1e-8aa162fb91e8_1572181_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
-    artist: "Weird Al Yankovic",
+      "https://s1.ticketm.net/dam/a/010/aa178e43-b5e8-44aa-bc2b-8c5975412010_1419701_TABLET_LANDSCAPE_LARGE_16_9.jpg?width=450&height=255&fit=crop&auto=webp",
+    artist: "Bad Bunny",
     location: "Bar Las palomas",
     city: "Bogotá",
     seat: 10,
@@ -215,6 +215,7 @@ export const data = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
     price: 0.02,
+<<<<<<< Updated upstream
   },
   {
     imageURL:
@@ -269,5 +270,7 @@ export const data = [
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean posuere metus id felis fermentum, suscipit congue nibh commodo. Aliquam erat volutpat. Aenean a metus vitae eros accumsan sollicitudin. Praesent lacinia augue a quam placerat, a ornare elit aliquet. Mauris dignissim nisl est. Sed commodo aliquet mauris, maximus dapibus diam lacinia a. Sed sapien felis, ullamcorper fermentum malesuada at, commodo eget metus. Duis eget est lobortis, viverra augue vitae, auctor odio. Cras luctus odio est, non blandit magna tempus sit amet. Sed nec est ultrices, posuere lacus sed, dapibus ex. Sed vulputate vitae nulla quis viverra.",
     price: 0.02,
+=======
+>>>>>>> Stashed changes
   },
 ];
