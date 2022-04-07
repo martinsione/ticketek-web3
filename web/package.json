@@ -35,6 +35,8 @@
 
 
     "seed": "node src/prisma/seed.js"
+
+
   },
 
 
@@ -99,6 +101,9 @@
 
 
     "sweetalert2": "^11.4.8",
+
+
+    "wallet-address-validator": "^0.2.4",
 
 
     "web3": "^1.7.1"
