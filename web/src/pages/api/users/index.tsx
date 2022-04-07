@@ -12,16 +12,21 @@ export default async function handler(
         if (req.method === "POST") {
             //   Ruta para la creación de un nuevo usuario, falta checkear parámetros
             const { name, email, walletAddress } = req.body;
+            // Se verifica que el input de walletAddress sea válido
             const valid = WAValidator.validate(walletAddress, "ETH");
             if (valid) {
-                const response = await prisma.user.create({
-                    data: {
-                        name,
-                        email,
-                        walletAddress,
-                    },
-                });
-                return res.status(200).json(response);
+                // Se verifica que el input de email sea válido
+                if (/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                    const response = await prisma.user.create({
+                        data: {
+                            name,
+                            email,
+                            walletAddress,
+                        },
+                    });
+                    return res.status(200).json(response);
+                }
+                return res.status(400).json({ error: "Not a valid email" });
             }
             return res.status(400).json({ error: "Not a valid address" });
         }
