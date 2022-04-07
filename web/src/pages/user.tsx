@@ -33,7 +33,7 @@ function user() {
 
   useLayoutEffect(() => {
     if (!account) router.push("/nouser");
-  }, []);
+  }, [account]);
   if (!account) return <div></div>;
   return (
     <>
