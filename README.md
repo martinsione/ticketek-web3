@@ -5,6 +5,7 @@
 - Ir al archivo *.env* y poner sus credenciales en la ``DATABASE_URL``
 - Posicionarse en la carpeta ``/src/prisma``
 - Ejecutar el comando ``npx prisma migrate dev --name init``
+- Ejecutar ``npm run seed`` para generar la db de ejemplo para trabajar
 
 Ya debería funcionar
 # ticketek-web3
