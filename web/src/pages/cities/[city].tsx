@@ -1,6 +1,5 @@
-import axios from "axios";
-
 import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
+import axios from "axios";
 
 export default function City({ data, city }: { data: []; city: string }) {
   return data && <EventCardViewer json={data} range={[0, 5]} title={city} />;
