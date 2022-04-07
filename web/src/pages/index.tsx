@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
 import LandingNavBar from "../components/NavBar/LandingNavBar";
+import axios from "axios";
 
 export default function Home() {
+  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
   return (
     <>
       <LandingNavBar />
