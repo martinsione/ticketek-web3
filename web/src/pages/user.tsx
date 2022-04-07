@@ -23,13 +23,13 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { useLayoutEffect } from "react";
+import { useEffect } from "react";
 
 function user() {
   const { account } = useWeb3React();
   const router = useRouter();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!account) router.push("/nouser");
   }, [account]);
   if (!account) return <div></div>;
