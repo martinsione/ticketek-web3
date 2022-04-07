@@ -145,10 +145,13 @@ export default function Evento({ data }: { data: [] }) {
   );
 }
 
-export async function getStaticProps(context: { params: { evento: string } }) {
+export async function getServerSideProps(context: {
+  params: { evento: string };
+}) {
   const { params } = context;
   const { data } = await axios(`/api/events/${params.evento}`);
 
+  console.log(data);
   if (!data.length) return { notFound: true };
 
   return {
@@ -158,19 +161,19 @@ export async function getStaticProps(context: { params: { evento: string } }) {
   };
 }
 
-export async function getStaticPaths() {
-  interface EVENT {
-    id: number;
-  }
-  const { data } = await axios("/api/events");
+// export async function getStaticPaths() {
+//   interface EVENT {
+//     id: number;
+//   }
+//   const { data } = await axios("/api/events");
 
-  const paths = data.map((event: EVENT) => ({
-    params: {
-      evento: `${event.id}`,
-    },
-  }));
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   const paths = data.map((event: EVENT) => ({
+//     params: {
+//       evento: `${event.id}`,
+//     },
+//   }));
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }

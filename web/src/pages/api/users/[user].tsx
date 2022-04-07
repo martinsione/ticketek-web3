@@ -31,6 +31,7 @@ export default async function handler(
         email = email || userToUpdate?.email;
         image = image || userToUpdate?.image;
 
+
         const response = await prisma.user.update({
             where: {
                 walletAddress: user,

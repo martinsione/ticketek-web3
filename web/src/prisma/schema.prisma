@@ -1,10 +1,10 @@
 generator client {
-      provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-      provider = "postgresql"
-      url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -19,4 +19,5 @@ model Contract {
       city    String
       name    String
       symbol  String
+
 }

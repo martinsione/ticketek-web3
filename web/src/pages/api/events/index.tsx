@@ -8,7 +8,9 @@ export default async function handler(
 ) {
     const { address, city, name, symbol } = req.body;
     try {
+
         //     POST para crear un evento
+
         if (req.method === "POST") {
             const response = await prisma.contract.create({
                 data: {
