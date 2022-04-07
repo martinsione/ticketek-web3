@@ -5,7 +5,6 @@ import NavBar from "../../components/NavBar/NavBar";
 export default function Search({ json }: { json: { data: [] } }) {
   return (
     <>
-      <NavBar long={false} />
       <div>
         {json.data.map(({ id, imageURL, artist, date, city }) => (
           <div key={id}>
