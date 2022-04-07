@@ -99,7 +99,7 @@ function LogIn() {
               </NextLink>
             )}
             {account && (
-              <NextLink passHref href="/user">
+              <NextLink passHref href="/user/userData">
                 <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
                   Settings
                 </Button>
