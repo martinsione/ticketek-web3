@@ -91,16 +91,20 @@ function LogIn() {
             >
               {account ? "Log out" : "Log in"}
             </Button>
-            <NextLink passHref href="/user">
-              <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
-                My profile
-              </Button>
-            </NextLink>
-            <NextLink passHref href="/user">
-              <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
-                Settings
-              </Button>
-            </NextLink>
+            {account && (
+              <NextLink passHref href="/user">
+                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
+                  My profile
+                </Button>
+              </NextLink>
+            )}
+            {account && (
+              <NextLink passHref href="/user">
+                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
+                  Settings
+                </Button>
+              </NextLink>
+            )}
           </PopoverBody>
         </PopoverContent>
       </Portal>
