@@ -8,6 +8,7 @@ export default async function handler(
 ) {
     const evento = req.query.evento.toString();
     try {
+        //     DELETE para borrar evento en particular, siempre buscandolo a traves de su address
         if (req.method === "DELETE") {
             const response = await prisma.contract.delete({
                 where: {
@@ -16,6 +17,8 @@ export default async function handler(
             });
             return res.status(200).json(response);
         }
+
+        //   GET para traer un evento en particular
         const response = await prisma.contract.findUnique({
             where: {
                 address: evento,

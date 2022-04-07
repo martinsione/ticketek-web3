@@ -20,13 +20,13 @@ export default async function handler(
     }
     if (req.method === "PUT") {
         let { name, email, image } = req.body;
-        //   Falta corroborar si no se envia nombre, etc etc
         const userToUpdate = await prisma.user.findUnique({
             where: {
                 walletAddress: user,
             },
         });
-
+        //   Los campos que no fueron enviados se asignan con los que ya tenía
+        // el usuario, para no dejarlos vacíos al actualizar
         name = name || userToUpdate?.name;
         email = email || userToUpdate?.email;
         image = image || userToUpdate?.image;
