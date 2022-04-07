@@ -1,7 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import data from "../../../components/fakeEvent.json";
+import prisma from "../../../lib/prisma";
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json(data);
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+  const justCities = (await prisma.contract.findMany()).map((e : {city : string}) => e.city);
+  const cities = new Set(justCities);
+  
+  res.status(200).json( Array.from(cities) );
 }

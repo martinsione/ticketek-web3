@@ -1,8 +1,17 @@
-import { FaEthereum, FaRegUserCircle } from 'react-icons/fa';
+import { FaEthereum, FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useWeb3React } from "@web3-react/core";
-import { Button, Popover, IconButton, PopoverBody, PopoverContent, PopoverTrigger, Portal, useToast } from "@chakra-ui/react";
+import {
+  Button,
+  Popover,
+  IconButton,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
+  useToast,
+} from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
 
@@ -59,25 +68,48 @@ function LogIn() {
   };
 
   return (
-    <Popover >
+    <Popover>
       <PopoverTrigger>
-        <IconButton _hover={{}} aria-label='Search database' bg="none" fontSize="50px" icon={account ? <FaEthereum /> : <FaRegUserCircle/>} />
+        <IconButton
+          _hover={{}}
+          aria-label="Search database"
+          bg="none"
+          fontSize="50px"
+          icon={account ? <FaEthereum /> : <FaRegUserCircle />}
+        />
       </PopoverTrigger>
-      <Portal >
+      <Portal>
         <PopoverContent>
           <PopoverBody>
-              <Button bg="none" fontSize="1.2rem" isLoading={loading} margin="5px" width="100%" onClick={handleConnect} >{account ? "Log out" : "Log in"}</Button>
+            <Button
+              bg="none"
+              fontSize="1.2rem"
+              isLoading={loading}
+              margin="5px"
+              width="100%"
+              onClick={handleConnect}
+            >
+              {account ? "Log out" : "Log in"}
+            </Button>
+            {account && (
               <NextLink passHref href="/user">
-                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%" >My profile</Button>
+                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
+                  My profile
+                </Button>
               </NextLink>
+            )}
+            {account && (
               <NextLink passHref href="/user">
-                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%" >Settings</Button>
+                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
+                  Settings
+                </Button>
               </NextLink>
+            )}
           </PopoverBody>
         </PopoverContent>
       </Portal>
-  </Popover>
-  )
+    </Popover>
+  );
 }
 
 export default LogIn;

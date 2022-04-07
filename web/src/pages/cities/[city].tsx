@@ -1,4 +1,5 @@
 import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
+import axios from "axios";
 
 export default function City({ data, city }: { data: []; city: string }) {
   return data && <EventCardViewer json={data} range={[0, 5]} title={city} />;
@@ -6,14 +7,13 @@ export default function City({ data, city }: { data: []; city: string }) {
 
 export async function getStaticProps(context: { params: { city: string } }) {
   const { params } = context;
-  const data = await fetch(`http://localhost:3000/api/cities/${params.city}`);
-  const json = await data.json();
+  const { data } = await axios(`/api/cities/${params.city}`);
 
-  if (!json.length) return { notFound: true };
+  if (!data.length) return { notFound: true };
 
   return {
     props: {
-      data: json,
+      data,
       city: params.city,
     },
   };
@@ -23,10 +23,9 @@ export async function getStaticPaths() {
   interface EVENT {
     city: string;
   }
-  const data = await fetch("http://localhost:3000/api/cities");
-  const json = await data.json();
+  const { data } = await axios("/api/cities");
 
-  const paths = json.map((event: EVENT) => ({
+  const paths = data.map((event: EVENT) => ({
     params: {
       city: `${event.city}`,
     },
