@@ -22,6 +22,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const matches: EVENT[] = [];
+  const articles: string[] = [
+    "de",
+    "del",
+    "el",
+    "la",
+    "lo",
+    "los",
+    "the",
+    "of",
+    "la",
+    "las",
+  ];
   data.filter((event: EVENT) => {
     // a = key of the object data
     // let a: keyof EVENT
@@ -34,7 +46,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           : value;
 
       // b = word of searchTerm string
-      for (const b of querySplit) {
+      for (let b of querySplit) {
+        console.log(b);
         if (
           a === "artist" ||
           a === "location" ||
@@ -42,7 +55,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           a === "country" ||
           a === "type"
         ) {
-          if (aSplit.includes(b.toLowerCase())) matches.push(event);
+          if (aSplit.includes(b.toLowerCase()) && !articles.includes(b))
+            matches.push(event);
         }
       }
     }
