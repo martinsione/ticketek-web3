@@ -17,3 +17,9 @@ model User {
       walletAddress String  @unique
       image         String?
 }
+
+model Contract {
+      id            Int     @id @default(autoincrement())
+      address       String  @unique
+      city          String 
+}
