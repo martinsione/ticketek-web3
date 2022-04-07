@@ -25,11 +25,16 @@ import {
 
 import NavBar from "../components/NavBar/NavBar";
 import { useRouter } from "next/router";
+import { useLayoutEffect } from "react";
 
 function user() {
   const { account } = useWeb3React();
   const router = useRouter();
-  if (!account) router.push("/nouser");
+
+  useLayoutEffect(() => {
+    if (!account) router.push("/nouser");
+  }, []);
+  if (!account) return <div></div>;
   return (
     <>
       <NavBar long={false} />
