@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Box,
   Container,
@@ -14,7 +15,6 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-import axios from "axios";
 
 export default function Evento({ data }: { data: [] }) {
   return (

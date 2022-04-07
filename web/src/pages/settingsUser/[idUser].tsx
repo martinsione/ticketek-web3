@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {
     Button,
     Flex,
@@ -14,91 +15,113 @@ import {
 } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
 
-export default function UserProfileEdit(): JSX.Element {
+export default function SettingsUser({ data }: { data: [] }) {
+    console.log(data)
     return (
-        <Flex
-            minH={'100vh'}
-            align={'center'}
-            justify={'center'}
-            bg={useColorModeValue('gray.50', 'gray.800')}>
-            <Stack
-                spacing={4}
-                w={'full'}
-                maxW={'md'}
-                bg={useColorModeValue('white', 'gray.700')}
-                rounded={'xl'}
-                boxShadow={'lg'}
-                p={6}
-                my={12}>
-                <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
-                    User Profile Edit
-                </Heading>
-                <FormControl id="userName">
-                    <FormLabel>User Icon</FormLabel>
-                    <Stack direction={['column', 'row']} spacing={6}>
-                        <Center>
-                            <Avatar size="xl" src="https://bit.ly/sage-adebayo">
-                                <AvatarBadge
-                                    as={IconButton}
-                                    size="sm"
-                                    rounded="full"
-                                    top="-10px"
-                                    colorScheme="red"
-                                    aria-label="remove Image"
-                                    icon={<SmallCloseIcon />}
-                                />
-                            </Avatar>
-                        </Center>
-                        <Center w="full">
-                            <Button w="full">Change Icon</Button>
-                        </Center>
+        data && data.map(
+            ({ name, email }) =>
+
+                <Flex
+                    align="center"
+                    bg={useColorModeValue('gray.50', 'gray.800')}
+                    justify="center"
+                    minH="100vh">
+                    <Stack
+                        bg={useColorModeValue('white', 'gray.700')}
+                        boxShadow="lg"
+                        maxW="md"
+                        my={12}
+                        p={6}
+                        rounded="xl"
+                        spacing={4}
+                        w="full">
+                        <Heading fontSize={{ base: '2xl', sm: '3xl' }} lineHeight={1.1}>
+                            User Profile Edit
+                        </Heading>
+                        <FormControl id="userName">
+                            <FormLabel>User Icon</FormLabel>
+                            <Stack direction={['column', 'row']} spacing={6}>
+                                <Center>
+                                    <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                                        <AvatarBadge
+                                            aria-label="remove Image"
+                                            as={IconButton}
+                                            colorScheme="red"
+                                            icon={<SmallCloseIcon />}
+                                            rounded="full"
+                                            size="sm"
+                                            top="-10px"
+                                        />
+                                    </Avatar>
+                                </Center>
+                                <Center w="full">
+                                    <Button w="full">Change Icon</Button>
+                                </Center>
+                            </Stack>
+                        </FormControl>
+                        <FormControl isRequired id="userName">
+                            <FormLabel>{name}</FormLabel>
+                            <Input
+                                _placeholder={{ color: 'gray.500' }}
+                                placeholder="UserName"
+                                type="text"
+                            />
+                        </FormControl>
+                        <FormControl isRequired id="email">
+                            <FormLabel>{email}</FormLabel>
+                            <Input
+                                _placeholder={{ color: 'gray.500' }}
+                                placeholder="your-email@example.com"
+                                type="email"
+                            />
+                        </FormControl>
+                        <FormControl isRequired id="password">
+                            <FormLabel>Password</FormLabel>
+                            <Input
+                                _placeholder={{ color: 'gray.500' }}
+                                placeholder="password"
+                                type="password"
+                            />
+                        </FormControl>
+                        <Stack direction={['column', 'row']} spacing={6}>
+                            <Button
+                                _hover={{
+                                    bg: 'red.500',
+                                }}
+                                bg="red.400"
+                                color="white"
+                                w="full">
+                                Cancel
+                            </Button>
+                            <Button
+                                _hover={{
+                                    bg: 'blue.500',
+                                }}
+                                bg="blue.400"
+                                color="white"
+                                w="full">
+                                Submit
+                            </Button>
+                        </Stack>
                     </Stack>
-                </FormControl>
-                <FormControl id="userName" isRequired>
-                    <FormLabel>User name</FormLabel>
-                    <Input
-                        placeholder="UserName"
-                        _placeholder={{ color: 'gray.500' }}
-                        type="text"
-                    />
-                </FormControl>
-                <FormControl id="email" isRequired>
-                    <FormLabel>Email address</FormLabel>
-                    <Input
-                        placeholder="your-email@example.com"
-                        _placeholder={{ color: 'gray.500' }}
-                        type="email"
-                    />
-                </FormControl>
-                <FormControl id="password" isRequired>
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                        placeholder="password"
-                        _placeholder={{ color: 'gray.500' }}
-                        type="password"
-                    />
-                </FormControl>
-                <Stack spacing={6} direction={['column', 'row']}>
-                    <Button
-                        bg={'red.400'}
-                        color={'white'}
-                        w="full"
-                        _hover={{
-                            bg: 'red.500',
-                        }}>
-                        Cancel
-                    </Button>
-                    <Button
-                        bg={'blue.400'}
-                        color={'white'}
-                        w="full"
-                        _hover={{
-                            bg: 'blue.500',
-                        }}>
-                        Submit
-                    </Button>
-                </Stack>
-            </Stack>
-        </Flex>
-    );
+                </Flex>
+        )
+    )
+}
+
+
+export async function getServerSideProps(context: {
+    params: { walletAddress: string };
+}) {
+    const { params } = context;
+    const { data } = await axios(`/api/events/${params.walletAddress}`);
+
+    console.log(data);
+    if (!data.length) return { notFound: true };
+
+    return {
+        props: {
+            data,
+        },
+    };
 }
