@@ -47,7 +47,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
       // b = word of searchTerm string
       for (let b of querySplit) {
-        console.log(b);
         if (
           a === "artist" ||
           a === "location" ||
