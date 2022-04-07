@@ -1,6 +1,4 @@
 {
-
-
   "name": "web",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +9,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,yml,yaml,css,scss,less,html,mdx}'",
+    "seed": "node src/prisma/seed.",
     "test": "jest --watch"
   },
   "dependencies": {
@@ -55,8 +54,7 @@
     "eslint-plugin-react-hooks": "4.4.0",
     "jest": "^27.5.1",
     "prettier": "2.6.1",
-     "prisma": "^3.12.0",
+    "prisma": "^3.12.0",
     "typescript": "4.6.3"
   }
-
 }
