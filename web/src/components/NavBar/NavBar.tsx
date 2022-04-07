@@ -12,8 +12,9 @@ function NavBar() {
       flexDirection="column"
       h={100}
       overflow="hidden"
-      position="relative"
+      position="fixed"
       w="100%"
+      zIndex={1000}
     >
       <Flex // nav bar
         alignItems="center"
