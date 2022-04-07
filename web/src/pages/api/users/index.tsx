@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "../../../lib/prisma";
 
 export default async function handler(
@@ -17,7 +18,8 @@ export default async function handler(
                 },
             });
             return res.status(200).json(response);
-        } else if (req.method === "DELETE") {
+        }
+        if (req.method === "DELETE") {
             //   Método para borrar todos los usuarios de la base de datos
             const response = await prisma.user.deleteMany({});
             return res.status(200).json(response);

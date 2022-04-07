@@ -16,7 +16,7 @@ export default async function handler(
 
         return res.status(200).json(response);
         //   Método PUT
-    } else if (req.method === "PUT") {
+    } if (req.method === "PUT") {
         const { name, email, image } = req.body;
         //   Falta corroborar si no se envia nombre, etc etc
         const response = await prisma.user.update({
