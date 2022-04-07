@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import prisma from "../../../lib/prisma";
 
 export default async function handler(
@@ -16,9 +17,20 @@ export default async function handler(
 
         return res.status(200).json(response);
         //   Método PUT
-    } if (req.method === "PUT") {
-        const { name, email, image } = req.body;
+    }
+    if (req.method === "PUT") {
+        let { name, email, image } = req.body;
         //   Falta corroborar si no se envia nombre, etc etc
+        const userToUpdate = await prisma.user.findUnique({
+            where: {
+                walletAddress: user,
+            },
+        });
+
+        name = name || userToUpdate?.name;
+        email = email || userToUpdate?.email;
+        image = image || userToUpdate?.image;
+
         const response = await prisma.user.update({
             where: {
                 walletAddress: user,
