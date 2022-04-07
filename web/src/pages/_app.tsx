@@ -8,7 +8,7 @@ import { store } from "../redux/store";
 
 import "../styles/globals.css";
 import getLibrary from "../components/Wallet/library";
-import Footer from "../components/Footer/Footer";
+import Layout from "../components/estructura/Layout";
 
 const theme = extendTheme({
   fonts: {
@@ -22,8 +22,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <Provider store={store}>
       <Web3ReactProvider getLibrary={getLibrary}>
         <ChakraProvider theme={theme}>
-          <Component {...pageProps} />
-          <Footer />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ChakraProvider>
       </Web3ReactProvider>
     </Provider>

@@ -1,19 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-      provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-      provider = "postgresql"
-      url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-      id            Int     @id @default(autoincrement())
+      walletAddress String  @id @unique
       email         String  @unique
-      name          String?
-      walletAddress String  @unique
-      image         String?
+      name          String? @default("Unknown")
+      image         String? @default("https://i1.sndcdn.com/avatars-000437232558-yuo0mv-t500x500.jpg")
+}
+
+model Contract {
+      address String @id @unique
+      city    String
+      name    String
+      symbol  String
+
 }

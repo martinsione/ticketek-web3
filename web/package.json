@@ -31,7 +31,14 @@
     "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,yml,yaml,css,scss,less,html,mdx}'",
 
 
+<<<<<<< HEAD
     "test": "jest --watch"
+=======
+    "test": "jest --watch",
+
+
+    "seed": "node src/prisma/seed.js"
+>>>>>>> 59681ca5d452c94c3c0e39ce9a1245a386693b18
 
 
   },
@@ -40,9 +47,12 @@
   "dependencies": {
 
 
+<<<<<<< HEAD
     "@chakra-ui/icons": "^1.1.7",
 
 
+=======
+>>>>>>> 59681ca5d452c94c3c0e39ce9a1245a386693b18
     "@chakra-ui/react": "^1.8.7",
 
 
@@ -67,6 +77,12 @@
     "@web3-react/injected-connector": "^6.0.7",
 
 
+<<<<<<< HEAD
+=======
+    "axios": "^0.26.1",
+
+
+>>>>>>> 59681ca5d452c94c3c0e39ce9a1245a386693b18
     "framer-motion": "^6.2.8",
 
 
@@ -100,6 +116,12 @@
     "sweetalert2": "^11.4.8",
 
 
+<<<<<<< HEAD
+=======
+    "wallet-address-validator": "^0.2.4",
+
+
+>>>>>>> 59681ca5d452c94c3c0e39ce9a1245a386693b18
     "web3": "^1.7.1"
 
 

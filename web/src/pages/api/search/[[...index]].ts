@@ -54,8 +54,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           a === "country" ||
           a === "type"
         ) {
-          if (aSplit.includes(b.toLowerCase()) && !articles.includes(b))
-            matches.push(event);
+          // if (aSplit.includes(b.toLowerCase()) && !articles.includes(b))
+          //   matches.push(event);
+          for (a of aSplit) {
+            if (a.includes(b.toLowerCase()) && !articles.includes(b)) {
+              matches.push(event);
+            }
+          }
         }
       }
     }

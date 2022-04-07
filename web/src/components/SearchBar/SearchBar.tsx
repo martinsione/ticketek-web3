@@ -24,7 +24,7 @@ function SearchBar() {
       router.query.searchTerm = query.trim();
       router.reload();
     }
-    router.push(`http://localhost:3000/search?searchTerm=${query.trim()}`);
+    router.push(`/search?searchTerm=${query.trim()}`);
   }
   return (
     <Flex alignItems="center" flexDirection="row" h={70}>
