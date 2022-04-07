@@ -5,7 +5,7 @@ import NavBar from "../components/NavBar/NavBar";
 export default function Help() {
   return (
     <>
-      <NavBar long={false} />
+      <NavBar />
       <Container maxW="3xl">
         <Stack
           as={Box}

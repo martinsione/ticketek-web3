@@ -23,7 +23,7 @@ function Home() {
 
   return (
     <div>
-      <NavBar long={false} />
+      <NavBar />
       <FilterBar />
       <main>
         <EventCardViewer json={data} range={[0, 3]} title="Destacados" />
