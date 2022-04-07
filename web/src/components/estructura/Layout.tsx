@@ -4,11 +4,10 @@ import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
 interface LAYOUT {
-  long: boolean;
   children: React.ReactNode;
 }
 
-function Layout({ children, long }: LAYOUT) {
+function Layout({ children }: LAYOUT) {
   return (
     <>
       <Head>
@@ -18,7 +17,7 @@ function Layout({ children, long }: LAYOUT) {
           rel="icon"
         />
       </Head>
-      <NavBar long={long} />
+      <NavBar />
       {children}
       <Footer />
     </>

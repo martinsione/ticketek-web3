@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 
 import { getEvents } from "../redux/actions";
-import NavBar from "../components/NavBar/NavBar";
 import FilterBar from "../components/FilterBar/FilterBar";
 import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 
@@ -23,7 +22,6 @@ function Home() {
 
   return (
     <div>
-      <NavBar />
       <FilterBar />
       <main>
         <EventCardViewer json={data} range={[0, 3]} title="Destacados" />
