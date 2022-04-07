@@ -41,5 +41,4 @@ yarn-error.log*
 typechain
 cache
 artifacts
-#web env
 web/.env
