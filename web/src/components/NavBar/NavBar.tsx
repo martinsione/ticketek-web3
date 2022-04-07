@@ -12,7 +12,7 @@ function NavBar() {
       flexDirection="column"
       h={100}
       overflow="hidden"
-      position="fixed"
+      position="relative"
       w="100%"
       zIndex={1000}
     >
