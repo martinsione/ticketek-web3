@@ -22,8 +22,6 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
-
-import NavBar from "../components/NavBar/NavBar";
 import { useRouter } from "next/router";
 import { useLayoutEffect } from "react";
 
@@ -37,7 +35,6 @@ function user() {
   if (!account) return <div></div>;
   return (
     <>
-      <NavBar long={false} />
       <VStack bgColor="#B2C1B5" height="40vh" />
       <VStack flexDirection="column" justifyContent="center" textAlign="center">
         <Box bottom="10" position="relative">
