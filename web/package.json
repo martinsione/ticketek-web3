@@ -31,9 +31,10 @@
     "format": "prettier --write '**/*.{ts,tsx,js,jsx,json,md,yml,yaml,css,scss,less,html,mdx}'",
 
 
-    "test": "jest --watch"
+    "test": "jest --watch",
 
 
+    "seed": "node src/prisma/seed.js"
   },
 
 
