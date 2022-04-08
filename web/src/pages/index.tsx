@@ -4,7 +4,7 @@ import LandingNavBar from "../components/NavBar/LandingNavBar";
 import axios from "axios";
 
 export default function Home() {
-  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+  axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return (
     <>
