@@ -1,14 +1,35 @@
 import axios from "axios";
 
+import DatesDropDown from "../../components/FilterBar/DatesDropDown";
+import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
 
 export default function City({ data, city }: { data: []; city: string }) {
-  return data && <EventCardViewer json={data} range={[0, 5]} title={city} />;
+  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.value === "choose") {
+      document.querySelector("#chooseDate").style.visibility = "visible";
+    } else {
+      document.querySelector("#chooseDate").style.visibility = "hidden";
+    }
+  };
+  return (
+    <>
+      <CategoriesDropDown />
+      <DatesDropDown fn={handleDates} />
+
+      {data && <EventCardViewer json={data} range={[0, 5]} title={city} />}
+    </>
+  );
 }
 
-export async function getStaticProps(context: { params: { city: string } }) {
+export async function getServerSideProps(context: {
+  params: { city: string };
+}) {
   const { params } = context;
-  const { data } = await axios(`/api/cities/${params.city}`);
+  const { data } = await axios(
+    `http://localhost:3000/api/cities/${params.city}`
+  );
 
   if (!data.length) return { notFound: true };
 
@@ -20,17 +41,17 @@ export async function getStaticProps(context: { params: { city: string } }) {
   };
 }
 
-export async function getStaticPaths() {
-  const { data } = await axios("/api/cities");
+// export async function getStaticPaths() {
+//   const { data } = await axios("/api/cities");
 
-  const paths = data.map((city: string) => ({ params: city }));
-  console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
+//   const paths = data.map((city: string) => ({ params: city }));
+//   console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
 
-  return {
-    paths,
-    fallback: false,
-  };
-}
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
 // export async function getStaticPaths() {
 //   interface EVENT {
 //     city: string;
