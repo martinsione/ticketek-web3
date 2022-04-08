@@ -12,3 +12,14 @@ export function getEvents() {
     });
   };
 }
+export function getCities() {
+  return async function (
+    dispatch: (arg0: { type: string; payload: {} }) => {}
+  ) {
+    const { data } = await axios("/api/cities");
+    return dispatch({
+      type: "GET_CITIES",
+      payload: data,
+    });
+  };
+}

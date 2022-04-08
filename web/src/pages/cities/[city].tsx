@@ -21,19 +21,31 @@ export async function getStaticProps(context: { params: { city: string } }) {
 }
 
 export async function getStaticPaths() {
-  interface EVENT {
-    city: string;
-  }
   const { data } = await axios("/api/cities");
 
-  const paths = data.map((event: EVENT) => ({
-    params: {
-      city: `${event.city}`,
-    },
-  }));
+  const paths = data.map((city: string) => ({ params: city }));
+  console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
 
   return {
     paths,
     fallback: false,
   };
 }
+// export async function getStaticPaths() {
+//   interface EVENT {
+//     city: string;
+//   }
+//   const { data } = await axios("/api/cities");
+
+//   const paths = data.map((city) => ({
+//     params: {
+//       city,
+//     },
+//   }));
+//   console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
+
+//   return {
+//     paths,
+//     fallback: false,
+//   };
+// }
