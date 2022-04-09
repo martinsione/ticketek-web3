@@ -6,12 +6,8 @@ import { Select } from "@chakra-ui/react";
 
 import { getCities } from "../../redux/actions";
 
-export default function CitiesDropDown({ fn }) {
+export default function CitiesDropDown({ fn }: any) {
   const allCities = useSelector((state: AppState) => state.cities);
-  console.log(
-    "🚀 ~ file: CitiesDropDown.tsx ~ line 12 ~ CitiesDropDown ~ allCities",
-    allCities
-  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCities());

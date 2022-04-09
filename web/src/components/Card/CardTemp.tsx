@@ -37,7 +37,9 @@ export default function Card({ address, city, name, symbol }: Props) {
             fontSize="2xl"
             fontWeight={200}
           >
-            {name}
+            <Link passHref href={`/events/${name}`}>
+              {name}
+            </Link>
           </Heading>
 
           <Link passHref href={`/cities/${city}`}>
@@ -48,7 +50,9 @@ export default function Card({ address, city, name, symbol }: Props) {
               {address}
             </Text>
           </Link>
-
+          <Text fontSize="xs" fontWeight={500}>
+            {symbol}
+          </Text>
           <Stack align="center" direction="row">
             <Button marginTop={3} variant="ghost">
               Get Ticket

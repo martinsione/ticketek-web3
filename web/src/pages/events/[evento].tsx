@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Box,
   Container,
@@ -14,7 +15,6 @@ import {
   List,
   ListItem,
 } from "@chakra-ui/react";
-import axios from "axios";
 
 export default function Evento({ data }: { data: [] }) {
   return (
@@ -149,7 +149,9 @@ export async function getServerSideProps(context: {
   params: { evento: string };
 }) {
   const { params } = context;
-  const { data } = await axios(`/api/events/${params.evento}`);
+  const { data } = await axios(
+    `http://localhost:3000/api/events/${params.evento}`
+  );
 
   console.log(data);
   if (!data.length) return { notFound: true };

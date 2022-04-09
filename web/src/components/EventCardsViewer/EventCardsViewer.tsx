@@ -1,10 +1,11 @@
-import Web3 from "web3";
-import React, { SetStateAction, useState } from "react";
+// import Web3 from "web3";
+import React from "react";
+// import  { SetStateAction, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
-import { abi } from "../Ticket.json";
+// import { abi } from "../Ticket.json";
 // import Card from "../Card/Card";
-import Card_temp from "../Card/Card_temp";
+import CardTemp from "../Card/CardTemp";
 
 interface Props {
   title: string;
@@ -13,13 +14,13 @@ interface Props {
   json: [];
 }
 
-const adrress: string = "0x945eD39416121076ADB07c493e306b6D9E541b09";
+// const adrress: string = "0x945eD39416121076ADB07c493e306b6D9E541b09";
 
-const web = new Web3(
-  "https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f"
-);
+// const web = new Web3(
+//   "https://ropsten.infura.io/v3/205cede8cdd24eec87b57ce48768889f"
+// );
 
-const contract = new web.eth.Contract(abi as any, adrress);
+// const contract = new web.eth.Contract(abi as any, adrress);
 
 // const arrContratos = contract.methods.getArr().call().then(res)
 // // aqui traeriamos el arreglo con todos los contratitos
@@ -33,35 +34,36 @@ const contract = new web.eth.Contract(abi as any, adrress);
 export default function EventCardViewer({ title, range, json }: Props) {
   // const events = fakeEvents().filter((ev) => ev.city === "Bogota");
   const [min, max] = range;
-  const [namecontrato, setNamecontrato] = useState("");
-  const [symbol, setSymbol] = useState("");
-  const [place, setPlace] = useState("");
-  const [eventDate, setEventDate] = useState("");
 
-  contract.methods
-    .name()
-    .call()
-    .then((res: SetStateAction<string>) => setNamecontrato(res));
-  contract.methods
-    .symbol()
-    .call()
-    .then((res: SetStateAction<string>) => setSymbol(res));
-  contract.methods
-    .place()
-    .call()
-    .then((res: SetStateAction<string>) => setPlace(res));
-  contract.methods
-    .eventDate()
-    .call()
-    .then((res: SetStateAction<string>) => setEventDate(res));
+  // const [namecontrato, setNamecontrato] = useState("");
+  // const [symbol, setSymbol] = useState("");
+  // const [place, setPlace] = useState("");
+  // const [eventDate, setEventDate] = useState("");
 
-  const unixTimestamp: string = eventDate;
+  // contract.methods
+  //   .name()
+  //   .call()
+  //   .then((res: SetStateAction<string>) => setNamecontrato(res));
+  // contract.methods
+  //   .symbol()
+  //   .call()
+  //   .then((res: SetStateAction<string>) => setSymbol(res));
+  // contract.methods
+  //   .place()
+  //   .call()
+  //   .then((res: SetStateAction<string>) => setPlace(res));
+  // contract.methods
+  //   .eventDate()
+  //   .call()
+  //   .then((res: SetStateAction<string>) => setEventDate(res));
 
-  const milliseconds = Number(unixTimestamp) * 1000;
+  // const unixTimestamp: string = eventDate;
 
-  const dateObject = new Date(milliseconds);
+  // const milliseconds = Number(unixTimestamp) * 1000;
 
-  const humanDateFormat = dateObject.toLocaleString().split(" ")[0]; // 2019-12-9 10:30:15
+  // const dateObject = new Date(milliseconds);
+
+  // const humanDateFormat = dateObject.toLocaleString().split(" ")[0]; // 2019-12-9 10:30:15
 
   // dateObject.toLocaleString("en-US", { weekday: "long" }) // Monday
   // dateObject.toLocaleString("en-US", { month: "long" }) // December
@@ -94,7 +96,7 @@ export default function EventCardViewer({ title, range, json }: Props) {
             (ev: EV, ndx: number) =>
               ndx >= min &&
               ndx <= max && (
-                <Card_temp
+                <CardTemp
                   key={ev.address}
                   address={ev.address}
                   city={ev.city}

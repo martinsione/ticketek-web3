@@ -1,0 +1,39 @@
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background: #dbd0bc;
+  /* overflow-y: scroll; */
+}
+
+.box {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px;
+  /* grid-template-rows: 150px; */
+  overflow-x: scroll;
+  scroll-snap-type: x proximity;
+}
+
+.item {
+  scroll-snap-align: center;
+  width: 350px;
+  padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.bot {
+  color: rgb(255, 169, 216);
+  font-size: 2em;
+  padding: 0 20px;
+  transition-duration: 300ms;
+}
+
+.bot:hover {
+  color: rgb(255, 44, 160);
+}

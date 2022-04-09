@@ -13,13 +13,8 @@ export default function filterBar() {
     e.preventDefault();
     //
   };
-  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.target.value === "choose") {
-      document.querySelector("#chooseDate").style.visibility = "visible";
-    } else {
-      document.querySelector("#chooseDate").style.visibility = "hidden";
-    }
+  const handleDates = () => {
+    console.log("HOLA");
   };
   const handleCities = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();

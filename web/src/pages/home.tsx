@@ -6,6 +6,7 @@ import React, { useEffect } from "react";
 import { getEvents } from "../redux/actions";
 import FilterBar from "../components/FilterBar/FilterBar";
 import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
+import CardSlider from "../components/CardSlider/CardSlider";
 
 // interface JSON {
 //   json: [];
@@ -24,6 +25,7 @@ function Home() {
     <div>
       <FilterBar />
       <main>
+        <CardSlider />
         <EventCardViewer json={data} range={[0, 3]} title="Destacados" />
         <EventCardViewer json={data} range={[4, 7]} title="En tu ciudad" />
         <EventCardViewer
