@@ -17,10 +17,10 @@ export default function UserData() {
 
   const onSubmit = async (data: {}) => {
     try {
-      console.log(data);
       await axios.post("/api/users", { ...data, walletAddress: account });
-      if (onSubmit.status === 200) router.push("/user/dataUserSuccess");
-      else if (onSubmit.status === 500) router.push("/error");
+      if (onSubmit.status === 200) return router.push("/user/dataUserSuccess");
+      else if (onSubmit.status === 500) return router.push("/error");
+      return router.push("/user/dataUserSuccess");
     } catch (error) {
       router.push("/user/error");
     }

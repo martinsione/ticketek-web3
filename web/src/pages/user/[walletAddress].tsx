@@ -22,25 +22,16 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import axios from "axios";
 
-function user() {
-  const [state, setState] = useState({ name: "" });
-  const router = useRouter();
-  const { account } = useWeb3React();
+interface DATA {
+  data: {
+    name: string;
+    walletAddress: string;
+  };
+}
 
-  async function fetchData() {
-    const { data } = await axios(`/api/users/${account}`);
-    setState(data);
-  }
-  useEffect(() => {
-    if (!account) router.push("/nouser");
-    fetchData();
-  }, [account]);
-  if (!account) return <div></div>;
-
+function UserID({ data }: DATA) {
   return (
     <>
       <VStack bgColor="#B2C1B5" height="40vh" />
@@ -50,13 +41,14 @@ function user() {
             boxSize="8rem"
             cursor="pointer"
             src={
-              account
-                ? "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
-                : ""
+              "hola"
+              //   account
+              //     ? "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
+              //     : ""
             }
           />
-          <Text fontSize="2rem">{state.name || "Unnamed"}</Text>
-          <Tag padding="3">{account || "address..."} </Tag>
+          <Text fontSize="2rem">{data.name}</Text>
+          <Tag padding="3">{data.walletAddress}</Tag>
         </Box>
       </VStack>
       <HStack width="100vw">
@@ -167,4 +159,20 @@ function user() {
   );
 }
 
-export default user;
+export default UserID;
+
+interface CONTEXT {
+  query: {
+    walletAddress: string;
+  };
+}
+
+export async function getServerSideProps(context: CONTEXT) {
+  const { query } = context;
+  const { data } = await axios(`/api/users/${query.walletAddress}`);
+  return {
+    props: {
+      data,
+    },
+  };
+}
