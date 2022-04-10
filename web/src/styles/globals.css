@@ -14,3 +14,29 @@ a {
 * {
   box-sizing: border-box;
 }
+
+body {
+  background-color: #fafafa;
+}
+
+.border-gradient {
+  position: relative;
+}
+.border-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  padding: 2px;
+  background: linear-gradient(90deg, #73e0a9 0%, #5b68df 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.border-gradient.sm::before {
+  padding: 1px;
+}
