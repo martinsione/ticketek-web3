@@ -3,22 +3,17 @@ import axios from "axios";
 import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
+import CardPage from "../../components/CardPage/CardPage";
 
 export default function City({ data, city }: { data: []; city: string }) {
-  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    if (e.target.value === "choose") {
-      document.querySelector("#chooseDate").style.visibility = "visible";
-    } else {
-      document.querySelector("#chooseDate").style.visibility = "hidden";
-    }
-  };
+  const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {};
   return (
     <>
-      <CategoriesDropDown />
+      <CategoriesDropDown fn={handleCategories} />
       <DatesDropDown fn={handleDates} />
 
-      {data && <EventCardViewer json={data} range={[0, 5]} title={city} />}
+      {data && <CardPage data={data} title={city} />}
     </>
   );
 }
@@ -40,6 +35,23 @@ export async function getServerSideProps(context: {
     },
   };
 }
+// export async function getServerSideProps(context: {
+//   params: { city: string };
+// }) {
+//   const { params } = context;
+//   const { data } = await axios(
+//     `http://localhost:3000/api/cities/${params.city}`
+//   );
+
+//   if (!data.length) return { notFound: true };
+
+//   return {
+//     props: {
+//       data,
+//       city: params.city,
+//     },
+//   };
+// }
 
 // export async function getStaticPaths() {
 //   const { data } = await axios("/api/cities");

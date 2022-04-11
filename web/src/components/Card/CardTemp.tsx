@@ -18,12 +18,13 @@ interface Props {
 
 export default function Card({ address, city, name, symbol }: Props) {
   return (
-    <Center margin={30} py={12}>
+    <Center margin={0} py={0}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
-        boxShadow="2xl"
+        // boxShadow="2xl"
+        margin="20px"
         maxW="330px"
-        p={6}
+        p="6"
         pos="relative"
         role="group"
         rounded="lg"

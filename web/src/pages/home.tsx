@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 
 import { getEvents } from "../redux/actions";
 import FilterBar from "../components/FilterBar/FilterBar";
-import EventCardViewer from "../components/EventCardsViewer/EventCardsViewer";
 import CardSlider from "../components/CardSlider/CardSlider";
 
 // interface JSON {
@@ -21,17 +20,44 @@ function Home() {
     dispatch(getEvents());
   }, []);
 
+  let count = 0;
+  const intervalID = setInterval(myCallback, 500, "Parameter 1", "Parameter 2");
+  const go = () => {
+    intervalID;
+  };
+  function myCallback(a, b) {
+    if (count > 8) {
+      clearInterval(intervalID);
+      count = 0;
+    }
+    count++;
+    console.log(count);
+  }
+
   return (
     <div>
+      <div>
+        <button type="button" onClick={go}>
+          GO
+        </button>
+      </div>
       <FilterBar />
       <main>
-        <CardSlider />
-        <EventCardViewer json={data} range={[0, 3]} title="Destacados" />
-        <EventCardViewer json={data} range={[4, 7]} title="En tu ciudad" />
-        <EventCardViewer
-          json={data}
-          range={[8, 11]}
-          title="Este fin de semana"
+        <CardSlider
+          data={data}
+          fn={() => Math.random() > 0.2}
+          // fn={(ev: any) => ev.name === "Carcass"}
+          title="Destacados"
+        />
+        <CardSlider
+          data={data}
+          fn={(ev: any) => ev.city === "Bogotá" || ev.city === "Medellín"}
+          title="En Colombia"
+        />
+        <CardSlider
+          data={data}
+          fn={(ev: any) => ev.city === "Mendoza"}
+          title="En Mendoza"
         />
       </main>
     </div>
