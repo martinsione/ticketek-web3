@@ -1,23 +1,21 @@
-import { Box } from "@chakra-ui/react";
 import axios from "axios";
+import { Box, Image } from "@chakra-ui/react";
 
 export default function Search({ data }: { data: { data: [] } }) {
   return (
-    <>
-      <div>
-        {data.data.map(({ id, imageURL, artist, date, city }) => (
-          <div key={id}>
-            <Box w={200}>
-              <img alt="" src={imageURL} />
-            </Box>
-            <div>Artist: {artist}</div>
-            <div>Date: {date}</div>
-            <div>City: {city}</div>
-            <hr />
-          </div>
-        ))}
-      </div>
-    </>
+    <div>
+      {data.data.map(({ id, imageURL, artist, date, city }) => (
+        <div key={id}>
+          <Box w={200}>
+            <Image alt="" src={imageURL} />
+          </Box>
+          <div>Artist: {artist}</div>
+          <div>Date: {date}</div>
+          <div>City: {city}</div>
+          <hr />
+        </div>
+      ))}
+    </div>
   );
 }
 
