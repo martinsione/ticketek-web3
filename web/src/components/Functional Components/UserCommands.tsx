@@ -28,11 +28,11 @@ const buyTicket = async () => {
     data: contract.methods.safeMint().encodeABI(),
   };
 
-  const txHash = await (window as any).ethereum.request({
-    method: "eth_sendTransaction",
-    params: [tx],
-  });
-  console.log(txHash);
+  // const txHash = await (window as any).ethereum.request({   // <--- dejar comentado lo que no se usa
+  //   method: "eth_sendTransaction",                          // para evitar warnings y poder deployar
+  //   params: [tx],
+  // });
+  // console.log(txHash);
 };
 
 const userBalance = async () => {
