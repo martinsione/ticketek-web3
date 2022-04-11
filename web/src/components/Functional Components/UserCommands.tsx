@@ -21,13 +21,11 @@ const buyTicket = async () => {
   // const user = await window.ethereum.request({
   //     method: "eth_requestAccounts",
   //   });
-
-  const tx = {
-    from: await userAddress(),
-    to: address,
-    data: contract.methods.safeMint().encodeABI(),
-  };
-
+  // const tx = {
+  //   from: await userAddress(),
+  //   to: address,
+  //   data: contract.methods.safeMint().encodeABI(),
+  // };
   // const txHash = await (window as any).ethereum.request({   // <--- dejar comentado lo que no se usa
   //   method: "eth_sendTransaction",                          // para evitar warnings y poder deployar
   //   params: [tx],
