@@ -21,7 +21,6 @@ export async function getServerSideProps(context: {
   params: { city: string };
 }) {
   const { params } = context;
-  console.log("🚀 ~ file: [city].tsx ~ line 24 ~ params", params);
   const { data } = await axios(
     `http://localhost:3000/api/cities/${params.city}`
   );
