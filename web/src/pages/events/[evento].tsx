@@ -17,7 +17,18 @@ import {
 } from "@chakra-ui/react";
 
 export default function Evento({ data }: { data: [] }) {
-  return <div>{data.address}</div>;
+  // return <div>{data.address}</div>;
+
+  return (
+    data && (
+      <Flex align="center" direction="column">
+        <div>{data.address}</div>
+        <div>{data.city}</div>
+        <div>{data.name}</div>
+        <div>{data.symbol}</div>
+      </Flex>
+    )
+  );
 
   // return (
   //   data &&
@@ -151,12 +162,11 @@ export async function getServerSideProps(context: {
   params: { evento: string };
 }) {
   const { params } = context;
-  console.log("🚀 ~ file: [evento].tsx ~ line 154 ~ params", params);
   const { data } = await axios(
     `http://localhost:3000/api/events/${params.evento}`
   );
 
-  if (!data.length) return { notFound: true };
+  if (!data) return { notFound: true };
 
   return {
     props: {
