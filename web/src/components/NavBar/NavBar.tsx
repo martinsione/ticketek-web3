@@ -1,6 +1,6 @@
 import { IoWalletOutline } from "react-icons/io5";
 import { BsSearch } from "react-icons/bs";
-import NextLink from "next/link";
+// import NextLink from "next/link";
 import {
   Stack,
   Text,
@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
-import SearchBar from "../SearchBar/SearchBar";
+// import SearchBar from "../SearchBar/SearchBar";
 
 export default function NavBar() {
   return (
@@ -53,7 +53,6 @@ export default function NavBar() {
           <Stack className="border-gradient" px="5" py="2">
             <Text>Account</Text>
           </Stack>
-
           <Stack
             alignItems="center"
             bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
