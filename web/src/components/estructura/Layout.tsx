@@ -1,5 +1,7 @@
 import Head from "next/head";
+
 import { Box } from "@chakra-ui/react";
+
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
 
