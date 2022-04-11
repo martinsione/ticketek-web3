@@ -11,11 +11,11 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     string public place;
-    address payable public Owner;
+    address payable public contractOwner;
     uint private totalTickets;
     uint public price;
     string private uri;
-    address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
+    address private constant NFTICKETS = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
     constructor(
         string memory name,
         string memory symb,
@@ -27,7 +27,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         place = _place;
         price = _price;
         uri = _uri;
-        Owner = payable(msg.sender);
+        contractOwner = payable(msg.sender);
         totalTickets = tickets;
         _tokenIdCounter.increment();
     }
@@ -43,7 +43,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         _;
     }
 
-    function _baseURI() internal pure override returns (string memory) {
+    function _baseURI() internal view override returns (string memory) {
         return uri;
     }
 
@@ -66,17 +66,17 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         
         _safeMint(msg.sender, tokenId);
 
-        Fees();
+        fees();
         _tokenIdCounter.increment();
         
     }
 
-    function Fees() internal{
+    function fees() internal{
         
-        uint us = msg.value * 0.1;
-        uint owner = msg.value - us;
-        Owner.transfer(owner);
-        NFTickets.transfer(us);
+        uint us = (msg.value/100) * 10;
+        uint toOwner = msg.value - us;
+        contractOwner.transfer(toOwner);
+        payable(NFTICKETS).transfer(us);
 
         
     }
