@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding: 0px 0;
+  /* background: #dbd0bc; */
+  /* overflow-y: scroll; */
+}
+
+.box {
+  display: grid;
+  grid-gap: 10px;
+  /* grid-template-columns: 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px; */
+  /* grid-template-rows: 150px; */
+  overflow-x: hidden;
+  scroll-snap-type: x proximity;
+}
+
+.bot {
+  color: rgba(255, 44, 160, 0.2);
+  font-size: 2em;
+  padding: 0 20px;
+  transition-duration: 300ms;
+}
+
+.bot:hover {
+  color: rgb(255, 44, 160);
+  background-color: rgba(0, 0, 0, 0.075);
+}

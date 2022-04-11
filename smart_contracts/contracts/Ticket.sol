@@ -11,14 +11,14 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     string public place;
-    address payable public Owner;
-    uint256 private totalTickets;
-    uint256 public price;
-    string private uri;
-    address payable private constant NFTickets =
-        payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46);
 
-    constructor(
+    address payable public contractOwner;
+    uint private totalTickets;
+    uint public price;
+    string private uri;
+    address private constant NFTICKETS = payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46); 
+
+constructor(
         string memory name,
         string memory symb,
         string memory _place,
@@ -30,7 +30,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         place = _place;
         price = _price;
         uri = _uri;
-        Owner = payable(msg.sender);
+        contractOwner = payable(msg.sender);
         totalTickets = tickets;
         _tokenIdCounter.increment();
     }
@@ -71,15 +71,19 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
 
         _safeMint(msg.sender, tokenId);
 
-        Fees();
+        fees();
         _tokenIdCounter.increment();
     }
 
-    function Fees() internal {
-        uint256 us = (msg.value / 100) * 10;
-        uint256 owner = msg.value - us;
-        Owner.transfer(owner);
-        NFTickets.transfer(us);
+
+    function fees() internal{
+        
+        uint us = (msg.value/100) * 10;
+        uint toOwner = msg.value - us;
+        contractOwner.transfer(toOwner);
+        payable(NFTICKETS).transfer(us);
+
+        
     }
 
     function getStock() public view returns (uint256) {

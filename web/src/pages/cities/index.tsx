@@ -1,13 +1,12 @@
 import axios from "axios";
 
 export default function Evento({ data }: { data: [] }) {
-  return data.map(({ artist, city, date, id, location }) => (
-    <div key={id}>
-      <p>artist: {artist}</p>
+  return data.map(({ address, city, name, symbol }) => (
+    <div key={address}>
+      <p>address: {address}</p>
       <p>city: {city}</p>
-      <p>date: {date}</p>
-      <p>id: {id}</p>
-      <p>location: {location}</p>
+      <p>name: {name}</p>
+      <p>symbol: {symbol}</p>
       <hr />
     </div>
   ));
