@@ -1,19 +1,19 @@
 import axios from "axios";
 import {
-  Box,
-  Container,
-  Stack,
-  Text,
-  Image,
+  // Box,
+  // Container,
+  // Stack,
+  // Text,
+  // Image,
   Flex,
-  VStack,
-  Button,
-  Heading,
-  SimpleGrid,
-  StackDivider,
-  useColorModeValue,
-  List,
-  ListItem,
+  // VStack,
+  // Button,
+  // Heading,
+  // SimpleGrid,
+  // StackDivider,
+  // useColorModeValue,
+  // List,
+  // ListItem,
 } from "@chakra-ui/react";
 
 interface DATA {
