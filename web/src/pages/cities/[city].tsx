@@ -1,17 +1,16 @@
 import axios from "axios";
 
-import DatesDropDown from "../../components/FilterBar/DatesDropDown";
-import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
-import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
+// import DatesDropDown from "../../components/FilterBar/DatesDropDown";
+// import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import CardPage from "../../components/CardPage/CardPage";
 
 export default function City({ data, city }: { data: []; city: string }) {
-  const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {};
-  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  // const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {}; //  fn={handleCategories}
+  // const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {};  //  fn={handleDates}
   return (
     <>
-      <CategoriesDropDown fn={handleCategories} />
-      <DatesDropDown fn={handleDates} />
+      {/* <CategoriesDropDown />
+      <DatesDropDown /> */}
 
       {data && <CardPage data={data} title={city} />}
     </>
@@ -22,6 +21,7 @@ export async function getServerSideProps(context: {
   params: { city: string };
 }) {
   const { params } = context;
+  console.log("🚀 ~ file: [city].tsx ~ line 24 ~ params", params);
   const { data } = await axios(
     `http://localhost:3000/api/cities/${params.city}`
   );
@@ -35,23 +35,6 @@ export async function getServerSideProps(context: {
     },
   };
 }
-// export async function getServerSideProps(context: {
-//   params: { city: string };
-// }) {
-//   const { params } = context;
-//   const { data } = await axios(
-//     `http://localhost:3000/api/cities/${params.city}`
-//   );
-
-//   if (!data.length) return { notFound: true };
-
-//   return {
-//     props: {
-//       data,
-//       city: params.city,
-//     },
-//   };
-// }
 
 // export async function getStaticPaths() {
 //   const { data } = await axios("/api/cities");

@@ -20,20 +20,6 @@ function Home() {
     dispatch(getEvents());
   }, []);
 
-  // let count = 0;
-  // const intervalID = setInterval(myCallback, 500, "Parameter 1", "Parameter 2");
-  // const go = () => {
-  //   intervalID;
-  // };
-  // function myCallback(a, b) {
-  //   if (count > 8) {
-  //     clearInterval(intervalID);
-  //     count = 0;
-  //   }
-  //   count++;
-  //   console.log(count);
-  // }
-
   return (
     <div>
       <FilterBar />
