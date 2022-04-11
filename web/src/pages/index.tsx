@@ -1,5 +1,5 @@
-import axios from "axios";
 import Link from "next/link";
+import axios from "axios";
 import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
 
 import LandingNavBar from "../components/NavBar/LandingNavBar";
