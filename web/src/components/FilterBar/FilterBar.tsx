@@ -1,7 +1,21 @@
 import React from "react";
 import { Flex, Input, Select } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 export default function filterBar() {
+  const router = useRouter();
+
+  const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    //
+  };
+  const handleDates = () => {
+    console.log("HOLA");
+  };
+  const handleCities = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    router.push(`/cities/${e.target.value}`);
+  };
   return (
     <div>
       <Flex

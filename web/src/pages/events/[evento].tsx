@@ -149,7 +149,9 @@ export async function getServerSideProps(context: {
   params: { evento: string };
 }) {
   const { params } = context;
-  const { data } = await axios(`/api/events/${params.evento}`);
+  const { data } = await axios(
+    `http://localhost:3000/api/events/${params.evento}`
+  );
 
   console.log(data);
   if (!data.length) return { notFound: true };
