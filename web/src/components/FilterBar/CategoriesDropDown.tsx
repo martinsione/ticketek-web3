@@ -2,11 +2,12 @@ import { useSelector } from "react-redux";
 import React from "react";
 import { Select } from "@chakra-ui/react";
 
-export default function CategoriesDropDown({ fn }) {
-  const allCategories = useSelector((state) => state.events)
+export default function CategoriesDropDown({ fn }: { fn: () => {} }) {
+  const allCategories = useSelector((state: { events: [] }) => state.events)
     .map((obj: { type: string }) => obj.type) // convierte el obj en arr
     .filter(
-      (item: string, index: number, arr: []) => arr.indexOf(item) === index
+      (item: string, index: number, arr: string[]) =>
+        arr.indexOf(item) === index
     ) // filtra repeticiones);
     .sort();
   // Hola soy un cambio

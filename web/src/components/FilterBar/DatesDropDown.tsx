@@ -1,22 +1,28 @@
 // import { useSelector } from "react-redux";
-import React, { useRef } from "react"; //  ChangeEventHandler,
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  MutableRefObject,
+  useRef,
+} from "react"; //  ChangeEventHandler,
 import { Select, Input } from "@chakra-ui/react";
 
 interface FUNC {
-  fn: () => void;
+  fn: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function CategoriesDropDown({ fn }: FUNC) {
-  const date = useRef();
-  const handleVisibleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //  ChangeEventHandler<HTMLSelectElement>
+  const date = useRef<HTMLInputElement>(null);
+  const handleVisibleDate: ChangeEventHandler<HTMLSelectElement> = (e) => {
     e.preventDefault();
-    if (e.target.value === "choose") {
-      date.current.style.visibility = "visible";
-    } else {
-      date.current.style.visibility = "hidden";
+    if (date.current !== null) {
+      if (e.target.value === "choose") {
+        date.current.style.visibility = "visible";
+      } else {
+        date.current.style.visibility = "hidden";
+      }
     }
-    fn();
+    fn(e);
   };
   return (
     <>
