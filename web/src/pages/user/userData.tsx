@@ -11,22 +11,21 @@ export default function UserData() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: {},
   } = useForm();
 
   const onSubmit: (data: {}) => Promise<
     boolean | undefined
   > = async (data: {}) => {
     try {
-      console.log(data);
       const atr: AxiosResponse<any, any> = await axios.post("/api/users", {
         ...data,
         walletAddress: account,
       });
       if (atr.status === 200) return router.push("/user/dataUserSuccess");
-      else if (atr.status === 500) return router.push("/error");
+      else return router.push("/error");
     } catch (error) {
-      router.push("/user/error");
+      return router.push("/user/error");
     }
   };
   useEffect(() => {
