@@ -14,6 +14,6 @@ const eventsWithID = events.map((event) => ({ ...event, objectID: event.id }));
 index
   .saveObjects(eventsWithID)
   .then((objectID) => {
-    console.log(objectID);
+    //console.log(objectID);
   })
-  .catch((error) => console.log(error));
+  .catch((error) => null);
