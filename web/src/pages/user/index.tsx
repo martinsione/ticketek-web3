@@ -1,4 +1,8 @@
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
+import { FiEdit3 } from "react-icons/fi";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
 import { useWeb3React } from "@web3-react/core";
 import {
   Avatar,
@@ -21,9 +25,9 @@ import {
   Tag,
   Link,
   Icon,
+  Flex,
+  IconButton,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 function user() {
   const { account } = useWeb3React();
@@ -32,7 +36,7 @@ function user() {
   useEffect(() => {
     if (!account) router.push("/nouser");
   }, [account]);
-  if (!account) return <div></div>;
+  if (!account) return <div />;
   return (
     <>
       <VStack bgColor="#B2C1B5" height="40vh" />
@@ -47,7 +51,12 @@ function user() {
                 : ""
             }
           />
-          <Text fontSize="2rem">User</Text>
+          <Flex align="center" justify="center" textAlign="center">
+            <Text fontSize="2rem" marginRight="10px" >User</Text>
+            <NextLink passHref href={`/settingsUser/${account}`}>
+              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+            </NextLink>
+          </Flex>
           <Tag padding="3">{account || "address..."} </Tag>
         </Box>
       </VStack>

@@ -1,5 +1,5 @@
 import { BsSearch } from "react-icons/bs";
-import NextLink from "next/link";
+// import NextLink from "next/link";
 import {
   Stack,
   Text,
@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
-import SearchBar from "../SearchBar/SearchBar";
+// import SearchBar from "../SearchBar/SearchBar";
 
 export default function NavBar() {
   return (
