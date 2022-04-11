@@ -2,21 +2,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from 'axios';
 import { useWeb3React } from "@web3-react/core";
-import {
-    // Button,
-    // Flex,
-    // FormControl,
-    // FormLabel,
-    // Heading,
-    // Input,
-    // Stack,
-    // useColorModeValue,
-    // Avatar,
-    // AvatarBadge,
-    // IconButton,
-    // Center,
-    // Text,
-} from '@chakra-ui/react';
+import { Input, Stack } from '@chakra-ui/react';
 
 // import { SmallCloseIcon } from '@chakra-ui/icons';
 
@@ -44,7 +30,7 @@ export async function getStaticProps(context: { params: { walletAddress: string 
     }
 }
 
-export default function SettingsUser() {
+export default function SettingsUser({ user }: { user: { image: string, name: string, email: string } }) {
     const router = useRouter();
     const { account } = useWeb3React();
     const { register, handleSubmit } = useForm();
@@ -61,11 +47,13 @@ export default function SettingsUser() {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <Stack
+            align="center" as="form" direction="column" justify="center" m="auto" mb="30px" w={300} onSubmit={handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}
-            <input placeholder="Name..." {...register("name")} />
-            <input type="submit" />
-        </form>
+            <p>{user.name}</p>
+            <Input placeholder="Name..." {...register("name")} />
+            <Input type="submit" />
+        </Stack>
     );
 }
         // <Flex
