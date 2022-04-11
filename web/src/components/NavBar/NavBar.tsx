@@ -1,5 +1,5 @@
 import { BsSearch } from "react-icons/bs";
-// import NextLink from "next/link";
+import NextLink from "next/link";
 import {
   Stack,
   Text,
