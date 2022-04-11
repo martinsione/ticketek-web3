@@ -11,19 +11,22 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     string public place;
+
     address payable public contractOwner;
     uint private totalTickets;
     uint public price;
     string private uri;
-    address private constant NFTICKETS = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
-    constructor(
+    address private constant NFTICKETS = payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46); 
+
+constructor(
         string memory name,
         string memory symb,
         string memory _place,
-        uint _price,
-        uint tickets,
+        uint256 _price,
+        uint256 tickets,
         string memory _uri
-    ) ERC721(name, symb) { //y el basee uri
+    ) ERC721(name, symb) {
+        //y el basee uri
         place = _place;
         price = _price;
         uri = _uri;
@@ -34,12 +37,12 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
-        require(totalTickets >= tokenId , "No more tickets left");
+        require(totalTickets >= tokenId, "No more tickets left");
         _;
     }
 
-    modifier hasFounds(){
-        require(msg.value/1000000000 == price, "Insufficient funds.");
+    modifier hasFounds() {
+        require(msg.value / 1000000000 == price, "Insufficient funds.");
         _;
     }
 
@@ -47,7 +50,10 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         return uri;
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 
@@ -61,15 +67,14 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     }
 
     function safeMint() public payable hasFounds puede {
-        
         uint256 tokenId = _tokenIdCounter.current();
-        
+
         _safeMint(msg.sender, tokenId);
 
         fees();
         _tokenIdCounter.increment();
-        
     }
+
 
     function fees() internal{
         
@@ -81,8 +86,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         
     }
 
-
-    function getStock() public view returns (uint){
+    function getStock() public view returns (uint256) {
         uint256 tokenId = _tokenIdCounter.current();
         return totalTickets >= tokenId ? totalTickets - tokenId + 1 : 0;
     }
@@ -95,7 +99,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         return place;
     }
 
-    function getPrice() public view returns (uint) {
+    function getPrice() public view returns (uint256) {
         return price * 1000000000;
     }
 }
