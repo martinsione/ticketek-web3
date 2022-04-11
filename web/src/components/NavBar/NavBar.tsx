@@ -1,71 +1,75 @@
-import Link from "next/link";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { IoWalletOutline } from "react-icons/io5";
+import { BsSearch } from "react-icons/bs";
+import NextLink from "next/link";
+import {
+  Stack,
+  Text,
+  Input,
+  Icon,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
 import SearchBar from "../SearchBar/SearchBar";
 
-function NavBar() {
+export default function NavBar() {
   return (
-    <Flex
-      bg="#f00"
-      bgGradient="linear(to-r, green.200, pink.500)"
-      flexDirection="column"
-      h={100}
-      overflow="hidden"
-      position="relative"
-      w="100%"
-      zIndex={1000}
-    >
-      <Flex // nav bar
+    <Stack bg="rgba(1, 31, 38, 0.2)" p={5}>
+      <Stack
         alignItems="center"
-        h={100}
-        justifyContent="flex-end"
-        w="100%"
+        direction="row"
+        justifyContent="space-between"
+        maxW="1276px"
+        mx="auto"
+        spacing={8}
+        w="full"
       >
-        <Flex // Login button container
-          alignItems="center"
-          borderRadius={10}
-          cursor="pointer"
-          justifyContent="center"
-          marginRight={450}
-          padding={1}
-        >
-          <Link passHref href="/home">
-            <Image
-              height={20}
-              src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
-              style={{ cursor: "pointer" }}
-            />
-          </Link>
-        </Flex>
-        <Link passHref href="/help">
-          <Text
-            color="white"
-            cursor="pointer"
-            fontSize={25}
-            fontWeight={800}
-            marginRight={70}
-          >
-            Quick Start
+        <Stack alignItems="start" direction="row" fontSize="36px" spacing={0}>
+          <Text fontWeight="extrabold" lineHeight={0}>
+            NFT
           </Text>
-        </Link>
-        <Link passHref href="/about">
-          <Text
-            color="white"
-            cursor="pointer"
-            fontSize={25}
-            fontWeight={800}
-            marginRight={70}
-          >
-            About us
+          <Text fontWeight="thin" lineHeight={0}>
+            icket
           </Text>
-        </Link>
-        <SearchBar />
-        <Box margin="2rem">
-          <LogIn />
-        </Box>
-      </Flex>
-    </Flex>
+        </Stack>
+        <InputGroup className="border-gradient sm" color="#fff" maxW="460px">
+          <Input
+            _placeholder={{ color: "#fff" }}
+            border="none"
+            borderRadius="full"
+            m="0"
+            outline="none"
+            placeholder="Search..."
+            px="4"
+            py="2"
+          />
+          <InputRightElement>
+            <BsSearch />
+          </InputRightElement>
+        </InputGroup>
+        <Stack alignItems="center" color="white" direction="row" spacing={6}>
+          <Text>Explore</Text>
+          <Stack className="border-gradient" px="5" py="2">
+            <Text>Account</Text>
+          </Stack>
+
+          <Stack
+            alignItems="center"
+            bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+            borderRadius="full"
+            color="white"
+            direction="row"
+            px="5"
+            py="2"
+            spacing={2}
+          >
+            <Icon as={IoWalletOutline} />
+            <Text whiteSpace="nowrap">Connect Wallet</Text>
+          </Stack>
+        </Stack>
+        <LogIn />
+      </Stack>
+    </Stack>
   );
 }
-export default NavBar;

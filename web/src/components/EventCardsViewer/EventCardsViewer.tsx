@@ -87,11 +87,16 @@ export default function EventCardViewer({ title, range, json }: Props) {
         <Text borderBottom="2px" fontSize="3xl">
           {title}
         </Text>
+        {/* <h1>{namecontrato}</h1>
+        <h1>{symbol}</h1>
+        <h1>{place}</h1>
+        <h1>{humanDateFormat}</h1> */}
         <Flex align="center" direction="row" justify="space-evenly" wrap="wrap">
           {/* <h1>{namecontrato}</h1>
           <h1>{symbol}</h1>
           <h1>{place}</h1>
           <h1>{humanDateFormat}</h1> */}
+
           {json.map(
             (ev: EV, ndx: number) =>
               ndx >= min &&
