@@ -16,7 +16,16 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 
-export default function Evento({ data }: { data: [] }) {
+interface DATA {
+  data: {
+    address: string;
+    city: string;
+    name: string;
+    symbol: string;
+  };
+}
+
+export default function Evento({ data }: DATA) {
   // return <div>{data.address}</div>;
 
   return (
