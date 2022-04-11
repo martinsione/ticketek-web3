@@ -8,11 +8,7 @@ import { Input, Stack } from "@chakra-ui/react";
 export default function UserData() {
   const { account } = useWeb3React();
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    formState: {},
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit: (data: {}) => Promise<
     boolean | undefined
@@ -23,9 +19,9 @@ export default function UserData() {
         walletAddress: account,
       });
       if (atr.status === 200) return router.push("/user/dataUserSuccess");
-      else return router.push("/error");
+      else router.push("/error");
     } catch (error) {
-      return router.push("/user/error");
+      router.push("/user/error");
     }
   };
   useEffect(() => {
