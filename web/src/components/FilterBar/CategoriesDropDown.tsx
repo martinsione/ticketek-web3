@@ -9,6 +9,7 @@ export default function CategoriesDropDown({ fn }) {
       (item: string, index: number, arr: []) => arr.indexOf(item) === index
     ) // filtra repeticiones);
     .sort();
+  // Hola soy un cambio
   return (
     <Select
       bg="gray.100"
