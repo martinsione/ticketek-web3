@@ -12,18 +12,21 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     Counters.Counter private _tokenIdCounter;
     string public place;
     address payable public Owner;
-    uint private totalTickets;
-    uint public price;
+    uint256 private totalTickets;
+    uint256 public price;
     string private uri;
-    address payable private constant NFTickets = 0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46; 
+    address payable private constant NFTickets =
+        payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46);
+
     constructor(
         string memory name,
         string memory symb,
         string memory _place,
-        uint _price,
-        uint tickets,
+        uint256 _price,
+        uint256 tickets,
         string memory _uri
-    ) ERC721(name, symb) { //y el basee uri
+    ) ERC721(name, symb) {
+        //y el basee uri
         place = _place;
         price = _price;
         uri = _uri;
@@ -34,20 +37,23 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
 
     modifier puede() {
         uint256 tokenId = _tokenIdCounter.current();
-        require(totalTickets >= tokenId , "No more tickets left");
+        require(totalTickets >= tokenId, "No more tickets left");
         _;
     }
 
-    modifier hasFounds(){
-        require(msg.value/1000000000 == price, "Insufficient funds.");
+    modifier hasFounds() {
+        require(msg.value / 1000000000 == price, "Insufficient funds.");
         _;
     }
 
-    function _baseURI() internal pure override returns (string memory) {
+    function _baseURI() internal view override returns (string memory) {
         return uri;
     }
 
-    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {
+    function _burn(uint256 tokenId)
+        internal
+        override(ERC721, ERC721URIStorage)
+    {
         super._burn(tokenId);
     }
 
@@ -61,28 +67,22 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     }
 
     function safeMint() public payable hasFounds puede {
-        
         uint256 tokenId = _tokenIdCounter.current();
-        
+
         _safeMint(msg.sender, tokenId);
 
         Fees();
         _tokenIdCounter.increment();
-        
     }
 
-    function Fees() internal{
-        
-        uint us = msg.value * 0.1;
-        uint owner = msg.value - us;
+    function Fees() internal {
+        uint256 us = (msg.value / 100) * 10;
+        uint256 owner = msg.value - us;
         Owner.transfer(owner);
         NFTickets.transfer(us);
-
-        
     }
 
-
-    function getStock() public view returns (uint){
+    function getStock() public view returns (uint256) {
         uint256 tokenId = _tokenIdCounter.current();
         return totalTickets >= tokenId ? totalTickets - tokenId + 1 : 0;
     }
@@ -95,7 +95,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
         return place;
     }
 
-    function getPrice() public view returns (uint) {
+    function getPrice() public view returns (uint256) {
         return price * 1000000000;
     }
 }
