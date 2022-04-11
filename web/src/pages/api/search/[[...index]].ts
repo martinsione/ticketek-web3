@@ -6,8 +6,10 @@ import data from "../../../components/fakeEvent.json";
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
 
-  const querySplit = (query.searchTerm as string).split(" ");
-
+  const querySplit = query.searchTerm
+    ? (query.searchTerm as string).split(" ")
+    : null;
+  if (querySplit === null) return res.json({ data: [] });
   interface EVENT {
     imageURL: string;
     artist: string;
