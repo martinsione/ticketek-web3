@@ -85,9 +85,8 @@ export default function CardSlider({ data, title, fn }: PROPS) {
         >
           {dataIntermediate &&
             dataIntermediate.map(({ address, city, name, symbol }) => (
-              <Box>
+              <Box key={address}>
                 <CardTemp
-                  key={address}
                   address={address}
                   city={city}
                   name={name}
