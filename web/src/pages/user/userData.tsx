@@ -13,16 +13,17 @@ export default function UserData() {
   const onSubmit: (data: {}) => Promise<
     boolean | undefined
   > = async (data: {}) => {
+    const atr: AxiosResponse<any, any> = await axios.post("/api/users", {
+      ...data,
+      walletAddress: account,
+    });
     try {
-      const atr: AxiosResponse<any, any> = await axios.post("/api/users", {
-        ...data,
-        walletAddress: account,
-      });
-      if (atr.status === 200) return router.push("/user/dataUserSuccess");
-      else router.push("/error");
+      if (atr.status === 200) return await router.push("/user/dataUserSuccess");
+      return await router.push("/error");
     } catch (error) {
       router.push("/user/error");
     }
+    return router.push("/home");
   };
   useEffect(() => {
     if (!account) router.push("/nouser");
