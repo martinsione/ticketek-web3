@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import prisma from "../../lib/prisma";
 import CardPage from "../../components/CardPage/CardPage";
 
 export default function Evento({ data }: { data: [] }) {
@@ -7,10 +6,14 @@ export default function Evento({ data }: { data: [] }) {
 }
 
 export async function getStaticProps() {
-  const { data } = await axios("http://localhost:3000/api/events");
+  // const { data } = await axios("http://localhost:3000/api/events");
+  // return {
+  //   props: {
+  //     data,
+  //   },
+  // };
+  const data = await prisma.contract.findMany();
   return {
-    props: {
-      data,
-    },
+    props: { data },
   };
 }

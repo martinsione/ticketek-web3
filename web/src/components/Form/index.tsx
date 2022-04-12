@@ -1,17 +1,17 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Stack,
-  Image,
+  // Image,
   Button,
   Input,
-  FormControl,
-  FormLabel,
-  NumberInput,
-  FormErrorMessage,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  // FormControl,
+  // FormLabel,
+  // NumberInput,
+  // FormErrorMessage,
+  // NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
 } from "@chakra-ui/react";
 
 interface InputProps {
