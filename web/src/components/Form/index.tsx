@@ -33,10 +33,10 @@ export default function Form() {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<InputProps>();
-  const onSubmit: SubmitHandler<InputProps> = (data) =>
+  const onSubmit: SubmitHandler<InputProps> = () =>
     new Promise<void>((resolve) => {
       setTimeout(() => {
-        alert(JSON.stringify(data, null, 2));
+        // alert(JSON.stringify(data, null, 2));
         resolve();
       }, 1500);
     });

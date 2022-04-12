@@ -4,7 +4,6 @@ import { ReactElement } from "react";
 import NextImage from "next/image";
 import {
   Link,
-  Container,
   SimpleGrid,
   Image,
   Flex,
@@ -15,7 +14,6 @@ import {
   Icon,
   useColorModeValue,
   Box,
-  Grid,
 } from "@chakra-ui/react";
 
 interface FeatureProps {
