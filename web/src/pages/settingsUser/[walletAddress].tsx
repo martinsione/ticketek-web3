@@ -2,12 +2,9 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
-import { PrismaClient } from "@prisma/client";
 import { Input, Stack } from "@chakra-ui/react";
+import prisma from "../../lib/prisma";
 
-// import prisma from "../../lib/prisma";
-
-const prisma = new PrismaClient();
 // import { SmallCloseIcon } from '@chakra-ui/icons';
 
 // export async function getStaticPaths() {

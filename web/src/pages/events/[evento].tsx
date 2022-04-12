@@ -1,5 +1,3 @@
-import { PrismaClient } from "@prisma/client";
-
 import {
   // Box,
   // Container,
@@ -16,10 +14,8 @@ import {
   // List,
   // ListItem,
 } from "@chakra-ui/react";
+import prisma from "../../lib/prisma";
 
-// import prisma from "../../lib/prisma";
-
-const prisma = new PrismaClient();
 interface DATA {
   data: {
     address: string;

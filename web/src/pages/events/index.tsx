@@ -1,9 +1,6 @@
-// import prisma from "../../lib/prisma";
-import { PrismaClient } from "@prisma/client";
-
+import prisma from "../../lib/prisma";
 import CardPage from "../../components/CardPage/CardPage";
 
-const prisma = new PrismaClient();
 export default function Evento({ data }: { data: [] }) {
   return <CardPage data={data} title="All events" />;
 }

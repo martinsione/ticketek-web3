@@ -1,8 +1,5 @@
-// import prisma from "../../lib/prisma";
+import prisma from "../../lib/prisma";
 
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
 export default function Evento({ data }: { data: [] }) {
   // return data.map(({ address, city, name, symbol }) => (
   //   <div key={address}>
