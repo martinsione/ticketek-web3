@@ -1,5 +1,10 @@
 // import { useSelector } from "react-redux";
-import React, { ChangeEvent, ChangeEventHandler, useRef } from "react"; //  ChangeEventHandler,
+import React, {
+  ChangeEvent,
+  ChangeEventHandler,
+  MutableRefObject,
+  useRef,
+} from "react"; //  ChangeEventHandler,
 import { Select, Input } from "@chakra-ui/react";
 
 interface FUNC {
