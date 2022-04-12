@@ -1,6 +1,9 @@
-import prisma from "../../lib/prisma";
+// import prisma from "../../lib/prisma";
+import { PrismaClient } from "@prisma/client";
+
 import CardPage from "../../components/CardPage/CardPage";
 
+const prisma = new PrismaClient();
 // import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 // import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 

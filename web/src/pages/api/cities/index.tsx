@@ -1,12 +1,19 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import prisma from "../../../lib/prisma";
+// import prisma from "../../../lib/prisma";
 
+import { PrismaClient } from "@prisma/client";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+const prisma = new PrismaClient();
 
-  const justCities = (await prisma.contract.findMany()).map((e : {city : string}) => e.city);
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  const justCities = (await prisma.contract.findMany()).map(
+    (e: { city: string }) => e.city
+  );
   const cities = new Set(justCities);
-  
-  res.status(200).json( Array.from(cities) );
+
+  res.status(200).json(Array.from(cities));
 }
