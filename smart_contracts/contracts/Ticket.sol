@@ -16,7 +16,7 @@ contract Ticket is ERC721, Ownable, ERC721URIStorage {
     uint private totalTickets;
     uint public price;
     string private uri;
-    address private constant NFTICKETS = payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46); 
+    address payable private constant NFTICKETS = payable(0xBCBd6194bD924AbbD1aA23DC4bf092B56C2f5F46); 
 
 constructor(
         string memory name,
@@ -81,7 +81,7 @@ constructor(
         uint us = (msg.value/100) * 10;
         uint toOwner = msg.value - us;
         contractOwner.transfer(toOwner);
-        payable(NFTICKETS).transfer(us);
+        NFTICKETS.transfer(us);
 
         
     }
