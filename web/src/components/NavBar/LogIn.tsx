@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
+import axios from "axios";
 
 function LogIn() {
   const toast = useToast();
@@ -33,26 +34,48 @@ function LogIn() {
       setLoading(false);
     } else if (!account) {
       // si no hay cuenta conectamos
-      activate(injected, undefined, true).then(
-        () => {
-          setLoading(false);
-          toast({
-            title: "Wallet connected",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-          });
-        },
-        () => {
-          setLoading(false);
-          toast({
-            title: "Oops, something went wrong",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
-      );
+      activate(injected, undefined, true)
+        .then(
+          () => {
+            setLoading(false);
+            axios.post(
+              "/api/auth/login",
+              {
+                walletID: account,
+              },
+              { withCredentials: true }
+            );
+          },
+          () => {
+            setLoading(false);
+            toast({
+              title: "Oops, something went wrong",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
+        )
+        .then(
+          () => {
+            setLoading(false);
+            toast({
+              title: "Wallet connected",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+          },
+          () => {
+            setLoading(false);
+            toast({
+              title: "Oops, something went wrong",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
+        );
     }
     // si hay cuenta desconectamos
     if (account) {
