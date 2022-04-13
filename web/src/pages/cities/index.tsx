@@ -10,7 +10,13 @@ export default function Evento({ data }: { data: [] }) {
   //     <hr />
   //   </div>
   // ));
-  return data.map((element) => <div>{element}</div>);
+  return (
+    <>
+      {data.map((element) => (
+        <div>{element}</div>
+      ))}
+    </>
+  );
 }
 
 export async function getStaticProps() {
