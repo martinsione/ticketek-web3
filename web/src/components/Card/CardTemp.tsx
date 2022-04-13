@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 
 import eventData from "../eventData";
+// import add from "../../pages/add";
 
 interface Props {
   address: string;
@@ -38,7 +39,6 @@ interface EventData {
 
 export default function Card({ address, city, name, symbol }: Props) {
   const data: EventData = eventData(address);
-  const fecha: string = data.metadata.date.toString;
   return (
     <Center margin={0} py={0}>
       <Box
@@ -60,7 +60,7 @@ export default function Card({ address, city, name, symbol }: Props) {
             fontSize="2xl"
             fontWeight={200}
           >
-            <Link passHref href={`/events/${name}`}>
+            <Link passHref href={`/events/${address}`}>
               {name}
             </Link>
           </Heading>
@@ -68,11 +68,7 @@ export default function Card({ address, city, name, symbol }: Props) {
           <Link passHref href={`/cities/${city}`}>
             <Text cursor="pointer">{city}</Text>
           </Link>
-          {/* <Link passHref href={`/events/${address}`}>
-            <Text fontSize="xs" fontWeight={500}>
-              {address}
-            </Text>
-          </Link> */}
+
           <Text fontSize="xs" fontWeight={500}>
             {symbol}
           </Text>

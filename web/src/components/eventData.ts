@@ -1,4 +1,22 @@
-export default function getEventData(address) {
+export default function getEventData(address: string) {
+  interface EventData {
+    name: string;
+    symbol: string;
+    place: string;
+    price: number;
+    numberOfTickets: number;
+    metadata: {
+      image: string;
+      name: string;
+      description: string;
+      type: string;
+      date: Date;
+      country: string;
+      location: string;
+      direction: string;
+    };
+  }
+
   if (!address) return {};
   let val = 0;
   for (let i = 0; i < address.length; i += 1) {
@@ -8,7 +26,6 @@ export default function getEventData(address) {
   const type = ["Concert", "Theatre", "Family", "Sports"];
   const country = ["Argentina", "Colombia", "México", "Brasil", "Perú"];
   const direccion = ["Calle", "Avenida", "Carrera", "Transversal", "Diagonal"];
-  const today = new Date();
 
   const name = `name${val}`;
   const symbol = "XXX";
@@ -28,5 +45,13 @@ export default function getEventData(address) {
       val / 200
     )} - ${Math.round(val / 400)}`,
   };
-  return { name, symbol, place, price, numberOfTickets, metadata };
+  const resp: EventData = {
+    name,
+    symbol,
+    place,
+    price,
+    numberOfTickets,
+    metadata,
+  };
+  return resp;
 }
