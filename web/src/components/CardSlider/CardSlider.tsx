@@ -51,6 +51,25 @@ export default function CardSlider({ data, title, fn }: PROPS) {
     }
   }
 
+  // const countR = setInterval(intervalR, 10);
+  // let counter = 0;
+  // function intervalR() {
+  //   if (counter > 1500) {
+  //     clearInterval(countR);
+  //     counter = 0;
+  //     return;
+  //   }
+  //   counter += 50;
+  //   if (box.current !== null) {
+  //     box.current.scrollBy(scrollStep, 0);
+  //     setScrollBox(box.current.scrollLeft);
+  //   }
+  //   console.log(
+  //     "🚀 ~ file: CardSlider.jsx ~ line 47 ~ intervalR ~ counter",
+  //     counter
+  //   );
+  // }
+
   const gridColumns = dataIntermediate.reduce(
     (str) => `${str}${columnWidth}px `,
     ""
