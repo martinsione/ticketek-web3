@@ -4,11 +4,20 @@ import abi from "../Ticket.json";
 
 const address: string = "0x945eD39416121076ADB07c493e306b6D9E541b09";
 
-const web = new Web3(
+let web = new Web3(
   "https://eth-ropsten.alchemyapi.io/v2/__kRrTi_nV3c2CZMzKkw0QfH44AVZ8_L"
 );
 
-const contract = new web.eth.Contract(abi as any, address);
+
+async function conn() {
+  if(window?.ethereum){
+    web = new Web3(window.ethereum)
+  }
+}
+
+conn()
+
+const contract = new web.eth.Contract(abi.abi as any, address);
 
 const userAddress = async () => {
   const user = await (window as any).ethereum.request({
@@ -45,4 +54,4 @@ const userBalance = async () => {
   return bal;
 };
 
-export { contract, buyTicket, userBalance };
+export {web, contract, buyTicket, userAddress };
