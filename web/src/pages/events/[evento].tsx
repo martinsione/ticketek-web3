@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   // Box,
   // Container,
@@ -15,6 +14,7 @@ import {
   // List,
   // ListItem,
 } from "@chakra-ui/react";
+import prisma from "../../lib/prisma";
 
 interface DATA {
   data: {
@@ -27,7 +27,6 @@ interface DATA {
 
 export default function Evento({ data }: DATA) {
   // return <div>{data.address}</div>;
-
   return (
     data && (
       <Flex align="center" direction="column">
@@ -167,16 +166,24 @@ export default function Evento({ data }: DATA) {
   // );
 }
 
-export async function getServerSideProps(context: {
-  params: { evento: string };
-}) {
+export async function getStaticProps(context: { params: { evento: string } }) {
+  //   const { data } = await axios(
+  //     `http://localhost:3000/api/events/${params.evento}`
+  //   );
+
+  //   if (!data) return { notFound: true };
+
+  //   return {
+  //     props: {
+  //       data,
+  //     },
+  //   };
   const { params } = context;
-  const { data } = await axios(
-    `http://localhost:3000/api/events/${params.evento}`
-  );
-
-  if (!data) return { notFound: true };
-
+  const data = await prisma.contract.findUnique({
+    where: {
+      address: params.evento,
+    },
+  });
   return {
     props: {
       data,
@@ -184,19 +191,19 @@ export async function getServerSideProps(context: {
   };
 }
 
-// export async function getStaticPaths() {
-//   interface EVENT {
-//     id: number;
-//   }
-//   const { data } = await axios("http://localhost:3000/api/events");
+export async function getStaticPaths() {
+  interface EVENT {
+    address: string;
+  }
+  const data = await prisma.contract.findMany();
 
-//   const paths = data.map((event: EVENT) => ({
-//     params: {
-//       evento: `${event.id}`,
-//     },
-//   }));
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+  const paths = data.map((event: EVENT) => ({
+    params: {
+      evento: `${event.address}`,
+    },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
+}

@@ -1,0 +1,6 @@
+settingsUser/[walletAddress] a      api/users y api/users/walletAddress
+search/[[...index]]   a             api/search?SearchTerm=
+events/index      a                 api/events
+events/[evento]   a                 api/events/[evento]
+cities/[city]      a                api/cities/[city]
+cities/index   a                    api/cities
