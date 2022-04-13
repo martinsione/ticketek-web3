@@ -10,7 +10,6 @@ export default async function handler(
     const user = req.query.user.toString();
     //     Método DELETE
     if (req.method === "DELETE") {
-        console.log(user);
         const response = await prisma.user.delete({
             where: { walletAddress: user },
         });

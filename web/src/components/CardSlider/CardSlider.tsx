@@ -4,38 +4,57 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import style from "./CardSlider.module.css";
 import CardTemp from "../Card/CardTemp";
 
-// interface Props {
-//   title: string;
-//   fn: () => void;
-//   range: [number, number];
-//   data: [];
+interface PROPS {
+  title: string;
+  fn: (ev: { city: {} }) => boolean;
+  data: [
+    {
+      address: string;
+      city: string;
+      name: string;
+      symbol: string;
+    }
+  ];
+}
+// interface MAP {
+//   address: string;
+//   city: string;
+//   name: string;
+//   symbol: string
 // }
 
-export default function CardSlider({ data, title, fn }) {
+export default function CardSlider({ data, title, fn }: PROPS) {
   const scrollStep = 1500;
   const cardWidth = 350;
   const columnWidth = Math.round(cardWidth * 1.15);
 
   const [scrollBox, setScrollBox] = useState(0);
 
-  data = fn ? data.filter(fn) : data;
+  const dataIntermediate = fn ? data.filter(fn) : data;
 
-  const maxWidth = (data.length - 1) * columnWidth - scrollStep; // superaproximado, pero hace lo suyo!
+  const maxWidth = (dataIntermediate.length - 1) * columnWidth - scrollStep; // superaproximado, pero hace lo suyo!
 
-  const box = useRef();
+  const box = useRef<HTMLDivElement>(null);
 
-  function goLeft(e) {
+  function goLeft(e: { preventDefault: () => void }) {
     e.preventDefault();
-    box.current.scrollBy(-scrollStep, 0);
-    setScrollBox(box.current.scrollLeft);
+    if (box.current !== null) {
+      box.current.scrollBy(-scrollStep, 0);
+      setScrollBox(box.current.scrollLeft);
+    }
   }
-  function goRight(e) {
+  function goRight(e: { preventDefault: () => void }) {
     e.preventDefault();
-    box.current.scrollBy(scrollStep, 0);
-    setScrollBox(box.current.scrollLeft);
+    if (box.current !== null) {
+      box.current.scrollBy(scrollStep, 0);
+      setScrollBox(box.current.scrollLeft);
+    }
   }
 
-  const gridColumns = data.reduce((str) => `${str}${columnWidth}px `, "");
+  const gridColumns = dataIntermediate.reduce(
+    (str) => `${str}${columnWidth}px `,
+    ""
+  );
   // grid-template-columns: 400px 400px 400px 400px
 
   return (
@@ -64,15 +83,14 @@ export default function CardSlider({ data, title, fn }) {
             gridTemplateColumns: gridColumns,
           }}
         >
-          {data &&
-            data.map((card) => (
-              <Box>
+          {dataIntermediate &&
+            dataIntermediate.map(({ address, city, name, symbol }) => (
+              <Box key={address}>
                 <CardTemp
-                  key={card.address}
-                  address={card.address}
-                  city={card.city}
-                  name={card.name}
-                  symbol={card.symbol}
+                  address={address}
+                  city={city}
+                  name={name}
+                  symbol={symbol}
                 />
               </Box>
             ))}

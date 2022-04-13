@@ -16,14 +16,13 @@ export default function CardPage({ data, title }: Props) {
       </Text>
       <Flex justify="center" p="10px" wrap="wrap">
         {data &&
-          data.map((card) => (
-            <Box>
+          data.map(({ address, city, name, symbol }) => (
+            <Box key={address}>
               <CardTemp
-                key={card.address}
-                address={card.address}
-                city={card.city}
-                name={card.name}
-                symbol={card.symbol}
+                address={address}
+                city={city}
+                name={name}
+                symbol={symbol}
               />
             </Box>
           ))}

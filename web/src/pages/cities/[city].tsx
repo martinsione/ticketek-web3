@@ -1,8 +1,8 @@
-import axios from "axios";
+import prisma from "../../lib/prisma";
+import CardPage from "../../components/CardPage/CardPage";
 
 // import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 // import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
-import CardPage from "../../components/CardPage/CardPage";
 
 export default function City({ data, city }: { data: []; city: string }) {
   // const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {}; //  fn={handleCategories}
@@ -17,51 +17,38 @@ export default function City({ data, city }: { data: []; city: string }) {
   );
 }
 
-export async function getServerSideProps(context: {
-  params: { city: string };
-}) {
-  const { params } = context;
-  console.log("🚀 ~ file: [city].tsx ~ line 24 ~ params", params);
-  const { data } = await axios(
-    `http://localhost:3000/api/cities/${params.city}`
-  );
+export async function getStaticProps(context: { params: { city: string } }) {
+  // const { data } = await axios(
+  //   `http://localhost:3000/api/cities/${params.city}`
+  // );
 
-  if (!data.length) return { notFound: true };
+  // if (!data.length) return { notFound: true };
+
+  // return {
+  //   props: {
+  //     data,
+  //     city: params.city,
+  //   },
+  // };
+  const { params } = context;
+  const cities = await prisma.contract.findMany();
+
+  const data = cities.filter((e: { city: string }) => e.city === params.city);
 
   return {
     props: {
       data,
-      city: params.city,
     },
   };
 }
 
-// export async function getStaticPaths() {
-//   const { data } = await axios("/api/cities");
-
-//   const paths = data.map((city: string) => ({ params: city }));
-//   console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
-// export async function getStaticPaths() {
-//   interface EVENT {
-//     city: string;
-//   }
-//   const { data } = await axios("/api/cities");
-
-//   const paths = data.map((city) => ({
-//     params: {
-//       city,
-//     },
-//   }));
-//   console.log("🚀 ~ file: [city].tsx ~ line 34 ~ paths ~ paths", paths);
-
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// }
+export async function getStaticPaths() {
+  const cities = await prisma.contract.findMany();
+  const paths = cities.map((element) => ({
+    params: { city: element.city.toLowerCase() },
+  }));
+  return {
+    paths,
+    fallback: true,
+  };
+}
