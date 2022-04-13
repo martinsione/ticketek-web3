@@ -11,6 +11,7 @@ import {
 import LogIn from "./LogIn";
 // import SearchBar from "../SearchBar/SearchBar";
 
+
 export default function NavBar() {
   return (
     <Stack bg="#022C30" p={5}>
