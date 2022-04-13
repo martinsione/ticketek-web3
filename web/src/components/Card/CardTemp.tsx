@@ -19,26 +19,33 @@ interface Props {
   symbol: string;
 }
 
-interface EventData {
-  name: string;
-  symbol: string;
-  place: string;
-  price: number;
-  numberOfTickets: number;
+// interface EventData {
+//   name: string;
+//   symbol: string;
+//   place: string;
+//   price: number;
+//   numberOfTickets: number;
+//   metadata: {
+//     image: string;
+//     name: string;
+//     description: string;
+//     type: string;
+//     date: Date;
+//     country: string;
+//     location: string;
+//     direction: string;
+//   };
+// }
+
+interface DATA {
   metadata: {
-    image: string;
-    name: string;
-    description: string;
-    type: string;
     date: Date;
-    country: string;
-    location: string;
-    direction: string;
+    type: string;
   };
 }
 
 export default function Card({ address, city, name, symbol }: Props) {
-  const data: EventData = eventData(address);
+  const data: DATA | undefined = eventData(address);
   return (
     <Center margin={0} py={0}>
       <Box
@@ -73,10 +80,10 @@ export default function Card({ address, city, name, symbol }: Props) {
             {symbol}
           </Text>
           <Text fontSize="xs" fontWeight={500}>
-            {data.metadata.date.toDateString()}
+            {data && data.metadata.date.toDateString()}
           </Text>
           <Text fontSize="xs" fontWeight={500}>
-            {data.metadata.type}
+            {data && data.metadata.type}
           </Text>
           <Stack align="center" direction="row">
             <Button marginTop={3} variant="ghost">

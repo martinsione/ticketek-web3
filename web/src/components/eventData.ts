@@ -1,4 +1,6 @@
-export default function getEventData(address: string) {
+export default function getEventData(
+  address: string
+): { metadata: { date: Date; type: string } } | undefined {
   interface EventData {
     name: string;
     symbol: string;
@@ -17,7 +19,7 @@ export default function getEventData(address: string) {
     };
   }
 
-  if (!address) return {};
+  if (!address) return;
   let val = 0;
   for (let i = 0; i < address.length; i += 1) {
     val += address[i].charCodeAt(0);
