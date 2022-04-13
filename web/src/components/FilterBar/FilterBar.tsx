@@ -13,18 +13,13 @@ export default function filterBar() {
     e.preventDefault();
     //
   };
-  const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    // if (e.target.value === "choose") {
-    //   document.querySelector("#chooseDate").style.visibility = "visible";
-    // } else {
-    //   document.querySelector("#chooseDate").style.visibility = "hidden";
-    // }
-  };
-  const handleCities = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    router.push(`/cities/${e.target.value}`);
-  };
+  // const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  // };
+  // const handleCities = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   e.preventDefault();
+  //   router.push(`/cities/${e.target.value}`);
+  // };
   return (
     <div>
       <Flex
@@ -35,8 +30,24 @@ export default function filterBar() {
         justifyContent="space-evenly"
       >
         <CategoriesDropDown fn={handleCategories} />
-        <DatesDropDown fn={handleDates} />
-        <CitiesDropDown fn={handleCities} />
+        <DatesDropDown
+          fn={(e: React.ChangeEvent<HTMLInputElement>) =>
+            e.target.value !== "choose"
+              ? router.push({
+                  pathname: "/search/byDate",
+                  query: { opt: e.target.value },
+                })
+              : router.push({
+                  pathname: "/search/byDate",
+                  query: { opt: "choose", date: e.target.value },
+                })
+          }
+        />
+        <CitiesDropDown
+          fn={(e: React.ChangeEvent<HTMLInputElement>) =>
+            router.push(`/cities/${e.target.value}`)
+          }
+        />
       </Flex>
     </div>
   );

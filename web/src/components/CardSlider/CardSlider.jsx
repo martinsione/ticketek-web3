@@ -31,7 +31,7 @@ export default function CardSlider({ data, title, fn }) {
   }
   function goRight(e) {
     e.preventDefault();
-    box.current.scrollBy(scrollStep, 0);
+    // box.current.scrollBy(scrollStep, 0);
     setScrollBox(box.current.scrollLeft);
     countR;
     console.log(counter);
@@ -46,6 +46,7 @@ export default function CardSlider({ data, title, fn }) {
       return;
     }
     counter += 1;
+    box.current.scrollBy(counter, 0);
     console.log(
       "🚀 ~ file: CardSlider.jsx ~ line 47 ~ intervalR ~ counter",
       counter
@@ -58,7 +59,7 @@ export default function CardSlider({ data, title, fn }) {
   return (
     <Box bg="pink" p="4">
       <Text borderBottom="2px" fontSize="3xl">
-        {title}
+        {title}caca
       </Text>
       <Flex p="10px">
         {/* className={style.root} */}

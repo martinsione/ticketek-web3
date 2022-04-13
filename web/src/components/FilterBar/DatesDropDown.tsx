@@ -2,7 +2,7 @@
 import React, {
   ChangeEvent,
   ChangeEventHandler,
-  MutableRefObject,
+  // MutableRefObject,
   useRef,
 } from "react"; //  ChangeEventHandler,
 import { Select, Input } from "@chakra-ui/react";
@@ -13,15 +13,21 @@ interface FUNC {
 
 export default function CategoriesDropDown({ fn }: FUNC) {
   const date = useRef<HTMLInputElement>(null);
-  const handleVisibleDate: ChangeEventHandler<HTMLSelectElement> = (e) => {
+
+  const handleDateMenu: ChangeEventHandler<HTMLSelectElement> = (e) => {
     e.preventDefault();
     if (date.current !== null) {
       if (e.target.value === "choose") {
         date.current.style.visibility = "visible";
       } else {
         date.current.style.visibility = "hidden";
+        fn(e);
       }
     }
+  };
+
+  const handleChooseDate: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    e.preventDefault();
     fn(e);
   };
   return (
@@ -33,11 +39,12 @@ export default function CategoriesDropDown({ fn }: FUNC) {
         name="category"
         p="10px"
         w="15%"
-        onChange={handleVisibleDate}
+        onChange={handleDateMenu}
       >
         <option value="all">All dates...</option>
         <option value="days">In a couple of days</option>
         <option value="weekend">This weekend</option>
+        <option value="week">Next week</option>
         <option value="month">This month</option>
         <option value="choose">Choose a date</option>
       </Select>
@@ -50,6 +57,7 @@ export default function CategoriesDropDown({ fn }: FUNC) {
         placeholder="Enter your date"
         style={{ visibility: "hidden", padding: "10px", width: "15%" }}
         type="date"
+        onChange={handleChooseDate}
       />
     </>
   );
