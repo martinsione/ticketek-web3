@@ -61,7 +61,7 @@ function user() {
           />
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
-              User
+              {state.name || "Unnamed"}
             </Text>
             <NextLink passHref href={`/settingsUser/${account}`}>
               <IconButton aria-label="edit-user" icon={<FiEdit3 />} />

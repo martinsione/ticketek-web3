@@ -13,10 +13,6 @@ export default function UserData() {
   const onSubmit: (data: {}) => Promise<
     boolean | undefined
   > = async (data: {}) => {
-    const atr: AxiosResponse<any, any> = await axios.post("/api/users", {
-      ...data,
-      walletAddress: account,
-    });
     try {
       const atr = await axios.post(
         "/api/users",
@@ -28,17 +24,13 @@ export default function UserData() {
       else if (atr.status === 500) return router.push("user/error");
       return router.push("/user/dataUserSuccess");
     } catch (error: any) {
-      console.log({ error });
-      if (error.response.request.status === 403)
+      if (error.response.request.status === 403) {
         return router.push("/user/forbidden");
+      }
       router.push("/user/error");
     }
     return router.push("/home");
   };
-  useEffect(() => {
-    if (!account) router.push("/nouser");
-  }, [account]);
-  if (!account) return <div />;
 
   return (
     <Stack align="center" mb="40px" mt="50px">
@@ -55,4 +47,30 @@ export default function UserData() {
       </Stack>
     </Stack>
   );
+}
+
+import { verify } from "jsonwebtoken";
+import { NextApiRequest } from "next";
+
+export async function getServerSideProps(context: NextApiRequest) {
+  console.log("ENTRO EN GETSVSIDEPROPS");
+  const { cookies } = context.req;
+  const loginJWT = cookies?.NFTicketLoginJWT;
+
+  return verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+    if (error) {
+      console.log("ENTRO EN ERROR");
+      console.log(process.env.NEXT_PUBLIC_BASE_URL);
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/nouser",
+        },
+        props: {},
+      };
+    }
+    return {
+      props: {},
+    };
+  });
 }
