@@ -1,5 +1,5 @@
+// import Web3 from "web3";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Web3 from "web3";
 import {
   Stack,
   // Image,
@@ -14,6 +14,7 @@ import {
   // NumberIncrementStepper,
   // NumberDecrementStepper,
 } from "@chakra-ui/react";
+
 import { contractDeploy } from "../Functional Components/Deploy";
 
 interface InputProps {
@@ -30,7 +31,6 @@ interface InputProps {
   city: string;
 }
 
-
 export default function Form() {
   const {
     register,
@@ -38,21 +38,45 @@ export default function Form() {
     formState: { isSubmitting },
   } = useForm<InputProps>();
 
-  const onSubmit: SubmitHandler<InputProps> = (data) =>{
+  const onSubmit: SubmitHandler<InputProps> = (data) => {
     new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(data, null, 2));
         resolve();
-      }, 1500);})
+      }, 1500);
+    });
 
-    // console.log('aqui')
-    const {name, symbol, description, city, date, country, image, location, numberOfTickets, price, type} = data
-    contractDeploy(symbol, city, price, numberOfTickets, image[0], name, description, type, date, country, location, location)
-    console.log(data)
-    };
+    const {
+      name,
+      symbol,
+      description,
+      city,
+      date,
+      country,
+      image,
+      location,
+      numberOfTickets,
+      price,
+      type,
+    } = data;
+    contractDeploy(
+      symbol,
+      city,
+      price,
+      numberOfTickets,
+      image[0],
+      name,
+      description,
+      type,
+      date,
+      country,
+      location,
+      location
+    );
+  };
 
   return (
-    <form onSubmit={(handleSubmit(onSubmit))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack
         border="1px"
         borderColor="blackAlpha.300"
