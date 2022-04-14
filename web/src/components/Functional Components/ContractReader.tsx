@@ -27,8 +27,6 @@ async function getEventData(contractAddress: string) {
     }
     return EventData
 
-
 }
 
-export default getEventData
-
+export default getEventData;

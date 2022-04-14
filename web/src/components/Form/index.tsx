@@ -1,3 +1,4 @@
+// import Web3 from "web3";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   Stack,
@@ -43,16 +44,41 @@ export default function Form() {
         alert(JSON.stringify(data, null, 2));
         resolve();
       }, 1500);
-    })
 
-    // console.log('aqui')
-    const { name, symbol, description, city, date, country, image, location, numberOfTickets, price, type } = data
-    console.log(image)
-    contractDeploy(symbol, city, price, numberOfTickets, image[0], name, description, type, date, country, location, location)
+    });
+
+    const {
+      name,
+      symbol,
+      description,
+      city,
+      date,
+      country,
+      image,
+      location,
+      numberOfTickets,
+      price,
+      type,
+    } = data;
+    contractDeploy(
+      symbol,
+      city,
+      price,
+      numberOfTickets,
+      image[0],
+      name,
+      description,
+      type,
+      date,
+      country,
+      location,
+      location
+    );
+
   };
 
   return (
-    <form onSubmit={(handleSubmit(onSubmit))}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Stack
         border="1px"
         borderColor="blackAlpha.300"
