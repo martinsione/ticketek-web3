@@ -1,10 +1,11 @@
+import { AbiItem } from 'web3-utils'
 import axios from "axios";
 
 import { userAddress, web } from "./UserCommands";
 import storeNFT from "./MetadataStorage";
 import Ticket from "../../Ticket.json";
 
-const priceContract = new web.eth.Contract(Ticket.abi);
+const priceContract = new web.eth.Contract(Ticket.abi as AbiItem[]);
 
 async function contractDeploy(
     symbol: string,
@@ -64,4 +65,5 @@ async function contractDeploy(
     });
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { contractDeploy };

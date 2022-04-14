@@ -46,7 +46,7 @@ function SocialButton({
 
 export default function Footer() {
   return (
-    <Stack bg="#022C30" color="#fff" p={8}>
+    <Stack bg="#0001" bottom="0" color="#fff" h="10vh" justify="center">
       <Stack
         alignItems="center"
         direction="row"
@@ -78,6 +78,6 @@ export default function Footer() {
           </SocialButton>
         </Stack>
       </Stack>
-    </Stack>
+    </Stack >
   );
 }

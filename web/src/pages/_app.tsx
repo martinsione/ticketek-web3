@@ -18,6 +18,13 @@ const theme = extendTheme({
     body: "Poppins, sans-serif",
   },
   textStyles: {},
+  styles: {
+    global: () => ({
+      body: {
+        bg: "#011F26",
+      }
+    })
+  },
 });
 
 export default function MyApp({ Component, pageProps }: AppProps) {

@@ -1,11 +1,12 @@
-import { web } from "./UserCommands";
-import Ticket from '../../Ticket.json'
+import { AbiItem } from 'web3-utils'
 import axios from "axios";
 
+import { web } from "./UserCommands";
+import Ticket from '../../Ticket.json'
 
-async function getEventData(contractAddress: string){
+async function getEventData(contractAddress: string) {
 
-    const contract = new web.eth.Contract(Ticket.abi, contractAddress);
+    const contract = new web.eth.Contract(Ticket.abi as AbiItem[], contractAddress);
 
     const Name = await contract.methods.name().call();
     const Symbol = await contract.methods.symbol().call();
@@ -15,14 +16,14 @@ async function getEventData(contractAddress: string){
     const Uri = await contract.methods.getUri().call();
 
     const metadata = await axios.get(Uri)
-    
+
     const EventData = {
         name: Name,
         symbol: Symbol,
         place: Place,
         price: Price,
         numberOfTickets: NumberOfTickets,
-        metadata: metadata
+        metadata
     }
     return EventData
 
