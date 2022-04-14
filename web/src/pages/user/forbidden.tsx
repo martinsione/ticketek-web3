@@ -1,6 +1,11 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+};
+
 export default function Forbidden() {
   const router = useRouter();
   let timeOutAtr: ReturnType<typeof setTimeout>;
@@ -15,8 +20,8 @@ export default function Forbidden() {
   }, []);
   return (
     <>
-      <div style={{ fontSize: "60px" }}>Forbidden access</div>;
-      <div style={{ fontSize: "60px" }}>You will be redirected now</div>
+      <div style={estilos}>Forbidden access</div>;
+      <div style={estilos}>You will be redirected now</div>
     </>
   );
 }

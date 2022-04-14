@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+};
+
 export default function NoUser() {
   const router = useRouter();
   let timeOutAtr: ReturnType<typeof setTimeout>;
@@ -16,8 +21,8 @@ export default function NoUser() {
   }, []);
   return (
     <>
-      <div>You need to be logged in to see this Page</div>
-      <div>You will be redirected Home</div>
+      <div style={estilos}>You need to be logged in to see this Page</div>
+      <div style={estilos}>You will be redirected Home</div>
       <Link passHref href="/home">
         <div style={{ cursor: "pointer" }}>Go back Home</div>
       </Link>
