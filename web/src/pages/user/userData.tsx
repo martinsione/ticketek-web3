@@ -50,9 +50,10 @@ export default function UserData() {
 }
 
 import { verify } from "jsonwebtoken";
-import { NextApiRequest } from "next";
 
-export async function getServerSideProps(context: NextApiRequest) {
+export async function getServerSideProps(context: {
+  req: { cookies: { NFTicketLoginJWT: string } };
+}) {
   console.log("ENTRO EN GETSVSIDEPROPS");
   const { cookies } = context.req;
   const loginJWT = cookies?.NFTicketLoginJWT;
