@@ -44,6 +44,7 @@ export default function Form() {
         alert(JSON.stringify(data, null, 2));
         resolve();
       }, 1500);
+
     });
 
     const {
@@ -73,6 +74,7 @@ export default function Form() {
       location,
       location
     );
+
   };
 
   return (
@@ -108,7 +110,6 @@ export default function Form() {
           placeholder="Image"
           type="file"
         />
-
         <Button
           colorScheme="teal"
           isLoading={isSubmitting}
