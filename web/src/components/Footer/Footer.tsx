@@ -2,15 +2,15 @@ import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
 import { ReactNode } from "react";
 import Link from "next/link";
 import {
-  Box,
   chakra,
-  Container,
-  Image,
+  Icon,
   Stack,
   Text,
   useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react";
+
+import Logo from "../Logo/Logo";
 
 function SocialButton({
   children,
@@ -46,24 +46,26 @@ function SocialButton({
 
 export default function Footer() {
   return (
-    <Box bg="#f00" bgGradient="linear(to-r, green.200, pink.500)">
-      <Container
-        align={{ base: "center", md: "center" }}
-        as={Stack}
-        direction={{ base: "column", md: "row" }}
-        justify={{ base: "center", md: "space-between" }}
-        maxW="6xl"
-        py={4}
-        spacing={4}
+    <Stack bg="#0001" bottom="0" color="#fff" h="10vh" justify="center">
+      <Stack
+        alignItems="center"
+        direction="row"
+        justifyContent="space-between"
+        maxW="1276px"
+        mx="auto"
+        spacing={8}
+        w="full"
       >
-        <Link passHref href="/home">
-          <Image
-            height={10}
-            src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
-            style={{ cursor: "pointer" }}
-          />
-        </Link>
-        <Text>© 2022 NFTicket Group. All rights reserved</Text>
+        <Stack align="center" direction="row" >
+          <Stack width="50px">
+            <Link passHref href="/home">
+              <Icon as={Logo} cursor="pointer" />
+            </Link>
+          </Stack>
+          <Stack fontSize="14px" px="10px" width="450px">
+            <Text fontWeight="thin">The first non-fungible token(NFT) marketplace for buying event tickets. © 2022 NFTicket Group. All rights reserved</Text>
+          </Stack>
+        </Stack>
         <Stack direction="row" spacing={6}>
           <SocialButton href="#" label="Twitter">
             <FaTwitter />
@@ -75,7 +77,7 @@ export default function Footer() {
             <FaInstagram />
           </SocialButton>
         </Stack>
-      </Container>
-    </Box>
+      </Stack>
+    </Stack >
   );
 }

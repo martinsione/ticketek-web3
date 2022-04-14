@@ -11,9 +11,10 @@ import {
 import LogIn from "./LogIn";
 // import SearchBar from "../SearchBar/SearchBar";
 
+
 export default function NavBar() {
   return (
-    <Stack bg="#022C30" p={5}>
+    <Stack bg="#0001" h="7vh" justify="center" >
       <Stack
         alignItems="center"
         direction="row"
