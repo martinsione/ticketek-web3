@@ -17,11 +17,19 @@ export default function UserData() {
 
   const onSubmit = async (data: {}) => {
     try {
-      await axios.post("/api/users", { ...data, walletAddress: account });
-      if (onSubmit.status === 200) return router.push("/user/dataUserSuccess");
-      else if (onSubmit.status === 500) return router.push("/error");
+      const atr = await axios.post(
+        "/api/users",
+        { ...data, walletAddress: account },
+        { withCredentials: true }
+      );
+      if (atr.status === 200) return router.push("/user/dataUserSuccess");
+      else if (atr.status === 403) return router.push("user/forbidden");
+      else if (atr.status === 500) return router.push("user/error");
       return router.push("/user/dataUserSuccess");
     } catch (error) {
+      console.log({ error });
+      if (error.response.request.status === 403)
+        return router.push("/user/forbidden");
       router.push("/user/error");
     }
   };
