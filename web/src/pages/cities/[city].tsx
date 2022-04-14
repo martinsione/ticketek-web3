@@ -1,38 +1,54 @@
-import EventCardViewer from "../../components/EventCardsViewer/EventCardsViewer";
-import axios from "axios";
+import prisma from "../../lib/prisma";
+import CardPage from "../../components/CardPage/CardPage";
+
+// import DatesDropDown from "../../components/FilterBar/DatesDropDown";
+// import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 
 export default function City({ data, city }: { data: []; city: string }) {
-  return data && <EventCardViewer json={data} range={[0, 5]} title={city} />;
+  // const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {}; //  fn={handleCategories}
+  // const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {};  //  fn={handleDates}
+  return (
+    <>
+      {/* <CategoriesDropDown />
+      <DatesDropDown /> */}
+
+      {data && <CardPage data={data} title={city} />}
+    </>
+  );
 }
 
 export async function getStaticProps(context: { params: { city: string } }) {
-  const { params } = context;
-  const { data } = await axios(`/api/cities/${params.city}`);
+  // const { data } = await axios(
+  //   `http://localhost:3000/api/cities/${params.city}`
+  // );
 
-  if (!data.length) return { notFound: true };
+  // if (!data.length) return { notFound: true };
+
+  // return {
+  //   props: {
+  //     data,
+  //     city: params.city,
+  //   },
+  // };
+  const { params } = context;
+  const cities = await prisma.contract.findMany();
+
+  const data = cities.filter((e: { city: string }) => e.city === params.city);
 
   return {
     props: {
       data,
-      city: params.city,
     },
   };
 }
 
 export async function getStaticPaths() {
-  interface EVENT {
-    city: string;
-  }
-  const { data } = await axios("/api/cities");
-
-  const paths = data.map((event: EVENT) => ({
-    params: {
-      city: `${event.city}`,
-    },
+  const cities = await prisma.contract.findMany();
+  const paths = cities.map((element) => ({
+    params: { city: element.city.toLowerCase() },
   }));
-
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }

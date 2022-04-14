@@ -1,48 +1,58 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import Web3 from "web3";
 import {
   Stack,
-  Image,
+  // Image,
   Button,
   Input,
-  FormControl,
-  FormLabel,
-  NumberInput,
-  FormErrorMessage,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
+  // FormControl,
+  // FormLabel,
+  // NumberInput,
+  // FormErrorMessage,
+  // NumberInputField,
+  // NumberInputStepper,
+  // NumberIncrementStepper,
+  // NumberDecrementStepper,
 } from "@chakra-ui/react";
+import { contractDeploy } from "../Functional Components/Deploy";
 
 interface InputProps {
-  city: string;
-  date: string;
-  id: string;
-  image: string;
+  name: string;
+  symbol: string;
+  description: string;
+  numberOfTickets: number;
+  type: string;
+  image: FileList;
+  date: number;
+  price: number;
+  country: string;
   location: string;
-  title: string;
-  tickets_available: number;
-  tickets_left: number;
-  type: "concierto" | "festival" | "exposicion";
+  city: string;
 }
+
 
 export default function Form() {
   const {
     register,
-    watch,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
   } = useForm<InputProps>();
-  const onSubmit: SubmitHandler<InputProps> = (data) =>
+
+  const onSubmit: SubmitHandler<InputProps> = (data) =>{
     new Promise<void>((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(data, null, 2));
         resolve();
-      }, 1500);
-    });
+      }, 1500);})
+
+    // console.log('aqui')
+    const {name, symbol, description, city, date, country, image, location, numberOfTickets, price, type} = data
+    contractDeploy(symbol, city, price, numberOfTickets, image[0], name, description, type, date, country, location, location)
+    console.log(data)
+    };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={(handleSubmit(onSubmit))}>
       <Stack
         border="1px"
         borderColor="blackAlpha.300"
@@ -54,84 +64,26 @@ export default function Form() {
         py="12px"
         spacing="12px"
       >
-        <FormControl isInvalid={!!errors.title}>
-          <FormLabel htmlFor="title">Name</FormLabel>
-          <Input
-            placeholder="title"
-            {...register("title", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
-            })}
-          />
-          <FormErrorMessage>
-            {errors.title && errors.title.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl isInvalid={!!errors.city}>
-          <FormLabel htmlFor="city">City</FormLabel>
-          <Input
-            placeholder="City"
-            {...register("city", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
-            })}
-          />
-          <FormErrorMessage>
-            {errors.city && errors.city.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl isInvalid={!!errors.image} maxW="100%">
-          <FormLabel htmlFor="image">Image</FormLabel>
-          <Input
-            placeholder="Image"
-            {...register("image", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
-            })}
-          />
-          <Image src={watch("image")} />
-          <FormErrorMessage>
-            {errors.image && errors.image.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl isInvalid={!!errors.location}>
-          <FormLabel htmlFor="Location">Location</FormLabel>
-          <Input
-            placeholder="Location"
-            {...register("location", {
-              required: "This is required",
-              minLength: { value: 4, message: "Minimum length should be 4" },
-            })}
-          />
-          <FormErrorMessage>
-            {errors.location && errors.location.message}
-          </FormErrorMessage>
-        </FormControl>
-
-        <FormControl isInvalid={!!errors.tickets_available}>
-          <FormLabel htmlFor="tickets_available">Tickets available</FormLabel>
-          <NumberInput min={1}>
-            <NumberInputField
-              placeholder="Tickets available"
-              {...register("tickets_available", {
-                minLength: { value: 4, message: "Minimum length should be 4" },
-                min: 1,
-                required: "This is required",
-                valueAsNumber: true,
-              })}
-            />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <FormErrorMessage>
-            {errors.tickets_available && errors.tickets_available.message}
-          </FormErrorMessage>
-        </FormControl>
+        <Input {...register("name")} placeholder="Name" />
+        <Input {...register("symbol")} placeholder="Symbol" />
+        <Input {...register("description")} placeholder="Description" />
+        <Input {...register("city")} placeholder="City" />
+        <Input {...register("date")} placeholder="Date" type="date" />
+        <Input {...register("country")} placeholder="Country" />
+        <Input {...register("location")} placeholder="Location" />
+        <Input {...register("type")} placeholder="Type" />
+        <Input {...register("price")} placeholder="Price" />
+        <Input
+          {...register("numberOfTickets")}
+          placeholder="Number of tickets"
+          type="number"
+        />
+        <Input
+          {...register("image")}
+          accept=".png,.jpg,.jpeg"
+          placeholder="Image"
+          type="file"
+        />
 
         <Button
           colorScheme="teal"

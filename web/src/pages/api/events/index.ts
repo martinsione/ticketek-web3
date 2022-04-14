@@ -8,7 +8,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const { address, city, name, symbol } = req.body;
+    const { address, name, symbol } = req.body;
     try {
         //     POST para crear un evento
 
@@ -17,11 +17,10 @@ export default async function handler(
             const valid = WAValidator.validate(address, "ETH");
             if (valid) {
                 // Se verifica que se hayan proporcionado los otros datos
-                if (city.length && name.length && symbol.length) {
+                if (name.length && symbol.length) {
                     const response = await prisma.contract.create({
                         data: {
                             address,
-                            city,
                             name,
                             symbol,
                         },

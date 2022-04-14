@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function NoUser() {
   const router = useRouter();
@@ -18,7 +18,7 @@ export default function NoUser() {
     <>
       <div>You need to be logged in to see this Page</div>
       <div>You will be redirected Home</div>
-      <Link href="/home" passHref>
+      <Link passHref href="/home">
         <div style={{ cursor: "pointer" }}>Go back Home</div>
       </Link>
     </>

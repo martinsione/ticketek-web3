@@ -1,71 +1,77 @@
-import Link from "next/link";
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { BsSearch } from "react-icons/bs";
+import NextLink from "next/link";
+import {
+  Stack,
+  Text,
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
-import SearchBar from "../SearchBar/SearchBar";
+// import SearchBar from "../SearchBar/SearchBar";
 
-function NavBar() {
+export default function NavBar() {
   return (
-    <Flex
-      bg="#f00"
-      bgGradient="linear(to-r, green.200, pink.500)"
-      flexDirection="column"
-      h={100}
-      overflow="hidden"
-      position="relative"
-      w="100%"
-      zIndex={1000}
-    >
-      <Flex // nav bar
+    <Stack bg="#022C30" p={5}>
+      <Stack
         alignItems="center"
-        h={100}
-        justifyContent="flex-end"
-        w="100%"
+        direction="row"
+        justifyContent="space-between"
+        maxW="1276px"
+        mx="auto"
+        spacing={8}
+        w="full"
       >
-        <Flex // Login button container
-          alignItems="center"
-          borderRadius={10}
-          cursor="pointer"
-          justifyContent="center"
-          marginRight={450}
-          padding={1}
-        >
-          <Link passHref href="/home">
-            <Image
-              height={20}
-              src="https://cdn-icons-png.flaticon.com/512/1614/1614997.png"
-              style={{ cursor: "pointer" }}
-            />
-          </Link>
-        </Flex>
-        <Link passHref href="/help">
-          <Text
-            color="white"
-            cursor="pointer"
-            fontSize={25}
-            fontWeight={800}
-            marginRight={70}
-          >
-            Quick Start
-          </Text>
-        </Link>
-        <Link passHref href="/about">
-          <Text
-            color="white"
-            cursor="pointer"
-            fontSize={25}
-            fontWeight={800}
-            marginRight={70}
-          >
-            About us
-          </Text>
-        </Link>
-        <SearchBar />
-        <Box margin="2rem">
+        <NextLink href="/">
+          <a>
+            <Stack
+              alignItems="start"
+              color="white"
+              direction="row"
+              fontSize="36px"
+              spacing={0}
+            >
+              <Text fontWeight="extrabold" lineHeight={0}>
+                NFT
+              </Text>
+              <Text fontWeight="thin" lineHeight={0}>
+                icket
+              </Text>
+            </Stack>
+          </a>
+        </NextLink>
+        <InputGroup className="border-gradient sm" color="#fff" maxW="460px">
+          <Input
+            _placeholder={{ color: "#fff" }}
+            border="none"
+            borderRadius="full"
+            m="0"
+            outline="none"
+            placeholder="Search..."
+            px="4"
+            py="2"
+          />
+          <InputRightElement>
+            <BsSearch />
+          </InputRightElement>
+        </InputGroup>
+        <Stack alignItems="center" direction="row" spacing={8}>
+          <NextLink href="/home">
+            <a>
+              <Stack
+                alignItems="center"
+                color="white"
+                direction="row"
+                spacing={6}
+              >
+                <Text>Explore</Text>
+              </Stack>
+            </a>
+          </NextLink>
           <LogIn />
-        </Box>
-      </Flex>
-    </Flex>
+        </Stack>
+      </Stack>
+    </Stack>
   );
 }
-export default NavBar;

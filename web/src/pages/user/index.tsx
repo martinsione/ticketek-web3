@@ -1,4 +1,6 @@
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
+import { FiEdit3 } from "react-icons/fi";
+import NextLink from "next/link";
 import { useWeb3React } from "@web3-react/core";
 import {
   Avatar,
@@ -21,6 +23,8 @@ import {
   Tag,
   Link,
   Icon,
+  Flex,
+  IconButton,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -55,7 +59,14 @@ function user() {
                 : ""
             }
           />
-          <Text fontSize="2rem">{state.name || "Unnamed"}</Text>
+          <Flex align="center" justify="center" textAlign="center">
+            <Text fontSize="2rem" marginRight="10px">
+              User
+            </Text>
+            <NextLink passHref href={`/settingsUser/${account}`}>
+              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+            </NextLink>
+          </Flex>
           <Tag padding="3">{account || "address..."} </Tag>
         </Box>
       </VStack>

@@ -1,16 +1,18 @@
-import { FaEthereum, FaRegUserCircle } from "react-icons/fa";
+import { IoWalletOutline } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useWeb3React } from "@web3-react/core";
 import {
   Button,
   Popover,
-  IconButton,
   PopoverBody,
   PopoverContent,
   PopoverTrigger,
   Portal,
   useToast,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
@@ -24,7 +26,7 @@ declare global {
   }
 }
 
-function LogIn() {
+export default function LogIn() {
   const toast = useToast();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
@@ -143,48 +145,87 @@ function LogIn() {
   };
 
   return (
-    <Popover>
-      <PopoverTrigger>
-        <IconButton
-          _hover={{}}
-          aria-label="Search database"
-          bg="none"
-          fontSize="50px"
-          icon={account ? <FaEthereum /> : <FaRegUserCircle />}
-        />
-      </PopoverTrigger>
-      <Portal>
-        <PopoverContent>
-          <PopoverBody>
+    <Stack>
+      {account ? (
+        <Popover>
+          <PopoverTrigger>
             <Button
-              bg="none"
-              fontSize="1.2rem"
-              isLoading={loading}
-              margin="5px"
-              width="100%"
-              onClick={handleConnect}
+              _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+              _hover={{
+                bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+                opacity: "0.85",
+              }}
+              bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+              borderRadius="full"
+              color="white"
+              leftIcon={<FaRegUserCircle />}
+              px="5"
+              py="2"
+              transition=".1s ease-in-out"
             >
-              {account ? "Log out" : "Log in"}
+              <Text whiteSpace="nowrap">Account</Text>
             </Button>
-            {account && (
-              <NextLink passHref href="/user">
-                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
-                  My profile
+          </PopoverTrigger>
+          <Portal>
+            <PopoverContent>
+              <PopoverBody>
+                <Button
+                  bg="none"
+                  fontSize="1.2rem"
+                  isLoading={loading}
+                  margin="5px"
+                  width="100%"
+                  onClick={handleConnect}
+                >
+                  Log out
                 </Button>
-              </NextLink>
-            )}
-            {account && (
-              <NextLink passHref href="/user/userData">
-                <Button bg="none" fontSize="1.2rem" margin="5px" width="100%">
-                  Settings
-                </Button>
-              </NextLink>
-            )}
-          </PopoverBody>
-        </PopoverContent>
-      </Portal>
-    </Popover>
+                {account && (
+                  <NextLink passHref href="/user">
+                    <Button
+                      bg="none"
+                      fontSize="1.2rem"
+                      margin="5px"
+                      width="100%"
+                    >
+                      My profile
+                    </Button>
+                  </NextLink>
+                )}
+                {account && (
+                  <NextLink passHref href="/user/userData">
+                    <Button
+                      bg="none"
+                      fontSize="1.2rem"
+                      margin="5px"
+                      width="100%"
+                    >
+                      Settings
+                    </Button>
+                  </NextLink>
+                )}
+              </PopoverBody>
+            </PopoverContent>
+          </Portal>
+        </Popover>
+      ) : (
+        <Button
+          _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+          _hover={{
+            bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+            opacity: "0.85",
+          }}
+          bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+          borderRadius="full"
+          color="white"
+          leftIcon={<IoWalletOutline />}
+          px="5"
+          py="2"
+          transition=".1s ease-in-out"
+          onClick={handleConnect}
+        >
+          <Text whiteSpace="nowrap">Connect Wallet</Text>
+        </Button>
+      )}
+    </Stack>
   );
 }
-
-export default LogIn;
