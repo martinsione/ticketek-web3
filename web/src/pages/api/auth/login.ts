@@ -11,7 +11,6 @@ export default async function handler(
   const { walletID, force } = req.body;
   const loginJWT = cookies.NFTicketLoginJWT;
   if (walletID) {
-    console.log({ walletID });
     if (!loginJWT && force) {
       const token = sign(
         {
@@ -30,10 +29,10 @@ export default async function handler(
 
       try {
         res.setHeader("Set-Cookie", serialised);
-        res.status(200).json({ message: "success" });
       } catch (error) {
         res.status(500).json({ message: "something went wrong" });
       }
+      res.status(200).json({ message: "success" });
     } else if ((loginJWT && force) || (loginJWT && !force)) {
       verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
         if (error) {
@@ -53,15 +52,13 @@ export default async function handler(
           });
 
           try {
-            res.setHeader("set-cookie", serialised);
-            res.status(200).json({ message: "success" });
+            return res.setHeader("set-cookie", serialised);
           } catch (error) {
-            res.status(500);
+            return res.status(500);
           }
         }
         res.status(200).json({ message: "success" });
       });
-      res.status(200).json({ message: "something went wrong" });
     } else {
       res.status(200).json({ message: "something went wrong" });
     }

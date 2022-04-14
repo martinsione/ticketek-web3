@@ -18,6 +18,12 @@ import axios from "axios";
 import Web3 from "web3";
 import { useRouter } from "next/router";
 
+declare global {
+  interface Window {
+    web3: any;
+  }
+}
+
 function LogIn() {
   const toast = useToast();
   const { activate, deactivate, account } = useWeb3React();
