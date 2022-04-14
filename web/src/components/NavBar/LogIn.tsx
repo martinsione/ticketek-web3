@@ -15,15 +15,85 @@ import {
 
 import injected from "../Wallet/connector";
 import axios from "axios";
+import Web3 from "web3";
+import { useRouter } from "next/router";
 
 function LogIn() {
   const toast = useToast();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
   const [metamask, setMetamask] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setMetamask(window.ethereum && true);
+  }, []);
+
+  async function connect() {
+    activate(injected, undefined, true)
+      .then(
+        () => checkConnection(true),
+        () => {
+          setLoading(false);
+          toast({
+            title: "Oops, something went wrong",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+      )
+      .then(
+        () => setLoading(false),
+        () => {
+          setLoading(false);
+          toast({
+            title: "Oops, something went wrong",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        }
+      );
+  }
+
+  const checkConnection = async (force = false) => {
+    // Check if browser is running Metamask
+    let web3: any;
+    if (window.ethereum) {
+      web3 = new Web3(window.ethereum);
+    } else if (window.web3) {
+      web3 = new Web3(window.web3.currentProvider);
+    }
+    // Check if User is already connected by retrieving the accounts
+    web3.eth.getAccounts().then(async (addr: string) => {
+      if (addr) {
+        const atr = await axios
+          .post(
+            "/api/auth/login",
+            { walletID: addr[0], force },
+            { withCredentials: true }
+          )
+          .then(({ data }) => {
+            if (data.message === "success") {
+              setTimeout(() => {
+                activate(injected, undefined, true).then(() =>
+                  toast({
+                    title: "Wallet connected",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                  })
+                );
+              }, 500);
+            }
+          });
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkConnection();
   }, []);
 
   const handleConnect = () => {
@@ -34,59 +104,36 @@ function LogIn() {
       setLoading(false);
     } else if (!account) {
       // si no hay cuenta conectamos
-      activate(injected, undefined, true)
-        .then(
-          () => {
-            setLoading(false);
-            axios.post(
-              "/api/auth/login",
-              {
-                walletID: account,
-              },
-              { withCredentials: true }
-            );
-          },
-          () => {
-            setLoading(false);
-            toast({
-              title: "Oops, something went wrong",
-              status: "error",
-              duration: 3000,
-              isClosable: true,
-            });
-          }
-        )
-        .then(
-          () => {
-            setLoading(false);
-            toast({
-              title: "Wallet connected",
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-            });
-          },
-          () => {
-            setLoading(false);
-            toast({
-              title: "Oops, something went wrong",
-              status: "error",
-              duration: 3000,
-              isClosable: true,
-            });
-          }
-        );
+      connect();
     }
     // si hay cuenta desconectamos
     if (account) {
+      console.log(account);
       deactivate();
+      axios
+        .post(
+          "/api/auth/logout",
+          { walletID: account },
+          { withCredentials: true }
+        )
+        .then(() => {
+          toast({
+            title: "Wallet disconected",
+            status: "warning",
+            duration: 3000,
+            isClosable: true,
+          });
+          router.reload();
+        })
+        .catch((err) =>
+          toast({
+            title: "Oops, something went wrong",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          })
+        );
       setLoading(false);
-      toast({
-        title: "Wallet disconected",
-        status: "warning",
-        duration: 3000,
-        isClosable: true,
-      });
     }
   };
 

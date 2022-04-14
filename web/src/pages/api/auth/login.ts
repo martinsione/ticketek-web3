@@ -8,50 +8,64 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { cookies } = req;
-  const { walletID } = req.body;
+  const { walletID, force } = req.body;
   const loginJWT = cookies.NFTicketLoginJWT;
+  if (walletID) {
+    console.log({ walletID });
+    if (!loginJWT && force) {
+      const token = sign(
+        {
+          exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+          walletID,
+        },
+        process.env.SECRET_WORD as string
+      );
 
-  if (!loginJWT) {
-    console.log("no hay token");
-    console.log(process.env.SECRET_WORD);
-    const token = sign(
-      {
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
-        walletID,
-      },
-      process.env.SECRET_WORD as string
-    );
-    const serialised = serialize("NFTicketLoginJWT", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 60 * 60 * 24,
-    });
-    res.setHeader("Set-Cookie", serialised);
-    res.status(200).json({ message: "success" });
-  } else {
-    console.log("entro a else");
-    verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
-      if (error) {
-        console.log("entro a error");
-        const token = sign(
-          {
-            exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
-            walletID,
-          },
-          process.env.SECRET_WORD as string
-        );
-        const serialised = serialize("NFTicketLoginJWT", token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV !== "development",
-          sameSite: "strict",
-          maxAge: 60 * 60 * 24,
-        });
-        res.setHeader("set-cookie", serialised);
+      const serialised = serialize("NFTicketLoginJWT", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV !== "development",
+        sameSite: "strict",
+        maxAge: 60 * 60 * 24,
+      });
+
+      try {
+        res.setHeader("Set-Cookie", serialised);
         res.status(200).json({ message: "success" });
+      } catch (error) {
+        res.status(500).json({ message: "something went wrong" });
       }
-      console.log("tramo final");
-      res.status(200).json({ message: "success" });
-    });
+    } else if ((loginJWT && force) || (loginJWT && !force)) {
+      verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+        if (error) {
+          const token = sign(
+            {
+              exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+              walletID,
+            },
+            process.env.SECRET_WORD as string
+          );
+
+          const serialised = serialize("NFTicketLoginJWT", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== "development",
+            sameSite: "strict",
+            maxAge: 60 * 60 * 24,
+          });
+
+          try {
+            res.setHeader("set-cookie", serialised);
+            res.status(200).json({ message: "success" });
+          } catch (error) {
+            res.status(500);
+          }
+        }
+        res.status(200).json({ message: "success" });
+      });
+      res.status(200).json({ message: "something went wrong" });
+    } else {
+      res.status(200).json({ message: "something went wrong" });
+    }
+  } else {
+    res.json({ message: "error" });
   }
 }
