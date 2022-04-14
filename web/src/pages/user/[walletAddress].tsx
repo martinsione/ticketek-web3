@@ -23,6 +23,8 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 interface DATA {
   data: {
@@ -32,6 +34,22 @@ interface DATA {
 }
 
 function UserID({ data }: DATA) {
+  let timeOutAtr: ReturnType<typeof setTimeout>;
+  const router = useRouter();
+
+  function redirect() {
+    timeOutAtr = setTimeout(() => {
+      router.push("/home");
+    }, 3000);
+  }
+  useEffect(() => {
+    return () => clearTimeout(timeOutAtr);
+  }, []);
+
+  if (!data) {
+    redirect();
+    return <div style={{ fontSize: "60px" }}>404 Wallet Address not found</div>;
+  }
   return (
     <>
       <VStack bgColor="#B2C1B5" height="40vh" />

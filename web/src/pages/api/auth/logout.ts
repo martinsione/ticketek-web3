@@ -13,8 +13,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     secure: process.env.NODE_ENV !== "development",
     sameSite: "strict",
     maxAge: -1,
+    path: "/",
   });
 
-  res.setHeader("set-cookie", serialised);
+  res.setHeader("Set-Cookie", serialised);
   res.status(200).json({ message: "success" });
 }

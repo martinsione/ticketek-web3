@@ -114,7 +114,6 @@ function LogIn() {
     }
     // si hay cuenta desconectamos
     if (account) {
-      console.log(account);
       deactivate();
       axios
         .post(

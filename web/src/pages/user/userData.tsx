@@ -26,7 +26,7 @@ export default function UserData() {
       else if (atr.status === 403) return router.push("user/forbidden");
       else if (atr.status === 500) return router.push("user/error");
       return router.push("/user/dataUserSuccess");
-    } catch (error) {
+    } catch (error: any) {
       console.log({ error });
       if (error.response.request.status === 403)
         return router.push("/user/forbidden");
