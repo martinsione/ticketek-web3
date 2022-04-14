@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { useRouter } from "next/router";
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Input, Stack } from "@chakra-ui/react";
 
