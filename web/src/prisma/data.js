@@ -27,188 +27,39 @@ module.exports = {
     },
   ],
   contracts: [
+    
     {
-      address: "0x945eD39416121076ADB07c493e106b6D9E541b09",
+      address: "0xE1b4CE0B47a33b18eFBA4e592d943f9D1b875683",
       
-      name: "Queen",
-      symbol: "QNN",
+      name: "Callejeros",
+      symbol: "CJS",
     },
     {
-      address: "0x141F9b8b27F8488DCg661aB850BEc72439E80f8A",
+      address: "0xCd6aac2Ae35034828B763E884900A0B4014670f3",
       
-      name: "Green Day",
-      symbol: "GND",
+      name: "Ricardo Arjona",
+      symbol: "RAJ",
     },
     {
-      address: "0x945eD39416121076SRB07c493e306b1D9E541b09",
-      
-      name: "Tamal",
-      symbol: "TML",
-    },
-    {
-      address: "0x141F9b8b27F8488DCe661aB840BEc72439E80f8A",
-      
-      name: "Gary Numan",
-      symbol: "GNM",
-    },
-    {
-      address: "0x945eD39416121076EQB07c493e306b6D9E541b09",
-      
-      name: "Metallica",
-      symbol: "MTL",
-    },
-    {
-      address: "1x141F9b8b27F8488DWe661aB850BEc72439E80f8A",
-      
-      name: "Sex Pistols",
-      symbol: "SEX",
-    },
-    {
-      address: "0x945eD39416121071SRB07c493e306b6D9E541b09",
-      
-      name: "Raime",
-      symbol: "RAM",
-    },
-    {
-      address: "0x141F9b8b27F8482DCe661aB850BEc72430E80f8A",
-      
-      name: "Ramones",
-      symbol: "RMN",
-    },
-    {
-      address: "0x945eD39412121276ADB07c493e306b6D9E541b09",
-      
-      name: "Caifanes",
-      symbol: "CFN",
-    },
-    {
-      address: "0x141F9b8b27F8488DCe661aB650BEc72439E80f8A",
-      
-      name: "Arca",
-      symbol: "ARC",
-    },
-    {
-      address: "0x945eD39416121076SRB07c491r306b6D9E541b09",
-      
-      name: "Katy Perry",
-      symbol: "KPY",
-    },
-    {
-      address: "0x141F9b8b27W8488DCw661aB850BEc72439E80f8A",
-      
-      name: "Pet Shop Boys",
-      symbol: "PSB",
-    },
-    {
-      address: "0x945eD39416131076ADB07c493e306r6D9E541b09",
-      
-      name: "Los Punsetes",
-      symbol: "PUN",
-    },
-    {
-      address: "0x141F9b8b27F8488DCq611aB850BEc72439E80f8A",
-      
-      name: "Kraken",
-      symbol: "KRK",
-    },
-    {
-      address: "0x945eD39416123036SXB07c493e306b6D9E541b09",
-      
-      name: "Carcass",
-      symbol: "CRC",
-    },
-    {
-      address: "0x141F9b8b27F8488DCe661aT852WEc72439E80f8A",
-      
-      name: "Wilfrido Vargas",
-      symbol: "WFR",
-    },
-    {
-      address: "0x945zD39416131076ADB07c493w306r6D9E541b09",
-      
-      name: "Los Pibes Chorros",
-      symbol: "PCH",
-    },
-    {
-      address: "0x141F9b8b22F8488DCq611aB250BTc72439E80f8A",
-      
-      name: "Ekymosis",
-      symbol: "EKY",
-    },
-    {
-      address: "0x945qS39416121236SXF07c493e306b6D9E541b09",
-      
-      name: "Radamel",
-      symbol: "RDM",
-    },
-    {
-      address: "0x945eD39416121233SXF07c411e306b6D9E541b09",
-      
-      name: "Rosalia",
-      symbol: "RSL",
-    },
-    {
-      address: "0x945eD39416124436SDR07c493e306b6D9E541b09",
-      
-      name: "The B52s",
-      symbol: "B52",
-    },
-    {
-      address: "0x945eD39116121235TXF03h493e306b6D9E541b09",
-      
-      name: "Il Genio",
-      symbol: "GNI",
-    },
-    {
-      address: "0x945eD39416121236SXF07c223e306b6D9E541b09",
-      
-      name: "Radamel",
-      symbol: "RDM",
-    },
-    {
-      address: "0x945eD39416121116SXF07c493e306b6D1E541b09",
-      
-      name: "Marie Davidson",
-      symbol: "RDM",
-    },
-    {
-      address: "0x945eD39416121236SXF07c493w206b6D9E541b09",
-      
-      name: "Calle 13",
-      symbol: "C13",
-    },
-    {
-      address: "0x945qS39416121226SXF07c493e306b6D9E541b09",
-      
-      name: "Kiss",
-      symbol: "KSS",
-    },
-    {
-      address: "0x945eD39444121233SXF07c411e306b6D9E541b09",
-      
-      name: "Julio Jaramillo",
-      symbol: "JJM",
-    },
-    {
-      address: "0x943tD39416124436SDR07c493e306b6D9E541b09",
+      address: "0x6963563c50326637E87eD185cB6960d46C36392a",
       
       name: "Rafaella Carrá",
       symbol: "RCR",
     },
     {
-      address: "0x945eD39116121233EXF03h493e306b6D9E541b09",
+      address: "0x0c52509cBeBb2D292Ad3C3740bDE10c3F83Ac4A7",
       
       name: "Menudo",
       symbol: "MDO",
     },
     {
-      address: "0x945eD39416671236SXF07c223e306b6D9E541b09",
+      address: "0x5e16601e655019451b6E945b6185cfDF8Ff3DC38",
       
       name: "ABBA",
       symbol: "ABA",
     },
     {
-      address: "0x945r539416121146SXF07c493e306b6D1E541b09",
+      address: "0x04480DD2BF749B0E1614032e1743443c08E268b3",
       
       name: "Techotronic",
       symbol: "RDM",
@@ -220,67 +71,67 @@ module.exports = {
       symbol: "SP3",
     },
     {
-      address: "0x945r539416981146SXF07c493e306b6D1E541b09",
+      address: "0x8E32d2391A8e8a6d37DE08aa59c27347D53B0C0c",
       
       name: "Boney M",
       symbol: "BNM",
     },
     {
-      address: "0x945eD39416114736SXF07c493w206b6D9E541b09",
+      address: "0xc2ca4537207178cF797B4a629783E27aE0B9b125",
       
       name: "Frank Sinatra",
       symbol: "FKS",
     },
     {
-      address: "0x141F9b8b27F8318DCe661aT321WEc72439E80f8A",
+      address: "0xe2f0fBD5a7f93291D92Ab31a646FB9CCAEdb5030",
       
       name: "Wendy Sulca",
       symbol: "WSL",
     },
     {
-      address: "0x945zD39416131136ADB07c493e306r6D9W541b09",
+      address: "0xD7ab99aA3c3776F3faE17110A327233692Ad2AfA",
       
       name: "Napalm Death",
       symbol: "NDH",
     },
     {
-      address: "0x141F9b8b22F8328DCq611aB830BTc72439E80f8A",
+      address: "0x8B0a2596d36d5194F8899b69ae5A52410dB55265",
       
       name: "Olivia Rodrigo",
       symbol: "OLR",
     },
     {
-      address: "0x945eD39416321236SXB07e393e306b6D9E541b09",
+      address: "0x3D7fAeAc931FeB8D706ef8CA911acb2f7Ff4cF98",
       
       name: "Billie Eilish",
       symbol: "BEL",
     },
     {
-      address: "0x141F9b8b27F8318DCe661aU850QEc72439E80f8A",
+      address: "0x44c3bf0B535A55aB7704ffDe8fc343c2C865559C",
       
       name: "La Tigresa de Oriente",
       symbol: "TIG",
     },
     {
-      address: "0x945zD39416131456ADB07c493e306r6D9E541b09",
+      address: "0xc5F6934776Eee549Fe08Ee74b143b702226eF094",
       
       name: "Os Mutantes",
       symbol: "OMU",
     },
     {
-      address: "0x141F9b8b22F1228DCq611aB150BTc72439E80f8A",
+      address: "0x7A3489e86Bad35fB0A116Cc731Ec308bba89a57B",
       
       name: "Britney Spears",
       symbol: "BRT",
     },
     {
-      address: "0x945eD39411221236SXB07e392e306b6D9E541b09",
+      address: "0x1473e71bDE021F7A0E09b6D553327A6bc3001e10",
       
       name: "Sex Pistols",
       symbol: "SEX",
     },
     {
-      address: "0x141F9b8b27F8318DCe661aU850WFc72439E80f8A",
+      address: "0xa637a2FC8D72078837dBCFE0eBF7329f00082a7D",
       
       name: "Los Tucanes de Tijuana",
       symbol: "TTJ",
