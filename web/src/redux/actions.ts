@@ -56,7 +56,7 @@ export function getContracts() {
   return async function (
     dispatch: (arg0: { type: string; payload: {} }) => {}
   ) {
-    const { data } = await axios("/api/events"); // No funciona porque tengo fake Data.
+    const { data } = await axios("/api/events");
     const contracts = data.map((e: any) => {
       // const contract = ContractReader(e.address);
       const contract = eventData(e.address);
