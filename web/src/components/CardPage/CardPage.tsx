@@ -4,8 +4,16 @@ import { Box, Text, Flex } from "@chakra-ui/react";
 import CardTemp from "../Card/CardTemp";
 
 type Props = {
-  data: [];
-  title: string;
+  data: [
+    {
+      address: string;
+      city: string;
+      name: string;
+      symbol: string;
+      metadata: { date: Date; type: string };
+    }
+  ];
+  title: string | string[] | undefined;
 };
 
 export default function CardPage({ data, title }: Props) {

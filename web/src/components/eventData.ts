@@ -23,13 +23,16 @@ export default function getEventData(address: string) {
     val += address[i].charCodeAt(0);
   }
 
-  const type = ["Concert", "Theatre", "Family", "Sports"];
+  const type = ["Concert", "Theatre", "Family", "Sports", "Comedy"];
   const country = ["Argentina", "Colombia", "México", "Brasil", "Perú"];
   const direccion = ["Calle", "Avenida", "Carrera", "Transversal", "Diagonal"];
 
-  const name = `name${val}`;
-  const symbol = "XXX";
-  const place = `place${val}`;
+  const name = `Event ${val}`;
+  const symbol =
+    String.fromCharCode((val % 25) + 65) +
+    String.fromCharCode((val % 15) + 65) +
+    String.fromCharCode((val % 15) + 70);
+  const place = `place ${val / 9999}`;
   const price = val / 500;
   const numberOfTickets = Math.round(val / 3);
   const metadata = {
@@ -37,7 +40,7 @@ export default function getEventData(address: string) {
     name: "metaName",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    type: type[val % 4],
+    type: type[val % 5],
     date: new Date(new Date().setDate(new Date().getDate() + (val % 60))),
     country: country[val % 5],
     location: `Random Location ${val}`,

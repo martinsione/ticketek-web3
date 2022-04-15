@@ -1,25 +1,10 @@
 import React from "react";
-import { useRouter } from "next/router";
-import { Flex, Select } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
-import CitiesDropDown from "./citiesDropDown";
-import DatesDropDown from "./DatesDropDown";
-import CategoriesDropDown from "./CategoriesDropDown";
-
-export default function filterBar() {
-  const router = useRouter();
-
-  const handleCategories = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    //
-  };
-  // const handleDates = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  // };
-  // const handleCities = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   e.preventDefault();
-  //   router.push(`/cities/${e.target.value}`);
-  // };
+interface CHILDREN {
+  children: React.ReactNode;
+}
+export default function FilterBar({ children }: CHILDREN) {
   return (
     <div>
       <Flex
@@ -27,27 +12,9 @@ export default function filterBar() {
         bg="gray.200"
         direction="row"
         h={50}
-        justifyContent="space-evenly"
+        justifyContent="end"
       >
-        <CategoriesDropDown fn={handleCategories} />
-        <DatesDropDown
-          fn={(e: React.ChangeEvent<HTMLInputElement>) =>
-            e.target.value !== "choose"
-              ? router.push({
-                  pathname: "/search/byDate",
-                  query: { opt: e.target.value },
-                })
-              : router.push({
-                  pathname: "/search/byDate",
-                  query: { opt: "choose", date: e.target.value },
-                })
-          }
-        />
-        <CitiesDropDown
-          fn={(e: React.ChangeEvent<HTMLInputElement>) =>
-            router.push(`/cities/${e.target.value}`)
-          }
-        />
+        {children}
       </Flex>
     </div>
   );

@@ -74,7 +74,6 @@ export default function CardSlider({ data, title, fn }: PROPS) {
     (str) => `${str}${columnWidth}px `,
     ""
   );
-  // grid-template-columns: 400px 400px 400px 400px
 
   return (
     <Box bg="pink" p="4">

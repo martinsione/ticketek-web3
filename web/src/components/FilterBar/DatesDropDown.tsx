@@ -8,7 +8,9 @@ import React, {
 import { Select, Input } from "@chakra-ui/react";
 
 interface FUNC {
-  fn: (e: ChangeEvent<HTMLSelectElement>) => void;
+  fn: (
+    e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 export default function CategoriesDropDown({ fn }: FUNC) {
@@ -26,7 +28,7 @@ export default function CategoriesDropDown({ fn }: FUNC) {
     }
   };
 
-  const handleChooseDate: ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const handleChooseDate: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     fn(e);
   };

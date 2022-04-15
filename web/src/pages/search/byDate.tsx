@@ -1,31 +1,88 @@
 import type { AppState } from "../../redux/store";
 
 import { useSelector, useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { Box } from "@chakra-ui/react";
 
-import { getEvents } from "../../redux/actions";
-import eventData from "../../components/eventData";
+import { filterEvents, getContracts } from "../../redux/actions";
+import dateFilter from "../../components/Functional Components/dateFilter";
+import FilterBar from "../../components/FilterBar/FilterBar";
+import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
+import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import CardPage from "../../components/CardPage/CardPage";
 
-type Props = {};
+// type Props = {};
 
-export default function byDate({}: Props) {
+export default function byDate() {
   const { query } = useRouter(); //  query.opt
   const dispatch = useDispatch();
 
-  const events = useSelector((state: AppState) => state.events);
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterCity, setFilterCity] = useState("all");
+
+  const filteredEvents = useSelector((state: AppState) => state.filterEvents);
+
   useEffect(() => {
-    dispatch(getEvents());
+    dispatch(getContracts());
   }, []);
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  const allEvents = dateFilter(
+    useSelector((state: AppState) => state.contracts),
+    query.opt
+  );
 
-  let displayTitle: string = "";
-  const filteredEvents = events.filter((ev: any) => {
-    const { metadata } = eventData(ev.address);
-    const { date }: Date = metadata;
+  useEffect(() => {
+    dispatch(
+      filterEvents(allEvents, {
+        date: "all",
+        city: filterCity,
+        category: filterCategory,
+      })
+    );
+  }, [filterCategory, filterCity]);
 
-    let filter: boolean;
-    switch (query.opt) {
+  function handleCategories(
+    e:
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) {
+    setFilterCategory(e.target.value);
+  }
+
+  function handleCities(e: React.ChangeEvent<HTMLInputElement>) {
+    setFilterCity(e.target.value);
+  }
+
+  const displayTitle: any = query.opt;
+
+  return (
+    <>
+      <FilterBar>
+        {/* eslint-disable-next-line react/jsx-no-bind */}
+        <CategoriesDropDown fn={handleCategories} />
+        {/* eslint-disable-next-line react/jsx-no-bind */}
+        <CitiesDropDown fn={handleCities} />
+      </FilterBar>
+
+      {filteredEvents.length ? (
+        <CardPage data={filteredEvents} title={displayTitle} />
+      ) : (
+        <Box textAlign="center">
+          There are no{" "}
+          {filterCategory !== "all" && filterCategory.toLowerCase()} events{" "}
+          {filterCity !== "all" && `for ${filterCity}`} on these dates
+        </Box>
+      )}
+    </>
+  );
+}
+
+export function dateFilterXXX(events: [], option: any) {
+  return events.filter((ev: any) => {
+    const { date } = ev.metadata;
+    let filter: boolean; // switch asigna filter, que se retorna a la salida
+    switch (option) {
       case "all": {
         filter = true;
         break;
@@ -35,13 +92,11 @@ export default function byDate({}: Props) {
           new Date().setDate(new Date().getDate() + 3)
         );
         filter = date > new Date() && date < coupleOfDays;
-        displayTitle = "In a couple of days...";
         break;
       }
       case "week": {
         const week = new Date(new Date().setDate(new Date().getDate() + 8));
         filter = date > new Date() && date < week;
-        displayTitle = "Within a week...";
         break;
       }
       case "weekend": {
@@ -60,7 +115,6 @@ export default function byDate({}: Props) {
           (date.toDateString() === fridayDate.toDateString() ||
             date.toDateString() === saturdayDate.toDateString() ||
             date.toDateString() === sundayDate.toDateString());
-        displayTitle = "This weekend...";
         break;
       }
       case "month": {
@@ -68,31 +122,14 @@ export default function byDate({}: Props) {
           new Date().setMonth(new Date().getMonth() + 1)
         );
         filter = date > new Date() && date < oneMonth;
-        displayTitle = "This month...";
         break;
       }
       default: {
-        const chosenDate = new Date(`${query.opt}Z`); // Raro, toma el dia anterior !!!
+        const chosenDate = new Date(`${option}Z`); // Raro, toma el dia anterior !!!
+        chosenDate.setDate(chosenDate.getDate() + 1); //  Acá la corrijo
         filter = date.toDateString() === chosenDate.toDateString();
-        displayTitle = chosenDate.toDateString();
       }
     }
-
     return filter;
   });
-  const eventsWithContractData = filteredEvents.map((ev: any) => ({
-    ...ev,
-    contract: eventData(ev.address),
-  }));
-
-  return (
-    <>
-      {/* <CategoriesDropDown />
-      <DatesDropDown /> */}
-
-      {eventsWithContractData && (
-        <CardPage data={eventsWithContractData} title={displayTitle} />
-      )}
-    </>
-  );
 }
