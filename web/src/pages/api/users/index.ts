@@ -63,5 +63,6 @@ export default async function handler(
   } catch (error) {
     return res.status(400).json({ error });
   }
-  return res.status(200).json({ message: "okey" });
+  const response = await prisma.user.findMany();
+  return res.status(200).json({ message: response });
 }
