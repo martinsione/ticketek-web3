@@ -1,12 +1,13 @@
-import axios from "axios";
 import Web3 from "web3";
+import axios from "axios";
+
 import injected from "../components/Wallet/connector";
 
 export default async function checkConnection(
-  force = false,
   activate: any,
-  callback: () => Promise<void> | undefined,
-  callbackSuccess?: () => Promise<void> | undefined
+  callback: any,
+  callbackSuccess?: () => Promise<void> | undefined,
+  force = false
 ) {
   let web3: any;
   if (window.ethereum) {
@@ -16,7 +17,7 @@ export default async function checkConnection(
   }
   web3.eth.getAccounts().then(async (addr: string) => {
     if (addr.length) {
-      const atr = await axios
+      await axios
         .post(
           "/api/auth/login",
           { walletID: addr[0], force },

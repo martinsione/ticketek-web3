@@ -1,7 +1,7 @@
-import { serialize } from "cookie";
-import { sign, verify } from "jsonwebtoken";
-
 import type { NextApiRequest, NextApiResponse } from "next";
+
+import { sign, verify } from "jsonwebtoken";
+import { serialize } from "cookie";
 
 export default async function handler(
   req: NextApiRequest,
@@ -37,7 +37,7 @@ export default async function handler(
       }
       res.status(200).json({ message: "success" });
     } else if ((loginJWT && force) || (loginJWT && !force)) {
-      verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+      verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
         if (error) {
           const token = sign(
             {
@@ -59,11 +59,11 @@ export default async function handler(
 
           try {
             return res.setHeader("set-cookie", serialised);
-          } catch (error) {
+          } catch (err) {
             return res.status(500);
           }
         }
-        res.status(200).json({ message: "success" });
+        return res.status(200).json({ message: "success" });
       });
     } else {
       res.status(200).json({ message: "something went wrong" });

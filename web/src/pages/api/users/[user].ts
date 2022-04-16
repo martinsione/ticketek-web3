@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import Auth from "../../../lib/auth";
 
 import prisma from "../../../lib/prisma";
+import Auth from "../../../lib/auth";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,9 +16,7 @@ export default async function handler(
   if (req.method === "DELETE") {
     Auth(
       JWT,
-      async () => {
-        return res.status(403).json({ message: "Forbidden" });
-      },
+      async () => res.status(403).json({ message: "Forbidden" }),
       async () => {
         const response = await prisma.user.delete({
           where: { walletAddress: user },
@@ -32,12 +30,8 @@ export default async function handler(
   if (req.method === "PUT") {
     let { name, image } = req.body;
     Auth(
-      //Auth es una funcion auxiliar que toma 3 parmetros, el JWT a verificar, un callback por si da error, un callback por si da success
-      JWT, // primer parametro el JWT
-      async () => {
-        // segundo parametro la callback por si da error y no se verifica
-        return res.status(403).json({ message: "Forbidden" });
-      },
+      JWT,
+      async () => res.status(403).json({ message: "Forbidden" }),
       async () => {
         // tercer paramtro el callback por si se verifica correctamente
         const userToUpdate = await prisma.user.findUnique({
@@ -45,8 +39,8 @@ export default async function handler(
             walletAddress: user,
           },
         });
-        //   Los campos que no fueron enviados se asignan con los que ya tenía
-        // el usuario, para no dejarlos vacíos al actualizar
+        /* Los campos que no fueron enviados se asignan con los que ya tenía
+        el usuario, para no dejarlos vacíos al actualizar */
         name = name || userToUpdate?.name;
         image = image || userToUpdate?.image;
 

@@ -2,7 +2,9 @@
 import { IoWalletOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import NextLink from "next/link";
+import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
   Button,
@@ -15,11 +17,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import checkConnection from "../../lib/walletConectionChecker";
 
 import injected from "../Wallet/connector";
-import axios from "axios";
-import { useRouter } from "next/router";
+import checkConnection from "../../lib/walletConectionChecker";
 
 declare global {
   interface Window {
@@ -105,7 +105,7 @@ export default function LogIn() {
           });
           router.reload();
         })
-        .catch((err) =>
+        .catch(() =>
           toast({
             title: "Oops, something went wrong",
             status: "error",
@@ -133,9 +133,9 @@ export default function LogIn() {
           px="5"
           py="2"
           transition=".1s ease-in-out"
-          onClick={handleConnect}
-          isLoading={loadingButton}
           loadingText="Detecting wallet"
+          isLoading={loadingButton}
+          onClick={handleConnect}
         >
           Detecting wallet
         </Button>

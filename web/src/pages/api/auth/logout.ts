@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import { serialize } from "cookie";
-// import { sign, verify } from "jsonwebtoken";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { cookies } = req;
-  const { walletID } = req.body;
+  // const { walletID } = req.body;
   const loginJWT = cookies.NFTicketLoginJWT;
 
   if (!loginJWT) return res.json({ message: "you are already logged out" });
@@ -17,5 +17,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   });
 
   res.setHeader("Set-Cookie", serialised);
-  res.status(200).json({ message: "success" });
+  return res.status(200).json({ message: "success" });
 }

@@ -1,6 +1,10 @@
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import NextLink from "next/link";
+import { verify } from "jsonwebtoken";
+import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
   Avatar,
@@ -26,9 +30,8 @@ import {
   Flex,
   IconButton,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
+import checkConnection from "../../lib/walletConectionChecker";
 
 const estilos = {
   fontSize: "50px",
@@ -51,11 +54,6 @@ function user() {
     );
     setState(data);
   }
-  useEffect(() => {
-    logOut();
-    fetchData();
-  }, [account]);
-  if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
   async function logOut() {
     checkConnection(false, activate, async () => {
@@ -63,6 +61,12 @@ function user() {
       router.push("/nouser");
     });
   }
+
+  useEffect(() => {
+    logOut();
+    fetchData();
+  }, [account]);
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
   return (
     <>
@@ -199,16 +203,13 @@ function user() {
 
 export default user;
 
-import { verify } from "jsonwebtoken";
-import checkConnection from "../../lib/walletConectionChecker";
-
 export async function getServerSideProps(context: {
   req: { cookies: { NFTicketLoginJWT: string } };
 }) {
   const { cookies } = context.req;
   const loginJWT = cookies?.NFTicketLoginJWT;
 
-  return verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+  return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
     if (error) {
       return {
         redirect: {

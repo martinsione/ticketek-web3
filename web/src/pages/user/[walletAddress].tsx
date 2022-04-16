@@ -1,5 +1,7 @@
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
-import { useWeb3React } from "@web3-react/core";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import axios from "axios";
 import {
   Avatar,
   Tab,
@@ -22,9 +24,6 @@ import {
   Link,
   Icon,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 interface DATA {
   data: {
@@ -38,13 +37,9 @@ function UserID({ data }: DATA) {
   const router = useRouter();
 
   function redirect() {
-    timeOutAtr = setTimeout(() => {
-      router.push("/home");
-    }, 3000);
+    timeOutAtr = setTimeout(() => router.push("/home"), 3000);
   }
-  useEffect(() => {
-    return () => clearTimeout(timeOutAtr);
-  }, []);
+  useEffect(() => () => clearTimeout(timeOutAtr), []);
 
   if (!data) {
     redirect();

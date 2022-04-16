@@ -1,10 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import prisma from "../../../lib/prisma";
+import Auth from "../../../lib/auth";
 
 const WAValidator = require("wallet-address-validator");
-
-import Auth from "../../../lib/auth";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,12 +15,9 @@ export default async function handler(
       const { name, email, walletAddress } = req.body;
       const { cookies } = req;
       const JWT = cookies.NFTicketLoginJWT;
-      //se verifica que el token corresponda al user que esta queriendo cambiar cosas
       Auth(
         JWT,
-        async () => {
-          return res.status(403).json({ error: "unauthorized" });
-        },
+        async () => res.status(403).json({ error: "unauthorized" }),
         async () => {
           const valid = WAValidator.validate(walletAddress, "ETH");
           if (valid) {
@@ -36,7 +32,9 @@ export default async function handler(
                   },
                 })
                 .then(() => {
-                  res.status(200).json({ message: "email changed" });
+                  res
+                    .status(200)
+                    .json({ message: "email changed", data: response });
                 })
                 .catch(() => {
                   res.status(400).json({ message: "not a valid email" });
@@ -46,6 +44,7 @@ export default async function handler(
         }
       );
     }
+
     // if (req.method === "DELETE") {         <----  comentado hasta saber que hacer
     //   const { cookies } = req;
     //   const JWT = cookies.NFTicketLoginJWT;
@@ -64,4 +63,5 @@ export default async function handler(
   } catch (error) {
     return res.status(400).json({ error });
   }
+  return res.status(200).json({ message: "okey" });
 }

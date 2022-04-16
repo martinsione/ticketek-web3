@@ -1,8 +1,12 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { verify } from "jsonwebtoken";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Input, Stack } from "@chakra-ui/react";
+
+import checkConnection from "../../lib/walletConectionChecker";
 
 const estilos = {
   fontSize: "50px",
@@ -17,11 +21,6 @@ export default function UserData() {
   const router = useRouter();
   const { register, handleSubmit } = useForm();
 
-  useEffect(() => {
-    logOut();
-  }, [account]);
-  if (!account) return <div style={estilos}>Detecting wallet...</div>;
-
   async function logOut() {
     checkConnection(false, activate, async () => {
       await axios.post("/api/auth/logout", {}, { withCredentials: true });
@@ -29,26 +28,27 @@ export default function UserData() {
     });
   }
 
-  const onSubmit: (data: {}) => Promise<
-    boolean | undefined
-  > = async (data: {}) => {
+  useEffect(() => {
+    logOut();
+  }, [account]);
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
+
+  const onSubmit: (data: {}) => Promise<void> = async (data: {}) => {
     try {
       const atr = await axios.post(
         "/api/users",
         { ...data, walletAddress: account },
         { withCredentials: true }
       );
-      if (atr.status === 200) return router.push("/user/dataUserSuccess");
-      else if (atr.status === 403) return router.push("user/forbidden");
-      else if (atr.status === 500) return router.push("user/error");
-      return router.push("/user/dataUserSuccess");
+      if (atr.status === 200) router.push("/user/dataUserSuccess");
+      else if (atr.status === 403) router.push("user/forbidden");
+      else if (atr.status === 500) router.push("user/error");
+      return;
     } catch (error: any) {
-      if (error.response.request.status === 403) {
-        return router.push("/user/forbidden");
-      }
+      if (error.response.request.status === 403) router.push("/user/forbidden");
+
       router.push("/user/error");
     }
-    return router.push("/home");
   };
 
   return (
@@ -68,17 +68,13 @@ export default function UserData() {
   );
 }
 
-import { verify } from "jsonwebtoken";
-import { useEffect } from "react";
-import checkConnection from "../../lib/walletConectionChecker";
-
 export async function getServerSideProps(context: {
   req: { cookies: { NFTicketLoginJWT: string } };
 }) {
   const { cookies } = context.req;
   const loginJWT = cookies?.NFTicketLoginJWT;
 
-  return verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+  return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
     if (error) {
       return {
         redirect: {
