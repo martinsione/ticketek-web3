@@ -100,6 +100,10 @@ constructor(
     }
 
     function getPrice() public view returns (uint256) {
-        return price * 1000000000;
+        return price;
+    }
+
+    function getUri() public view returns(string memory){
+        return uri ;
     }
 }

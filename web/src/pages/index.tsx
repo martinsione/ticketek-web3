@@ -1,17 +1,29 @@
 import Link from "next/link";
-import ImageNext from "next/image";
 import axios from "axios";
-import { Box, Button, Image, Stack, Text } from "@chakra-ui/react";
+import { Button, Image, Stack, Text } from "@chakra-ui/react";
 
 export default function Home() {
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return (
-    <Stack alignItems="center" bg="#011F26" direction="row" display="flex" h="83vh" justifyContent="space-between" maxW="1276px" mx="auto">
+    <Stack
+      alignItems="center"
+      bg="#011F26"
+      direction="row"
+      display="flex"
+      h="83vh"
+      justifyContent="space-between"
+      maxW="1276px"
+      mx="auto"
+    >
       <Stack spacing="2rem">
         <Stack color="white" spacing="0">
-          <Text fontSize="58px" fontWeight="bold">More than just tickets.</Text>
-          <Text fontSize="28px">Purchase your NFT ticket today, hold it forever</Text>
+          <Text fontSize="58px" fontWeight="bold">
+            More than just tickets.
+          </Text>
+          <Text fontSize="28px">
+            Purchase your NFT ticket today, hold it forever
+          </Text>
         </Stack>
         <Stack direction="row" spacing="2rem">
           <Link passHref href="/home">
@@ -51,7 +63,14 @@ export default function Home() {
         </Stack>
       </Stack>
       <Stack align="center" justify="center">
-        <Stack bg="#03A688" borderRadius="full" h="560px" position="relative" style={{ filter: "blur(500px)" }} w="560px" />
+        <Stack
+          bg="#03A688"
+          borderRadius="full"
+          h="560px"
+          position="relative"
+          style={{ filter: "blur(500px)" }}
+          w="560px"
+        />
         <Image position="absolute" src="/images/cards-landing.png" />
       </Stack>
     </Stack>

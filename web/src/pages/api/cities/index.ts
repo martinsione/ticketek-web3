@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const justCities = (await prisma.contract.findMany()).map(
-    (e: { city: string }) => e.city
+    (e) => e.name
   );
   const cities = new Set(justCities);
 
