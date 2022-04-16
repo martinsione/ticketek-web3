@@ -4,10 +4,11 @@ import axios from "axios";
 import injected from "../components/Wallet/connector";
 
 export default async function checkConnection(
+  // eslint-disable-next-line @typescript-eslint/default-param-last
+  force = false,
   activate: any,
   callback: any,
-  callbackSuccess?: () => Promise<void> | undefined,
-  force = false
+  callbackSuccess?: () => Promise<void> | undefined
 ) {
   let web3: any;
   if (window.ethereum) {
