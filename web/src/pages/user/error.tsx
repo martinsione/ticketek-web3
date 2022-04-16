@@ -1,6 +1,14 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
 export default function dataUserSuccess() {
   const router = useRouter();
   let timeOutAtr: ReturnType<typeof setTimeout>;
@@ -15,10 +23,8 @@ export default function dataUserSuccess() {
   }, []);
   return (
     <>
-      <div style={{ fontSize: "50px" }}>
-        Something went wrong, data could not be changed
-      </div>
-      ;<div style={{ fontSize: "50px" }}>You will be redirected now</div>
+      <div style={estilos}>Something went wrong, data could not be changed</div>
+      ;<div style={estilos}>You will be redirected now</div>
     </>
   );
 }
