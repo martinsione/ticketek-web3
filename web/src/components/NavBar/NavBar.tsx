@@ -27,17 +27,16 @@ export default function NavBar() {
         <NextLink href="/">
           <a>
             <Stack
-              alignItems="start"
               color="white"
               direction="row"
               fontSize="36px"
               spacing={0}
             >
-              <Text fontWeight="extrabold" lineHeight={0}>
+              <Text fontSize="36px" fontWeight="extrabold" lineHeight={0}>
                 NFT
               </Text>
-              <Text fontWeight="thin" lineHeight={0}>
-                icket
+              <Text fontSize="30px" fontWeight="thin" lineHeight={0}>
+                ICKET
               </Text>
             </Stack>
           </a>

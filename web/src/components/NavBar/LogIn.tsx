@@ -135,18 +135,18 @@ export default function LogIn() {
         </Popover>
       ) : (
         <Button
-          _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
           _hover={{
-            bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
-            opacity: "0.85",
+            bgGradient: "linear(to-r, #66C796 0%, #505CC4 100%)",
+            boxShadow: "0px 0px 4px rgba(255, 255, 255, 0.25)"
           }}
           bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
           borderRadius="full"
           color="white"
+          fontWeight="medium"
           leftIcon={<IoWalletOutline />}
           px="5"
           py="2"
-          transition=".1s ease-in-out"
+          transition=".25s ease-in-out"
           onClick={handleConnect}
         >
           <Text whiteSpace="nowrap">Connect Wallet</Text>

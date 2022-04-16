@@ -1,10 +1,10 @@
 // import Web3 from "web3";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
-  Stack,
   // Image,
   Button,
   Input,
+  Box,
   // FormControl,
   // FormLabel,
   // NumberInput,
@@ -78,47 +78,62 @@ export default function Form() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack
-        border="1px"
-        borderColor="blackAlpha.300"
-        borderRadius="md"
-        maxW="container.sm"
-        minW="container.sm"
-        my="16px"
-        px="16px"
-        py="12px"
-        spacing="12px"
+    <Box
+      alignItems="center"
+      as="form"
+      backgroundColor="white"
+      borderRadius="36px"
+      display="flex"
+      flexDirection="column"
+      gap="0.5rem"
+      justifyContent="center"
+      maxW="container.sm"
+      minW="container.sm"
+      my="16px"
+      px="35px"
+      py="30px"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <Input {...register("name")} borderRadius="full" placeholder="Name" />
+      <Input {...register("symbol")} borderRadius="full" placeholder="Symbol" />
+      <Input {...register("description")} borderRadius="full" placeholder="Description" />
+      <Input {...register("city")} borderRadius="full" placeholder="City" />
+      <Input {...register("date")} borderRadius="full" placeholder="Date" type="date" />
+      <Input {...register("country")} borderRadius="full" placeholder="Country" />
+      <Input {...register("location")} borderRadius="full" placeholder="Location" />
+      <Input {...register("type")} borderRadius="full" placeholder="Type" />
+      <Input {...register("price")} borderRadius="full" placeholder="Price" />
+      <Input
+        {...register("numberOfTickets")}
+        borderRadius="full"
+        placeholder="Number of tickets"
+        type="number"
+      />
+      <Input
+        borderRadius="full"
+        {...register("image")}
+        accept=".png,.jpg,.jpeg"
+        placeholder="Image"
+        py="1"
+        type="file"
+      />
+      <Button
+        _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+        _hover={{
+          bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+          opacity: "0.85",
+        }}
+        alignSelf="end"
+        bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+        borderRadius="full"
+        colorScheme="teal"
+        isLoading={isSubmitting}
+        mt="0.75rem"
+        type="submit"
+        width="100px"
       >
-        <Input {...register("name")} placeholder="Name" />
-        <Input {...register("symbol")} placeholder="Symbol" />
-        <Input {...register("description")} placeholder="Description" />
-        <Input {...register("city")} placeholder="City" />
-        <Input {...register("date")} placeholder="Date" type="date" />
-        <Input {...register("country")} placeholder="Country" />
-        <Input {...register("location")} placeholder="Location" />
-        <Input {...register("type")} placeholder="Type" />
-        <Input {...register("price")} placeholder="Price" />
-        <Input
-          {...register("numberOfTickets")}
-          placeholder="Number of tickets"
-          type="number"
-        />
-        <Input
-          {...register("image")}
-          accept=".png,.jpg,.jpeg"
-          placeholder="Image"
-          type="file"
-        />
-        <Button
-          colorScheme="teal"
-          isLoading={isSubmitting}
-          mt={4}
-          type="submit"
-        >
-          Submit
-        </Button>
-      </Stack>
-    </form>
+        Submit
+      </Button>
+    </Box>
   );
 }
