@@ -3,6 +3,7 @@ import { IoWalletOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
+// import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
   Button,
@@ -17,6 +18,32 @@ import {
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
+// import { Wallet } from "../../pages/user";
+
+
+// // API_KEY para el fetch
+// const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9"
+
+// // Fetch user activity
+// const getUserActivity = async (wallet: Wallet)=>{
+
+//   const res = await axios(
+//     `https://api-ropsten.etherscan.io/api
+//     ?module=account
+//     &action=txlist
+//     &address=${wallet}
+//     &startblock=0
+//     &endblock=99999999
+//     &page=1
+//     &offset=10
+//     &sort=asc
+//     &apikey=${API_KEY}`)
+  
+
+//   return res.data
+
+// }
+
 
 export default function LogIn() {
   const toast = useToast();
@@ -95,16 +122,6 @@ export default function LogIn() {
           <Portal>
             <PopoverContent>
               <PopoverBody>
-                <Button
-                  bg="none"
-                  fontSize="1.2rem"
-                  isLoading={loading}
-                  margin="5px"
-                  width="100%"
-                  onClick={handleConnect}
-                >
-                  Log out
-                </Button>
                 {account && (
                   <NextLink passHref href="/user">
                     <Button
@@ -117,18 +134,16 @@ export default function LogIn() {
                     </Button>
                   </NextLink>
                 )}
-                {account && (
-                  <NextLink passHref href="/user/userData">
-                    <Button
-                      bg="none"
-                      fontSize="1.2rem"
-                      margin="5px"
-                      width="100%"
-                    >
-                      Settings
-                    </Button>
-                  </NextLink>
-                )}
+                <Button
+                  bg="none"
+                  fontSize="1.2rem"
+                  isLoading={loading}
+                  margin="5px"
+                  width="100%"
+                  onClick={handleConnect}
+                >
+                  Log out
+                </Button>
               </PopoverBody>
             </PopoverContent>
           </Portal>
