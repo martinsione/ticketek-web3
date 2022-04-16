@@ -1,3 +1,3 @@
 interface Window {
-  ethereum: Provider;
+  ethereum: {} | Provider;
 }

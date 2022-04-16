@@ -1,11 +1,7 @@
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
-import { FiEdit3 } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
-import { verify } from "jsonwebtoken";
 import axios from "axios";
-import { useWeb3React } from "@web3-react/core";
 import {
   Avatar,
   Tab,
@@ -27,47 +23,28 @@ import {
   Tag,
   Link,
   Icon,
-  Flex,
-  IconButton,
 } from "@chakra-ui/react";
 
-import checkConnection from "../../lib/walletConectionChecker";
+interface DATA {
+  data: {
+    name: string;
+    walletAddress: string;
+  };
+}
 
-const estilos = {
-  fontSize: "50px",
-  color: "white",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-};
-
-function user() {
-  const [state, setState] = useState({ name: "" });
+function UserID({ data }: DATA) {
+  let timeOutAtr: ReturnType<typeof setTimeout>;
   const router = useRouter();
-  const { account, activate } = useWeb3React();
 
-  async function fetchData() {
-    const { data } = await axios.post(
-      `/api/users/${account}`,
-      { walletID: account },
-      { withCredentials: true }
-    );
-    setState(data);
+  function redirect() {
+    timeOutAtr = setTimeout(() => router.push("/home"), 3000);
   }
+  useEffect(() => () => clearTimeout(timeOutAtr), []);
 
-  async function logOut() {
-    checkConnection(false, activate, async () => {
-      await axios.post("/api/auth/logout", {}, { withCredentials: true });
-      router.push("/nouser");
-    });
+  if (!data) {
+    redirect();
+    return <div style={{ fontSize: "60px" }}>404 Wallet Address not found</div>;
   }
-
-  useEffect(() => {
-    logOut();
-    fetchData();
-  }, [account]);
-  if (!account) return <div style={estilos}>Detecting wallet...</div>;
-
   return (
     <>
       <VStack bgColor="#B2C1B5" height="40vh" />
@@ -77,20 +54,14 @@ function user() {
             boxSize="8rem"
             cursor="pointer"
             src={
-              account
-                ? "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
-                : ""
+              "hola"
+              //   account
+              //     ? "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
+              //     : ""
             }
           />
-          <Flex align="center" justify="center" textAlign="center">
-            <Text fontSize="2rem" marginRight="10px">
-              {state.name || "Unnamed"}
-            </Text>
-            <NextLink passHref href={`/settingsUser/${account}`}>
-              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
-            </NextLink>
-          </Flex>
-          <Tag padding="3">{account || "address..."} </Tag>
+          <Text fontSize="2rem">{data.name}</Text>
+          <Tag padding="3">{data.walletAddress}</Tag>
         </Box>
       </VStack>
       <HStack width="100vw">
@@ -201,26 +172,20 @@ function user() {
   );
 }
 
-export default user;
+export default UserID;
 
-export async function getServerSideProps(context: {
-  req: { cookies: { NFTicketLoginJWT: string } };
-}) {
-  const { cookies } = context.req;
-  const loginJWT = cookies?.NFTicketLoginJWT;
+interface CONTEXT {
+  query: {
+    walletAddress: string;
+  };
+}
 
-  return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
-    if (error) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/nouser",
-        },
-        props: {},
-      };
-    }
-    return {
-      props: {},
-    };
-  });
+export async function getServerSideProps(context: CONTEXT) {
+  const { query } = context;
+  const { data } = await axios(`/api/users/${query.walletAddress}`);
+  return {
+    props: {
+      data,
+    },
+  };
 }
