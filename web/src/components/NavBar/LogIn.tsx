@@ -44,7 +44,9 @@ export default function LogIn() {
       false,
       activate,
       () => setLoadingButton(false),
-      () => (timer = setTimeout(() => setLoadingButton(false), 1500))
+      () => {
+        timer = setTimeout(() => setLoadingButton(false), 1500);
+      }
     );
     return () => {
       if (timer) clearTimeout(timer);
@@ -119,106 +121,109 @@ export default function LogIn() {
 
   return (
     <Stack>
-      {loadingButton ? (
-        <Button
-          _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
-          _hover={{
-            bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
-            opacity: "0.85",
-          }}
-          bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
-          borderRadius="full"
-          color="white"
-          leftIcon={<IoWalletOutline />}
-          px="5"
-          py="2"
-          transition=".1s ease-in-out"
-          loadingText="Detecting wallet"
-          isLoading={loadingButton}
-          onClick={handleConnect}
-        >
-          Detecting wallet
-        </Button>
-      ) : account ? (
-        <Popover>
-          <PopoverTrigger>
-            <Button
-              _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
-              _hover={{
-                bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
-                opacity: "0.85",
-              }}
-              bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
-              borderRadius="full"
-              color="white"
-              leftIcon={<FaRegUserCircle />}
-              px="5"
-              py="2"
-              transition=".1s ease-in-out"
-            >
-              <Text whiteSpace="nowrap">My Account</Text>
-            </Button>
-          </PopoverTrigger>
-          <Portal>
-            <PopoverContent>
-              <PopoverBody>
-                <Button
-                  bg="none"
-                  fontSize="1.2rem"
-                  isLoading={loading}
-                  margin="5px"
-                  width="100%"
-                  onClick={handleConnect}
-                >
-                  Log out
-                </Button>
-                {account && (
-                  <NextLink passHref href="/user">
-                    <Button
-                      bg="none"
-                      fontSize="1.2rem"
-                      margin="5px"
-                      width="100%"
-                    >
-                      My profile
-                    </Button>
-                  </NextLink>
-                )}
-                {account && (
-                  <NextLink passHref href="/user/userData">
-                    <Button
-                      bg="none"
-                      fontSize="1.2rem"
-                      margin="5px"
-                      width="100%"
-                    >
-                      Settings
-                    </Button>
-                  </NextLink>
-                )}
-              </PopoverBody>
-            </PopoverContent>
-          </Portal>
-        </Popover>
-      ) : (
-        <Button
-          _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
-          _hover={{
-            bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
-            opacity: "0.85",
-          }}
-          bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
-          borderRadius="full"
-          color="white"
-          leftIcon={<IoWalletOutline />}
-          px="5"
-          py="2"
-          transition=".1s ease-in-out"
-          onClick={handleConnect}
-        >
-          <Text whiteSpace="nowrap">Connect Wallet</Text>
-        </Button>
-      )}
+      {
+        // eslint-disable-next-line no-nested-ternary
+        loadingButton ? (
+          <Button
+            _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+            _hover={{
+              bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+              opacity: "0.85",
+            }}
+            bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+            borderRadius="full"
+            color="white"
+            isLoading={loadingButton}
+            leftIcon={<IoWalletOutline />}
+            loadingText="Detecting wallet"
+            px="5"
+            py="2"
+            transition=".1s ease-in-out"
+            onClick={handleConnect}
+          >
+            Detecting wallet
+          </Button>
+        ) : account ? (
+          <Popover>
+            <PopoverTrigger>
+              <Button
+                _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+                _hover={{
+                  bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+                  opacity: "0.85",
+                }}
+                bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+                borderRadius="full"
+                color="white"
+                leftIcon={<FaRegUserCircle />}
+                px="5"
+                py="2"
+                transition=".1s ease-in-out"
+              >
+                <Text whiteSpace="nowrap">My Account</Text>
+              </Button>
+            </PopoverTrigger>
+            <Portal>
+              <PopoverContent>
+                <PopoverBody>
+                  <Button
+                    bg="none"
+                    fontSize="1.2rem"
+                    isLoading={loading}
+                    margin="5px"
+                    width="100%"
+                    onClick={handleConnect}
+                  >
+                    Log out
+                  </Button>
+                  {account && (
+                    <NextLink passHref href="/user">
+                      <Button
+                        bg="none"
+                        fontSize="1.2rem"
+                        margin="5px"
+                        width="100%"
+                      >
+                        My profile
+                      </Button>
+                    </NextLink>
+                  )}
+                  {account && (
+                    <NextLink passHref href="/user/userData">
+                      <Button
+                        bg="none"
+                        fontSize="1.2rem"
+                        margin="5px"
+                        width="100%"
+                      >
+                        Settings
+                      </Button>
+                    </NextLink>
+                  )}
+                </PopoverBody>
+              </PopoverContent>
+            </Portal>
+          </Popover>
+        ) : (
+          <Button
+            _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+            _hover={{
+              bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+              opacity: "0.85",
+            }}
+            bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+            borderRadius="full"
+            color="white"
+            leftIcon={<IoWalletOutline />}
+            px="5"
+            py="2"
+            transition=".1s ease-in-out"
+            onClick={handleConnect}
+          >
+            <Text whiteSpace="nowrap">Connect Wallet</Text>
+          </Button>
+        )
+      }
     </Stack>
   );
 }

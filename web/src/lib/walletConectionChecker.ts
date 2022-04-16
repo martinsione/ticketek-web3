@@ -33,8 +33,6 @@ export default async function checkConnection(
         .then(() => {
           if (callbackSuccess) callbackSuccess();
         });
-    } else {
-      if (callback) callback();
-    }
+    } else if (callback) callback();
   });
 }
