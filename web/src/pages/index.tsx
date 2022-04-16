@@ -1,53 +1,78 @@
 import Link from "next/link";
 import axios from "axios";
-import { Container, Heading, Stack, Text, Button } from "@chakra-ui/react";
-
-import LandingNavBar from "../components/NavBar/LandingNavBar";
+import { Button, Image, Stack, Text } from "@chakra-ui/react";
 
 export default function Home() {
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
   return (
-    <>
-      <LandingNavBar />
-      <Container maxW="5xl">
-        <Stack
-          align="center"
-          py={{ base: 20, md: 28 }}
-          spacing={{ base: 8, md: 10 }}
-          textAlign="center"
-        >
-          <Heading
-            fontSize={{ base: "3xl", sm: "4xl", md: "6xl" }}
-            fontWeight={600}
-            lineHeight="110%"
-          >
-            A new era of buying{" "}
-            <Text as="span" color="green.300">
-              tickets
-            </Text>
-          </Heading>
-          <Text color="gray.500" maxW="3xl">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet fuga
-            laborum magnam ipsum consequuntur voluptate minima nisi aliquam
-            soluta et ratione, magni omnis! Ad minus consequatur necessitatibus
-            distinctio nihil eligendi!
+    <Stack
+      alignItems="center"
+      bg="#011F26"
+      direction="row"
+      display="flex"
+      h="83vh"
+      justifyContent="space-between"
+      maxW="1276px"
+      mx="auto"
+    >
+      <Stack spacing="2rem">
+        <Stack color="white" spacing="0">
+          <Text fontSize="58px" fontWeight="bold">
+            More than just tickets.
           </Text>
-          <Stack direction="row" spacing={6}>
-            <Link passHref href="/home">
-              <Button
-                _hover={{ bg: "pink.300" }}
-                bg="pink.400"
-                colorScheme="pink"
-                px={6}
-                rounded="full"
-              >
-                Get started
-              </Button>
-            </Link>
-          </Stack>
+          <Text fontSize="28px">
+            Purchase your NFT ticket today, hold it forever
+          </Text>
         </Stack>
-      </Container>
-    </>
+        <Stack direction="row" spacing="2rem">
+          <Link passHref href="/home">
+            <Button
+              _hover={{ bg: "transparent" }}
+              backgroundColor="transparent"
+              className="border-gradient"
+              color="white"
+              fontSize="20px"
+              fontWeight="semibold"
+              height="4rem"
+              px="3rem"
+              rounded="full"
+            >
+              Explore
+            </Button>
+          </Link>
+          <Link passHref href="/help">
+            <Button
+              _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+              _hover={{
+                bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+                opacity: "0.85",
+              }}
+              backgroundColor="transparent"
+              bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+              color="white"
+              fontSize="20px"
+              fontWeight="semibold"
+              height="4rem"
+              px="3rem"
+              rounded="full"
+            >
+              Quick Start
+            </Button>
+          </Link>
+        </Stack>
+      </Stack>
+      <Stack align="center" justify="center">
+        <Stack
+          bg="#03A688"
+          borderRadius="full"
+          h="560px"
+          position="relative"
+          style={{ filter: "blur(500px)" }}
+          w="560px"
+        />
+        <Image position="absolute" src="/images/cards-landing.png" />
+      </Stack>
+    </Stack>
   );
 }

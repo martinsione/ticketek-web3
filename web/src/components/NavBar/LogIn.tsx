@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { IoWalletOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
