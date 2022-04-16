@@ -34,7 +34,7 @@ interface ITransaccion {
   value: string
   to: string
   from: string
-  timeStam: string
+  timeStamp: string
   hash: string
 }
 
@@ -79,7 +79,7 @@ const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9"
 
 // Fetch user activity
 const getUserActivity =  (wallet?: Wallet)=>(
-  axios.get(`https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${wallet || "0xf9e7dc6ed769d4193e47f63729482d1ed98fba6d"}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${API_KEY}`)
+  axios.get(`https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${API_KEY}`)
   )
   
   
@@ -88,12 +88,13 @@ const getUserActivity =  (wallet?: Wallet)=>(
 
 function User({users_list}:Iprops) {
   const { account } = useWeb3React();
-  const [activity, setActivity] = useState([])
+  const [activity, setActivity] = useState<IActivity>([])
+  const ethValue = 1000000000000000000
 
   const userDB = checkDBuser(users_list, account) 
   useEffect(() => {
-    getUserActivity().then(res => 
-      setActivity(res.data.result)
+    getUserActivity(account).then(res =>{ 
+      setActivity(res.data.result)} 
     )
   }, [account])
   
@@ -151,9 +152,7 @@ function User({users_list}:Iprops) {
               </ul>
             </TabPanel>
             <TabPanel>
-            {!activity.length ? <h2>No activity yet in this account</h2> : 
-            
-
+            {!activity.length ? <Text>No activity yet in this account</Text> : 
               <TableContainer>
                 <Table>
                   <Thead>
@@ -166,79 +165,26 @@ function User({users_list}:Iprops) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {activity.map((transaccion: ITransaccion) => {
-                      const date = new Date(Number(transaccion.timeStam)*1000)
+                    {activity.length && activity.map((transaccion: ITransaccion) => {
+                      const date = new Date(Number(transaccion.timeStamp)*1000).toString().replace(/ \w+-\d+ \(.*\)$/,"")
+                      const value = Number(transaccion.value)/ethValue
+                      const valueFormat = String(value).slice(0,4)  
                       return (
                       <Tr>
-                      <Td>
-                        <Link color="teal">{transaccion.hash.slice(1,10)}...</Link>
-                        {/* <Td>{date}</Td> */}
-                        <Td>
-                          <Link color="teal">{transaccion.from.slice(1,10)}...</Link>
-                      </Td>
-                        <Td>
-                          <Link color="teal">{transaccion.to.slice(1,10)}...</Link>
-                      </Td>
-                      <Td>{transaccion.value}</Td>
-
-                      </Td>
-                      </Tr>)}
+                        <Td>  
+                          <Link color="teal">{transaccion.hash.slice(0,20)}...</Link>
+                         </Td>
+                          <Td>{date}</Td>
+                         <Td>
+                            <Link color="teal">{transaccion.from.slice(0,20)}...</Link>
+                        </Td>
+                          <Td>
+                            <Link color="teal">{transaccion.to.slice(0,20)}...</Link>
+                        </Td>
+                        <Td>{valueFormat} Eth</Td>
+                      </Tr>
+                      )}
                     )}
-                    {/* <Tr>
-                      <Td>
-                        <Link color="teal">0xdd8cd8316e8ee9b4353...</Link>
-                      </Td>
-                      <Td>8 days 11 hrs ago</Td>
-                      <Td>
-                        <Link color="teal">0xf9e7dc6ed769d4193e4...</Link>
-                      </Td>
-                      <Td>OpenSea: Wyvern Excha...</Td>
-                      <Td>0.0039 Ether</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Link color="teal">0xdd8cd8316e8ee9b4353...</Link>
-                      </Td>
-                      <Td>8 days 11 hrs ago</Td>
-                      <Td>
-                        <Link color="teal">0xf9e7dc6ed769d4193e4...</Link>
-                      </Td>
-                      <Td>0x26e78b5f903239b0eb5d26a2f95ac761fdd7f6e9</Td>
-                      <Td>0.045666 Ether</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Link color="teal">0xdd8cd8316e8ee9b4353...</Link>
-                      </Td>
-                      <Td>8 days 11 hrs ago</Td>
-                      <Td>
-                        <Link color="teal">0xf9e7dc6ed769d4193e4...</Link>
-                      </Td>
-                      <Td>OpenSea: Wyvern Excha...</Td>
-                      <Td>0.007799 Ether</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Link color="teal">0xdd8cd8316e8ee9b4353...</Link>
-                      </Td>
-                      <Td>14 days 1 hr ago</Td>
-                      <Td>
-                        <Link color="teal">0xf9e7dc6ed769d4193e4...</Link>
-                      </Td>
-                      <Td>Uniswap V3: Router 2</Td>
-                      <Td>0.00112 Ether</Td>
-                    </Tr>
-                    <Tr>
-                      <Td>
-                        <Link color="teal">0xdd8cd8316e8ee9b4353...</Link>
-                      </Td>
-                      <Td>8 days 11 hrs ago</Td>
-                      <Td>
-                        <Link color="teal">0xf9e7dc6ed769d4193e4...</Link>
-                      </Td>
-                      <Td>Proof of Humanity</Td>
-                      <Td>0.012 Ether</Td>
-                    </Tr> */}
                   </Tbody>
                 </Table> 
               </TableContainer>
