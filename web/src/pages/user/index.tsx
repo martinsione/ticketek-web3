@@ -30,20 +30,36 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+};
+
 function user() {
   const [state, setState] = useState({ name: "" });
   const router = useRouter();
-  const { account } = useWeb3React();
+  const { account, activate } = useWeb3React();
 
   async function fetchData() {
-    const { data } = await axios(`/api/users/${account}`);
+    const { data } = await axios.post(
+      `/api/users/${account}`,
+      { walletID: account },
+      { withCredentials: true }
+    );
     setState(data);
   }
   useEffect(() => {
-    if (!account) router.push("/nouser");
+    logOut();
     fetchData();
   }, [account]);
-  if (!account) return <div></div>;
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
+
+  async function logOut() {
+    checkConnection(false, activate, async () => {
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      router.push("/nouser");
+    });
+  }
 
   return (
     <>
@@ -179,3 +195,28 @@ function user() {
 }
 
 export default user;
+
+import { verify } from "jsonwebtoken";
+import checkConnection from "../../lib/walletConectionChecker";
+
+export async function getServerSideProps(context: {
+  req: { cookies: { NFTicketLoginJWT: string } };
+}) {
+  const { cookies } = context.req;
+  const loginJWT = cookies?.NFTicketLoginJWT;
+
+  return verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
+    if (error) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/nouser",
+        },
+        props: {},
+      };
+    }
+    return {
+      props: {},
+    };
+  });
+}

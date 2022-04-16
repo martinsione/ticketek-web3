@@ -15,10 +15,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import checkConnection from "../../lib/walletConectionChecker";
 
 import injected from "../Wallet/connector";
 import axios from "axios";
-import Web3 from "web3";
 import { useRouter } from "next/router";
 
 declare global {
@@ -31,79 +31,51 @@ export default function LogIn() {
   const toast = useToast();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);
+  const [loadingButton, setLoadingButton] = useState(true);
   const [metamask, setMetamask] = useState(false);
   const router = useRouter();
-
+  let timer;
   useEffect(() => {
     setMetamask(window.ethereum && true);
   }, []);
 
-  async function connect() {
-    activate(injected, undefined, true)
-      .then(
-        () => checkConnection(true),
-        () => {
-          setLoading(false);
-          toast({
-            title: "Oops, something went wrong",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
-      )
-      .then(
-        () => setLoading(false),
-        () => {
-          setLoading(false);
-          toast({
-            title: "Oops, something went wrong",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
-        }
-      );
-  }
-
-  const checkConnection = async (force = false) => {
-    // Check if browser is running Metamask
-    let web3: any;
-    if (window.ethereum) {
-      web3 = new Web3(window.ethereum);
-    } else if (window.web3) {
-      web3 = new Web3(window.web3.currentProvider);
-    }
-    // Check if User is already connected by retrieving the accounts
-    web3.eth.getAccounts().then(async (addr: string) => {
-      if (addr) {
-        const atr = await axios
-          .post(
-            "/api/auth/login",
-            { walletID: addr[0], force },
-            { withCredentials: true }
-          )
-          .then(({ data }) => {
-            if (data.message === "success") {
-              setTimeout(() => {
-                activate(injected, undefined, true).then(() =>
-                  toast({
-                    title: "Wallet connected",
-                    status: "success",
-                    duration: 3000,
-                    isClosable: true,
-                  })
-                );
-              }, 500);
-            }
-          });
-      }
-    });
-  };
+  useEffect(() => {
+    checkConnection(
+      false,
+      activate,
+      () => setLoadingButton(false),
+      () => (timer = setTimeout(() => setLoadingButton(false), 1500))
+    );
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, []);
 
   useEffect(() => {
-    checkConnection();
-  }, []);
+    if (account) setLoadingButton(false);
+  }, [account]);
+
+  async function connect() {
+    activate(injected, undefined, true)
+      .then(() => checkConnection(true, activate))
+      .then(() => setLoading(false))
+      .then(() =>
+        toast({
+          title: "Wallet connected",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        })
+      )
+      .catch(() =>
+        toast({
+          title: "Oops, something went wrong",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        })
+      );
+  }
 
   const handleConnect = () => {
     setLoading(true);
@@ -147,7 +119,27 @@ export default function LogIn() {
 
   return (
     <Stack>
-      {account ? (
+      {loadingButton ? (
+        <Button
+          _active={{ bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)" }}
+          _hover={{
+            bg: "linear(to-r, #73E0A9 0%, #5B68DF 100%)",
+            opacity: "0.85",
+          }}
+          bgGradient="linear(to-r, #73E0A9 0%, #5B68DF 100%)"
+          borderRadius="full"
+          color="white"
+          leftIcon={<IoWalletOutline />}
+          px="5"
+          py="2"
+          transition=".1s ease-in-out"
+          onClick={handleConnect}
+          isLoading={loadingButton}
+          loadingText="Detecting wallet"
+        >
+          Detecting wallet
+        </Button>
+      ) : account ? (
         <Popover>
           <PopoverTrigger>
             <Button
@@ -164,7 +156,7 @@ export default function LogIn() {
               py="2"
               transition=".1s ease-in-out"
             >
-              <Text whiteSpace="nowrap">Account</Text>
+              <Text whiteSpace="nowrap">My Account</Text>
             </Button>
           </PopoverTrigger>
           <Portal>

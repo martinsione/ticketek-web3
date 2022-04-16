@@ -4,10 +4,27 @@ import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Input, Stack } from "@chakra-ui/react";
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+};
+
 export default function UserData() {
-  const { account } = useWeb3React();
+  const { account, activate } = useWeb3React();
   const router = useRouter();
   const { register, handleSubmit } = useForm();
+
+  useEffect(() => {
+    logOut();
+  }, [account]);
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
+
+  async function logOut() {
+    checkConnection(false, activate, async () => {
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      router.push("/nouser");
+    });
+  }
 
   const onSubmit: (data: {}) => Promise<
     boolean | undefined
@@ -49,18 +66,17 @@ export default function UserData() {
 }
 
 import { verify } from "jsonwebtoken";
+import { useEffect } from "react";
+import checkConnection from "../../lib/walletConectionChecker";
 
 export async function getServerSideProps(context: {
   req: { cookies: { NFTicketLoginJWT: string } };
 }) {
-  console.log("ENTRO EN GETSVSIDEPROPS");
   const { cookies } = context.req;
   const loginJWT = cookies?.NFTicketLoginJWT;
 
   return verify(loginJWT, process.env.SECRET_WORD as string, (error, user) => {
     if (error) {
-      console.log("ENTRO EN ERROR");
-      console.log(process.env.NEXT_PUBLIC_BASE_URL);
       return {
         redirect: {
           permanent: false,
