@@ -11,7 +11,9 @@ export default async function handler(
     try {
         if (req.method === "POST") {
             //   Ruta para la creación de un nuevo usuario, falta checkear parámetros
-            const { name, email, walletAddress } = req.body;
+            const { name, email, walletAddress, image } = req.body;
+            console.log(image);
+
             // Se verifica que el input de walletAddress sea válido
             const valid = WAValidator.validate(walletAddress, "ETH");
             if (valid) {
@@ -22,6 +24,7 @@ export default async function handler(
                             name,
                             email,
                             walletAddress,
+                            image,
                         },
                     });
                     return res.status(200).json(response);

@@ -2,26 +2,39 @@
 import axios from "axios";
 
 export function getEvents() {
-  // eslint-disable-next-line func-names
-  return async function (
-    dispatch: (arg0: { type: string; payload: {} }) => {}
-  ) {
-    const { data } = await axios("/api/events");
-    return dispatch({
-      type: "GET_EVENTS",
-      payload: data,
-    });
-  };
+    // eslint-disable-next-line func-names
+    return async function (
+        dispatch: (arg0: { type: string; payload: {} }) => {}
+    ) {
+        const { data } = await axios("/api/events");
+        return dispatch({
+            type: "GET_EVENTS",
+            payload: data,
+        });
+    };
 }
 export function getCities() {
-  // eslint-disable-next-line func-names
-  return async function (
-    dispatch: (arg0: { type: string; payload: {} }) => {}
-  ) {
-    const { data } = await axios("/api/cities");
-    return dispatch({
-      type: "GET_CITIES",
-      payload: data,
-    });
-  };
+    // eslint-disable-next-line func-names
+    return async function (
+        dispatch: (arg0: { type: string; payload: {} }) => {}
+    ) {
+        const { data } = await axios("/api/cities");
+        return dispatch({
+            type: "GET_CITIES",
+            payload: data,
+        });
+    };
+}
+
+export function getUserFromDB(walletAddress: string) {
+    // eslint-disable-next-line func-names
+    return async function (
+        dispatch: (arg0: { type: string; payload: {} }) => {}
+    ) {
+        const { data } = await axios(`/api/users/${walletAddress}`);
+        return dispatch({
+            type: "GET_USER",
+            payload: data,
+        });
+    };
 }
