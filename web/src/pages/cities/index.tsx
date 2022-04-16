@@ -21,7 +21,7 @@ export default function Evento({ data }: { data: [] }) {
 
 export async function getStaticProps() {
   const justCities = (await prisma.contract.findMany()).map(
-    (e: { city: string }) => e.city
+    (e) => e.name
   );
   const cities = new Set(justCities);
   return {
