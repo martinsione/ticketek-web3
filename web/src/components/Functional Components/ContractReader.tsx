@@ -13,9 +13,11 @@ async function getEventData(contractAddress: string) {
     const Place = await contract.methods.getPlace().call();
     const Price = await contract.methods.getPrice().call();
     const NumberOfTickets = await contract.methods.getStock().call();
-    const Uri = await contract.methods.getUri().call();
+    let Uri = await contract.methods.getUri().call();
+    Uri = `https://nftstorage.link/ipfs${Uri.slice(6)}`;
 
-    const metadata = await axios.get(Uri)
+    const metadata = await axios.get(Uri).then(r => r.data);
+    metadata.image = `https://nftstorage.link/ipfs${metadata.image.slice(6)}`
 
     const EventData = {
         name: Name,
