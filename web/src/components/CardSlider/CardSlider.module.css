@@ -10,8 +10,6 @@
 .box {
   display: grid;
   grid-gap: 10px;
-  /* grid-template-columns: 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px; */
-  /* grid-template-rows: 150px; */
   overflow-x: hidden;
   scroll-snap-type: x proximity;
 }

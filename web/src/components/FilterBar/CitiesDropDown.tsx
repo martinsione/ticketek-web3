@@ -23,9 +23,7 @@ export default function CitiesDropDown({ fn }: any) {
       w="25%"
       onChange={fn}
     >
-      <option disabled style={{ color: "gray" }}>
-        All cities...
-      </option>
+      <option value="all">All cities...</option>
       {allCities &&
         allCities.map((city: string) => (
           <option key={city} value={city}>
