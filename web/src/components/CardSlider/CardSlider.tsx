@@ -16,15 +16,9 @@ interface PROPS {
     }
   ];
 }
-// interface MAP {
-//   address: string;
-//   city: string;
-//   name: string;
-//   symbol: string
-// }
 
 export default function CardSlider({ data, title, fn }: PROPS) {
-  const scrollStep = 1500;
+  const scrollStep = 1275; //  1500
   const cardWidth = 350;
   const columnWidth = Math.round(cardWidth * 1.15);
 
@@ -57,17 +51,17 @@ export default function CardSlider({ data, title, fn }: PROPS) {
   }
 
   function animateValue(start: number, duration: number, direction: string) {
-    const end = 50;
+    const end = 55;
     const range = end - start;
     let current = start;
     const increment = end > start ? 1 : -1;
 
     const step = function tomaTuNombrePaQueDejesDeJoderPutoEslint() {
       current += increment;
-
       if (direction === "right" && box.current)
         box.current.scrollBy(current, 0);
-      else if (box.current) box.current.scrollBy(-current, 0);
+      else if (direction === "left" && box.current)
+        box.current.scrollBy(-current, 0);
 
       if (current !== end) {
         setTimeout(step, quadratic(duration, range, current));

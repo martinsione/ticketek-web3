@@ -28,7 +28,8 @@ export function getCategories() {
     const { data } = await axios("/api/events");
     const addresses = data.map((ev: { address: string }) => ev.address);
     const categories = addresses.map(
-      (address: string) => eventData(address).metadata.type
+      (address: string) => ContractReader(address).metadata.type
+      // (address: string) => eventData(address).metadata.type
     );
     const uniqueCategories = categories.filter(
       (item: never, index: number, arr: []) => arr.indexOf(item) === index
@@ -58,8 +59,8 @@ export function getContracts() {
   ) {
     const { data } = await axios("/api/events");
     const contracts = data.map((e: any) => {
-      // const contract = ContractReader(e.address);
-      const contract = eventData(e.address);
+      const contract = ContractReader(e.address);
+      // const contract = eventData(e.address);
       return { ...e, ...contract };
     });
 
@@ -74,15 +75,16 @@ export function filterEvents(data: [], { date, city, category }: any) {
   return async function (
     dispatch: (arg0: { type: string; payload: {} }) => {}
   ) {
-    data = date ? dateFilter(data, date) : data;
-    data =
+    const dataDate = date ? dateFilter(data, date) : data;
+    const dataCategory =
       category && category !== "all"
-        ? data.filter((ev: any) => ev.metadata.type === category)
-        : data;
-    data =
+        ? dataDate.filter((ev: any) => ev.metadata.type === category)
+        : dataDate;
+    const dataCity =
       city && city !== "all"
-        ? data.filter((ev: any) => ev.city === city)
-        : data;
+        ? dataCategory.filter((ev: any) => ev.city === city)
+        : dataCategory;
+    const dataFinal = dataCity;
     return dispatch({
       type: "FILTER_EVENTS",
       payload: data,
