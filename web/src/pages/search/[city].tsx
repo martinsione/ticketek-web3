@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
@@ -43,7 +43,7 @@ export default function City({ city }: { city: string }) {
     setFilterDate(`${e.target.value}`);
   }
 
-  function handleCategories(e: React.ChangeEvent<HTMLInputElement>) {
+  function handleCategories(e: ChangeEvent<HTMLSelectElement>) {
     setFilterCategory(e.target.value);
   }
 

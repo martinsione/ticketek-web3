@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Select } from "@chakra-ui/react";
 
 interface FUNC {

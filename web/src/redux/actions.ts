@@ -28,7 +28,7 @@ export function getCategories() {
     const { data } = await axios("/api/events");
     const addresses = data.map((ev: { address: string }) => ev.address);
     const categories = addresses.map(
-      (address: string) => ContractReader(address).metadata.type
+      async (address: string) => (await ContractReader(address)).metadata.type
       // (address: string) => eventData(address).metadata.type
     );
     const uniqueCategories = categories.filter(

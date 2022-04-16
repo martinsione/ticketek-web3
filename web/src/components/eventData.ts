@@ -1,4 +1,22 @@
-export default function getEventData(address: string) {
+interface EVENT {
+  name: string;
+  symbol: string;
+  place: string;
+  price: number;
+  numberOfTickets: number;
+  metadata: {
+    image: string;
+    name: string;
+    description: string;
+    type: string;
+    date: Date;
+    country: string;
+    location: string;
+    direction: string;
+  };
+}
+
+export default function getEventData(address: string): EVENT {
   interface EventData {
     name: string;
     symbol: string;
@@ -17,7 +35,7 @@ export default function getEventData(address: string) {
     };
   }
 
-  if (!address) return {};
+  // if (!address) return {};
   let val = 0;
   for (let i = 0; i < address.length; i += 1) {
     val += address[i].charCodeAt(0);

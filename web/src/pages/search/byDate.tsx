@@ -34,7 +34,7 @@ export default function byDate() {
 
   useEffect(() => {
     dispatch(
-      filterEvents(allEvents, {
+      filterEvents(allEvents as [], {
         date: "all",
         city: filterCity,
         category: filterCategory,
