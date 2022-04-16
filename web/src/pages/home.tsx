@@ -28,7 +28,8 @@ function Home() {
       <main>
         <CardSlider
           data={data}
-          fn={() => Math.random() > 0.2}
+          // fn={() => Math.random() > 0.2}
+          fn={(ev: any) => ev.name.includes("e")}
           // fn={(ev: any) => ev.name === "Carcass"}
           title="Destacados"
         />

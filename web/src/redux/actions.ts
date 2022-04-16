@@ -3,7 +3,7 @@ import axios from "axios";
 
 import eventData from "../components/eventData";
 import dateFilter from "../components/Functional Components/dateFilter";
-// import ContractReader from "../components/Functional Components/ContractReader";
+import ContractReader from "../components/Functional Components/ContractReader";
 
 export function getEvents() {
   // eslint-disable-next-line func-names
