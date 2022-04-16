@@ -7,6 +7,9 @@ import { Input, Stack } from "@chakra-ui/react";
 const estilos = {
   fontSize: "50px",
   color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 export default function UserData() {

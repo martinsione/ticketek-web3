@@ -33,6 +33,9 @@ import axios from "axios";
 const estilos = {
   fontSize: "50px",
   color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 function user() {

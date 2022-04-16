@@ -4,6 +4,9 @@ import { useEffect } from "react";
 const estilos = {
   fontSize: "50px",
   color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 export default function Forbidden() {

@@ -6,7 +6,7 @@ export default async function checkConnection(
   force = false,
   activate: any,
   callback: () => Promise<void> | undefined,
-  callbackSuccess: () => Promise<void> | undefined
+  callbackSuccess?: () => Promise<void> | undefined
 ) {
   let web3: any;
   if (window.ethereum) {
