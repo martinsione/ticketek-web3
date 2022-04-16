@@ -64,7 +64,7 @@ module.exports = {
       symbol: "RDM",
     },
     {
-      address: "0x945eD39416127736SXF07c493w206b6D9E541b09",
+      address: "0xb8d0aEf3DCf7F0AF078Cd73c56E5933A0a505285",
       
       name: "Spacemen3",
       symbol: "SP3",

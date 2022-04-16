@@ -72,7 +72,7 @@ export default function City({ city }: { city: string }) {
 export async function getStaticProps(context: { params: { city: string } }) {
   const { params } = context;
   const cities = await prisma.contract.findMany();
-  const data = cities.filter((e: { city: string }) => e.city === params.city);
+  const data = cities.filter((e) => e.name === params.city);
 
   return {
     props: {
@@ -85,7 +85,7 @@ export async function getStaticProps(context: { params: { city: string } }) {
 export async function getStaticPaths() {
   const cities = await prisma.contract.findMany();
   const paths = cities.map((element) => ({
-    params: { city: element.city.toLowerCase() },
+    params: { city: element.name.toLowerCase() },
   }));
   return {
     paths,
