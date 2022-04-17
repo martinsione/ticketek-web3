@@ -1,6 +1,7 @@
 export default function dateFilter(events: [], option: any) {
   return events.filter((ev: any) => {
-    const { date } = ev.metadata;
+    let { date } = ev.metadata;
+    date = new Date(date);
     let filter: boolean; // switch asigna filter, que se retorna a la salida
     switch (option) {
       case "all": {
@@ -45,8 +46,7 @@ export default function dateFilter(events: [], option: any) {
         break;
       }
       default: {
-        const chosenDate = new Date(`${option}Z`); // Raro, toma el dia anterior !!!
-        chosenDate.setDate(chosenDate.getDate() + 1); //  Acá la corrijo
+        const chosenDate = new Date(`${option}Z`);
         filter = date.toDateString() === chosenDate.toDateString();
       }
     }

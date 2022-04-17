@@ -3,9 +3,9 @@ import type { AppState } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
-import { filterEvents, getContracts, getEvents } from "../../redux/actions";
+import { filterEvents, getEvents } from "../../redux/actions";
 import dateFilter from "../../components/Functional Components/dateFilter";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
@@ -58,15 +58,19 @@ export default function byDate() {
 
   return (
     <>
-      <FilterBar>
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <CategoriesDropDown fn={handleCategories} />
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <CitiesDropDown fn={handleCities} />
-      </FilterBar>
-
+      <Box>
+        <Text borderBottom="2px" fontSize="3xl">
+          {displayTitle}
+        </Text>
+        <FilterBar>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <CategoriesDropDown fn={handleCategories} />
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <CitiesDropDown fn={handleCities} />
+        </FilterBar>
+      </Box>
       {filteredEvents.length ? (
-        <CardPage data={filteredEvents} title={displayTitle} />
+        <CardPage data={filteredEvents} />
       ) : (
         <Box textAlign="center">
           There are no{" "}

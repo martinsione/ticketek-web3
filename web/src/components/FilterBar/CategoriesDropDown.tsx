@@ -1,12 +1,18 @@
-import { useSelector } from "react-redux";
-import React, { ChangeEvent } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
+
+import { getCategories } from "../../redux/actions";
 
 interface FUNC {
   fn: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export default function CategoriesDropDown({ fn }: FUNC) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories);
+  }, []);
   const allCategories = useSelector(
     (state: { categories: [] }) => state.categories
   ); //  .sort
