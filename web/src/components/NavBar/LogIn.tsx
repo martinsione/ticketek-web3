@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 import { IoWalletOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { useEffect, useState } from "react";
@@ -7,15 +8,15 @@ import NextLink from "next/link";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
-  Button,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-  Portal,
-  useToast,
-  Stack,
-  Text,
+    Button,
+    Popover,
+    PopoverBody,
+    PopoverContent,
+    PopoverTrigger,
+    Portal,
+    useToast,
+    Stack,
+    Text,
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
@@ -27,7 +28,9 @@ declare global {
   }
 }
 
+
 export default function LogIn() {
+
   const toast = useToast();
   const { activate, deactivate, account } = useWeb3React();
   const [loading, setLoading] = useState(false);

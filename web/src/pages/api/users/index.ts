@@ -9,10 +9,11 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
   try {
     if (req.method === "POST") {
       //   Ruta para la creación de un nuevo usuario, falta checkear parámetros
-      const { name, email, walletAddress } = req.body;
+      const { name, email, walletAddress, image } = req.body;
       const { cookies } = req;
       const JWT = cookies.NFTicketLoginJWT;
       Auth(
@@ -29,6 +30,7 @@ export default async function handler(
                     name,
                     email,
                     walletAddress,
+                    image,
                   },
                 })
                 .then(() => {
