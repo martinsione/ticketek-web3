@@ -58,13 +58,40 @@ interface IUser{
 
 export type Wallet =  string | null | undefined
 
+interface Iprops {
+  users_list: IUser[],
+}
+
+interface IcheckDBuser {
+  (users_list: IUser[], wallet: Wallet): IUser | undefined
+}
+
 interface GetTicketsResponse{
   result: []
 }
 
 
 
+// Traemos todos los usuarios de la DB
+export async function getStaticProps() {
+  const users = await axios("/api/users")
+  const contracts = await axios("api/addresses")
+  return {
+    props: {
+      users_list: users.data,
+      contracts_list: contracts.data
+    }, 
+  }
+}
 
+
+
+// Funcion para chequear si el usuario existe en la DB o no en base a su wallet
+const checkDBuser: IcheckDBuser = (users_list, wallet)=>{
+
+  const findUser = users_list.find(usuario => usuario.walletAddress === wallet)
+  return findUser 
+}
 
 const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9"
 
@@ -89,15 +116,16 @@ const estilos = {
   justifyContent: "center",
 };
 
-function user() {
+function user({users_list}:Iprops) {
   const [activity, setActivity] = useState<IActivity>([])
   const [tickets, setTickets] = useState<string[]>([])
   const ethValue = 1000000000000000000
   const [stateLocal, setState] = useState({ name: "" });
   const router = useRouter();
   const { account, activate } = useWeb3React();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
+  const userDB = checkDBuser(users_list, account) 
 
             
               
@@ -130,13 +158,11 @@ function user() {
   useEffect(() => {
     logOut();
     fetchData();
-    // account && dispatch(getUserFromDB(account));
-    if(account){
-      getUserActivity(account).then(res =>{ 
-        setActivity(res.data.result)} 
-        )
-        getUserTickets(account).then(res => setTickets(res))
-      }
+    account && dispatch(getUserFromDB(account));
+    getUserActivity(account).then(res =>{ 
+      setActivity(res.data.result)} 
+      )
+    getUserTickets(account).then(res => setTickets(res))
   }, [account]);
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
@@ -159,7 +185,7 @@ function user() {
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink passHref href={stateLocal ? `/settingsUser/${account}` : `user/userData` }>
+            <NextLink passHref href={userDB ? `/settingsUser/${account}` : `user/userData` }>
               <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
             </NextLink>
           </Flex>
