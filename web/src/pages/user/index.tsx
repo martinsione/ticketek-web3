@@ -50,7 +50,7 @@ const estilos = {
 function user() {
   const [state, setState] = useState({ name: "" });
   const router = useRouter();
-  const { account, activate } = useWeb3React
+  const { account, activate } = useWeb3React();
   const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
             
@@ -84,7 +84,7 @@ function user() {
   useEffect(() => {
     logOut();
     fetchData();
-    dispatch(getUserFromDB(account));
+    account && dispatch(getUserFromDB(account));
   }, [account]);
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
