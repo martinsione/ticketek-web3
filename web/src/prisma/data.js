@@ -31,7 +31,12 @@ module.exports = {
       address: "0xE1b4CE0B47a33b18eFBA4e592d943f9D1b875683",
 
       name: "Callejeros",
-      symbol: "CJS",
+      symbol: "CJS" }, 
+      { 
+      address: "0x945ed39416121076adb07c493e306b6d9e541b09",
+      
+      name: "Queen",
+      symbol: "QNN",
     },
     {
       address: "0xCd6aac2Ae35034828B763E884900A0B4014670f3",
