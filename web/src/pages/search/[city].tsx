@@ -88,6 +88,7 @@ export async function getStaticPaths() {
   }, []);
   const paths = cities.map((element: any) => ({
     params: { city: element.place.toLowerCase() },
+
   }));
   return {
     paths,

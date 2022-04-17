@@ -65,7 +65,6 @@ module.exports = {
     },
     {
       address: "0xb8d0aEf3DCf7F0AF078Cd73c56E5933A0a505285",
-
       name: "Spacemen3",
       symbol: "SP3",
     },
