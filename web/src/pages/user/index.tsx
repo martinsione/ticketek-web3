@@ -47,26 +47,37 @@ interface IUser{
   email: string 
 }
 
+
+
 export type Wallet =  string | null | undefined
+
 interface Iprops {
-  users_list: IUser[]
+  users_list: IUser[],
 }
 
 interface IcheckDBuser {
   (users_list: IUser[], wallet: Wallet): IUser | undefined
 }
 
+interface GetTicketsResponse{
+  result: []
+}
+
 
 
 // Traemos todos los usuarios de la DB
 export async function getStaticProps() {
-  const users = await axios("http://localhost:3000/api/users")
+  const users = await axios("/api/users")
+  const contracts = await axios("api/addresses")
   return {
     props: {
-      users_list: users.data
+      users_list: users.data,
+      contracts_list: contracts.data
     }, 
   }
 }
+
+
 
 // Funcion para chequear si el usuario existe en la DB o no en base a su wallet
 const checkDBuser: IcheckDBuser = (users_list, wallet)=>{
@@ -83,19 +94,26 @@ const getUserActivity =  (wallet?: Wallet)=>(
   )
   
   
-  
-  
+// Fetch tokens balace
+const getUserTickets = (wallet?: Wallet)=>(
+  axios.get<GetTicketsResponse>(`https://api-ropsten.etherscan.io/api?module=account&action=tokennfttx&address=${wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"}&page=1&offset=100&startblock=0&endblock=99999999&sort=asc&apikey=${API_KEY}`)
+  .then(res =>  res.data.result.map((ticket: {tokenSymbol: string}) => `1 ${ticket.tokenSymbol}`))
+  )
+
+   
 
 function User({users_list}:Iprops) {
   const { account } = useWeb3React();
   const [activity, setActivity] = useState<IActivity>([])
+  const [tickets, setTickets] = useState<string[]>([])
   const ethValue = 1000000000000000000
 
   const userDB = checkDBuser(users_list, account) 
   useEffect(() => {
     getUserActivity(account).then(res =>{ 
       setActivity(res.data.result)} 
-    )
+      )
+    getUserTickets(account).then(res => setTickets(res))
   }, [account])
   
   
@@ -137,7 +155,9 @@ function User({users_list}:Iprops) {
           </TabList>
           <TabPanels>
             <TabPanel>
-              <p>1 QNN</p>
+             {
+               tickets?.length ? <p>{tickets}</p> : <p>No tickets bought yet</p>
+             }
             </TabPanel>
             <TabPanel
               alignItems="center"
@@ -152,7 +172,7 @@ function User({users_list}:Iprops) {
               </ul>
             </TabPanel>
             <TabPanel>
-            {!activity.length ? <Text>No activity yet in this account</Text> : 
+            {!activity.length ? <Text>No activity in this account</Text> : 
               <TableContainer>
                 <Table>
                   <Thead>

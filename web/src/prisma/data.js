@@ -28,7 +28,7 @@ module.exports = {
   ],
   contracts: [
     {
-      address: "0x945eD39416121076ADB07c493e106b6D9E541b09",
+      address: "0x945ed39416121076adb07c493e306b6d9e541b09",
       
       name: "Queen",
       symbol: "QNN",
