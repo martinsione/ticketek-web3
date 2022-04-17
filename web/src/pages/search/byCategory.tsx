@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { Box } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-import { getContracts, filterEvents } from "../../redux/actions";
+import { filterEvents, getEvents } from "../../redux/actions";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
@@ -22,10 +22,14 @@ export default function index() {
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
-    dispatch(getContracts());
+    dispatch(getEvents());
   }, []);
-  const allEvents = useSelector((state: AppState) => state.contracts).filter(
+  const allEvents = useSelector((state: AppState) => state.events).filter(
     (ev: any) => ev.metadata.type === query.cat
+  );
+  console.log(
+    "🚀 ~ file: byCategory.tsx ~ line 30 ~ index ~ allEvents",
+    allEvents
   );
 
   useEffect(() => {

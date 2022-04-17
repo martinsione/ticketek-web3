@@ -2,22 +2,15 @@ import React, { useRef, useState } from "react";
 import { Box, Text, Flex } from "@chakra-ui/react";
 
 import style from "./CardSlider.module.css";
-import CardTemp from "../Card/CardTemp";
+import NewCard from "../Card/NewCard";
 
-interface PROPS {
+interface Props {
+  data: [{ name: string; price: number; place: string; metadata: [] }];
   title: string;
-  fn: (ev: { city: {} }) => boolean;
-  data: [
-    {
-      address: string;
-      city: string;
-      name: string;
-      symbol: string;
-    }
-  ];
+  fn: (ev: any) => boolean;
 }
 
-export default function CardSlider({ data, title, fn }: PROPS) {
+export default function CardSlider({ data, title, fn }: Props) {
   const scrollStep = 1275; //  1500
   const cardWidth = 350;
   const columnWidth = Math.round(cardWidth * 1.15);
@@ -114,15 +107,16 @@ export default function CardSlider({ data, title, fn }: PROPS) {
           }}
         >
           {dataIntermediate &&
-            dataIntermediate.map(({ address, city, name, symbol }) => (
-              <Box key={address}>
-                <CardTemp
-                  address={address}
-                  city={city}
-                  name={name}
-                  symbol={symbol}
+            dataIntermediate.map((ev: any) => (
+              <Box key={title}>
+                <NewCard
+                  date={ev.metadata.date}
+                  image={ev.metadata.image}
+                  location={ev.metadata.location}
+                  name={ev.name}
+                  place={ev.place}
+                  price={ev.price}
                 />
-                {/* <NewCard /> */}
               </Box>
             ))}
         </div>

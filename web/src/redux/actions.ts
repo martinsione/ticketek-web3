@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/prefer-default-export
 import axios from "axios";
 
-import eventData from "../components/eventData";
+// import eventData from "../components/eventData";
 import dateFilter from "../components/Functional Components/dateFilter";
 import ContractReader from "../components/Functional Components/ContractReader";
 
@@ -27,10 +27,10 @@ export function getCategories() {
     //   metadata: { type: string };
     // }
     const { data } = await axios("/api/events");
-    const addresses = data.map((ev: { address: string }) => ev.address);
-    const categories = addresses.map(
-      (address: string) => ContractReader(address).metadata.type
-      // (address: string) => eventData(address).metadata.type
+    // const addresses = data.map((ev: { address: string }) => ev.address);
+    const categories = data.map(
+      // async (address: string) => (await ContractReader(address)).metadata.type
+      (ev: { metadata: { type: string } }) => ev.metadata.type
     );
     const uniqueCategories = categories.filter(
       (item: never, index: number, arr: []) => arr.indexOf(item) === index
@@ -46,10 +46,14 @@ export function getCities() {
   return async function (
     dispatch: (arg0: { type: string; payload: {} }) => {}
   ) {
-    const { data } = await axios("/api/cities");
+    const { data } = await axios("/api/events");
+    const cities = data.map((ev: { place: string }) => ev.place);
+    const uniqueCities = cities.filter(
+      (item: never, index: number, arr: []) => arr.indexOf(item) === index
+    );
     return dispatch({
       type: "GET_CITIES",
-      payload: data,
+      payload: uniqueCities,
     });
   };
 }
@@ -61,7 +65,6 @@ export function getContracts() {
     const { data } = await axios("/api/events");
     const contracts = data.map((e: any) => {
       const contract = ContractReader(e.address);
-      // const contract = eventData(e.address);
       return { ...e, ...contract };
     });
 

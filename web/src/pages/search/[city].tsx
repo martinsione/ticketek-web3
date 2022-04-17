@@ -3,7 +3,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-import { filterEvents, getContracts } from "../../redux/actions";
+import { filterEvents, getContracts, getEvents } from "../../redux/actions";
 import prisma from "../../lib/prisma";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import DatesDropDown from "../../components/FilterBar/DatesDropDown";
@@ -19,9 +19,9 @@ export default function City({ city }: { city: string }) {
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
-    dispatch(getContracts());
+    dispatch(getEvents());
   }, []);
-  const allEvents = useSelector((state: AppState) => state.contracts).filter(
+  const allEvents = useSelector((state: AppState) => state.events).filter(
     (ev: any) => ev.city === city
   );
 
@@ -71,21 +71,23 @@ export default function City({ city }: { city: string }) {
 
 export async function getStaticProps(context: { params: { city: string } }) {
   const { params } = context;
-  const cities = await prisma.contract.findMany();
-  const data = cities.filter((e: { city: string }) => e.city === params.city);
 
   return {
     props: {
-      data,
       city: params.city,
     },
   };
 }
 
 export async function getStaticPaths() {
-  const cities = await prisma.contract.findMany();
-  const paths = cities.map((element) => ({
-    params: { city: element.city.toLowerCase() },
+  const dispatch = useDispatch();
+  const cities = useSelector((state: AppState) => state.cities);
+
+  useEffect(() => {
+    dispatch(getEvents());
+  }, []);
+  const paths = cities.map((element: any) => ({
+    params: { city: element.place.toLowerCase() },
   }));
   return {
     paths,

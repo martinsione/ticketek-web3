@@ -3,7 +3,7 @@ import type { AppState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 
-import { getCategories, getContracts, getEvents } from "../redux/actions";
+import { getCategories, getEvents } from "../redux/actions";
 import HomeFilterBar from "../components/FilterBar/HomeFilterBar";
 import CardSlider from "../components/CardSlider/CardSlider";
 
@@ -14,12 +14,12 @@ import CardSlider from "../components/CardSlider/CardSlider";
 function Home() {
   //  { json }: JSON
   const dispatch = useDispatch();
-  const data = useSelector((state: AppState) => state.contracts);
+  const data = useSelector((state: AppState) => state.events);
 
   useEffect(() => {
     dispatch(getEvents());
     dispatch(getCategories());
-    dispatch(getContracts());
+    // dispatch(getContracts());
   }, []);
 
   return (
