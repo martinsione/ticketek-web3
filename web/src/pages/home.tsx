@@ -35,13 +35,13 @@ function Home() {
         />
         <CardSlider
           data={data}
-          fn={(ev) => ev.city === "Bogotá" || ev.city === "Medellín"}
+          fn={(ev: any) => ev.place === "Bogota" || ev.place === "Medellín"}
           title="En Colombia"
         />
         <CardSlider
           data={data}
-          fn={(ev) => ev.city === "Mendoza"}
-          title="En Mendoza"
+          fn={(ev: any) => ev.place === "Cordoba"}
+          title="En Cordoba"
         />
       </main>
     </div>

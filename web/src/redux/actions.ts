@@ -10,7 +10,8 @@ export function getEvents() {
   return async function (
     dispatch: (arg0: { type: string; payload: {} }) => {}
   ) {
-    const { data } = await axios("/api/events");
+    const { data } = await axios("http://localhost:3000/api/events");
+    console.log("🚀 ~ file: actions.ts ~ line 14 ~ getEvents ~ data", data);
     return dispatch({
       type: "GET_EVENTS",
       payload: data,
@@ -28,7 +29,7 @@ export function getCategories() {
     const { data } = await axios("/api/events");
     const addresses = data.map((ev: { address: string }) => ev.address);
     const categories = addresses.map(
-      async (address: string) => (await ContractReader(address)).metadata.type
+      (address: string) => ContractReader(address).metadata.type
       // (address: string) => eventData(address).metadata.type
     );
     const uniqueCategories = categories.filter(
@@ -87,7 +88,7 @@ export function filterEvents(data: [], { date, city, category }: any) {
     const dataFinal = dataCity;
     return dispatch({
       type: "FILTER_EVENTS",
-      payload: data,
+      payload: dataFinal,
     });
   };
 }
