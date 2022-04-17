@@ -22,6 +22,7 @@ async function getEventData(contractAddress: string) {
   metadata.image = `https://nftstorage.link/ipfs${metadata.image.slice(6)}`;
 
   const EventData = {
+    address : contractAddress,
     name: Name,
     symbol: Symbol,
     place: Place,
