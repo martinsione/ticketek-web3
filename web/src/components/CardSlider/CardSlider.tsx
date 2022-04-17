@@ -108,7 +108,7 @@ export default function CardSlider({ data, title, fn }: Props) {
         >
           {dataIntermediate &&
             dataIntermediate.map((ev: any) => (
-              <Box key={title}>
+              <Box key={ev.symbol}>
                 <NewCard
                   date={ev.metadata.date}
                   image={ev.metadata.image}

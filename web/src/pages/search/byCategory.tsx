@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
 import { filterEvents, getEvents } from "../../redux/actions";
@@ -19,18 +19,16 @@ export default function index() {
   const [filterDate, setFilterDate] = useState("all");
   const [filterCity, setFilterCity] = useState("all");
 
-  const filteredEvents = useSelector((state: AppState) => state.filterEvents);
-
   useEffect(() => {
     dispatch(getEvents());
   }, []);
+
   const allEvents = useSelector((state: AppState) => state.events).filter(
-    (ev: any) => ev.metadata.type === query.cat
+    (ev: any) => ev.metadata.type === query.cat,
+    () => {}
   );
-  console.log(
-    "🚀 ~ file: byCategory.tsx ~ line 30 ~ index ~ allEvents",
-    allEvents
-  );
+
+  const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
     dispatch(
@@ -58,14 +56,19 @@ export default function index() {
 
   return (
     <>
-      <FilterBar>
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <DatesDropDown fn={handleDate} />
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <CitiesDropDown fn={handleCities} />
-      </FilterBar>
+      <Box>
+        <Text borderBottom="2px" fontSize="3xl">
+          {displayTitle}
+        </Text>
+        <FilterBar>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <DatesDropDown fn={handleDate} />
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <CitiesDropDown fn={handleCities} />
+        </FilterBar>
+      </Box>
       {filteredEvents.length ? (
-        <CardPage data={filteredEvents} title={displayTitle} />
+        <CardPage data={filteredEvents} />
       ) : (
         <Box textAlign="center">
           There are no{" "}

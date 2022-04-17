@@ -1,7 +1,7 @@
 import React from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 
-import CardTemp from "../Card/CardTemp";
+import NewCard from "../Card/NewCard";
 
 type Props = {
   data: [
@@ -13,24 +13,26 @@ type Props = {
       metadata: { date: Date; type: string };
     }
   ];
-  title: string | string[] | undefined;
+  // title: string | string[] | undefined;
 };
 
-export default function CardPage({ data, title }: Props) {
+export default function CardPage({ data }: Props) {
   return (
     <Box bg="pink" p="4">
-      <Text borderBottom="2px" fontSize="3xl">
+      {/* <Text borderBottom="2px" fontSize="3xl">
         {title}
-      </Text>
+      </Text> */}
       <Flex justify="center" p="10px" wrap="wrap">
         {data &&
-          data.map(({ address, city, name, symbol }) => (
-            <Box key={address}>
-              <CardTemp
-                address={address}
-                city={city}
-                name={name}
-                symbol={symbol}
+          data.map((ev: any) => (
+            <Box key={ev.symbol}>
+              <NewCard
+                date={ev.metadata.date}
+                image={ev.metadata.image}
+                location={ev.metadata.location}
+                name={ev.name}
+                place={ev.place}
+                price={ev.price}
               />
             </Box>
           ))}
