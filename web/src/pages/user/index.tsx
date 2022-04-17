@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -34,7 +34,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-import { getUserFromDB } from "../../redux/actions";
+// import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
 
 interface ITransaccion {
@@ -47,24 +47,10 @@ interface ITransaccion {
 
 type IActivity = ITransaccion[]
 
-interface IUser{ 
-  walletAddress: string,
-  image: string,
-  name: string, 
-  email: string 
-}
-
 
 
 export type Wallet =  string | null | undefined
 
-interface Iprops {
-  users_list: IUser[],
-}
-
-interface IcheckDBuser {
-  (users_list: IUser[], wallet: Wallet): IUser | undefined
-}
 
 interface GetTicketsResponse{
   result: []
@@ -72,26 +58,7 @@ interface GetTicketsResponse{
 
 
 
-// Traemos todos los usuarios de la DB
-export async function getStaticProps() {
-  const users = await axios("/api/users")
-  const contracts = await axios("api/addresses")
-  return {
-    props: {
-      users_list: users.data,
-      contracts_list: contracts.data
-    }, 
-  }
-}
 
-
-
-// Funcion para chequear si el usuario existe en la DB o no en base a su wallet
-const checkDBuser: IcheckDBuser = (users_list, wallet)=>{
-
-  const findUser = users_list.find(usuario => usuario.walletAddress === wallet)
-  return findUser 
-}
 
 const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9"
 
@@ -116,16 +83,15 @@ const estilos = {
   justifyContent: "center",
 };
 
-function user({users_list}:Iprops) {
+function user() {
   const [activity, setActivity] = useState<IActivity>([])
   const [tickets, setTickets] = useState<string[]>([])
   const ethValue = 1000000000000000000
   const [stateLocal, setState] = useState({ name: "" });
   const router = useRouter();
   const { account, activate } = useWeb3React();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
-  const userDB = checkDBuser(users_list, account) 
 
             
               
@@ -158,11 +124,13 @@ function user({users_list}:Iprops) {
   useEffect(() => {
     logOut();
     fetchData();
-    account && dispatch(getUserFromDB(account));
-    getUserActivity(account).then(res =>{ 
-      setActivity(res.data.result)} 
-      )
-    getUserTickets(account).then(res => setTickets(res))
+    // account && dispatch(getUserFromDB(account));
+    if(account){
+      getUserActivity(account).then(res =>{ 
+        setActivity(res.data.result)} 
+        )
+        getUserTickets(account).then(res => setTickets(res))
+      }
   }, [account]);
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
@@ -185,7 +153,7 @@ function user({users_list}:Iprops) {
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink passHref href={userDB ? `/settingsUser/${account}` : `user/userData` }>
+            <NextLink passHref href={stateLocal ? `/settingsUser/${account}` : `user/userData` }>
               <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
             </NextLink>
           </Flex>
