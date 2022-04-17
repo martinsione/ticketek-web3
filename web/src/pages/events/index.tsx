@@ -1,7 +1,19 @@
 import prisma from "../../lib/prisma";
 import CardPage from "../../components/CardPage/CardPage";
 
-export default function Evento({ data }: { data: [] }) {
+interface DATA {
+  data: [
+    {
+      address: string;
+      city: string;
+      name: string;
+      symbol: string;
+      metadata: { date: Date; type: string };
+    }
+  ];
+}
+
+export default function Evento({ data }: DATA) {
   return <CardPage data={data} title="All events" />;
 }
 

@@ -39,14 +39,7 @@ export default function Form() {
   } = useForm<InputProps>();
 
   const onSubmit: SubmitHandler<InputProps> = (data) => {
-    new Promise<void>((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(data, null, 2));
-        resolve();
-      }, 1500);
-
-    });
-
+   
     const {
       name,
       symbol,
@@ -90,25 +83,27 @@ export default function Form() {
         py="12px"
         spacing="12px"
       >
-        <Input {...register("name")} placeholder="Name" />
-        <Input {...register("symbol")} placeholder="Symbol" />
-        <Input {...register("description")} placeholder="Description" />
-        <Input {...register("city")} placeholder="City" />
-        <Input {...register("date")} placeholder="Date" type="date" />
-        <Input {...register("country")} placeholder="Country" />
-        <Input {...register("location")} placeholder="Location" />
-        <Input {...register("type")} placeholder="Type" />
-        <Input {...register("price")} placeholder="Price" />
+        <Input {...register("name")} placeholder="Name" color="#fff"/>
+        <Input {...register("symbol")} placeholder="Symbol" color="#fff" />
+        <Input {...register("description")} placeholder="Description" color="#fff"/>
+        <Input {...register("city")} placeholder="City" color="#fff"/>
+        <Input {...register("date")} placeholder="Date" type="date" color="#fff"/>
+        <Input {...register("country")} placeholder="Country" color="#fff"/>
+        <Input {...register("location")} placeholder="Location" color="#fff"/>
+        <Input {...register("type")} placeholder="Type" color="#fff"/>
+        <Input {...register("price")} placeholder="Price" color="#fff"/>
         <Input
           {...register("numberOfTickets")}
           placeholder="Number of tickets"
           type="number"
+          color="#fff"
         />
         <Input
           {...register("image")}
           accept=".png,.jpg,.jpeg"
           placeholder="Image"
           type="file"
+          color="#fff"
         />
         <Button
           colorScheme="teal"

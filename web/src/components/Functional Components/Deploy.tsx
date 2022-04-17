@@ -1,11 +1,11 @@
 import { AbiItem } from "web3-utils";
+import Web3 from "web3";
 import axios from "axios";
 
-import { userAddress, web } from "./UserCommands";
+import { userAddress} from "./UserCommands";
 import storeNFT from "./MetadataStorage";
 import Ticket from "../../Ticket.json";
 
-const priceContract = new web.eth.Contract(Ticket.abi as AbiItem[]);
 
 async function contractDeploy(
   symbol: string,
@@ -20,18 +20,16 @@ async function contractDeploy(
   country: string,
   location: string,
   direction: string
-) {
-  // console.log("llegue a deploy");
-  // const reader = new FileReader
-  // new File(
-  //      [
-  //        /* data */
-  //      ],
-  //      'pinpie.jpg',
-  //      { type: 'image/jpg' }
-  //    )
-
-  const uri = await storeNFT(
+  ) {
+    
+  let web3 = new Web3( "https://eth-ropsten.alchemyapi.io/v2/__kRrTi_nV3c2CZMzKkw0QfH44AVZ8_L")
+   
+    if(window){
+      web3 = new Web3(window.ethereum);
+    }
+    
+    
+    const uri = await storeNFT(
     image,
     name,
     description,
@@ -40,18 +38,19 @@ async function contractDeploy(
     country,
     location,
     direction
-  );
-
+    );
+  
+  const priceContract = new web3.eth.Contract(Ticket.abi as AbiItem[]);
+    
   const tx = priceContract.deploy({
     data: Ticket.bytecode,
-    arguments: [name, symbol, city, price, numberOfTickets, uri.url], // ur.url
+    arguments: [name, symbol, city, price, numberOfTickets, uri.url], 
   });
 
   tx.send({
     from: await userAddress(),
   }).on("receipt", async (receipt: any) => {
-    // console.log(receipt.contractAddress);
-    // meter ruta de post de addresses
+
     try {
       await axios.post("/api/events", {
         address: receipt.contractAddress,

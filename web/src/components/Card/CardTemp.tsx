@@ -9,6 +9,9 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import eventData from "../eventData";
+// import add from "../../pages/add";
+
 interface Props {
   address: string;
   city: string;
@@ -16,7 +19,26 @@ interface Props {
   symbol: string;
 }
 
+interface EventData {
+  name: string;
+  symbol: string;
+  place: string;
+  price: number;
+  numberOfTickets: number;
+  metadata: {
+    image: string;
+    name: string;
+    description: string;
+    type: string;
+    date: Date;
+    country: string;
+    location: string;
+    direction: string;
+  };
+}
+
 export default function Card({ address, city, name, symbol }: Props) {
+  const data: EventData = eventData(address);
   return (
     <Center margin={0} py={0}>
       <Box
@@ -38,7 +60,7 @@ export default function Card({ address, city, name, symbol }: Props) {
             fontSize="2xl"
             fontWeight={200}
           >
-            <Link passHref href={`/events/${name}`}>
+            <Link passHref href={`/events/${address}`}>
               {name}
             </Link>
           </Heading>
@@ -46,13 +68,15 @@ export default function Card({ address, city, name, symbol }: Props) {
           <Link passHref href={`/cities/${city}`}>
             <Text cursor="pointer">{city}</Text>
           </Link>
-          <Link passHref href={`/events/${address}`}>
-            <Text fontSize="xs" fontWeight={500}>
-              {address}
-            </Text>
-          </Link>
+
           <Text fontSize="xs" fontWeight={500}>
             {symbol}
+          </Text>
+          <Text fontSize="xs" fontWeight={500}>
+            {data.metadata.date.toDateString()}
+          </Text>
+          <Text fontSize="xs" fontWeight={500}>
+            {data.metadata.type}
           </Text>
           <Stack align="center" direction="row">
             <Button marginTop={3} variant="ghost">
