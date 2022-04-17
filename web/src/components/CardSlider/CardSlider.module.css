@@ -4,7 +4,7 @@
   width: 100%;
   padding: 0px 0;
   /* background: #dbd0bc; */
-  /* overflow-y: scroll; */
+  overflow-y: hidden;
 }
 
 .box {

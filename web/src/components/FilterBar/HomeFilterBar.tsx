@@ -26,7 +26,7 @@ export default function filterBar() {
             })
           }
         />
-        <DatesDropDown
+        {/* <DatesDropDown
           fn={(
             e:
               | React.ChangeEvent<HTMLSelectElement>
@@ -42,12 +42,12 @@ export default function filterBar() {
                   query: { opt: "choose", date: e.target.value }, //  Next envia  el query opt: e.target.value... Raro!
                 })
           }
-        />
-        <CitiesDropDown
+        /> */}
+        {/* <CitiesDropDown
           fn={(e: React.ChangeEvent<HTMLInputElement>) =>
             router.push(`/search/${e.target.value}`)
           }
-        />
+        /> */}
       </Flex>
     </div>
   );

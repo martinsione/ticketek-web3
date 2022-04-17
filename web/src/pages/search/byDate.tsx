@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Box } from "@chakra-ui/react";
 
-import { filterEvents, getContracts } from "../../redux/actions";
+import { filterEvents, getContracts, getEvents } from "../../redux/actions";
 import dateFilter from "../../components/Functional Components/dateFilter";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
@@ -24,11 +24,11 @@ export default function byDate() {
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
-    dispatch(getContracts());
+    dispatch(getEvents());
   }, []);
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const allEvents = dateFilter(
-    useSelector((state: AppState) => state.contracts),
+    useSelector((state: AppState) => state.events),
     query.opt
   );
 
