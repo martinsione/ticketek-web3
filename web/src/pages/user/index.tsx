@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { useEffect, useState } from "react";
