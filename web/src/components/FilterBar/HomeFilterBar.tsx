@@ -32,14 +32,17 @@ export default function filterBar() {
               | React.ChangeEvent<HTMLSelectElement>
               | React.ChangeEvent<HTMLInputElement>
           ) =>
-            e.target.value !== "choose"
+            e.target.id === "presetDate"
               ? router.push({
                   pathname: "/search/byDate",
-                  query: { opt: e.target.value },
+                  query: {
+                    opt: e.target.value,
+                    title: e.target[e.target.selectedIndex].innerText,
+                  },
                 })
               : router.push({
                   pathname: "/search/byDate",
-                  query: { opt: "choose", date: e.target.value }, //  Next envia  el query opt: e.target.value... Raro!
+                  query: { opt: e.target.value },
                 })
           }
         />

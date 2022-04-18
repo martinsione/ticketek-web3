@@ -15,18 +15,18 @@ export default function City({ city }: { city: string }) {
   const [filterDate, setFilterDate] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
 
-  useEffect(() => {
-    dispatch(getEvents());
-  }, []);
+  const { events } = useSelector((state: AppState) => state);
+  const cityEvents = events.filter((ev: any) => ev.place === city);
 
-  const allEvents = useSelector((state: AppState) => state.events).filter(
-    (ev: any) => ev.place === city
-  );
+  useEffect(() => {
+    if (!events.length) dispatch(getEvents());
+  }, [events]);
+
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
     dispatch(
-      filterEvents(allEvents, {
+      filterEvents(cityEvents, {
         date: filterDate,
         city: "all",
         category: filterCategory,
