@@ -12,6 +12,7 @@ import "@fontsource/poppins"
 import "../styles/globals.css";
 import Layout from "../components/estructura/Layout";
 import getLibrary from "../components/Wallet/library";
+// import "@fontsource/poppins"
 
 const theme = extendTheme({
   fonts: {
@@ -22,8 +23,8 @@ const theme = extendTheme({
     global: () => ({
       body: {
         bg: "#011F26",
-      }
-    })
+      },
+    }),
   },
 });
 

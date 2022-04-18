@@ -1,16 +1,22 @@
-import { useSelector } from "react-redux";
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import React, { ChangeEvent, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 
-export default function CategoriesDropDown({ fn }: { fn: () => {} }) {
-  const allCategories = useSelector((state: { events: [] }) => state.events)
-    .map((obj: { type: string }) => obj.type) // convierte el obj en arr
-    .filter(
-      (item: string, index: number, arr: string[]) =>
-        arr.indexOf(item) === index
-    ) // filtra repeticiones);
-    .sort();
-  // Hola soy un cambio
+import { getCategories } from "../../redux/actions";
+
+interface FUNC {
+  fn: (e: ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export default function CategoriesDropDown({ fn }: FUNC) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories);
+  }, []);
+  const allCategories = useSelector(
+    (state: { categories: [] }) => state.categories
+  ); //  .sort
+
   return (
     <Select
       bg="gray.100"
@@ -21,9 +27,7 @@ export default function CategoriesDropDown({ fn }: { fn: () => {} }) {
       w="25%"
       onChange={fn}
     >
-      <option disabled style={{ color: "gray" }}>
-        All events...
-      </option>
+      <option value="all">All categories...</option>
       {allCategories &&
         allCategories.map((type: string) => (
           <option key={type} value={type}>

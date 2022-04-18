@@ -10,7 +10,7 @@ export default async function handler(
 
   const cities = await prisma.contract.findMany();
 
-  const filtered = cities.filter((e: { city: string }) => e.city === city);
+  const filtered = cities.filter((e) => e.name === city);
 
   res.status(200).json(filtered);
 }

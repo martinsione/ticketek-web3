@@ -39,13 +39,6 @@ export default function Form() {
   } = useForm<InputProps>();
 
   const onSubmit: SubmitHandler<InputProps> = (data) => {
-    new Promise<void>((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(data, null, 2));
-        resolve();
-      }, 1500);
-
-    });
 
     const {
       name,
@@ -74,7 +67,6 @@ export default function Form() {
       location,
       location
     );
-
   };
 
   return (

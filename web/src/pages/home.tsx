@@ -3,8 +3,8 @@ import type { AppState } from "../redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 
-import { getEvents } from "../redux/actions";
-import FilterBar from "../components/FilterBar/FilterBar";
+import { getCategories, getEvents } from "../redux/actions";
+import HomeFilterBar from "../components/FilterBar/HomeFilterBar";
 import CardSlider from "../components/CardSlider/CardSlider";
 
 // interface JSON {
@@ -18,27 +18,30 @@ function Home() {
 
   useEffect(() => {
     dispatch(getEvents());
+    dispatch(getCategories());
+    // dispatch(getContracts());
   }, []);
 
   return (
     <div>
-      <FilterBar />
+      <HomeFilterBar />
       <main>
         <CardSlider
           data={data}
-          fn={() => Math.random() > 0.2}
+          // fn={() => Math.random() > 0.2}
+          fn={(ev: any) => ev.name.includes("e")}
           // fn={(ev: any) => ev.name === "Carcass"}
           title="Destacados"
         />
         <CardSlider
           data={data}
-          fn={(ev) => ev.city === "Bogotá" || ev.city === "Medellín"}
+          fn={(ev: any) => ev.place === "Bogota" || ev.place === "Medellín"}
           title="En Colombia"
         />
         <CardSlider
           data={data}
-          fn={(ev) => ev.city === "Mendoza"}
-          title="En Mendoza"
+          fn={(ev: any) => ev.place === "Cordoba"}
+          title="En Cordoba"
         />
       </main>
     </div>

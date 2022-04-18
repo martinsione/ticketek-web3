@@ -4,14 +4,12 @@
   width: 100%;
   padding: 0px 0;
   /* background: #dbd0bc; */
-  /* overflow-y: scroll; */
+  overflow-y: hidden;
 }
 
 .box {
   display: grid;
   grid-gap: 10px;
-  /* grid-template-columns: 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px 400px; */
-  /* grid-template-rows: 150px; */
   overflow-x: hidden;
   scroll-snap-type: x proximity;
 }

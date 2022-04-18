@@ -27,7 +27,6 @@ interface DATA {
 }
 
 export default function Evento({ data }: DATA) {
-  // return <div>{data.address}</div>;
   return (
     data && (
       <Flex align="center" direction="column">
