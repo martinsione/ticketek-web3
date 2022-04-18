@@ -27,6 +27,7 @@ export default function CardPage({ data }: Props) {
           data.map((ev: any) => (
             <Box key={ev.symbol}>
               <NewCard
+                address={ev.address}
                 date={ev.metadata.date}
                 image={ev.metadata.image}
                 location={ev.metadata.location}
