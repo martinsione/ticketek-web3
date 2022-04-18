@@ -54,10 +54,14 @@ export default function SettingsUser({
 
   const onSubmit = async (data: {}) => {
     try {
-      await axios.put(`/api/users/${account}`, {
-        ...data,
-        walletAddress: account,
-      });
+      await axios.put(
+        `/api/users/${account}`,
+        {
+          ...data,
+          walletAddress: account,
+        },
+        { withCredentials: true }
+      );
     } catch (e) {
       router.push("/user/error");
     }

@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import prisma from "../../../lib/prisma";
 import Auth from "../../../lib/auth";
 
+// eslint-disable-next-line consistent-return
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -27,7 +28,7 @@ export default async function handler(
     );
   }
   //   Método PUT
-  if (req.method === "PUT") {
+  else if (req.method === "PUT") {
     let { name, image } = req.body;
     Auth(
       JWT,
@@ -55,8 +56,10 @@ export default async function handler(
     );
   }
   //     Método GET
-  const response = await prisma.user.findUnique({
-    where: { walletAddress: user },
-  });
-  return res.status(200).json(response);
+  else {
+    const response = await prisma.user.findUnique({
+      where: { walletAddress: user },
+    });
+    return res.status(200).json(response);
+  }
 }
