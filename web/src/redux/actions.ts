@@ -89,3 +89,16 @@ export function filterEvents(data: [], { date, city, category }: any) {
     });
   };
 }
+
+export function getUserFromDB(walletAddress: string) {
+  // eslint-disable-next-line func-names
+  return async function (
+      dispatch: (arg0: { type: string; payload: {} }) => {}
+  ) {
+      const { data } = await axios(`/api/users/${walletAddress}`);
+      return dispatch({
+          type: "GET_USER",
+          payload: data,
+      });
+  };
+}

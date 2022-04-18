@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -34,7 +34,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-// import { getUserFromDB } from "../../redux/actions";
+import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
 
 interface ITransaccion {
@@ -92,7 +92,7 @@ function user() {
   const [stateLocal, setState] = useState({ name: "" });
   const { account, activate } = useWeb3React();
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
 
   const cloud = new Cloudinary({
@@ -124,11 +124,8 @@ function user() {
   useEffect(() => {
     logOut();
     fetchData();
-    // account && dispatch(getUserFromDB(account));
-  }, [account]);
-
-  useEffect(() => {
     if (account) {
+      dispatch(getUserFromDB(account));
       getUserActivity(account).then((res) => {
         setActivity(res.data.result);
       });
