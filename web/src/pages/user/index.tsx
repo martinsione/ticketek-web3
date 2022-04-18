@@ -43,115 +43,62 @@ import { AppState } from "../../redux/store";
 import checkConnection from "../../lib/walletConectionChecker";
 import EditUserProfile from "../../components/EditUserProfile/EditUserProfile";
 
-
-
 const estilos = {
-  fontSize: "50px",
-  color: "white",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
+    fontSize: "50px",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
 };
 
 function user() {
-  
-  const [state, setState] = useState({ name: "" });
-  const router = useRouter();
-  const { account, activate } = useWeb3React();
-  // const dispatch = useDispatch();
-  const currentUser = useSelector((state: AppState) => state.user);
-  const {isOpen, onOpen, onClose} = useDisclosure()
-            
-              
-  const cloud = new Cloudinary({
+    const [state, setState] = useState({ name: "" });
+    const router = useRouter();
+    const { account, activate } = useWeb3React();
+    // const dispatch = useDispatch();
+    const currentUser = useSelector((state: AppState) => state.user);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
+    const cloud = new Cloudinary({
         cloud: {
             cloudName: "dm9n9hrgn",
         },
     });
-    
-   const myImage = currentUser.image
+
+    const myImage = currentUser.image
         ? cloud.image(currentUser.image.toString()).toURL()
         : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png";
-              
-  async function fetchData() {
-    const { data } = await axios.post(
-      `/api/users/${account}`,
-      { walletID: account },
-      { withCredentials: true }
-    );
-    setState(data);
-  }
 
-  async function logOut() {
-    checkConnection(false, activate, async () => {
-      await axios.post("/api/auth/logout", {}, { withCredentials: true });
-      router.push("/nouser");
-    });
-  }
+    async function fetchData() {
+        const { data } = await axios.post(
+            `/api/users/${account}`,
+            { walletID: account },
+            { withCredentials: true }
+        );
+        setState(data);
+    }
 
-  useEffect(() => {
-    logOut();
-    fetchData();
-    // account && dispatch(getUserFromDB(account));
-  }, [account]);
-  if (!account) return <div style={estilos}>Detecting wallet...</div>;
+    async function logOut() {
+        checkConnection(false, activate, async () => {
+            await axios.post("/api/auth/logout", {}, { withCredentials: true });
+            router.push("/nouser");
+        });
+    }
 
-  return (
-    <>
-      <VStack bgColor="#B2C1B5" height="40vh" />
-      <VStack flexDirection="column" justifyContent="center" textAlign="center">
-        <Box bottom="10" position="relative">
-          <Avatar
-            boxSize="8rem"
-            cursor="pointer"
-            src={
-              account
-                ? myImage
-                : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
-                
-            }
-            onClick={onOpen}
-          />
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-              <ModalContent>  
-                <ModalBody>
-                  <EditUserProfile account={account}/>
-                </ModalBody>
-              </ModalContent>
-          </Modal>
-          <Flex align="center" justify="center" textAlign="center">
-            <Text fontSize="2rem" marginRight="10px">
-              {state.name || "Unnamed"}
-            </Text>
-            <NextLink passHref href={`/settingsUser/${account}`}>
-              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
-            </NextLink>
-          </Flex>
-          <Tag padding="3">{account || "address..."} </Tag>
-        </Box>
-      </VStack>
-      <HStack width="100vw">
-        <Tabs isFitted size="lg" variant="enclosed" width="100vw">
-          <TabList>
-            <Tab>My tickets</Tab>
-            <Tab>
-              <Icon as={IoIosHeartEmpty} marginRight="2" />
-              <Text>Favorites</Text>
-            </Tab>
-            <Tab>
-              <Icon as={IoIosTrendingUp} marginRight="2" />
-              <Text>Activity</Text>
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <p>1 QNN</p>
-            </TabPanel>
-            <TabPanel
-              alignItems="center"
-              listStyleType="none"
-              textAlign="center"
+    useEffect(() => {
+        logOut();
+        fetchData();
+        // account && dispatch(getUserFromDB(account));
+    }, [account]);
+    if (!account) return <div style={estilos}>Detecting wallet...</div>;
+
+    return (
+        <>
+            <VStack bgColor="#B2C1B5" height="40vh" />
+            <VStack
+                flexDirection="column"
+                justifyContent="center"
+                textAlign="center"
             >
                 <Box bottom="10" position="relative">
                     <Avatar
@@ -160,12 +107,21 @@ function user() {
                         src={
                             account
                                 ? myImage
-                                : "https://res.cloudinary.com/dm9n9hrgn/image/upload/ptkmmbf7depeeyigo9io?_a=ATAK9AA0"
+                                : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
                         }
+                        onClick={onOpen}
                     />
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                        <ModalOverlay />
+                        <ModalContent>
+                            <ModalBody>
+                                <EditUserProfile account={account} />
+                            </ModalBody>
+                        </ModalContent>
+                    </Modal>
                     <Flex align="center" justify="center" textAlign="center">
                         <Text fontSize="2rem" marginRight="10px">
-                            User
+                            {state.name || "Unnamed"}
                         </Text>
                         <NextLink passHref href={`/settingsUser/${account}`}>
                             <IconButton
@@ -176,15 +132,67 @@ function user() {
                     </Flex>
                     <Tag padding="3">{account || "address..."} </Tag>
                 </Box>
-              </TabPanel>
-              </TabPanels>
-              </Tabs>
-          </HStack>
+            </VStack>
+            <HStack width="100vw">
+                <Tabs isFitted size="lg" variant="enclosed" width="100vw">
+                    <TabList>
+                        <Tab>My tickets</Tab>
+                        <Tab>
+                            <Icon as={IoIosHeartEmpty} marginRight="2" />
+                            <Text>Favorites</Text>
+                        </Tab>
+                        <Tab>
+                            <Icon as={IoIosTrendingUp} marginRight="2" />
+                            <Text>Activity</Text>
+                        </Tab>
+                    </TabList>
+                    <TabPanels>
+                        <TabPanel>
+                            <p>1 QNN</p>
+                        </TabPanel>
+                        <TabPanel
+                            alignItems="center"
+                            listStyleType="none"
+                            textAlign="center"
+                        >
+                            <Box bottom="10" position="relative">
+                                <Avatar
+                                    boxSize="8rem"
+                                    cursor="pointer"
+                                    src={
+                                        account
+                                            ? myImage
+                                            : "https://res.cloudinary.com/dm9n9hrgn/image/upload/ptkmmbf7depeeyigo9io?_a=ATAK9AA0"
+                                    }
+                                />
+                                <Flex
+                                    align="center"
+                                    justify="center"
+                                    textAlign="center"
+                                >
+                                    <Text fontSize="2rem" marginRight="10px">
+                                        User
+                                    </Text>
+                                    <NextLink
+                                        passHref
+                                        href={`/settingsUser/${account}`}
+                                    >
+                                        <IconButton
+                                            aria-label="edit-user"
+                                            icon={<FiEdit3 />}
+                                        />
+                                    </NextLink>
+                                </Flex>
+                                <Tag padding="3">
+                                    {account || "address..."}{" "}
+                                </Tag>
+                            </Box>
+                        </TabPanel>
+                    </TabPanels>
+                </Tabs>
+            </HStack>
 
-
-
-
-          <HStack width="100vw">
+            <HStack width="100vw">
                 <Tabs isFitted size="lg" variant="enclosed" width="100vw">
                     <TabList>
                         <Tab>My tickets</Tab>
@@ -317,23 +325,23 @@ function user() {
 export default user;
 
 export async function getServerSideProps(context: {
-  req: { cookies: { NFTicketLoginJWT: string } };
+    req: { cookies: { NFTicketLoginJWT: string } };
 }) {
-  const { cookies } = context.req;
-  const loginJWT = cookies?.NFTicketLoginJWT;
+    const { cookies } = context.req;
+    const loginJWT = cookies?.NFTicketLoginJWT;
 
-  return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
-    if (error) {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/nouser",
-        },
-        props: {},
-      };
-    }
-    return {
-      props: {},
-    };
-  });
+    return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
+        if (error) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/nouser",
+                },
+                props: {},
+            };
+        }
+        return {
+            props: {},
+        };
+    });
 }

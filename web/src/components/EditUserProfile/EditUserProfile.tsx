@@ -42,9 +42,11 @@ export default function EditUserProfile(account: any) {
                     formData
                 )
                 .then(async (res) => {
+                    // eslint-disable-next-line react/destructuring-assignment
                     console.log(`LA CUENTA ES: ${account.account}`);
 
                     const atr = await axios.put(
+                        // eslint-disable-next-line react/destructuring-assignment
                         `/api/users/${account.account}`,
                         {
                             name: data.name,
