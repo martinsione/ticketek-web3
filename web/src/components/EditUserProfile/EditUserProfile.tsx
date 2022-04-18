@@ -2,13 +2,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Input, Stack} from "@chakra-ui/react";
-
+import { Input, Stack } from "@chakra-ui/react";
 
 interface IUser {
-    image: string,
-    name: string,
-    email: string
+    image: string;
+    name: string;
+    email: string;
 }
 
 interface InputProps {
@@ -17,24 +16,20 @@ interface InputProps {
     image: FileList;
 }
 
-
-export default function EditUserProfile (account: any){
-    
-    
+export default function EditUserProfile(account: any) {
     const [user, setUser] = useState({} as IUser);
     const router = useRouter();
     const { register, handleSubmit } = useForm<InputProps>();
-    
+
     async function getUserData() {
-        const data = await axios.get('/api/test') 
-        setUser(data.data)
+        const data = await axios.get("/api/test");
+        setUser(data.data);
     }
 
     useEffect(() => {
-        getUserData()
-    },[])
+        getUserData();
+    }, []);
 
-    
     const onSubmit: SubmitHandler<InputProps> = async (data) => {
         try {
             const formData = new FormData();
@@ -47,12 +42,13 @@ export default function EditUserProfile (account: any){
                     formData
                 )
                 .then(async (res) => {
-                    const atr = await axios.post(
-                        "/api/users",
+                    console.log(`LA CUENTA ES: ${account.account}`);
+
+                    const atr = await axios.put(
+                        `/api/users/${account.account}`,
                         {
                             name: data.name,
                             email: data.email,
-                            walletAddress: account,
                             image: res.data.public_id.toString(),
                         },
                         { withCredentials: true }
@@ -71,26 +67,33 @@ export default function EditUserProfile (account: any){
         }
     };
 
-    
-
-
     return (
-            <Stack
-                align="center"
-                as="form"
-                direction="column"
-                onSubmit={handleSubmit(onSubmit)}
-            >
-                <Input  defaultValue={user.name} placeholder="Name"{...register("name")} w={300} />
-                <Input  defaultValue={user.email} placeholder="E-mail" {...register("email")} w={300} />
-                <Input
-                    placeholder="User Image"
-                    {...register("image")}
-                    accept=".png,.jpg,.jpeg"
-                    type="file"
-                    w={300}
-                />
-                <Input cursor="pointer" type="submit" w={150} />
-            </Stack>
-    )
+        <Stack
+            align="center"
+            as="form"
+            direction="column"
+            onSubmit={handleSubmit(onSubmit)}
+        >
+            <Input
+                defaultValue={user.name}
+                placeholder="Name"
+                {...register("name")}
+                w={300}
+            />
+            <Input
+                defaultValue={user.email}
+                placeholder="E-mail"
+                {...register("email")}
+                w={300}
+            />
+            <Input
+                placeholder="User Image"
+                {...register("image")}
+                accept=".png,.jpg,.jpeg"
+                type="file"
+                w={300}
+            />
+            <Input cursor="pointer" type="submit" w={150} />
+        </Stack>
+    );
 }
