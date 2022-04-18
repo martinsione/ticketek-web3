@@ -11,7 +11,7 @@
   display: flex;
   overflow-x: hidden;
   scroll-snap-type: x proximity;
-  height: 50vh;
+  height: 35vh;
   gap: 1rem;
 }
 
