@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import prisma from "../../lib/prisma";
+import { buyTicket } from "../../components/FunctionalComponents/UserCommands";
 
 interface DATA {
   data: {
@@ -94,6 +95,7 @@ interface DATA {
           borderRadius="full"
           color="white"
           fontSize="sm"
+          onClick={()=> buyTicket(data.address)}
           >
           Buy Ticket
         </Button>
