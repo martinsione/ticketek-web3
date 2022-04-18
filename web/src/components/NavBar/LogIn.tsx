@@ -8,15 +8,15 @@ import NextLink from "next/link";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
-    Button,
-    Popover,
-    PopoverBody,
-    PopoverContent,
-    PopoverTrigger,
-    Portal,
-    useToast,
-    Stack,
-    Text,
+  Button,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
+  useToast,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";

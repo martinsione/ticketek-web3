@@ -57,9 +57,9 @@ export default function Footer() {
         w="full"
       >
         <Stack align="center" direction="row" >
-          <Stack width="50px">
+          <Stack>
             <Link passHref href="/home">
-              <Icon as={Logo} cursor="pointer" />
+              <Icon as={Logo} cursor="pointer" height="50px" width="50px" />
             </Link>
           </Stack>
           <Stack fontSize="14px" px="10px" width="450px">

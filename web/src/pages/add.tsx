@@ -4,8 +4,8 @@ import Form from "../components/Form";
 
 export default function add() {
   return (
-    <Stack alignItems="center" justifyContent="center">
-      <Text as="h2" fontSize="3xl">
+    <Stack alignItems="center" justifyContent="center" my="2rem">
+      <Text as="h2" color="white" fontSize="3xl">
         Add an event
       </Text>
       <Form />
