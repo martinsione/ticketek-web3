@@ -37,7 +37,7 @@ export default function filterBar() {
                   pathname: "/search/byDate",
                   query: {
                     opt: e.target.value,
-                    title: e.target[e.target.selectedIndex].innerText,
+                    /* title: 'e.target[e.target.selectedIndex].innerText', */
                   },
                 })
               : router.push({

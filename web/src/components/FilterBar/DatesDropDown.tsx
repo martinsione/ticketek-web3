@@ -18,6 +18,7 @@ export default function DatesDropDown({ fn }: FUNC) {
 
   const handleDateMenu: ChangeEventHandler<HTMLSelectElement> = (e) => {
     e.preventDefault();
+    console.log(e);
     if (date.current !== null) {
       if (e.target.value === "choose") {
         date.current.style.visibility = "visible";

@@ -15,6 +15,13 @@ import CardPage from "../../components/CardPage/CardPage";
 export default function byDate() {
   const { query } = useRouter();
 
+  const dictionary = {
+    days: "In a couple of days",
+    weekend: "This weekend",
+    week: "Next week",
+    month: "This month",
+  };
+  
   const dispatch = useDispatch();
 
   const [filterCategory, setFilterCategory] = useState("all");
@@ -55,10 +62,11 @@ export default function byDate() {
     setFilterCity(e.target.value);
   }
 
-  const displayTitle = query.title
-    ? query.title
-    : typeof query.opt === "string" && new Date(query.opt).toDateString();
 
+  const displayTitle =
+  query.opt !== "choose"
+    ? typeof dictionary === "string" && dictionary[String(query.opt)]
+    : typeof query.opt === "string" && new Date(query.opt).toDateString();
   return (
     <>
       <Box>

@@ -1,7 +1,7 @@
 import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
 import Link from "next/link";
-import { Stack, Text, Image, Button, IconButton } from "@chakra-ui/react";
+import { Stack, Text, Image, IconButton } from "@chakra-ui/react";
 
 interface Props {
   address: string;

@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import CardPage from "../../components/CardPage/CardPage";
 
 interface DATA {
@@ -18,7 +19,7 @@ export default function Evento({ data }: DATA) {
 }
 
 export async function getStaticProps() {
-  const { data } = await axios("/api/events");
+  const { data } = await axios.get("/api/events");
   return {
     props: {
       data,
