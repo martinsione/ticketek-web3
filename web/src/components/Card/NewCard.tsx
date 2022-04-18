@@ -3,8 +3,10 @@ import { useState } from "react";
 import { Stack, Text, Image, Button, IconButton } from "@chakra-ui/react";
 
 import {buyTicket} from '../FunctionalComponents/UserCommands'
+import Link from "next/link";
 
 interface Props {
+  address: string;
   name: string;
   date: string;
   image: string;
@@ -14,6 +16,7 @@ interface Props {
 }
 
 export default function Card({
+  address,
   name,
   date,
   image,
@@ -79,16 +82,17 @@ export default function Card({
         w="full"
         zIndex={9999}
       >
+        <Link passHref href={`/events/${address}`}>
         <Button
           _hover={{ bg: "#5B68DF" }}
           bg="#73E0A9"
           borderRadius="full"
           color="white"
           fontSize="sm"
-          onClick={()=> buyTicket()}
-        >
+          >
           Buy Ticket
         </Button>
+        </Link>
         <IconButton
           aria-label="Toggle favorite"
           borderRadius="full"

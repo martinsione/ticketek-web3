@@ -1,42 +1,104 @@
+import type { AppState } from "../../redux/store";
+
+import { useSelector } from "react-redux";
 import {
-  // Box,
-  // Container,
-  // Stack,
-  // Text,
-  // Image,
+  Container,
+  SimpleGrid,
+  Image,
   Flex,
-  // VStack,
-  // Button,
-  // Heading,
-  // SimpleGrid,
-  // StackDivider,
-  // useColorModeValue,
-  // List,
-  // ListItem,
+  Heading,
+  Text,
+  Stack,
+  StackDivider,
+  useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
 
 import prisma from "../../lib/prisma";
+import { buyTicket } from "../../components/FunctionalComponents/UserCommands";
 
 interface DATA {
   data: {
     address: string;
-    city: string;
     name: string;
     symbol: string;
   };
 }
 
-export default function Evento({ data }: DATA) {
+/* export default function Evento({ data }: DATA) {
+  const allInfo = useSelector((state: AppState) => state.events);
+  const eventInfo = allInfo.find((e: {address: string}) => e.address === data.address); 
+  
   return (
     data && (
-      <Flex align="center" direction="column">
+      <Flex align="center" direction="column" color='fff'>
         <div>{data.address}</div>
-        <div>{data.city}</div>
         <div>{data.name}</div>
         <div>{data.symbol}</div>
+        <div>{eventInfo.place}</div>
+        <div>{eventInfo.price}</div>
+        <div>{eventInfo.numberOfTickets}</div>
+        <div>{eventInfo.metadata.description}</div>
+        <div>{eventInfo.metadata.date}</div>
+        <div>{eventInfo.metadata.country}</div>
+        <div>{eventInfo.metadata.location}</div>
+        <img src={eventInfo.metadata.image} alt="No image" />
+        
+        
       </Flex>
     )
-  );
+  ); */
+  export default function Evento({ data }: DATA) {
+    const allInfo = useSelector((state: AppState) => state.events);
+    const eventInfo = allInfo.find((e: {address: string}) => e.address === data.address); 
+
+    return (
+      <Container maxW="5xl" py={12}>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+          <Stack spacing={4}>
+            
+            <Heading color="white">{data.name}</Heading>
+            <Text color="gray.500" fontSize="lg">
+            {eventInfo? eventInfo.metadata.description : ''}
+            </Text>
+            <Stack
+              divider={
+                <StackDivider
+                  borderColor={useColorModeValue('gray.100', 'gray.700')}
+                />
+              }
+              spacing={4}>
+              <Text color="gray.500" fontSize="lg">Anda a {eventInfo? eventInfo.place : ''}</Text>
+              <Text color="gray.500" fontSize="lg">Paga {eventInfo? Number(eventInfo.price)/1000000000 : ''} ETH</Text>
+              <Text color="gray.500" fontSize="lg">Dale que quedan {eventInfo? eventInfo.numberOfTickets : ''} tickets</Text>
+              <Text color="gray.500" fontSize="lg">Estas el {eventInfo? eventInfo.metadata.date : ''} ?</Text>
+              <Text color="gray.500" fontSize="lg">Es en {eventInfo? eventInfo.metadata.country : ''}</Text>
+              <Text color="gray.500" fontSize="lg">Y aca {eventInfo? eventInfo.metadata.location : ''}</Text>
+              
+            </Stack>
+          </Stack>
+          <Flex>
+            <Image
+              alt="feature image"
+              objectFit="cover"
+              rounded="md"
+              src={eventInfo? eventInfo.metadata.image : ''}
+            />
+          </Flex>
+        </SimpleGrid>
+        <Button
+          _hover={{ bg: "#5B68DF" }}
+          bg="#73E0A9"
+          borderRadius="full"
+          color="white"
+          fontSize="sm"
+          onClick={()=> buyTicket(data.address)}
+          >
+          Buy Ticket
+        </Button>
+      </Container>
+    );
+  }
 
   // return (
   //   data &&
@@ -164,7 +226,7 @@ export default function Evento({ data }: DATA) {
   //     )
   //   )
   // );
-}
+
 
 export async function getStaticProps(context: { params: { evento: string } }) {
   //   const { data } = await axios(
