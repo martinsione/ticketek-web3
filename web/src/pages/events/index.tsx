@@ -1,4 +1,4 @@
-import prisma from "../../lib/prisma";
+import axios from "axios";
 import CardPage from "../../components/CardPage/CardPage";
 
 interface DATA {
@@ -14,18 +14,18 @@ interface DATA {
 }
 
 export default function Evento({ data }: DATA) {
-  return <CardPage data={data} title="All events" />;
+  return <CardPage data={data}  />;
 }
 
 export async function getStaticProps() {
-  // const { data } = await axios("http://localhost:3000/api/events");
-  // return {
-  //   props: {
-  //     data,
-  //   },
-  // };
-  const data = await prisma.contract.findMany();
+  const { data } = await axios("/api/events");
+  return {
+    props: {
+      data,
+    },
+  };
+  /* const data = await prisma.contract.findMany();
   return {
     props: { data },
-  };
+  }; */
 }

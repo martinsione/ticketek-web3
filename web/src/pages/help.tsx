@@ -1,4 +1,4 @@
-import { Heading, Container, Text, Stack, Link, AspectRatio, Box } from "@chakra-ui/react";
+import { Heading, Container, Text, Stack, Link, AspectRatio } from "@chakra-ui/react";
 
 export default function Help() {
   return (
