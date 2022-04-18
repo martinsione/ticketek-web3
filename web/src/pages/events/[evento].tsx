@@ -12,6 +12,7 @@ import {
   StackDivider,
   Icon,
   useColorModeValue,
+  Button,
 } from "@chakra-ui/react";
 
 import prisma from "../../lib/prisma";
@@ -52,16 +53,15 @@ interface DATA {
   export default function Evento({ data }: DATA) {
     const allInfo = useSelector((state: AppState) => state.events);
     const eventInfo = allInfo.find((e: {address: string}) => e.address === data.address); 
-    {console.log(eventInfo)}
+
     return (
       <Container maxW={'5xl'} py={12}>
         <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
           <Stack spacing={4}>
             
-            <Heading>{data.name}</Heading>
+            <Heading color={'white'}>{data.name}</Heading>
             <Text color={'gray.500'} fontSize={'lg'}>
-            {/* eventInfo.metadata.description */}
-            Algo
+            {eventInfo? eventInfo.metadata.description : ''}
             </Text>
             <Stack
               spacing={4}
@@ -70,12 +70,12 @@ interface DATA {
                   borderColor={useColorModeValue('gray.100', 'gray.700')}
                 />
               }>
-              <Text color={'gray.500'} fontSize={'lg'}>Anda a {/* eventInfo.place */}</Text>
-              <Text color={'gray.500'} fontSize={'lg'}>Paga {/* eventInfo.price */}</Text>
-              <Text color={'gray.500'} fontSize={'lg'}>Dale que quedan {/* eventInfo.numberOfTickets */}</Text>
-              <Text color={'gray.500'} fontSize={'lg'}>Estas el {/* eventInfo.metadata.date */}</Text>
-              <Text color={'gray.500'} fontSize={'lg'}>Es en {/* eventInfo.metadata.country */}</Text>
-              <Text color={'gray.500'} fontSize={'lg'}>Y aca {/* eventInfo.metadata.location */}</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Anda a {eventInfo? eventInfo.place : ''}</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Paga {eventInfo? Number(eventInfo.price)/1000000000 : ''} ETH</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Dale que quedan {eventInfo? eventInfo.numberOfTickets : ''} tickets</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Estas el {eventInfo? eventInfo.metadata.date : ''} ?</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Es en {eventInfo? eventInfo.metadata.country : ''}</Text>
+              <Text color={'gray.500'} fontSize={'lg'}>Y aca {eventInfo? eventInfo.metadata.location : ''}</Text>
               
             </Stack>
           </Stack>
@@ -83,11 +83,20 @@ interface DATA {
             <Image
               rounded={'md'}
               alt={'feature image'}
-              src={eventInfo.metadata.image}
+              src={eventInfo? eventInfo.metadata.image : ''}
               objectFit={'cover'}
             />
           </Flex>
         </SimpleGrid>
+        <Button
+          _hover={{ bg: "#5B68DF" }}
+          bg="#73E0A9"
+          borderRadius="full"
+          color="white"
+          fontSize="sm"
+          >
+          Buy Ticket
+        </Button>
       </Container>
     );
   }
