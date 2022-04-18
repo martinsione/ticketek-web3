@@ -31,11 +31,17 @@ import {
     Icon,
     Flex,
     IconButton,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-import { getUserFromDB } from "../../redux/actions";
+// import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
+import EditUserProfile from "../../components/EditUserProfile/EditUserProfile";
 
 
 
@@ -48,11 +54,13 @@ const estilos = {
 };
 
 function user() {
+  
   const [state, setState] = useState({ name: "" });
   const router = useRouter();
   const { account, activate } = useWeb3React();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
+  const {isOpen, onOpen, onClose} = useDisclosure()
             
               
   const cloud = new Cloudinary({
@@ -84,7 +92,7 @@ function user() {
   useEffect(() => {
     logOut();
     fetchData();
-    account && dispatch(getUserFromDB(account));
+    // account && dispatch(getUserFromDB(account));
   }, [account]);
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
@@ -102,7 +110,16 @@ function user() {
                 : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
                 
             }
+            onClick={onOpen}
           />
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+              <ModalContent>  
+                <ModalBody>
+                  <EditUserProfile account={account}/>
+                </ModalBody>
+              </ModalContent>
+          </Modal>
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
               {state.name || "Unnamed"}
@@ -159,8 +176,15 @@ function user() {
                     </Flex>
                     <Tag padding="3">{account || "address..."} </Tag>
                 </Box>
-            </VStack>
-            <HStack width="100vw">
+              </TabPanel>
+              </TabPanels>
+              </Tabs>
+          </HStack>
+
+
+
+
+          <HStack width="100vw">
                 <Tabs isFitted size="lg" variant="enclosed" width="100vw">
                     <TabList>
                         <Tab>My tickets</Tab>
