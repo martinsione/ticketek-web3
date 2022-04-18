@@ -1,8 +1,11 @@
+import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
 import React, { useRef, useState } from "react";
-import { Box, Text, Flex } from "@chakra-ui/react";
+import { Box, Text, Flex, Stack } from "@chakra-ui/react";
 
 import style from "./CardSlider.module.css";
 import NewCard from "../Card/NewCard";
+
+
 
 interface Props {
   data: [{ name: string; price: number; place: string; metadata: [] }];
@@ -81,8 +84,8 @@ export default function CardSlider({ data, title, fn }: Props) {
   }
 
   return (
-    <Box bg="pink" p="4">
-      <Text borderBottom="2px" fontSize="3xl">
+    <Stack px="6rem" py="1rem" >
+      <Text borderBottom="2px" color="white" fontSize="3xl">
         {title}
       </Text>
       <Flex p="10px">
@@ -97,7 +100,7 @@ export default function CardSlider({ data, title, fn }: Props) {
           type="button"
           onClick={goLeft}
         >
-          ◀
+          <IoIosArrowDropleftCircle color="white" />
         </button>
         <div
           ref={box}
@@ -116,6 +119,7 @@ export default function CardSlider({ data, title, fn }: Props) {
                   name={ev.name}
                   place={ev.place}
                   price={ev.price}
+                  url={ev.name}
                 />
               </Box>
             ))}
@@ -130,9 +134,9 @@ export default function CardSlider({ data, title, fn }: Props) {
           type="button"
           onClick={goRight}
         >
-          ▶
+          <IoIosArrowDroprightCircle color="white" />
         </button>
       </Flex>
-    </Box>
+    </Stack >
   );
 }

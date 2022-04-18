@@ -33,6 +33,7 @@ export default function CardPage({ data }: Props) {
                 name={ev.name}
                 place={ev.place}
                 price={ev.price}
+                url={ev.name}
               />
             </Box>
           ))}
