@@ -2,6 +2,8 @@ import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
 import { Stack, Text, Image, Button, IconButton } from "@chakra-ui/react";
 
+import {buyTicket} from '../FunctionalComponents/UserCommands'
+
 interface Props {
   name: string;
   date: string;
@@ -83,6 +85,7 @@ export default function Card({
           borderRadius="full"
           color="white"
           fontSize="sm"
+          onClick={()=> buyTicket()}
         >
           Buy Ticket
         </Button>
