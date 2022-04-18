@@ -110,6 +110,7 @@ export default function CardSlider({ data, title, fn }: Props) {
             dataIntermediate.map((ev: any) => (
               <Box key={ev.symbol}>
                 <NewCard
+                  address={ev.address}
                   date={ev.metadata.date}
                   image={ev.metadata.image}
                   location={ev.metadata.location}
