@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { verify } from "jsonwebtoken";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Input, Stack } from "@chakra-ui/react";
 
+import checkConnection from "../../lib/walletConectionChecker";
 import prisma from "../../lib/prisma";
 
 // import { SmallCloseIcon } from '@chakra-ui/icons';
@@ -25,9 +28,29 @@ export default function SettingsUser({
 }: {
   user: { image: string; name: string; email: string };
 }) {
+  const estilos = {
+    fontSize: "50px",
+    color: "white",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
   const router = useRouter();
-  const { account } = useWeb3React();
+  const { account, activate } = useWeb3React();
   const { register, handleSubmit } = useForm();
+
+  async function logOut() {
+    checkConnection(false, activate, async () => {
+      await axios.post("/api/auth/logout", {}, { withCredentials: true });
+      router.push("/nouser");
+    });
+  }
+
+  useEffect(() => {
+    logOut();
+  }, [account]);
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
   const onSubmit = async (data: {}) => {
     try {
@@ -39,8 +62,6 @@ export default function SettingsUser({
       router.push("/user/error");
     }
   };
-
-  // console.log(watch("name")) // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -136,20 +157,35 @@ export default function SettingsUser({
 // </Flex>
 
 export async function getServerSideProps(context: {
-  params: { walletAddress: string };
+  req: {
+    cookies: {
+      NFTicketLoginJWT: string;
+    };
+  };
+  params: {
+    walletAddress: string;
+  };
 }) {
   const { walletAddress } = context.params;
-  //   const res = await axios(`http://localhost:3000/api/users/${walletAddress}`);
-  //   const { data } = res;
-  //   return {
-  //     props: {
-  //       user: data,
-  //     },
-  //   };
+  const { cookies } = context.req;
+  const loginJWT = cookies?.NFTicketLoginJWT;
+
   const user = await prisma.user.findUnique({
     where: { walletAddress },
   });
-  return {
-    props: { user },
-  };
+
+  return verify(loginJWT, process.env.SECRET_WORD as string, (error) => {
+    if (error) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/nouser",
+        },
+        props: {},
+      };
+    }
+    return {
+      props: { user },
+    };
+  });
 }

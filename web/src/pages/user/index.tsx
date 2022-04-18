@@ -126,7 +126,6 @@ function user() {
     fetchData();
     // account && dispatch(getUserFromDB(account));
   }, [account]);
-  if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
   useEffect(() => {
     if (account) {
@@ -137,6 +136,7 @@ function user() {
     }
   }, [account]);
 
+  if (!account) return <div style={estilos}>Detecting wallet...</div>;
   return (
     <>
       <VStack
