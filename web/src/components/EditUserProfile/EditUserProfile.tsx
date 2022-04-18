@@ -17,18 +17,10 @@ interface InputProps {
 }
 
 export default function EditUserProfile(account: any) {
-    const [user, setUser] = useState({} as IUser);
     const router = useRouter();
     const { register, handleSubmit } = useForm<InputProps>();
 
-    async function getUserData() {
-        const data = await axios.get("/api/test");
-        setUser(data.data);
-    }
-
-    useEffect(() => {
-        getUserData();
-    }, []);
+    
 
     const onSubmit: SubmitHandler<InputProps> = async (data) => {
         try {
@@ -43,11 +35,11 @@ export default function EditUserProfile(account: any) {
                 )
                 .then(async (res) => {
                     // eslint-disable-next-line react/destructuring-assignment
-                    console.log(`LA CUENTA ES: ${account.account}`);
+                    console.log(`LA CUENTA ES: ${account.walletAddress}`);
 
                     const atr = await axios.put(
                         // eslint-disable-next-line react/destructuring-assignment
-                        `/api/users/${account.account}`,
+                        `/api/users/${account.walletAddress}`,
                         {
                             name: data.name,
                             email: data.email,
@@ -77,13 +69,13 @@ export default function EditUserProfile(account: any) {
             onSubmit={handleSubmit(onSubmit)}
         >
             <Input
-                defaultValue={user.name}
+                defaultValue={account.name}
                 placeholder="Name"
                 {...register("name")}
                 w={300}
             />
             <Input
-                defaultValue={user.email}
+                defaultValue={account.email}
                 placeholder="E-mail"
                 {...register("email")}
                 w={300}
