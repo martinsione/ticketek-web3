@@ -14,11 +14,11 @@ import CardSlider from "../components/CardSlider/CardSlider";
 function Home() {
   //  { json }: JSON
   const dispatch = useDispatch();
-  const data = useSelector((state: AppState) => state.events);
+  const {events, categories} = useSelector((state: AppState) => state);
 
   useEffect(() => {
-    dispatch(getEvents());
-    dispatch(getCategories());
+    if(!events.length) dispatch(getEvents())
+    if(!categories.length) dispatch(getCategories());
     // dispatch(getContracts());
   }, []);
 
@@ -27,19 +27,19 @@ function Home() {
       <HomeFilterBar />
       <main>
         <CardSlider
-          data={data}
+          data={events}
           // fn={() => Math.random() > 0.2}
           fn={(ev: any) => ev.name.includes("e")}
           // fn={(ev: any) => ev.name === "Carcass"}
           title="Destacados"
         />
         <CardSlider
-          data={data}
+          data={events}
           fn={(ev: any) => ev.place === "Bogota" || ev.place === "Medellín"}
           title="En Colombia"
         />
         <CardSlider
-          data={data}
+          data={events}
           fn={(ev: any) => ev.place === "Cordoba"}
           title="En Cordoba"
         />
