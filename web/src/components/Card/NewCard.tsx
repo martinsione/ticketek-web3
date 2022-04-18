@@ -1,9 +1,8 @@
 import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
+import Link from "next/link";
 import { Stack, Text, Image, Button, IconButton } from "@chakra-ui/react";
 
-import {buyTicket} from '../FunctionalComponents/UserCommands'
-import Link from "next/link";
 
 interface Props {
   address: string;
@@ -32,7 +31,7 @@ export default function Card({
       borderRadius="3xl"
       position="relative"
       role="group"
-      w="fit-content"
+      w="300px"
     >
       <Image
         alt={name}
@@ -83,15 +82,15 @@ export default function Card({
         zIndex={9999}
       >
         <Link passHref href={`/events/${address}`}>
-        <Button
-          _hover={{ bg: "#5B68DF" }}
-          bg="#73E0A9"
-          borderRadius="full"
-          color="white"
-          fontSize="sm"
+          <Button
+            _hover={{ bg: "#5B68DF" }}
+            bg="#73E0A9"
+            borderRadius="full"
+            color="white"
+            fontSize="sm"
           >
-          Buy Ticket
-        </Button>
+            Buy Ticket
+          </Button>
         </Link>
         <IconButton
           aria-label="Toggle favorite"
