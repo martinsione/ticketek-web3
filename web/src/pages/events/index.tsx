@@ -18,7 +18,7 @@ export default function Evento({ data }: DATA) {
   return <CardPage data={data} />;
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { data } = await axios("/api/events");
   return {
     props: {
