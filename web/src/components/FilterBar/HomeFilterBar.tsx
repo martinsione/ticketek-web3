@@ -37,6 +37,7 @@ export default function filterBar() {
                   pathname: "/search/byDate",
                   query: {
                     opt: e.target.value,
+                    // @ts-ignore
                     title: e.target[e.target.selectedIndex].innerText,
                   },
                 })

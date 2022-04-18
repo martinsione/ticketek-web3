@@ -31,10 +31,6 @@ export default function DatesDropDown({ fn }: FUNC) {
   const handleChooseDate: ChangeEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault();
     fn(e);
-    console.log(
-      "🚀 ~ file: DatesDropDown.tsx ~ line 35 ~ DatesDropDown ~ e",
-      e
-    );
   };
   return (
     <>
