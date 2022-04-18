@@ -1,4 +1,4 @@
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IoIosHeartEmpty, IoIosTrendingUp } from "react-icons/io";
 import { FiEdit3 } from "react-icons/fi";
 import { useEffect, useState } from "react";
@@ -9,28 +9,28 @@ import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Cloudinary } from "@cloudinary/url-gen";
 import {
-    Avatar,
-    Tab,
-    TabList,
-    Tabs,
-    TabPanel,
-    TabPanels,
-    VStack,
-    HStack,
-    Box,
-    TableContainer,
-    Table,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
-    Text,
-    Tag,
-    Link,
-    Icon,
-    Flex,
-    IconButton,
+  Avatar,
+  Tab,
+  TabList,
+  Tabs,
+  TabPanel,
+  TabPanels,
+  VStack,
+  HStack,
+  Box,
+  TableContainer,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Text,
+  Tag,
+  Link,
+  Icon,
+  Flex,
+  IconButton,
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
@@ -38,42 +38,44 @@ import { AppState } from "../../redux/store";
 import checkConnection from "../../lib/walletConectionChecker";
 
 interface ITransaccion {
-  value: string
-  to: string
-  from: string
-  timeStamp: string
-  hash: string
+  value: string;
+  to: string;
+  from: string;
+  timeStamp: string;
+  hash: string;
 }
 
-type IActivity = ITransaccion[]
+type IActivity = ITransaccion[];
 
+export type Wallet = string | null | undefined;
 
-
-export type Wallet =  string | null | undefined
-
-
-interface GetTicketsResponse{
-  result: []
+interface GetTicketsResponse {
+  result: [];
 }
 
-
-
-
-
-const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9"
+const API_KEY = "TKM5Z914BF3HEM5HEYDXC7SNI7989QEJT9";
 
 // Fetch user activity
-const getUserActivity =  (wallet?: Wallet)=>(
-  axios.get(`https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"}&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${API_KEY}`)
-  )
-  
-  
-// Fetch tokens balace
-const getUserTickets = (wallet?: Wallet)=>(
-  axios.get<GetTicketsResponse>(`https://api-ropsten.etherscan.io/api?module=account&action=tokennfttx&address=${wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"}&page=1&offset=100&startblock=0&endblock=99999999&sort=asc&apikey=${API_KEY}`)
-  .then(res =>  res.data.result.map((ticket: {tokenSymbol: string}) => `1 ${ticket.tokenSymbol}`))
-  )
+const getUserActivity = (wallet?: Wallet) =>
+  axios.get(
+    `https://api-ropsten.etherscan.io/api?module=account&action=txlist&address=${
+      wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"
+    }&startblock=0&endblock=99999999&page=1&offset=10&sort=asc&apikey=${API_KEY}`
+  );
 
+// Fetch tokens balace
+const getUserTickets = (wallet?: Wallet) =>
+  axios
+    .get<GetTicketsResponse>(
+      `https://api-ropsten.etherscan.io/api?module=account&action=tokennfttx&address=${
+        wallet || "0x54D05F1BB2C9759db5914DB727733B3b0040b514"
+      }&page=1&offset=100&startblock=0&endblock=99999999&sort=asc&apikey=${API_KEY}`
+    )
+    .then((res) =>
+      res.data.result.map(
+        (ticket: { tokenSymbol: string }) => `1 ${ticket.tokenSymbol}`
+      )
+    );
 
 const estilos = {
   fontSize: "50px",
@@ -84,27 +86,25 @@ const estilos = {
 };
 
 function user() {
-  const [activity, setActivity] = useState<IActivity>([])
-  const [tickets, setTickets] = useState<string[]>([])
-  const ethValue = 1000000000000000000
+  const [activity, setActivity] = useState<IActivity>([]);
+  const [tickets, setTickets] = useState<string[]>([]);
+  const ethValue = 1000000000000000000;
   const [stateLocal, setState] = useState({ name: "" });
-  const router = useRouter();
   const { account, activate } = useWeb3React();
+  const router = useRouter();
   // const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
 
-            
-              
   const cloud = new Cloudinary({
-        cloud: {
-            cloudName: "dm9n9hrgn",
-        },
-    });
-    
-   const myImage = currentUser.image
-        ? cloud.image(currentUser.image.toString()).toURL()
-        : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png";
-              
+    cloud: {
+      cloudName: "dm9n9hrgn",
+    },
+  });
+
+  const myImage = currentUser.image
+    ? cloud.image(currentUser.image.toString()).toURL()
+    : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png";
+
   async function fetchData() {
     const { data } = await axios.post(
       `/api/users/${account}`,
@@ -125,18 +125,24 @@ function user() {
     logOut();
     fetchData();
     // account && dispatch(getUserFromDB(account));
-    if(account){
-      getUserActivity(account).then(res =>{ 
-        setActivity(res.data.result)} 
-        )
-        getUserTickets(account).then(res => setTickets(res))
-      }
   }, [account]);
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
 
+  useEffect(() => {
+    if (account) {
+      getUserActivity(account).then((res) => {
+        setActivity(res.data.result);
+      });
+      getUserTickets(account).then((res) => setTickets(res));
+    }
+  }, [account]);
+
   return (
     <>
-      <VStack  bgGradient="linear-gradient(140deg, rgba(122,214,173,1) 0%, rgba(112,165,178,1) 48%, rgba(96,81,186,1) 100%)" height="40vh" />
+      <VStack
+        bgGradient="linear-gradient(140deg, rgba(122,214,173,1) 0%, rgba(112,165,178,1) 48%, rgba(96,81,186,1) 100%)"
+        height="40vh"
+      />
       <VStack flexDirection="column" justifyContent="center" textAlign="center">
         <Box bottom="10" position="relative">
           <Avatar
@@ -146,14 +152,16 @@ function user() {
               account
                 ? myImage
                 : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
-                
             }
           />
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink passHref href={stateLocal ? `/settingsUser/${account}` : `user/userData` }>
+            <NextLink
+              passHref
+              href={stateLocal ? `/settingsUser/${account}` : `user/userData`}
+            >
               <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
             </NextLink>
           </Flex>
@@ -175,9 +183,11 @@ function user() {
           </TabList>
           <TabPanels>
             <TabPanel>
-             {
-               tickets?.length ? <p>{tickets}</p> : <p>No tickets bought yet</p>
-             }
+              {tickets?.length ? (
+                <p>{tickets}</p>
+              ) : (
+                <p>No tickets bought yet</p>
+              )}
             </TabPanel>
             <TabPanel
               alignItems="center"
@@ -192,43 +202,56 @@ function user() {
               </ul>
             </TabPanel>
             <TabPanel>
-            {!activity.length ? <Text>No activity in this account</Text> : 
-              <TableContainer>
-                <Table>
-                  <Thead>
-                    <Tr>
-                      <Th>Txn Hash</Th>
-                      <Th>Age</Th>
-                      <Th>From</Th>
-                      <Th>To</Th>
-                      <Th>Value</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {activity.length && activity.map((transaccion: ITransaccion) => {
-                      const date = new Date(Number(transaccion.timeStamp)*1000).toString().replace(/ \w+-\d+ \(.*\)$/,"")
-                      const value = Number(transaccion.value)/ethValue
-                      const valueFormat = String(value).slice(0,4)  
-                      return (
+              {!activity.length ? (
+                <Text>No activity in this account</Text>
+              ) : (
+                <TableContainer>
+                  <Table>
+                    <Thead>
                       <Tr>
-                        <Td>  
-                          <Link color="teal">{transaccion.hash.slice(0,20)}...</Link>
-                         </Td>
-                          <Td>{date}</Td>
-                         <Td>
-                            <Link color="teal">{transaccion.from.slice(0,20)}...</Link>
-                        </Td>
-                          <Td>
-                            <Link color="teal">{transaccion.to.slice(0,20)}...</Link>
-                        </Td>
-                        <Td>{valueFormat} Eth</Td>
+                        <Th>Txn Hash</Th>
+                        <Th>Age</Th>
+                        <Th>From</Th>
+                        <Th>To</Th>
+                        <Th>Value</Th>
                       </Tr>
-                      )}
-                    )}
-                  </Tbody>
-                </Table> 
-              </TableContainer>
-              }
+                    </Thead>
+                    <Tbody>
+                      {activity.length &&
+                        activity.map((transaccion: ITransaccion) => {
+                          const date = new Date(
+                            Number(transaccion.timeStamp) * 1000
+                          )
+                            .toString()
+                            .replace(/ \w+-\d+ \(.*\)$/, "");
+                          const value = Number(transaccion.value) / ethValue;
+                          const valueFormat = String(value).slice(0, 4);
+                          return (
+                            <Tr>
+                              <Td>
+                                <Link color="teal">
+                                  {transaccion.hash.slice(0, 20)}...
+                                </Link>
+                              </Td>
+                              <Td>{date}</Td>
+                              <Td>
+                                <Link color="teal">
+                                  {transaccion.from.slice(0, 20)}...
+                                </Link>
+                              </Td>
+                              <Td>
+                                <Link color="teal">
+                                  {transaccion.to.slice(0, 20)}...
+                                </Link>
+                              </Td>
+                              <Td>{valueFormat} Eth</Td>
+                            </Tr>
+                          );
+                        })}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
+              )}
             </TabPanel>
           </TabPanels>
         </Tabs>
