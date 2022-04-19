@@ -117,3 +117,10 @@ export function getUserFromDB(walletAddress: string) {
     });
   };
 }
+
+export function getEventsSessionStorage(payload: []) {
+  return {
+    type: "GET_EVENT_SESSION_STORAGE",
+    payload,
+  };
+}
