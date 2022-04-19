@@ -106,7 +106,10 @@ export default function Evento({ data }: DATA) {
         borderRadius="full"
         color="white"
         fontSize="sm"
-        onClick={() => buyTicket(data.address, eventInfo.metadata.price)}
+        onClick={() => {
+          console.log(eventInfo)
+          return buyTicket(data.address, eventInfo.price)
+        }}
       >
         Buy Ticket
       </Button>

@@ -25,22 +25,40 @@ const userAddress = async () => {
 
 const buyTicket = async (address: string, price: number) => {
 
-  const contract = new web.eth.Contract(abi.abi as any, address);
-
-
-  const tx = {
+  
+  // const contract = new web.eth.Contract(abi.abi as any, address);
+  
+  let web3 = web
+  
+  if (window?.ethereum) {
+    web3 = new Web3(window.ethereum);
+  } 
+  
+  console.log(price)
+  
+  const contract = new web3.eth.Contract(abi.abi as any, address);
+  
+  await contract.methods.safeMint().send({
     from: await userAddress(),
-    to: address,
-    value: price,
-    data: contract.methods.safeMint().encodeABI(),
-  };
+    value: Number(price)*1000000000,
+  }).on('receipt', (receipt: any) =>{
+    // receipt example
+    console.log(receipt);})
+    // receipt example
+  // const tx = {
+  //   from: await userAddress(),
+  //   to: address,
+  //   value: price,
+  //   data: contract.methods.safeMint().encodeABI(),
+  // };
   
-  await (window as any).ethereum.request({   // <--- dejar comentado lo que no se usa
-    method: "eth_sendTransaction",                          // para evitar warnings y poder deployar
-    params: [tx],
-  });
+  // await (window as any).ethereum.request({   // <--- dejar comentado lo que no se usa
+  //   method: "eth_sendTransaction",                          // para evitar warnings y poder deployar
+  //   params: [tx],
+  // });
   
-};
+}
+  
 
 
 
