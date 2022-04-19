@@ -1,14 +1,13 @@
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { Input, Stack } from "@chakra-ui/react";
 
-interface IUser {
-    image: string;
-    name: string;
-    email: string;
-}
+// interface IUser {
+//     image: string;
+//     name: string;
+//     email: string;
+// }
 
 interface InputProps {
     name: string;
@@ -19,6 +18,7 @@ interface InputProps {
 export default function EditUserProfile(account: any) {
     const router = useRouter();
     const { register, handleSubmit } = useForm<InputProps>();
+    const {name, email} = account
 
     
 
@@ -69,13 +69,13 @@ export default function EditUserProfile(account: any) {
             onSubmit={handleSubmit(onSubmit)}
         >
             <Input
-                defaultValue={account.name}
+                defaultValue={name}
                 placeholder="Name"
                 {...register("name")}
                 w={300}
             />
             <Input
-                defaultValue={account.email}
+                defaultValue={email}
                 placeholder="E-mail"
                 {...register("email")}
                 w={300}
