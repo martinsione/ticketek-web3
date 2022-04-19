@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 
 import NewCard from "../Card/NewCard";
 
@@ -18,25 +18,22 @@ type Props = {
 
 export default function CardPage({ data }: Props) {
   return (
-    <Box bg="pink" p="4">
-      {/* <Text borderBottom="2px" fontSize="3xl">
-        {title}
-      </Text> */}
-      <Flex justify="center" p="10px" wrap="wrap">
-        {data &&
-          data.map((ev: any) => (
-            <Box key={ev.symbol}>
-              <NewCard
-                date={ev.metadata.date}
-                image={ev.metadata.image}
-                location={ev.metadata.location}
-                name={ev.name}
-                place={ev.place}
-                price={ev.price}
-              />
-            </Box>
-          ))}
-      </Flex>
-    </Box>
+    <Stack align="center" direction="row" justify="center" m="auto" maxW="1200px" wrap="wrap">
+      {data &&
+        data.map((ev: any) => (
+          <Box key={ev.symbol}>
+            <NewCard
+              address={ev.address}
+              date={ev.metadata.date}
+              image={ev.metadata.image}
+              location={ev.metadata.location}
+              name={ev.name}
+              place={ev.place}
+              price={ev.price}
+            />
+          </Box>
+        ))}
+    </Stack>
+
   );
 }

@@ -9,33 +9,39 @@ import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Cloudinary } from "@cloudinary/url-gen";
 import {
-  Avatar,
-  Tab,
-  TabList,
-  Tabs,
-  TabPanel,
-  TabPanels,
-  VStack,
-  HStack,
-  Box,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Text,
-  Tag,
-  Link,
-  Icon,
-  Flex,
-  IconButton,
+    Avatar,
+    Tab,
+    TabList,
+    Tabs,
+    TabPanel,
+    TabPanels,
+    VStack,
+    HStack,
+    Box,
+    TableContainer,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
+    Text,
+    Tag,
+    Link,
+    Icon,
+    Flex,
+    IconButton,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
 import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
+import EditUserProfile from "../../components/EditUserProfile/EditUserProfile";
 
 interface ITransaccion {
   value: string;
@@ -94,6 +100,7 @@ function user() {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
+  const {isOpen, onOpen, onClose} = useDisclosure()
 
   const cloud = new Cloudinary({
     cloud: {
@@ -150,17 +157,34 @@ function user() {
                 ? myImage
                 : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
             }
+       
           />
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink
+            {stateLocal ? 
+            <>
+               <IconButton aria-label="edit-user" icon={<FiEdit3 />} onClick={onOpen} />
+               <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                  <ModalContent>  
+                    <ModalBody>
+                      <EditUserProfile account={currentUser}/>
+                    </ModalBody>
+                  </ModalContent>
+               </Modal>
+            </>
+
+              :
+              <NextLink
               passHref
               href={stateLocal ? `/settingsUser/${account}` : `user/userData`}
-            >
-              <IconButton aria-label="edit-user" bg="black" icon={<FiEdit3 />} />
-            </NextLink>
+              >
+                  <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+              </NextLink>
+          }  
+            
           </Flex>
           <Text padding="3">{account || "address..."} </Text>
         </Box>

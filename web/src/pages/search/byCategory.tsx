@@ -10,20 +10,19 @@ import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
 import CardPage from "../../components/CardPage/CardPage";
 
-// type Props = {};
-
 export default function index() {
-  const { query } = useRouter(); //  query.cat
+  const { query } = useRouter();
   const dispatch = useDispatch();
 
   const [filterDate, setFilterDate] = useState("all");
   const [filterCity, setFilterCity] = useState("all");
 
+  const { events } = useSelector((state: AppState) => state);
   useEffect(() => {
-    dispatch(getEvents());
-  }, []);
+    if (!events.length) dispatch(getEvents());
+  }, [events]);
 
-  const allEvents = useSelector((state: AppState) => state.events).filter(
+  const categoryEvents = events.filter(
     (ev: any) => ev.metadata.type === query.cat,
     () => {}
   );
@@ -32,7 +31,7 @@ export default function index() {
 
   useEffect(() => {
     dispatch(
-      filterEvents(allEvents, {
+      filterEvents(categoryEvents, {
         date: filterDate,
         city: filterCity,
         category: "all",

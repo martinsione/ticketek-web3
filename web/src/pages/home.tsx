@@ -1,46 +1,87 @@
-import type { AppState } from "../redux/store";
-
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { getCategories, getEvents } from "../redux/actions";
+import { AppState, store } from "../redux/store";
+import { /* getCategories, getCities, */ getEvents } from "../redux/actions";
+import dateFilter from "../components/Functional Components/dateFilter";
 import HomeFilterBar from "../components/FilterBar/HomeFilterBar";
 import CardSlider from "../components/CardSlider/CardSlider";
 
-// interface JSON {
-//   json: [];
-// }
+export const localStorage = (stateName: string) => {
+  const sessionState = sessionStorage.getItem(stateName);
+  return sessionState && JSON.parse(sessionState);
+};
+
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 function Home() {
-  //  { json }: JSON
   const dispatch = useDispatch();
-  const {events, categories} = useSelector((state: AppState) => state);
+  const [homeStorage, setHomeStorage] = useState([]);
+  const { events } = useSelector((state: AppState) => state);
+  const [error, setError] = useState(false);
+  const [loadingDestacados, setLoadingDestacados] = useState(false);
+
+  // useEffect(() => {
+  //   if (!events.length) dispatch(getEvents());
+  //   // if (!categories.length) dispatch(getCategories());
+  // }, []);
+  // useEffect(() => {
+  //   dispatch(getCategories(events));
+  //   dispatch(getCities(events));
+  // }, [events]);
+  useEffect(() => {
+    const sessionState = localStorage("homeState");
+    if (sessionState?.length) {
+      setHomeStorage(sessionState);
+      return;
+    }
+    if (!events.length) {
+      try {
+        setError(false);
+        setLoadingDestacados(true);
+        dispatch(getEvents());
+      } catch {
+        setError(true);
+      }
+    }
+  }, [events]);
+
+  store.subscribe(() => {
+    setHomeStorage(events);
+    setLoadingDestacados(false);
+  });
 
   useEffect(() => {
-    if(!events.length) dispatch(getEvents())
-    if(!categories.length) dispatch(getCategories());
-    // dispatch(getContracts());
-  }, []);
+    sessionStorage.setItem("homeState", JSON.stringify(homeStorage));
+  }, [homeStorage]);
 
+  if (error) return <div style={estilos}>Algo salio mal...</div>;
   return (
     <div>
       <HomeFilterBar />
       <main>
         <CardSlider
-          data={events}
-          // fn={() => Math.random() > 0.2}
+          data={homeStorage.length ? homeStorage : events}
           fn={(ev: any) => ev.name.includes("e")}
-          // fn={(ev: any) => ev.name === "Carcass"}
+          loading={loadingDestacados}
           title="Destacados"
         />
         <CardSlider
-          data={events}
-          fn={(ev: any) => ev.place === "Bogota" || ev.place === "Medellín"}
-          title="En Colombia"
+          data={homeStorage.length ? homeStorage : events}
+          fn={(ev: any) => dateFilter(events, "month") && ev}
+          loading={loadingDestacados}
+          title="Este mes"
         />
         <CardSlider
-          data={events}
+          data={homeStorage.length ? homeStorage : events}
           fn={(ev: any) => ev.place === "Cordoba"}
+          loading={loadingDestacados}
           title="En Cordoba"
         />
       </main>
@@ -49,13 +90,3 @@ function Home() {
 }
 
 export default Home;
-
-// export async function getStaticProps() {
-//   const data = await fetch("http://localhost:3000/api/events");
-//   const json = await data.json();
-//   return {
-//     props: {
-//       json,
-//     },
-//   };
-// }

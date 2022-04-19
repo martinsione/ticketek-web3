@@ -7,11 +7,14 @@ import { Select } from "@chakra-ui/react";
 import { getCities } from "../../redux/actions";
 
 export default function CitiesDropDown({ fn }: any) {
-  const {cities, events} = useSelector((state: AppState) => state);
+  const { cities, events } = useSelector((state: AppState) => state);
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   if (!events.length) dispatch(getEvents());
+  // }, []);
   useEffect(() => {
-    if(!events.length) dispatch(getCities());
-  }, []);
+    if (!cities.length) dispatch(getCities(events));
+  }, [events]);
 
   return (
     <Select
