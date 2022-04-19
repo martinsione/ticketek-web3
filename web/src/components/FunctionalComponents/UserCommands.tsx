@@ -23,7 +23,7 @@ const userAddress = async () => {
   return user[0];
 };
 
-const buyTicket = async (address: string) => {
+const buyTicket = async (address: string, price: number) => {
 
   const contract = new web.eth.Contract(abi.abi as any, address);
 
@@ -31,6 +31,7 @@ const buyTicket = async (address: string) => {
   const tx = {
     from: await userAddress(),
     to: address,
+    value: price,
     data: contract.methods.safeMint().encodeABI(),
   };
   
