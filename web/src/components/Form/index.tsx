@@ -56,7 +56,7 @@ export default function Form() {
     contractDeploy(
       symbol,
       city,
-      price,
+      price*1000000000,
       numberOfTickets,
       image[0],
       name,
