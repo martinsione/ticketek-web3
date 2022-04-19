@@ -3,18 +3,18 @@ import NextLink from "next/link";
 import {
   Stack,
   Text,
-  Input,
+  // Input,
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
 
 import LogIn from "./LogIn";
+import SearchBar from "../SearchBar/SearchBar";
 // import SearchBar from "../SearchBar/SearchBar";
-
 
 export default function NavBar() {
   return (
-    <Stack bg="#0001" h="7vh" justify="center" >
+    <Stack bg="#0001" h="7vh" justify="center">
       <Stack
         alignItems="center"
         direction="row"
@@ -26,12 +26,7 @@ export default function NavBar() {
       >
         <NextLink href="/">
           <a>
-            <Stack
-              color="white"
-              direction="row"
-              fontSize="36px"
-              spacing={0}
-            >
+            <Stack color="white" direction="row" fontSize="36px" spacing={0}>
               <Text fontSize="36px" fontWeight="extrabold" lineHeight={0}>
                 NFT
               </Text>
@@ -42,7 +37,7 @@ export default function NavBar() {
           </a>
         </NextLink>
         <InputGroup className="border-gradient sm" color="#fff" maxW="460px">
-          <Input
+          {/* <Input
             _placeholder={{ color: "#fff" }}
             border="none"
             borderRadius="full"
@@ -51,7 +46,8 @@ export default function NavBar() {
             placeholder="Search..."
             px="4"
             py="2"
-          />
+          /> */}
+          <SearchBar />
           <InputRightElement>
             <BsSearch />
           </InputRightElement>

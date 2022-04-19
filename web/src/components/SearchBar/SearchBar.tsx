@@ -1,7 +1,6 @@
-import { IoIosSearch } from "react-icons/io";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { Flex, IconButton, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 
 function SearchBar() {
   const [search, setSearch] = useState("");
@@ -26,38 +25,25 @@ function SearchBar() {
     }
     router.push(`/search?searchTerm=${query.trim()}`);
   }
+
   return (
-    <Flex alignItems="center" flexDirection="row" h={70}>
-      <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
-        <Flex alignItems="center" flexDirection="row" h={70}>
-          <Flex
-            alignItems="center"
-            bg="gray.200"
-            borderRadius="30"
-            h={50}
-            justifyContent="space-around"
-            w={400}
-          >
-            <Input
-              placeholder="Buscar eventos, escenarios o artistas"
-              value={search}
-              w="200"
-              onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                setSearch(e.target.value)
-              }
-            />
-            <IconButton
-              aria-label="Search"
-              bg="none"
-              fontSize="1.5rem"
-              icon={<IoIosSearch />}
-              type="submit"
-            />
-          </Flex>
-          {/* <Input marginRight={50} type="submit" w={150} /> */}
-        </Flex>
-      </form>
-    </Flex>
+    <form onSubmit={(e: FormEvent<HTMLFormElement>) => handleSubmit(e)}>
+      <Input
+        _placeholder={{ color: "#fff" }}
+        border="none"
+        borderRadius="full"
+        m="0"
+        outline="none"
+        placeholder="Search..."
+        px="4"
+        py="2"
+        value={search}
+        w="200"
+        onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          setSearch(e.target.value)
+        }
+      />
+    </form>
   );
 }
 
