@@ -1,10 +1,39 @@
 /* eslint-disable */
 import { NextApiRequest, NextApiResponse } from "next";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch, useStore } from "react-redux";
+// import data from "../../../components/fakeEvent.json";
+import { getEvents } from "../../../redux/actions";
+import { AppState } from "../../../redux/store";
 
-import data from "../../../components/fakeEvent.json";
+export const localStorage = (stateName: string) => {
+  const sessionState = sessionStorage.getItem(stateName);
+  return sessionState && JSON.parse(sessionState);
+};
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query }: NextApiRequest = req;
+  const dispatch = useDispatch();
+  const { events } = useSelector((state: AppState) => state);
+  const store = useStore();
+
+  useEffect(() => {
+    if (!events.length) dispatch(getEvents());
+  }, []);
+
+  let sessionState = localStorage("homeState");
+  useEffect(() => {
+    if (sessionState?.length) {
+      return;
+    }
+    if (!events.length) {
+      dispatch(getEvents());
+    }
+  }, [events]);
+
+  store.subscribe(() => {
+    sessionStorage.setItem("homeState", JSON.stringify(events));
+  });
 
   const querySplit = query.searchTerm
     ? (query.searchTerm as string).split(" ")
@@ -36,6 +65,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     "la",
     "las",
   ];
+  let data = sessionStorage || events;
   data.filter((event: EVENT) => {
     // a = key of the object data
     // let a: keyof EVENT

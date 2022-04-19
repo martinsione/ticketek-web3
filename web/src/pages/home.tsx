@@ -55,6 +55,7 @@ function Home() {
   store.subscribe(() => {
     setHomeStorage(events);
     setLoadingDestacados(false);
+    console.log(store.getState());
   });
 
   useEffect(() => {
