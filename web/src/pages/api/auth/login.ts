@@ -58,7 +58,7 @@ export default async function handler(
           });
 
           try {
-            return res.setHeader("set-cookie", serialised);
+            return res.setHeader("Set-Cookie", serialised);
           } catch (err) {
             return res.status(500);
           }
