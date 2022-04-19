@@ -67,6 +67,18 @@ export default function Footer() {
           </Stack>
         </Stack>
         <Stack direction="row" spacing={6}>
+        <Link href="/about">
+            <a>
+              <Stack
+                alignItems="center"
+                color="white"
+                direction="row"
+                spacing={6}
+              >
+                <Text>About</Text>
+              </Stack>
+            </a>
+          </Link>
           <SocialButton href="#" label="Twitter">
             <FaTwitter />
           </SocialButton>

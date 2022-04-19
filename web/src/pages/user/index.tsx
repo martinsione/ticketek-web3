@@ -9,33 +9,39 @@ import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import { Cloudinary } from "@cloudinary/url-gen";
 import {
-  Avatar,
-  Tab,
-  TabList,
-  Tabs,
-  TabPanel,
-  TabPanels,
-  VStack,
-  HStack,
-  Box,
-  TableContainer,
-  Table,
-  Thead,
-  Tr,
-  Th,
-  Tbody,
-  Td,
-  Text,
-  Tag,
-  Link,
-  Icon,
-  Flex,
-  IconButton,
+    Avatar,
+    Tab,
+    TabList,
+    Tabs,
+    TabPanel,
+    TabPanels,
+    VStack,
+    HStack,
+    Box,
+    TableContainer,
+    Table,
+    Thead,
+    Tr,
+    Th,
+    Tbody,
+    Td,
+    Text,
+    Tag,
+    Link,
+    Icon,
+    Flex,
+    IconButton,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalBody,
 } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
 import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
+import EditUserProfile from "../../components/EditUserProfile/EditUserProfile";
 
 interface ITransaccion {
   value: string;
@@ -94,6 +100,7 @@ function user() {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentUser = useSelector((state: AppState) => state.user);
+  const {isOpen, onOpen, onClose} = useDisclosure()
 
   const cloud = new Cloudinary({
     cloud: {
@@ -135,7 +142,7 @@ function user() {
 
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
   return (
-    <>
+    <Box color="white">
       <VStack
         bgGradient="linear-gradient(140deg, rgba(122,214,173,1) 0%, rgba(112,165,178,1) 48%, rgba(96,81,186,1) 100%)"
         height="40vh"
@@ -150,19 +157,36 @@ function user() {
                 ? myImage
                 : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
             }
+       
           />
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink
+            {stateLocal ? 
+            <>
+               <IconButton aria-label="edit-user" icon={<FiEdit3 />} onClick={onOpen} />
+               <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                  <ModalContent>  
+                    <ModalBody>
+                      <EditUserProfile account={currentUser}/>
+                    </ModalBody>
+                  </ModalContent>
+               </Modal>
+            </>
+
+              :
+              <NextLink
               passHref
               href={stateLocal ? `/settingsUser/${account}` : `user/userData`}
-            >
-              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
-            </NextLink>
+              >
+                  <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+              </NextLink>
+          }  
+            
           </Flex>
-          <Tag padding="3">{account || "address..."} </Tag>
+          <Text padding="3">{account || "address..."} </Text>
         </Box>
       </VStack>
       <HStack width="100vw">
@@ -180,9 +204,11 @@ function user() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {tickets?.length ? (
-                <p>{tickets}</p>
-              ) : (
+              {tickets?.length ? 
+                tickets.map(ticket => 
+                  <Tag fontSize="24px" margin="0 10px">{ticket}</Tag>
+                  )
+               : (
                 <p>No tickets bought yet</p>
               )}
             </TabPanel>
@@ -253,7 +279,7 @@ function user() {
           </TabPanels>
         </Tabs>
       </HStack>
-    </>
+    </Box>
   );
 }
 
