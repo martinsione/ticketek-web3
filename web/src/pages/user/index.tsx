@@ -135,7 +135,7 @@ function user() {
 
   if (!account) return <div style={estilos}>Detecting wallet...</div>;
   return (
-    <>
+    <Box color="white">
       <VStack
         bgGradient="linear-gradient(140deg, rgba(122,214,173,1) 0%, rgba(112,165,178,1) 48%, rgba(96,81,186,1) 100%)"
         height="40vh"
@@ -159,10 +159,10 @@ function user() {
               passHref
               href={stateLocal ? `/settingsUser/${account}` : `user/userData`}
             >
-              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+              <IconButton aria-label="edit-user" bg="black" icon={<FiEdit3 />} />
             </NextLink>
           </Flex>
-          <Tag padding="3">{account || "address..."} </Tag>
+          <Text padding="3">{account || "address..."} </Text>
         </Box>
       </VStack>
       <HStack width="100vw">
@@ -180,9 +180,11 @@ function user() {
           </TabList>
           <TabPanels>
             <TabPanel>
-              {tickets?.length ? (
-                <p>{tickets}</p>
-              ) : (
+              {tickets?.length ? 
+                tickets.map(ticket => 
+                  <Tag fontSize="24px" margin="0 10px">{ticket}</Tag>
+                  )
+               : (
                 <p>No tickets bought yet</p>
               )}
             </TabPanel>
@@ -253,7 +255,7 @@ function user() {
           </TabPanels>
         </Tabs>
       </HStack>
-    </>
+    </Box>
   );
 }
 
