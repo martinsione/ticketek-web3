@@ -19,7 +19,7 @@ async function getEventData(contractAddress: string) {
   Uri = `https://nftstorage.link/ipfs${Uri.slice(6)}`;
 
   const metadata = await axios.get(Uri).then((r) => r.data);
-  console.log("REQUESTTTTT");
+  console.log("MAKING A REQUEST TO NFTSTORAGE");
   metadata.image = `https://nftstorage.link/ipfs${metadata.image.slice(6)}`;
 
   const EventData = {
