@@ -25,77 +25,80 @@ export default function Card({
   const [liked, setLiked] = useState(false);
 
   return (
-    <Link passHref href={`/events/${address}`}>
-      <Stack w="300px">
-        <Stack
-          _hover={{
-            position: "absolute",
-            transform: "scale(1.25)",
-            shadow: "lg",
-            transitionDuration: "200ms",
-            zIndex: 9999,
-          }}
-          bg="white"
-          borderRadius="3xl"
-          maxW="300px"
-          overflow="hidden"
-          role="group"
-        >
-          <Image
-            alt={name}
-            borderRadius="3xl"
-            h="300px"
-            objectFit="cover"
-            src={image}
-            w="300px"
-          />
-          <Stack
-            _groupHover={{ display: "flex" }}
-            display="none"
-            transitionDuration="200ms"
-            w="full"
-          >
-            <IconButton
-              aria-label="Toggle favorite"
-              borderRadius="full"
-              colorScheme="gray"
-              fontSize="xl"
-              icon={<AiFillHeart fill={liked ? "red" : "gray"} />}
-              position="absolute"
-              right="15px"
-              top="15px"
-              onClick={() => setLiked(!liked)}
+    <Stack w="300px">
+      <Stack
+        _hover={{
+          position: "absolute",
+          transform: "scale(1.25)",
+          transitionDuration: "300ms",
+          zIndex: 1,
+        }}
+        bg="white"
+        borderRadius="3xl"
+        maxW="300px"
+        overflow="hidden"
+        position="relative"
+        role="group"
+      >
+        <IconButton
+          _groupHover={{ display: "flex" }}
+          aria-label="Toggle favorite"
+          borderRadius="full"
+          colorScheme="gray"
+          display="none"
+          fontSize="xl"
+          icon={<AiFillHeart fill={liked ? "red" : "gray"} />}
+          position="absolute"
+          right="15px"
+          top="15px"
+          onClick={() => setLiked(!liked)}
+        />
+        <Link passHref href={`/events/${address}`}>
+          <a>
+            <Image
+              alt={name}
+              borderRadius="3xl"
+              h="300px"
+              objectFit="cover"
+              src={image}
+              w="300px"
             />
-
-            <Stack bg="white" pb={7} pt={4} px={5}>
+            <Stack
+              _groupHover={{ display: "flex" }}
+              bg="white"
+              display="none"
+              position="relative"
+              px={5}
+              py={5}
+              transitionDuration="200ms"
+            >
               <Stack
-                alignItems="center"
+                alignItems="start"
                 color="blackAlpha.700"
                 direction="row"
-                fontSize="14px"
+                fontSize="12px"
                 fontWeight={500}
                 justifyContent="space-between"
               >
-                <Text>{location}</Text>
-                <Text>{place}</Text>
-                <Text>{date}</Text>
+                <Text>
+                  {location}, {place}
+                </Text>
+                <Text whiteSpace="nowrap">{date}</Text>
               </Stack>
               <Stack
                 alignItems="center"
                 direction="row"
-                fontSize="16px"
+                fontSize="14px"
                 fontWeight="bold"
                 justifyContent="space-between"
               >
                 <Text>{name}</Text>
-                <Text letterSpacing={0} m={0} p={0} whiteSpace="nowrap">
-                  {price} ETH
-                </Text>
+                <Text whiteSpace="nowrap">{price} ETH</Text>
               </Stack>
             </Stack>
-          </Stack>
-        </Stack>
+          </a>
+        </Link>
       </Stack>
-    </Link>
+    </Stack>
   );
 }
