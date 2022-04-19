@@ -33,7 +33,9 @@ export default async function handler(
       try {
         res.setHeader("Set-Cookie", serialised);
       } catch (error) {
-        res.status(500).json({ message: "something went wrong" });
+        res
+          .status(500)
+          .json({ message: "something went wrong, !JWT, force: true" });
       }
       res.status(200).json({ message: "success" });
     } else if ((loginJWT && force) || (loginJWT && !force)) {
@@ -60,7 +62,11 @@ export default async function handler(
           try {
             return res.setHeader("Set-Cookie", serialised);
           } catch (err) {
-            return res.status(500);
+            return res
+              .status(500)
+              .json({
+                message: "something went wrong, JWT and force || !force ",
+              });
           }
         }
         return res.status(200).json({ message: "success" });
