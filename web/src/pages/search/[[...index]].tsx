@@ -36,19 +36,22 @@ export const localStorage = (stateName: string) => {
 export default function Search() {
   const router = useRouter();
   const { searchTerm } = router.query;
-  const { events } = useSelector((state: AppState) => state);
-  const [state, setState] = useState([]);
+  const [homeStorage, setHomeStorage] = useState([]);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { events } = useSelector((state: AppState) => state);
 
   useEffect(() => {
     const sessionState = localStorage("homeState");
     if (sessionState?.length) {
-      setState(sessionState);
+      setHomeStorage(sessionState);
       return;
     }
     if (!events.length) {
       try {
+        setError(false);
+        setLoading(true);
         dispatch(getEvents());
       } catch {
         setError(true);
@@ -56,7 +59,14 @@ export default function Search() {
     }
   }, [events]);
 
-  store.subscribe(() => setState(events));
+  store.subscribe(() => {
+    setHomeStorage(store.getState().events);
+    setLoading(false);
+  });
+
+  useEffect(() => {
+    sessionStorage.setItem("homeState", JSON.stringify(homeStorage));
+  }, [homeStorage]);
 
   const matches: EVENT[] = [];
   const articles: string[] = [
@@ -76,7 +86,7 @@ export default function Search() {
     return <div style={estilos}>Nothing to search for...</div>;
 
   // eslint-disable-next-line array-callback-return
-  state.filter((event: EVENT) => {
+  homeStorage.map((event: EVENT) => {
     // a = key of the object data
     // let a: keyof EVENT
     for (let a in event) {
@@ -103,14 +113,15 @@ export default function Search() {
   const arrUniq = [...new Map(matches.map((v: EVENT) => [v.id, v])).values()];
 
   if (error) return <div style={estilos}>Something went wrong...</div>;
+  if (loading) return <div style={estilos}> Cargando...</div>;
   return (
     <div>
-      {state.length &&
-        arrUniq.map(({ id, metadata, name, place }) => (
+      {arrUniq.length &&
+        arrUniq.map(({ metadata, name, place, address }) => (
           <Card
             key={name}
             date={metadata.date}
-            id={id}
+            id={address}
             image={metadata.image}
             location={place}
             name={name}
