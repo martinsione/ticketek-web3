@@ -1,6 +1,8 @@
 import axios from "axios";
 
 import dateFilter from "../components/Functional Components/dateFilter";
+import { EventInfo } from "../components/Card/NewCard";
+
 
 export function getEvents() {
   // eslint-disable-next-line func-names
@@ -117,3 +119,6 @@ export function getUserFromDB(walletAddress: string) {
     });
   };
 }
+
+export const addFav = (payload: EventInfo) => ({ type: "ADD_FAV", payload });
+export const deleteFav = (address: string) => ({ type: "DELETE_FAV", payload: address });

@@ -38,7 +38,8 @@ import {
     ModalBody,
 } from "@chakra-ui/react";
 
-import { AppState } from "../../redux/store";
+// import { AppState } from "../../redux/store";
+import { IState } from "../../redux/reducer";
 import { getUserFromDB } from "../../redux/actions";
 import checkConnection from "../../lib/walletConectionChecker";
 import EditUserProfile from "../../components/EditUserProfile/EditUserProfile";
@@ -91,7 +92,7 @@ const estilos = {
   justifyContent: "center",
 };
 
-function user() {
+function User() {
   const [activity, setActivity] = useState<IActivity>([]);
   const [tickets, setTickets] = useState<string[]>([]);
   const ethValue = 1000000000000000000;
@@ -99,7 +100,7 @@ function user() {
   const { account, activate } = useWeb3React();
   const router = useRouter();
   const dispatch = useDispatch();
-  const currentUser = useSelector((state: AppState) => state.user);
+  const {user, favs} = useSelector((state: IState) => state);
   const {isOpen, onOpen, onClose} = useDisclosure()
 
   const cloud = new Cloudinary({
@@ -108,8 +109,8 @@ function user() {
     },
   });
 
-  const myImage = currentUser.image
-    ? cloud.image(currentUser.image.toString()).toURL()
+  const myImage = user.image
+    ? cloud.image(user.image.toString()).toURL()
     : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png";
 
   async function fetchData() {
@@ -170,7 +171,7 @@ function user() {
                 <ModalOverlay />
                   <ModalContent>  
                     <ModalBody>
-                      <EditUserProfile account={currentUser}/>
+                      <EditUserProfile account={user}/>
                     </ModalBody>
                   </ModalContent>
                </Modal>
@@ -217,12 +218,16 @@ function user() {
               listStyleType="none"
               textAlign="center"
             >
-              <ul>
-                <li>Queen</li>
-                <li>Katy Perry</li>
-                <li>Bad Bunny</li>
-                <li>Duki</li>
-              </ul>
+              
+                {favs.map(ev => {
+                  console.log(ev)
+                  return( 
+                  <NextLink passHref href={`/events/${ev.address}`}>
+                  <Tag cursor="pointer" fontSize="24px" margin="0 10px">{ev.name}</Tag>
+                  </NextLink>
+                  )
+                }) }
+              
             </TabPanel>
             <TabPanel>
               {!activity.length ? (
@@ -283,7 +288,7 @@ function user() {
   );
 }
 
-export default user;
+export default User;
 
 export async function getServerSideProps(context: {
   req: { cookies: { NFTicketLoginJWT: string } };
