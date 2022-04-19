@@ -29,7 +29,7 @@ export default function Card(props: EventInfo) {
     place,
   } = props
   const [liked, setLiked] = useState(false);
-  const ethValue = 1000000000000000000;
+  const ethValue = 1000000000;
   const dispatch = useDispatch()
   const {favs} = useSelector((state: IState) => state)
   const favCard = favs.find( event => event.address === address)

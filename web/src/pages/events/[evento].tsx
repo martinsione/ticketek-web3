@@ -90,7 +90,7 @@ export default function Evento({ data }: DATA) {
       from: await userAddress(),
       value: Number(price)*1000000000,
     })
-    .on('confirmation', () =>{
+    .once('receipt', () =>{
       setTrans('transaccion confirmada')
 
       window.ethereum.request({
@@ -105,25 +105,12 @@ export default function Evento({ data }: DATA) {
           },
         },
       })
+      router.push('/home');
 
     })
     .on('error', () => { setTrans('error en transacacion')});
     
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   return (
     <Container maxW="5xl" py={12}>
@@ -201,7 +188,7 @@ export default function Evento({ data }: DATA) {
               {algo ? <Button onClick={() => {buyTicket(data.address, eventInfo.price); setAlgo(false)}}>
                 Buy
               </Button> :
-              <Button  onClick={() => router.push('/about')}>
+              <Button  onClick={() => router.push('/home')}>
                   Seguir Explorando
               </Button> }
             </ModalFooter>
