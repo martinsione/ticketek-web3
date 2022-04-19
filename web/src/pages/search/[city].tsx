@@ -50,15 +50,15 @@ export default function City({ city }: { city: string }) {
   return (
     <>
       <Box>
-        <Text borderBottom="2px" fontSize="3xl">
-          {displayTitle}
-        </Text>
         <FilterBar>
           {/* eslint-disable-next-line react/jsx-no-bind */}
           <CategoriesDropDown fn={handleCategories} />
           {/* eslint-disable-next-line react/jsx-no-bind */}
           <DatesDropDown fn={handleDate} />
         </FilterBar>
+        <Text borderBottom="2px" fontSize="3xl">
+          {displayTitle}
+        </Text>
       </Box>
       {(filteredEvents as any).length ? (
         <CardPage data={(filteredEvents as any)} />

@@ -21,18 +21,19 @@ export default function CategoriesDropDown({ fn }: FUNC) {
 
   return (
     <Select
-      bg="gray.100"
+      bg="#38665B"
+      border="none"
       borderRadius="30"
+      color="white"
       defaultValue="All events..."
       name="category"
-      p="10px"
-      w="25%"
+      // p="10px"
       onChange={fn}
     >
-      <option value="all">All categories...</option>
+      <option style={{ backgroundColor: "#38665B" }} value="all">All categories...</option>
       {categories &&
         categories.map((type: string) => (
-          <option key={type} value={type}>
+          <option key={type} style={{ backgroundColor: "#38665B" }} value={type}>
             {type}
           </option>
         ))}
