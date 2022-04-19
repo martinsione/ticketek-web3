@@ -1,21 +1,22 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
 interface CHILDREN {
   children: React.ReactNode;
 }
 export default function FilterBar({ children }: CHILDREN) {
   return (
-    <div>
-      <Flex
-        alignItems="center"
-        bg="gray.200"
-        direction="row"
-        h={50}
-        justifyContent="end"
-      >
-        {children}
-      </Flex>
-    </div>
+    <Stack
+      alignItems="baseline"
+      direction="row"
+      gap="2rem"
+      h={50}
+      justify="space-around"
+      m="auto"
+      maxW="876px"
+      mt="0.5rem"
+    >
+      {children}
+    </Stack>
   );
 }
