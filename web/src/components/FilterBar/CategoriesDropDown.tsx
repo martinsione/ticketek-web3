@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { ChangeEvent, useEffect } from "react";
 import { Select } from "@chakra-ui/react";
 
-import { AppState } from "../../redux/store";
+import { IState } from "../../redux/reducer";
 import { getCategories } from "../../redux/actions";
 
 interface FUNC {
@@ -11,10 +11,10 @@ interface FUNC {
 
 export default function CategoriesDropDown({ fn }: FUNC) {
   const dispatch = useDispatch();
-  const { categories, events } = useSelector((state: AppState) => state);
+  const { categories, events } = useSelector((state: IState) => state);
 
   useEffect(() => {
-    if (!categories.length) {
+    if (!(categories as any).length) {
       dispatch(getCategories(events));
     }
   }, [events]);

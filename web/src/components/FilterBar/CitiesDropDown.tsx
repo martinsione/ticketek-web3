@@ -13,7 +13,7 @@ export default function CitiesDropDown({ fn }: any) {
   //   if (!events.length) dispatch(getEvents());
   // }, []);
   useEffect(() => {
-    if (!cities.length) dispatch(getCities(events));
+    if (!(cities as any).length) dispatch(getCities(events));
   }, [events]);
 
   return (

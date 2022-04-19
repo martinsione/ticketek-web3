@@ -19,10 +19,10 @@ export default function index() {
 
   const { events } = useSelector((state: AppState) => state);
   useEffect(() => {
-    if (!events.length) dispatch(getEvents());
+    if (!(events as any ).length) dispatch(getEvents());
   }, [events]);
 
-  const categoryEvents = events.filter(
+  const categoryEvents = (events as any ).filter(
     (ev: any) => ev.metadata.type === query.cat,
     () => { }
   );
@@ -66,8 +66,8 @@ export default function index() {
           {displayTitle}
         </Text>
       </Box>
-      {filteredEvents.length ? (
-        <CardPage data={filteredEvents} />
+      {(filteredEvents as any).length ? (
+        <CardPage data={(filteredEvents as any)   } />
       ) : (
         <Box textAlign="center">
           There are no{" "}

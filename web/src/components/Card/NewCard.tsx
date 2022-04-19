@@ -1,9 +1,14 @@
+/* eslint-disable import/no-cycle */
+import { useDispatch, useSelector } from "react-redux";
 import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";
 import Link from "next/link";
 import { Stack, Text, Image, IconButton } from "@chakra-ui/react";
 
-interface Props {
+import { IState } from "../../redux/reducer";
+import { addFav, deleteFav } from "../../redux/actions";
+
+export interface EventInfo {
   address: string;
   name: string;
   date: string;
@@ -13,16 +18,26 @@ interface Props {
   place: string;
 }
 
-export default function Card({
-  address,
-  name,
-  date,
-  image,
-  price,
-  location,
-  place,
-}: Props) {
+export default function Card(props: EventInfo) {
+  const {
+    address,
+    name,
+    date,
+    image,
+    price,
+    location,
+    place,
+  } = props
   const [liked, setLiked] = useState(false);
+  const ethValue = 1000000000000000000;
+  const dispatch = useDispatch()
+  const {favs} = useSelector((state: IState) => state)
+  const favCard = favs.find( event => event.address === address)
+  const handleFav = ()=>{
+      setLiked(!liked)
+      if(liked) dispatch(deleteFav(address))
+      if(!liked) dispatch(addFav(props))
+  }
 
   return (
     <Stack w="300px">
@@ -47,11 +62,11 @@ export default function Card({
           colorScheme="gray"
           display="none"
           fontSize="xl"
-          icon={<AiFillHeart fill={liked ? "red" : "gray"} />}
+          icon={<AiFillHeart fill={favCard ? "red" : "gray"} />}
           position="absolute"
           right="15px"
           top="15px"
-          onClick={() => setLiked(!liked)}
+          onClick={handleFav}
         />
         <Link passHref href={`/events/${address}`}>
           <a>
@@ -93,7 +108,9 @@ export default function Card({
                 justifyContent="space-between"
               >
                 <Text>{name}</Text>
-                <Text whiteSpace="nowrap">{price} ETH</Text>
+                <Text letterSpacing={0} m={0} p={0} whiteSpace="nowrap">
+                  {price/ethValue} ETH
+                </Text>
               </Stack>
             </Stack>
           </a>

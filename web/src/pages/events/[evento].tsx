@@ -50,7 +50,7 @@ interface DATA {
   ); */
 export default function Evento({ data }: DATA) {
   const allInfo = useSelector((state: AppState) => state.events);
-  const eventInfo = allInfo.find(
+  const eventInfo = (allInfo as any).find(
     (e: { address: string }) => e.address === data.address
   );
 

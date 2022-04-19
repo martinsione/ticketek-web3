@@ -45,7 +45,7 @@ function Home() {
       setHomeStorage(sessionState);
       return;
     }
-    if (!events.length) {
+    if (!(events as any ).length) {
       try {
         setError(false);
         setLoadingDestacados(true);
@@ -57,7 +57,7 @@ function Home() {
   }, [events]);
 
   store.subscribe(() => {
-    setHomeStorage(events);
+    setHomeStorage(events as any );
     setLoadingDestacados(false);
   });
 
@@ -71,19 +71,19 @@ function Home() {
       <HomeFilterBar />
       <main>
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
+          data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.name.includes("e")}
           loading={loadingDestacados}
           title="Destacados"
         />
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
-          fn={(ev: any) => dateFilter(events, "month") && ev}
+          data={homeStorage.length ? homeStorage : (events as any )}
+          fn={(ev: any) => dateFilter((events as any ), "month") && ev}
           loading={loadingDestacados}
           title="Este mes"
         />
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
+          data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.place === "Cordoba"}
           loading={loadingDestacados}
           title="En Cordoba"
