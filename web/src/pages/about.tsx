@@ -53,7 +53,7 @@ const GITHUB_USERS = [
 
 export default function About() {
   return (
-    <Stack maxW="5xl" mx="auto" py={12} spacing={12}>
+    <Stack color="white" maxW="5xl" mx="auto" py={12} spacing={12}>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={4}>
           <Text

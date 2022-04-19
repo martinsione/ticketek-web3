@@ -57,6 +57,18 @@ export default function NavBar() {
           </InputRightElement>
         </InputGroup>
         <Stack alignItems="center" direction="row" spacing={8}>
+          <NextLink href="/add">
+            <a>
+              <Stack
+                alignItems="center"
+                color="white"
+                direction="row"
+                spacing={6}
+              >
+                <Text>Create</Text>
+              </Stack>
+            </a>
+          </NextLink>
           <NextLink href="/home">
             <a>
               <Stack
