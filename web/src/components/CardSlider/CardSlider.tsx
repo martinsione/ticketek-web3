@@ -1,4 +1,7 @@
-import { IoIosArrowDropleftCircle, IoIosArrowDroprightCircle } from "react-icons/io";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 import React, { useRef, useState } from "react";
 import { Box, Text, Flex, Stack } from "@chakra-ui/react";
 
@@ -9,9 +12,18 @@ interface Props {
   data: [{ name: string; price: number; place: string; metadata: [] }];
   title: string;
   fn: (ev: any) => boolean;
+  loading: boolean;
 }
 
-export default function CardSlider({ data, title, fn }: Props) {
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+export default function CardSlider({ data, title, fn, loading }: Props) {
   const scrollStep = 1275; //  1500
   const cardWidth = 350;
   const columnWidth = Math.round(cardWidth * 1.15);
@@ -86,55 +98,59 @@ export default function CardSlider({ data, title, fn }: Props) {
       <Text borderBottom="2px" color="white" fontSize="3xl">
         {title}
       </Text>
-      <Flex p="10px">
-        {/* className={style.root} */}
-        <button
-          className={style.bot}
-          style={
-            scrollBox === 0
-              ? { visibility: "hidden" }
-              : { visibility: "visible" }
-          }
-          type="button"
-          onClick={goLeft}
-        >
-          <IoIosArrowDropleftCircle color="white" />
-        </button>
-        <div
-          ref={box}
-          className={style.box}
-          style={{
-            gridTemplateColumns: gridColumns,
-          }}
-        >
-          {dataIntermediate &&
-            dataIntermediate.map((ev: any) => (
-              <Box key={ev.symbol}>
-                <NewCard
-                  address={ev.address}
-                  date={ev.metadata.date}
-                  image={ev.metadata.image}
-                  location={ev.metadata.location}
-                  name={ev.name}
-                  place={ev.place}
-                  price={ev.price}
-                />
-              </Box>
-            ))}
-        </div>
-        <button
-          className={style.bot}
-          style={
-            scrollBox >= maxWidth
-              ? { visibility: "hidden" }
-              : { visibility: "visible" }
-          }
-          type="button"
-          onClick={goRight}
-        >
-          <IoIosArrowDroprightCircle color="white" />
-        </button>
-      </Flex>
+      {loading ? (
+        <div style={estilos}>Cargando...</div>
+      ) : (
+        <Flex p="10px">
+          {/* className={style.root} */}
+          <button
+            className={style.bot}
+            style={
+              scrollBox === 0
+                ? { visibility: "hidden" }
+                : { visibility: "visible" }
+            }
+            type="button"
+            onClick={goLeft}
+          >
+            <IoIosArrowDropleftCircle color="white" />
+          </button>
+          <div
+            ref={box}
+            className={style.box}
+            style={{
+              gridTemplateColumns: gridColumns,
+            }}
+          >
+            {dataIntermediate &&
+              dataIntermediate.map((ev: any) => (
+                <Box key={ev.symbol}>
+                  <NewCard
+                    address={ev.address}
+                    date={ev.metadata.date}
+                    image={ev.metadata.image}
+                    location={ev.metadata.location}
+                    name={ev.name}
+                    place={ev.place}
+                    price={ev.price}
+                  />
+                </Box>
+              ))}
+          </div>
+          <button
+            className={style.bot}
+            style={
+              scrollBox >= maxWidth
+                ? { visibility: "hidden" }
+                : { visibility: "visible" }
+            }
+            type="button"
+            onClick={goRight}
+          >
+            <IoIosArrowDroprightCircle color="white" />
+          </button>
+        </Flex>
+      )}
     </Stack>
   );
 }

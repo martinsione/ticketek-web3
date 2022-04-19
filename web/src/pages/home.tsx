@@ -12,10 +12,20 @@ export const localStorage = (stateName: string) => {
   return sessionState && JSON.parse(sessionState);
 };
 
+const estilos = {
+  fontSize: "50px",
+  color: "white",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
 function Home() {
   const dispatch = useDispatch();
   const [homeStorage, setHomeStorage] = useState([]);
   const { events } = useSelector((state: AppState) => state);
+  const [error, setError] = useState(false);
+  const [loadingDestacados, setLoadingDestacados] = useState(false);
 
   // useEffect(() => {
   //   if (!events.length) dispatch(getEvents());
@@ -31,15 +41,28 @@ function Home() {
       setHomeStorage(sessionState);
       return;
     }
-    dispatch(getEvents());
-  }, []);
+    if (!events.length) {
+      try {
+        setError(false);
+        setLoadingDestacados(true);
+        dispatch(getEvents());
+      } catch {
+        setError(true);
+      }
+    }
+  }, [events]);
 
-  store.subscribe(() => setHomeStorage(events));
+  store.subscribe(() => {
+    setHomeStorage(events);
+    setLoadingDestacados(false);
+    console.log(store.getState());
+  });
 
   useEffect(() => {
     sessionStorage.setItem("homeState", JSON.stringify(homeStorage));
   }, [homeStorage]);
 
+  if (error) return <div style={estilos}>Algo salio mal...</div>;
   return (
     <div>
       <HomeFilterBar />
@@ -47,16 +70,19 @@ function Home() {
         <CardSlider
           data={homeStorage.length ? homeStorage : events}
           fn={(ev: any) => ev.name.includes("e")}
+          loading={loadingDestacados}
           title="Destacados"
         />
         <CardSlider
           data={homeStorage.length ? homeStorage : events}
           fn={(ev: any) => dateFilter(events, "month") && ev}
+          loading={loadingDestacados}
           title="Este mes"
         />
         <CardSlider
           data={homeStorage.length ? homeStorage : events}
           fn={(ev: any) => ev.place === "Cordoba"}
+          loading={loadingDestacados}
           title="En Cordoba"
         />
       </main>
