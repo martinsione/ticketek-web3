@@ -219,14 +219,11 @@ function User() {
               textAlign="center"
             >
               
-                {favs.map(ev => {
-                  console.log(ev)
-                  return( 
+                {favs.map(ev => ( 
                   <NextLink passHref href={`/events/${ev.address}`}>
                   <Tag cursor="pointer" fontSize="24px" margin="0 10px">{ev.name}</Tag>
                   </NextLink>
-                  )
-                }) }
+                  )) }
               
             </TabPanel>
             <TabPanel>
