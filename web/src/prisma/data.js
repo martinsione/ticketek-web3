@@ -33,6 +33,7 @@ module.exports = {
       name: "Callejeros",
       symbol: "CJS",
     },
+
     {
       address: "0xCd6aac2Ae35034828B763E884900A0B4014670f3",
 

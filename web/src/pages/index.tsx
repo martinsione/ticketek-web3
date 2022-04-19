@@ -1,6 +1,11 @@
 import Link from "next/link";
 import axios from "axios";
-import { Button, Image, Stack, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Image,
+  Stack,
+  Text
+} from "@chakra-ui/react";
 
 export default function Home() {
   axios.defaults.baseURL = process.env.NEXT_PUBLIC_BASE_URL;

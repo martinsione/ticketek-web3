@@ -13,7 +13,7 @@ interface FUNC {
   ) => void;
 }
 
-export default function CategoriesDropDown({ fn }: FUNC) {
+export default function DatesDropDown({ fn }: FUNC) {
   const date = useRef<HTMLInputElement>(null);
 
   const handleDateMenu: ChangeEventHandler<HTMLSelectElement> = (e) => {
@@ -38,6 +38,7 @@ export default function CategoriesDropDown({ fn }: FUNC) {
         bg="gray.100"
         borderRadius="30"
         defaultValue="All dates..."
+        id="presetDate"
         name="category"
         p="10px"
         w="15%"
@@ -54,7 +55,7 @@ export default function CategoriesDropDown({ fn }: FUNC) {
         ref={date}
         background-color="gray.100"
         border-radius="30"
-        id="chooseDate"
+        id="userDate"
         name="date"
         placeholder="Enter your date"
         style={{ visibility: "hidden", padding: "10px", width: "15%" }}

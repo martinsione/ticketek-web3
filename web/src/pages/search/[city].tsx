@@ -1,10 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeEvent, useEffect, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
-import { filterEvents, getContracts, getEvents } from "../../redux/actions";
-import prisma from "../../lib/prisma";
+import { filterEvents, getEvents } from "../../redux/actions";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
@@ -16,18 +15,18 @@ export default function City({ city }: { city: string }) {
   const [filterDate, setFilterDate] = useState("all");
   const [filterCategory, setFilterCategory] = useState("all");
 
+  const { events } = useSelector((state: AppState) => state);
+  const cityEvents = events.filter((ev: any) => ev.place === city);
+
+  useEffect(() => {
+    if (!events.length) dispatch(getEvents());
+  }, [events]);
+
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
   useEffect(() => {
-    dispatch(getEvents());
-  }, []);
-  const allEvents = useSelector((state: AppState) => state.events).filter(
-    (ev: any) => ev.city === city
-  );
-
-  useEffect(() => {
     dispatch(
-      filterEvents(allEvents, {
+      filterEvents(cityEvents, {
         date: filterDate,
         city: "all",
         category: filterCategory,
@@ -50,14 +49,19 @@ export default function City({ city }: { city: string }) {
   const displayTitle: any = city;
   return (
     <>
-      <FilterBar>
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <CategoriesDropDown fn={handleCategories} />
-        {/* eslint-disable-next-line react/jsx-no-bind */}
-        <DatesDropDown fn={handleDate} />
-      </FilterBar>
+      <Box>
+        <Text borderBottom="2px" fontSize="3xl">
+          {displayTitle}
+        </Text>
+        <FilterBar>
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <CategoriesDropDown fn={handleCategories} />
+          {/* eslint-disable-next-line react/jsx-no-bind */}
+          <DatesDropDown fn={handleDate} />
+        </FilterBar>
+      </Box>
       {filteredEvents.length ? (
-        <CardPage data={filteredEvents} title={displayTitle} />
+        <CardPage data={filteredEvents} />
       ) : (
         <Box textAlign="center">
           There are no{" "}
@@ -79,16 +83,24 @@ export async function getStaticProps(context: { params: { city: string } }) {
   };
 }
 
-export async function getStaticPaths() {
-  const dispatch = useDispatch();
-  const cities = useSelector((state: AppState) => state.cities);
+export function getStaticPaths() {
+  // const dispatch = useDispatch();
+  // const cities = useSelector((state: AppState) => state.cities);
 
-  useEffect(() => {
-    dispatch(getEvents());
-  }, []);
+  // Esto es provisional!!! La linea anterior me bota error
+  const cities = [
+    "Buenos Aires",
+    "La Plata",
+    "Guadalajara",
+    "Bogota",
+    "Cordoba",
+    "Tijuana",
+  ];
+  // useEffect(() => {
+  //   dispatch(getEvents());
+  // }, []);
   const paths = cities.map((element: any) => ({
-    params: { city: element.place.toLowerCase() },
-
+    params: { city: element.toLowerCase() },
   }));
   return {
     paths,

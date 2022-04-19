@@ -26,28 +26,32 @@ export default function filterBar() {
             })
           }
         />
-        {/* <DatesDropDown
+        <DatesDropDown
           fn={(
             e:
               | React.ChangeEvent<HTMLSelectElement>
               | React.ChangeEvent<HTMLInputElement>
           ) =>
-            e.target.value !== "choose"
+            e.target.id === "presetDate"
               ? router.push({
                   pathname: "/search/byDate",
-                  query: { opt: e.target.value },
+                  query: {
+                    opt: e.target.value,
+                    // @ts-ignore
+                    title: e.target[e.target.selectedIndex].innerText,
+                  },
                 })
               : router.push({
                   pathname: "/search/byDate",
-                  query: { opt: "choose", date: e.target.value }, //  Next envia  el query opt: e.target.value... Raro!
+                  query: { opt: e.target.value },
                 })
           }
-        /> */}
-        {/* <CitiesDropDown
+        />
+        <CitiesDropDown
           fn={(e: React.ChangeEvent<HTMLInputElement>) =>
             router.push(`/search/${e.target.value}`)
           }
-        /> */}
+        />
       </Flex>
     </div>
   );

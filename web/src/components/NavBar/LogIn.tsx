@@ -8,15 +8,15 @@ import NextLink from "next/link";
 import axios from "axios";
 import { useWeb3React } from "@web3-react/core";
 import {
-    Button,
-    Popover,
-    PopoverBody,
-    PopoverContent,
-    PopoverTrigger,
-    Portal,
-    useToast,
-    Stack,
-    Text,
+  Button,
+  Popover,
+  PopoverBody,
+  PopoverContent,
+  PopoverTrigger,
+  Portal,
+  useToast,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 
 import injected from "../Wallet/connector";
@@ -169,16 +169,6 @@ export default function LogIn() {
             <Portal>
               <PopoverContent>
                 <PopoverBody>
-                  <Button
-                    bg="none"
-                    fontSize="1.2rem"
-                    isLoading={loading}
-                    margin="5px"
-                    width="100%"
-                    onClick={handleConnect}
-                  >
-                    Log out
-                  </Button>
                   {account && (
                     <NextLink passHref href="/user">
                       <Button
@@ -191,18 +181,16 @@ export default function LogIn() {
                       </Button>
                     </NextLink>
                   )}
-                  {account && (
-                    <NextLink passHref href="/user/userData">
-                      <Button
-                        bg="none"
-                        fontSize="1.2rem"
-                        margin="5px"
-                        width="100%"
-                      >
-                        Settings
-                      </Button>
-                    </NextLink>
-                  )}
+                  <Button
+                    bg="none"
+                    fontSize="1.2rem"
+                    isLoading={loading}
+                    margin="5px"
+                    width="100%"
+                    onClick={handleConnect}
+                  >
+                    Log out
+                  </Button>
                 </PopoverBody>
               </PopoverContent>
             </Portal>
