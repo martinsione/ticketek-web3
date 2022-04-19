@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { AppState, store } from "../redux/store";
-import { /* getCategories, getCities, */ getEvents } from "../redux/actions";
+import {
+  /* getCategories, getCities, */ getEvents,
+  getEventsSessionStorage,
+} from "../redux/actions";
 import dateFilter from "../components/Functional Components/dateFilter";
 import HomeFilterBar from "../components/FilterBar/HomeFilterBar";
 import CardSlider from "../components/CardSlider/CardSlider";
@@ -38,10 +41,11 @@ function Home() {
   useEffect(() => {
     const sessionState = localStorage("homeState");
     if (sessionState?.length) {
+      dispatch(getEventsSessionStorage(sessionState));
       setHomeStorage(sessionState);
       return;
     }
-    if (!events.length) {
+    if (!(events as any ).length) {
       try {
         setError(false);
         setLoadingDestacados(true);
@@ -53,7 +57,7 @@ function Home() {
   }, [events]);
 
   store.subscribe(() => {
-    setHomeStorage(events);
+    setHomeStorage(events as any );
     setLoadingDestacados(false);
   });
 
@@ -67,19 +71,19 @@ function Home() {
       <HomeFilterBar />
       <main>
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
+          data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.name.includes("e")}
           loading={loadingDestacados}
           title="Destacados"
         />
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
-          fn={(ev: any) => dateFilter(events, "month") && ev}
+          data={homeStorage.length ? homeStorage : (events as any )}
+          fn={(ev: any) => dateFilter((events as any ), "month") && ev}
           loading={loadingDestacados}
           title="Este mes"
         />
         <CardSlider
-          data={homeStorage.length ? homeStorage : events}
+          data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.place === "Cordoba"}
           loading={loadingDestacados}
           title="En Cordoba"
