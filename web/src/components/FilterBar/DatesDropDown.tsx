@@ -5,7 +5,7 @@ import React, {
   // MutableRefObject,
   useRef,
 } from "react"; //  ChangeEventHandler,
-import { Select, Input } from "@chakra-ui/react";
+import { Select, Input, Stack } from "@chakra-ui/react";
 
 interface FUNC {
   fn: (
@@ -33,35 +33,36 @@ export default function DatesDropDown({ fn }: FUNC) {
     fn(e);
   };
   return (
-    <>
+    <Stack >
       <Select
-        bg="gray.100"
+        bg="#38665B"
+        border="none"
         borderRadius="30"
+        color="white"
         defaultValue="All dates..."
         id="presetDate"
         name="category"
-        p="10px"
-        w="15%"
+        width="20rem"
         onChange={handleDateMenu}
       >
-        <option value="all">All dates...</option>
-        <option value="days">In a couple of days</option>
-        <option value="weekend">This weekend</option>
-        <option value="week">Next week</option>
-        <option value="month">This month</option>
-        <option value="choose">Choose a date</option>
+        <option style={{ backgroundColor: "#38665B" }} value="all">All dates...</option>
+        <option style={{ backgroundColor: "#38665B" }} value="days">In a couple of days</option>
+        <option style={{ backgroundColor: "#38665B" }} value="weekend">This weekend</option>
+        <option style={{ backgroundColor: "#38665B" }} value="week">Next week</option>
+        <option style={{ backgroundColor: "#38665B" }} value="month">This month</option>
+        <option style={{ backgroundColor: "#38665B" }} value="choose">Choose a date</option>
       </Select>
       <Input
         ref={date}
-        background-color="gray.100"
-        border-radius="30"
+        backgroundColor="gray.100"
+        borderRadius="30px"
         id="userDate"
         name="date"
         placeholder="Enter your date"
-        style={{ visibility: "hidden", padding: "10px", width: "15%" }}
         type="date"
+        visibility="hidden"
         onChange={handleChooseDate}
       />
-    </>
+    </Stack>
   );
 }

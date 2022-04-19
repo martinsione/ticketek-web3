@@ -18,18 +18,18 @@ export default function CitiesDropDown({ fn }: any) {
 
   return (
     <Select
-      bg="gray.100"
+      bg="#38665B"
+      border="none"
       borderRadius="30"
+      color="white"
       defaultValue="All cities..."
       name="city"
-      p="10px"
-      w="25%"
       onChange={fn}
     >
-      <option value="all">All cities...</option>
+      <option style={{ backgroundColor: "#38665B" }} value="all">All cities...</option>
       {cities &&
         cities.map((city: string) => (
-          <option key={city} value={city}>
+          <option key={city} style={{ backgroundColor: "#38665B" }} value={city}>
             {city}
           </option>
         ))}
