@@ -59,9 +59,11 @@ export default function rootReducer(state: IState = initialState, action: IActio
       return { ...state, contracts: action.payload };
     case "FILTER_EVENTS":
       return { ...state, filterEvents: action.payload };
+    case "GET_EVENT_SESSION_STORAGE":
+      return { ...state, events: action.payload };
 
-        case "GET_USER":
-            return { ...state, user: action.payload };
+    case "GET_USER":
+      return { ...state, user: action.payload };
     default:
       return state;
   }

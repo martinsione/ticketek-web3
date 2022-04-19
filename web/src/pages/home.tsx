@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect, useState } from "react";
 
 import { AppState, store } from "../redux/store";
-import { /* getCategories, getCities, */ getEvents } from "../redux/actions";
+import {
+  /* getCategories, getCities, */ getEvents,
+  getEventsSessionStorage,
+} from "../redux/actions";
 import dateFilter from "../components/Functional Components/dateFilter";
 import HomeFilterBar from "../components/FilterBar/HomeFilterBar";
 import CardSlider from "../components/CardSlider/CardSlider";
@@ -38,6 +41,7 @@ function Home() {
   useEffect(() => {
     const sessionState = localStorage("homeState");
     if (sessionState?.length) {
+      dispatch(getEventsSessionStorage(sessionState));
       setHomeStorage(sessionState);
       return;
     }

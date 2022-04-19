@@ -122,3 +122,9 @@ export function getUserFromDB(walletAddress: string) {
 
 export const addFav = (payload: EventInfo) => ({ type: "ADD_FAV", payload });
 export const deleteFav = (address: string) => ({ type: "DELETE_FAV", payload: address });
+export function getEventsSessionStorage(payload: []) {
+  return {
+    type: "GET_EVENT_SESSION_STORAGE",
+    payload,
+  };
+}

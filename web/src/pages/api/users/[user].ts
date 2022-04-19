@@ -53,7 +53,7 @@ export default async function handler(
                         where: {
                             walletAddress: user,
                         },
-                        data: { name, image, email },
+                        data: { name, image, email, walletAddress: user },
                     });
                     return res.status(200).json(response);
                 }
@@ -67,4 +67,4 @@ export default async function handler(
         });
         return res.status(200).json(response);
     }
- }
+}
