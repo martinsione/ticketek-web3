@@ -53,7 +53,7 @@ export default async function handler(
 
           const serialised = serialize("NFTicketLoginJWT", token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV !== "development",
+            secure: false,
             sameSite: "lax",
             maxAge: 60 * 60 * 24,
             path: "/",
@@ -62,11 +62,9 @@ export default async function handler(
           try {
             return res.setHeader("Set-Cookie", serialised);
           } catch (err) {
-            return res
-              .status(500)
-              .json({
-                message: "something went wrong, JWT and force || !force ",
-              });
+            return res.status(500).json({
+              message: "something went wrong, JWT and force || !force ",
+            });
           }
         }
         return res.status(200).json({ message: "success" });
