@@ -29,6 +29,7 @@ export default function Card({
       <Stack w="300px">
         <Stack
           _hover={{
+            position: "absolute",
             transform: "scale(1.25)",
             shadow: "lg",
             transitionDuration: "200ms",
@@ -38,7 +39,6 @@ export default function Card({
           borderRadius="3xl"
           maxW="300px"
           overflow="hidden"
-          position="absolute"
           role="group"
         >
           <Image
