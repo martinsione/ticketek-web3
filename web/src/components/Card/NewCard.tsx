@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillHeart } from "react-icons/ai";
 import { useState } from "react";

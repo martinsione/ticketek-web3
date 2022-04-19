@@ -24,12 +24,12 @@ export default function byDate() {
   const { events } = useSelector((state: AppState) => state);
 
   useEffect(() => {
-    if (!events.length) dispatch(getEvents());
+    if (!(events as any ).length) dispatch(getEvents());
   }, [events]);
 
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const dateEvents = dateFilter(
-    useSelector((state: AppState) => state.events),
+    useSelector((state: AppState) => (state.events as any)),
     query.opt
   );
 
@@ -72,8 +72,8 @@ export default function byDate() {
           <CitiesDropDown fn={handleCities} />
         </FilterBar>
       </Box>
-      {filteredEvents.length ? (
-        <CardPage data={filteredEvents} />
+      {(filteredEvents as any).length ? (
+        <CardPage data={(filteredEvents as any)} />
       ) : (
         <Box textAlign="center">
           There are no{" "}

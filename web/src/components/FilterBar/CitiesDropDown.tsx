@@ -13,7 +13,7 @@ export default function CitiesDropDown({ fn }: any) {
   //   if (!events.length) dispatch(getEvents());
   // }, []);
   useEffect(() => {
-    if (!cities.length) dispatch(getCities(events));
+    if (!(cities as any).length) dispatch(getCities(events));
   }, [events]);
 
   return (
@@ -28,7 +28,7 @@ export default function CitiesDropDown({ fn }: any) {
     >
       <option value="all">All cities...</option>
       {cities &&
-        cities.map((city: string) => (
+        (cities as any).map((city: string) => (
           <option key={city} value={city}>
             {city}
           </option>

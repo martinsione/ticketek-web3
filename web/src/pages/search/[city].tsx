@@ -16,10 +16,10 @@ export default function City({ city }: { city: string }) {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const { events } = useSelector((state: AppState) => state);
-  const cityEvents = events.filter((ev: any) => ev.place === city);
+  const cityEvents = (events as any ).filter((ev: any) => ev.place === city);
 
   useEffect(() => {
-    if (!events.length) dispatch(getEvents());
+    if (!(events as any ).length) dispatch(getEvents());
   }, [events]);
 
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
@@ -60,8 +60,8 @@ export default function City({ city }: { city: string }) {
           <DatesDropDown fn={handleDate} />
         </FilterBar>
       </Box>
-      {filteredEvents.length ? (
-        <CardPage data={filteredEvents} />
+      {(filteredEvents as any).length ? (
+        <CardPage data={(filteredEvents as any)} />
       ) : (
         <Box textAlign="center">
           There are no{" "}

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { EventInfo } from "../components/Card/NewCard";
 
 export interface IUser {
@@ -19,7 +20,7 @@ favs: EventInfo[]
 
 interface IAction {
   type: string,
-  payload: unknown 
+  payload: any 
 }
 
 const initialState: IState = {

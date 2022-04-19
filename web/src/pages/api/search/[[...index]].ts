@@ -18,7 +18,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const store = useStore();
 
   useEffect(() => {
-    if (!events.length) dispatch(getEvents());
+    if (!(events as any).length) dispatch(getEvents());
   }, []);
 
   let sessionState = localStorage("homeState");
@@ -26,7 +26,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (sessionState?.length) {
       return;
     }
-    if (!events.length) {
+    if (!(events as any).length) {
       dispatch(getEvents());
     }
   }, [events]);
