@@ -1,6 +1,9 @@
 import type { AppState } from "../../redux/store";
 
+import Web3 from "web3";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import  { useRouter } from "next/router";
 import {
   Container,
   SimpleGrid,
@@ -12,10 +15,21 @@ import {
   StackDivider,
   useColorModeValue,
   Button,
+  Modal, 
+  ModalContent,
+  ModalOverlay,
+  useDisclosure,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
 } from "@chakra-ui/react";
 
 import prisma from "../../lib/prisma";
-import { buyTicket } from "../../components/FunctionalComponents/UserCommands";
+import { web, userAddress } from "../../components/FunctionalComponents/UserCommands";
+import abi from '../../Ticket.json'
+
+
 
 interface DATA {
   data: {
@@ -53,6 +67,63 @@ export default function Evento({ data }: DATA) {
   const eventInfo = (allInfo as any).find(
     (e: { address: string }) => e.address === data.address
   );
+
+  const {isOpen, onOpen, onClose} = useDisclosure()
+  const [trans, setTrans] = useState('La compra se esta procesando')
+  const [algo, setAlgo] = useState(true)
+  const router = useRouter()
+
+  
+   
+
+
+
+  const buyTicket = async (address: string, price: number) => {
+    let web3 = web
+    
+    if (window?.ethereum) {
+      web3 = new Web3(window.ethereum);
+    } 
+    const contract = new web3.eth.Contract(abi.abi as any, address);
+    
+    await contract.methods.safeMint().send({
+      from: await userAddress(),
+      value: Number(price)*1000000000,
+    })
+    .on('confirmation', () =>{
+      setTrans('transaccion confirmada')
+
+      window.ethereum.request({
+        method: 'wallet_watchAsset',
+        params: {
+          type: 'ERC20',
+          options: {
+            address: data.address,
+            symbol: data.symbol,
+            decimals: 10,
+            image: eventInfo.metadata.image
+          },
+        },
+      })
+
+    })
+    .on('error', () => { setTrans('error en transacacion')});
+    
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <Container maxW="5xl" py={12}>
@@ -106,13 +177,36 @@ export default function Evento({ data }: DATA) {
         borderRadius="full"
         color="white"
         fontSize="sm"
-        onClick={() => {
-          console.log(eventInfo)
-          return buyTicket(data.address, eventInfo.price)
-        }}
+        onClick={onOpen}
       >
         Buy Ticket
       </Button>
+
+      <Modal isOpen={isOpen} onClose={onClose} >
+        <ModalOverlay />
+        <ModalContent>
+            <ModalCloseButton/>
+              <ModalBody>
+               <ModalHeader>
+                    Confirmar Compra
+                </ModalHeader>
+                {algo ? (<p>
+                  Event: {data.name}  <br/>
+                  Place: {eventInfo.metadata.location}  <br/>  
+                  Date {eventInfo.metadata.date} <br/>
+                  Price {eventInfo.price / 1000000000} ETH  <br/>
+                </p>) : <h1>{trans}</h1>}
+              </ModalBody>
+            <ModalFooter>
+              {algo ? <Button onClick={() => {buyTicket(data.address, eventInfo.price); setAlgo(false)}}>
+                Buy
+              </Button> :
+              <Button  onClick={() => router.push('/about')}>
+                  Seguir Explorando
+              </Button> }
+            </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 }
