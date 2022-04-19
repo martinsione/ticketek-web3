@@ -28,8 +28,6 @@ export default async function handler(
         sameSite: "lax",
         maxAge: 60 * 60 * 24,
         path: "/",
-        domain:
-          process.env.NODE_ENV === "development" ? ".localhost" : ".vercel.app",
       });
 
       try {
@@ -57,10 +55,6 @@ export default async function handler(
             sameSite: "lax",
             maxAge: 60 * 60 * 24,
             path: "/",
-            domain:
-              process.env.NODE_ENV === "development"
-                ? ".localhost"
-                : ".vercel.app",
           });
 
           try {
