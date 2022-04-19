@@ -157,26 +157,34 @@ function user() {
                 ? myImage
                 : "https://upload.wikimedia.org/wikipedia/commons/b/b7/ETHEREUM-YOUTUBE-PROFILE-PIC.png"
             }
-            onClick={onOpen}
+       
           />
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-              <ModalContent>  
-                <ModalBody>
-                  <EditUserProfile account={currentUser}/>
-                </ModalBody>
-              </ModalContent>
-          </Modal>
           <Flex align="center" justify="center" textAlign="center">
             <Text fontSize="2rem" marginRight="10px">
               {stateLocal.name || "Unnamed"}
             </Text>
-            <NextLink
+            {stateLocal ? 
+            <>
+               <IconButton onClick={onOpen} aria-label="edit-user" icon={<FiEdit3 />} />
+               <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                  <ModalContent>  
+                    <ModalBody>
+                      <EditUserProfile account={currentUser}/>
+                    </ModalBody>
+                  </ModalContent>
+               </Modal>
+            </>
+
+              :
+              <NextLink
               passHref
               href={stateLocal ? `/settingsUser/${account}` : `user/userData`}
-            >
-              <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
-            </NextLink>
+              >
+                  <IconButton aria-label="edit-user" icon={<FiEdit3 />} />
+              </NextLink>
+          }  
+            
           </Flex>
           <Tag padding="3">{account || "address..."} </Tag>
         </Box>
