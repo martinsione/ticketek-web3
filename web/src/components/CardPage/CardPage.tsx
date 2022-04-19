@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Stack } from "@chakra-ui/react";
 
-import NewCard from "../Card/NewCard";
+import CardFiltrada from "../Card/CardFiltrada";
 
 type Props = {
   data: [
@@ -22,7 +22,7 @@ export default function CardPage({ data }: Props) {
       {data &&
         data.map((ev: any) => (
           <Box key={ev.symbol}>
-            <NewCard
+            <CardFiltrada
               address={ev.address}
               date={ev.metadata.date}
               image={ev.metadata.image}
