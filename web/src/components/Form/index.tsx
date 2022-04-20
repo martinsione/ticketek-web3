@@ -1,10 +1,23 @@
 // import Web3 from "web3";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/router";
 import {
   // Image,
   Button,
   Input,
   Box,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  ModalFooter,
+  useDisclosure,
+  ModalBody,
+  ModalHeader,
+  Stack,
+  Text,
+  Spinner,
   // FormControl,
   // FormLabel,
   // NumberInput,
@@ -37,6 +50,10 @@ export default function Form() {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<InputProps>();
+  const [info, setInfo] = useState <any>('');
+  const [algo, setAlgo] = useState(true);
+  const router = useRouter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const onSubmit: SubmitHandler<InputProps> = (data) => {
 
@@ -69,6 +86,8 @@ export default function Form() {
     );
   };
 
+
+
   return (
     <Box
       alignItems="center"
@@ -84,7 +103,7 @@ export default function Form() {
       my="16px"
       px="35px"
       py="30px"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(setInfo)}
     >
       <Input {...register("name")} borderRadius="full" placeholder="Name" />
       <Input {...register("symbol")} borderRadius="full" placeholder="Symbol" />
@@ -123,9 +142,60 @@ export default function Form() {
         mt="0.75rem"
         type="submit"
         width="100px"
+        onClick={onOpen}
       >
         Submit
       </Button>
+      <Modal isOpen={isOpen} onClose={onClose} >
+        <ModalOverlay />
+        <ModalContent borderRadius="30px" mt="12rem">
+          <ModalCloseButton
+            _hover={{ bgGradient: "linear(to-tr, #fff 0%, #FF0000 100%)" }}
+            bgGradient="linear(to-tr, #73E0A9 0%, #5B68DF 100%)"
+            borderRadius="full"
+            color="white"
+            m="0.5rem"
+          />
+          <ModalBody>
+            <ModalHeader>
+              Confirmar contrato
+            </ModalHeader>
+            <Stack direction="column" mt="0.5rem">
+              {algo 
+              ? (
+                <>
+                <Text>Al pulsar el boton se confirma el contrato de:</Text>
+                <Text>Nombre: {info.name}</Text>
+                <Text>Lugar: {info.location}</Text>
+                <Text>Precio: {info.price} ETH</Text>
+                <Text>Fecha: {info.date}</Text>
+                </>
+              )
+              :
+              <>
+                <Text>Se lo redireccionara a la pagina principal...</Text>
+                <Spinner alignSelf="center" size='xl' />
+              </> 
+              }
+            </Stack>
+
+          </ModalBody> 
+          <ModalFooter>
+          <Button
+                _hover={{ bg: "#5B68DF" }}
+                bg="#73E0A9"
+                borderRadius="full"
+                color="white"
+                disabled= {!algo}
+                fontSize="sm"
+                onClick={() => { onSubmit(info); setAlgo(false); setTimeout(() =>router.push('/home'),5000 )}}
+              >
+                {algo? 'Confirmar' : 'Confirmado'}
+              </Button>
+          
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
