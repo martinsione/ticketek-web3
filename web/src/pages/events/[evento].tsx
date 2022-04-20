@@ -73,7 +73,7 @@ export default function Evento({ data }: DATA) {
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [trans, setTrans] = useState(`La compra se esta procesando`)
+  const [trans, setTrans] = useState(`The transaction is being processed`)
   const [algo, setAlgo] = useState(true)
   const router = useRouter()
 
@@ -90,7 +90,7 @@ export default function Evento({ data }: DATA) {
       value: Number(price) * 1000000000,
     })
       .once('receipt', () => {
-        setTrans('transaccion confirmada')
+        setTrans('transaction confirmed')
 
         window.ethereum.request({
           method: 'wallet_watchAsset',
@@ -128,27 +128,25 @@ export default function Evento({ data }: DATA) {
             spacing={4}
           >
             <Text color="gray.500" fontSize="lg">
-              Anda a {eventInfo ? eventInfo.place : ""}
+              Takes place in {eventInfo ? eventInfo.metadata.location : ""}
             </Text>
             <Text color="gray.500" fontSize="lg">
-              Paga {eventInfo ? Number(eventInfo.price) / 1000000000 : ""} ETH
+              The price is {eventInfo ? Number(eventInfo.price) / 1000000000 : ""} ETH
             </Text>
             <Text color="gray.500" fontSize="lg">
-              Dale que quedan {eventInfo ? eventInfo.numberOfTickets : ""}{" "}
-              tickets
+              Just {eventInfo ? eventInfo.numberOfTickets : ""}{" "}
+              tickets left
             </Text>
             <Text color="gray.500" fontSize="lg">
-              Estas el {eventInfo ? eventInfo.metadata.date : ""} ?
+              On {eventInfo ? eventInfo.metadata.date : ""} 
             </Text>
             <Text color="gray.500" fontSize="lg">
-              Es en {eventInfo ? eventInfo.metadata.country : ""}
+              In {eventInfo ? eventInfo.place : ""}, {eventInfo ? eventInfo.metadata.country : ""}
             </Text>
-            <Text color="gray.500" fontSize="lg">
-              Y aca {eventInfo ? eventInfo.metadata.location : ""}
-            </Text>
+            
           </Stack>
         </Stack>
-        {/* un poquito de estilos por aqui en los detalles  */}
+      
         <Flex>
           <Image
             alt="feature image"
@@ -181,7 +179,7 @@ export default function Evento({ data }: DATA) {
           />
           <ModalBody>
             <ModalHeader>
-              Confirmar Compra
+              Confirm transaction
             </ModalHeader>
             {algo ? (<Stack direction="column" mt="0.5rem">
               <Text>
@@ -224,7 +222,7 @@ export default function Evento({ data }: DATA) {
                 fontSize="sm"
                 onClick={() => router.push('/home')}
               >
-                Seguir Explorando
+                Keep exploring
               </Button>}
           </ModalFooter>
         </ModalContent>

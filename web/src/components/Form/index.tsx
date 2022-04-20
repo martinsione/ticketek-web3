@@ -158,22 +158,22 @@ export default function Form() {
           />
           <ModalBody>
             <ModalHeader>
-              Confirmar contrato
+              Confirm event
             </ModalHeader>
             <Stack direction="column" mt="0.5rem">
               {algo 
               ? (
                 <>
-                <Text>Al pulsar el boton se confirma el contrato de:</Text>
-                <Text>Nombre: {info.name}</Text>
-                <Text>Lugar: {info.location}</Text>
-                <Text>Precio: {info.price} ETH</Text>
-                <Text>Fecha: {info.date}</Text>
+                <Text>By pushing the button the event will be confirmed: </Text>
+                <Text>Name: {info.name}</Text>
+                <Text>Place: {info.location}</Text>
+                <Text>Price: {info.price} ETH</Text>
+                <Text>Date: {info.date}</Text>
                 </>
               )
               :
               <>
-                <Text>Se lo redireccionara a la pagina principal...</Text>
+                <Text>You will be redirected to home ...</Text>
                 <Spinner alignSelf="center" size='xl' />
               </> 
               }

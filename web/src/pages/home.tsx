@@ -74,19 +74,19 @@ function Home() {
           data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.name.includes("e")}
           loading={loadingDestacados}
-          title="Destacados"
+          title="Highlights"
         />
         <CardSlider
           data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => dateFilter((events as any ), "month") && ev}
           loading={loadingDestacados}
-          title="Este mes"
+          title="This month"
         />
         <CardSlider
           data={homeStorage.length ? homeStorage : (events as any )}
           fn={(ev: any) => ev.place === "Cordoba"}
           loading={loadingDestacados}
-          title="En Cordoba"
+          title="In Cordoba"
         />
       </main>
     </div>

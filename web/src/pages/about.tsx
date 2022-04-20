@@ -68,7 +68,7 @@ export default function About() {
           >
             Our Story
           </Text>
-          <Heading>A new way to buy and hodl your tickets</Heading>
+          <Heading>A new way to buy and hold your tickets</Heading>
           <Text color="gray.500" fontSize="lg">
             A Henry&apos;s team who wants to change the events industry
           </Text>
