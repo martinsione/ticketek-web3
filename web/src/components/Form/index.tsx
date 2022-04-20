@@ -190,7 +190,7 @@ export default function Form() {
                 fontSize="sm"
                 onClick={() => { onSubmit(info); setAlgo(false); setTimeout(() =>router.push('/home'),5000 )}}
               >
-                {algo? 'Confirmar' : 'Confirmado'}
+                {algo? 'Confirm' : 'Confirmed'}
               </Button>
           
           </ModalFooter>
