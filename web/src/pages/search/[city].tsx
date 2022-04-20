@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeEvent, useEffect, useState } from "react";
+import router from "next/router";
 import { Box, Text } from "@chakra-ui/react";
 
 import { AppState } from "../../redux/store";
 import { filterEvents, getEvents } from "../../redux/actions";
 import FilterBar from "../../components/FilterBar/FilterBar";
 import DatesDropDown from "../../components/FilterBar/DatesDropDown";
+import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
 import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import CardPage from "../../components/CardPage/CardPage";
 
@@ -16,10 +18,10 @@ export default function City({ city }: { city: string }) {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const { events } = useSelector((state: AppState) => state);
-  const cityEvents = (events as any ).filter((ev: any) => ev.place === city);
+  const cityEvents = (events as any).filter((ev: any) => ev.place === city);
 
   useEffect(() => {
-    if (!(events as any ).length) dispatch(getEvents());
+    if (!(events as any).length) dispatch(getEvents());
   }, [events]);
 
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
@@ -32,7 +34,7 @@ export default function City({ city }: { city: string }) {
         category: filterCategory,
       })
     );
-  }, [filterDate, filterCategory]);
+  }, [filterDate, filterCategory, city]);
 
   function handleDate(
     e:
@@ -55,18 +57,30 @@ export default function City({ city }: { city: string }) {
           <CategoriesDropDown fn={handleCategories} />
           {/* eslint-disable-next-line react/jsx-no-bind */}
           <DatesDropDown fn={handleDate} />
+          <CitiesDropDown
+            fn={(e: React.ChangeEvent<HTMLInputElement>) =>
+              router.push(`/search/${e.target.value}`)
+            }
+          />
         </FilterBar>
-        <Text borderBottom="2px" fontSize="3xl">
+        <Text
+          borderBottom="2px"
+          color="white"
+          fontSize="3xl"
+          textAlign="center"
+        >
           {displayTitle}
         </Text>
       </Box>
       {(filteredEvents as any).length ? (
-        <CardPage data={(filteredEvents as any)} />
+        <CardPage data={filteredEvents as any} />
       ) : (
-        <Box textAlign="center">
-          There are no{" "}
-          {filterCategory !== "all" && filterCategory.toLowerCase()} events{" "}
-          {city !== "all" && `for ${city}`} on these dates
+        <Box color="white" h="70vh">
+          <Text fontSize="58px" mt="150px" textAlign="center">
+            There are no{" "}
+            {filterCategory !== "all" && filterCategory.toLowerCase()} events{" "}
+            {city !== "all" && `for ${city}`} on these dates
+          </Text>
         </Box>
       )}
     </>

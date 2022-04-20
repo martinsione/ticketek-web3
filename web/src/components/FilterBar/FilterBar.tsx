@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "@chakra-ui/react";
+import { Button, Link, Stack } from "@chakra-ui/react";
 
 interface CHILDREN {
   children: React.ReactNode;
@@ -17,6 +17,18 @@ export default function FilterBar({ children }: CHILDREN) {
       mt="0.5rem"
     >
       {children}
+      <Link href="/home">
+        <Button
+          _hover={{ bg: "transparent" }}
+          bg="#38665B"
+          border="2px"
+          borderColor="#38665B"
+          borderRadius="30"
+          color="white"
+        >
+          Reset
+        </Button>
+      </Link>
     </Stack>
   );
 }
