@@ -4,6 +4,7 @@ import axios from "axios";
 
 import { userAddress} from "./UserCommands";
 import storeNFT from "./MetadataStorage";
+import {useToast, Box} from '@chakra-ui/react';
 import Ticket from "../../Ticket.json";
 
 
@@ -41,6 +42,7 @@ async function contractDeploy(
     );
   
   const priceContract = new web3.eth.Contract(Ticket.abi as AbiItem[]);
+  const toast = useToast()
     
   const tx = priceContract.deploy({
     data: Ticket.bytecode,
@@ -50,6 +52,16 @@ async function contractDeploy(
   tx.send({
     from: await userAddress(),
   }).on("receipt", async (receipt: any) => {
+
+
+    toast({
+      position: 'bottom-left',
+      render: () => (
+        <Box color='white' p={3} bg='blue.500'>
+          Hello World
+        </Box>
+      ),
+    })
 
     try {
       await axios.post("/api/events", {
@@ -61,7 +73,17 @@ async function contractDeploy(
     } catch (error) {
       // console.error(error);
     }
-  });
+  }).on("error", async (receipt: any) => {
+
+
+    toast({
+      position: 'bottom-left',
+      render: () => (
+        <Box color='white' p={3} bg='blue.500'>
+          apseto
+        </Box>
+      ),
+    })})
 }
 
 // eslint-disable-next-line import/prefer-default-export
