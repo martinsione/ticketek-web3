@@ -99,7 +99,8 @@ export default function Help() {
                         fontSize="26px"
                         fontWeight="normal"
                         opacity={0.5}
-                        width="70vw"
+                        textAlign="center"
+                        width="fit-content"
                     >
                         Add MetaMask extension for Chrome and click on the
                         extension.
@@ -157,7 +158,7 @@ export default function Help() {
                         fontSize="26px"
                         fontWeight="normal"
                         opacity={0.5}
-                        width="40vw"
+                        width="fit-content"
                     >
                         Click next and reveal your secret phrase. Then put your
                         phrase in order.
@@ -269,7 +270,7 @@ export default function Help() {
                 justify="center"
                 minHeight="100vh"
                 paddingTop="3rem"
-                pb="3rem"
+                pb="5rem"
                 rowGap="3rem"
             >
                 <Stack
@@ -290,7 +291,8 @@ export default function Help() {
                         fontSize="26px"
                         fontWeight="normal"
                         opacity={0.5}
-                        width="70vw"
+                        textAlign="center"
+                        width="fit-content"
                     >
                         Select your ticket from explore and then press buy
                         ticket from the detail.
@@ -335,7 +337,7 @@ export default function Help() {
                         fontSize="26px"
                         fontWeight="normal"
                         opacity={0.5}
-                        width="35vw"
+                        width="25vw"
                     >
                         Confirm the buying and then your MetaMask transaction.
                     </Text>
