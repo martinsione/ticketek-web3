@@ -18,7 +18,10 @@ export default function City({ city }: { city: string }) {
   const [filterCategory, setFilterCategory] = useState("all");
 
   const { events } = useSelector((state: AppState) => state);
-  const cityEvents = (events as any).filter((ev: any) => ev.place === city);
+  const cityEvents =
+    city !== "all"
+      ? (events as any).filter((ev: any) => ev.place === city)
+      : events;
 
   useEffect(() => {
     if (!(events as any).length) dispatch(getEvents());
@@ -48,7 +51,7 @@ export default function City({ city }: { city: string }) {
     setFilterCategory(e.target.value);
   }
 
-  const displayTitle: any = city;
+  const displayTitle: any = city !== "all" ? city : "All cities...";
   return (
     <>
       <Box>
