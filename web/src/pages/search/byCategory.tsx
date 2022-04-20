@@ -23,10 +23,13 @@ export default function index() {
     if (!(events as any).length) dispatch(getEvents());
   }, [events]);
 
-  const categoryEvents = (events as any).filter(
-    (ev: any) => ev.metadata.type === query.cat,
-    () => {}
-  );
+  const categoryEvents =
+    query.cat !== "all"
+      ? (events as any).filter(
+          (ev: any) => ev.metadata.type === query.cat,
+          () => {}
+        )
+      : events;
 
   const filteredEvents = useSelector((state: AppState) => state.filterEvents);
 
@@ -52,7 +55,8 @@ export default function index() {
     setFilterCity(e.target.value);
   }
 
-  const displayTitle: any = query.cat;
+  const displayTitle: any =
+    query.cat !== "all" ? query.cat : "All categories...";
 
   return (
     <>
