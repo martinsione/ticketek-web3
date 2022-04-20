@@ -4,11 +4,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Box, Image } from "@chakra-ui/react";
 
 import { AppState, store } from "../../redux/store";
 import { getEvents } from "../../redux/actions";
-import Card from "../../components/Card/Card";
+import CardPage from "../../components/CardPage/CardPage";
 
 interface EVENT {
   name: string;
@@ -114,27 +113,5 @@ export default function Search() {
 
   if (error) return <div style={estilos}>Something went wrong...</div>;
   if (loading) return <div style={estilos}> Cargando...</div>;
-  return (
-    <div>
-      {arrUniq.length &&
-        arrUniq.map(({ metadata, name, place, address }) => (
-          <Card
-            key={name}
-            date={metadata.date}
-            id={address}
-            image={metadata.image}
-            location={place}
-            name={name}
-          >
-            <Box w={200}>
-              <Image alt="" src={metadata.image} />
-            </Box>
-            <div>Artist: {name}</div>
-            <div>Date: {metadata.date}</div>
-            <div>City: {place}</div>
-            <hr />
-          </Card>
-        ))}
-    </div>
-  );
+  return <div>{arrUniq.length && <CardPage data={arrUniq as any} />}</div>;
 }

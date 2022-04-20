@@ -19,35 +19,25 @@ export interface EventInfo {
 }
 
 export default function Card(props: EventInfo) {
-  const {
-    address,
-    name,
-    date,
-    image,
-    price,
-    location,
-    place,
-  } = props
+  const { address, name, date, image, price, location, place } = props;
   const [liked, setLiked] = useState(false);
   const ethValue = 1000000000;
-  const dispatch = useDispatch()
-  const {favs} = useSelector((state: IState) => state)
-  const favCard = favs.find( event => event.address === address)
-  const handleFav = ()=>{
-      setLiked(!liked)
-      if(liked) dispatch(deleteFav(address))
-      if(!liked) dispatch(addFav(props))
-  }
+  const dispatch = useDispatch();
+  const { favs } = useSelector((state: IState) => state);
+  const favCard = favs.find((event) => event.address === address);
+  const handleFav = () => {
+    setLiked(!liked);
+    if (favCard) {
+      dispatch(deleteFav(address));
+    }
+    if (!favCard) {
+      dispatch(addFav(props));
+    }
+  };
 
   return (
     <Stack w="300px">
       <Stack
-        _hover={{
-          position: "absolute",
-          transform: "scale(1.25)",
-          transitionDuration: "300ms",
-          zIndex: 1,
-        }}
         bg="white"
         borderRadius="3xl"
         maxW="300px"
@@ -63,7 +53,9 @@ export default function Card(props: EventInfo) {
           display="none"
           fontSize="xl"
           icon={<AiFillHeart fill={favCard ? "red" : "gray"} />}
+          letterSpacing={0}
           position="absolute"
+          pt="-5px"
           right="15px"
           top="15px"
           onClick={handleFav}
@@ -78,15 +70,7 @@ export default function Card(props: EventInfo) {
               src={image}
               w="300px"
             />
-            <Stack
-              _groupHover={{ display: "flex" }}
-              bg="white"
-              display="none"
-              position="relative"
-              px={5}
-              py={5}
-              transitionDuration="200ms"
-            >
+            <Stack bg="white" px={5} py={5} transitionDuration="200ms">
               <Stack
                 alignItems="start"
                 color="blackAlpha.700"
@@ -109,7 +93,7 @@ export default function Card(props: EventInfo) {
               >
                 <Text>{name}</Text>
                 <Text letterSpacing={0} m={0} p={0} whiteSpace="nowrap">
-                  {price/ethValue} ETH
+                  {price / ethValue} ETH
                 </Text>
               </Stack>
             </Stack>

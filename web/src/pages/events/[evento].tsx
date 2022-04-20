@@ -3,7 +3,7 @@ import type { AppState } from "../../redux/store";
 import Web3 from "web3";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import  { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import {
   Container,
   SimpleGrid,
@@ -15,7 +15,7 @@ import {
   StackDivider,
   useColorModeValue,
   Button,
-  Modal, 
+  Modal,
   ModalContent,
   ModalOverlay,
   useDisclosure,
@@ -23,13 +23,17 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader,
+  Spinner,
 } from "@chakra-ui/react";
 
 import prisma from "../../lib/prisma";
 import { web, userAddress } from "../../components/FunctionalComponents/UserCommands";
 import abi from '../../Ticket.json'
 
+// antes de que se active buy en el modal, averiguar por la verificacion de ser un humano para activarlo al buy
 
+// estilos a los detalles
+// estilos a los modales en general
 
 interface DATA {
   data: {
@@ -68,48 +72,43 @@ export default function Evento({ data }: DATA) {
     (e: { address: string }) => e.address === data.address
   );
 
-  const {isOpen, onOpen, onClose} = useDisclosure()
-  const [trans, setTrans] = useState('La compra se esta procesando')
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [trans, setTrans] = useState(`La compra se esta procesando`)
   const [algo, setAlgo] = useState(true)
   const router = useRouter()
 
-  
-   
-
-
-
   const buyTicket = async (address: string, price: number) => {
     let web3 = web
-    
+
     if (window?.ethereum) {
       web3 = new Web3(window.ethereum);
-    } 
+    }
     const contract = new web3.eth.Contract(abi.abi as any, address);
-    
+
     await contract.methods.safeMint().send({
       from: await userAddress(),
-      value: Number(price)*1000000000,
+      value: Number(price) * 1000000000,
     })
-    .once('receipt', () =>{
-      setTrans('transaccion confirmada')
+      .once('receipt', () => {
+        setTrans('transaccion confirmada')
 
-      window.ethereum.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: data.address,
-            symbol: data.symbol,
-            decimals: 10,
-            image: eventInfo.metadata.image
+        window.ethereum.request({
+          method: 'wallet_watchAsset',
+          params: {
+            type: 'ERC20',
+            options: {
+              address: data.address,
+              symbol: data.symbol,
+              decimals: 0,
+              image: eventInfo.metadata.image
+            },
           },
-        },
-      })
-      router.push('/home');
+        })
+        router.push('/home');
 
-    })
-    .on('error', () => { setTrans('error en transacacion')});
-    
+      })
+      .on('error', () => { setAlgo(true) })
+
   }
 
   return (
@@ -149,6 +148,7 @@ export default function Evento({ data }: DATA) {
             </Text>
           </Stack>
         </Stack>
+        {/* un poquito de estilos por aqui en los detalles  */}
         <Flex>
           <Image
             alt="feature image"
@@ -171,27 +171,62 @@ export default function Evento({ data }: DATA) {
 
       <Modal isOpen={isOpen} onClose={onClose} >
         <ModalOverlay />
-        <ModalContent>
-            <ModalCloseButton/>
-              <ModalBody>
-               <ModalHeader>
-                    Confirmar Compra
-                </ModalHeader>
-                {algo ? (<p>
-                  Event: {data.name}  <br/>
-                  Place: {eventInfo.metadata.location}  <br/>  
-                  Date {eventInfo.metadata.date} <br/>
-                  Price {eventInfo.price / 1000000000} ETH  <br/>
-                </p>) : <h1>{trans}</h1>}
-              </ModalBody>
-            <ModalFooter>
-              {algo ? <Button onClick={() => {buyTicket(data.address, eventInfo.price); setAlgo(false)}}>
+        <ModalContent borderRadius="30px" mt="12rem">
+          <ModalCloseButton
+            _hover={{ bgGradient: "linear(to-tr, #fff 0%, #FF0000 100%)" }}
+            bgGradient="linear(to-tr, #73E0A9 0%, #5B68DF 100%)"
+            borderRadius="full"
+            color="white"
+            m="0.5rem"
+          />
+          <ModalBody>
+            <ModalHeader>
+              Confirmar Compra
+            </ModalHeader>
+            {algo ? (<Stack direction="column" mt="0.5rem">
+              <Text>
+                Event: {data.name}
+              </Text>
+              <Text>
+                Place: {eventInfo.metadata.location}
+              </Text>
+              <Text>
+                Date {eventInfo.metadata.date}
+              </Text>
+              <Text>
+                Price {eventInfo.price / 1000000000} ETH
+              </Text>
+            </Stack>) :
+              <Stack align="center" direction="column" gap="1rem">
+                <Text fontSize="18px" mt="0.5rem">
+                  {trans}
+                </Text>
+                <Spinner alignSelf="center" size='xl' />
+              </Stack>}
+          </ModalBody>
+          <ModalFooter>
+            {algo ?
+              <Button
+                _hover={{ bg: "#5B68DF" }}
+                bg="#73E0A9"
+                borderRadius="full"
+                color="white"
+                fontSize="sm"
+                onClick={() => { buyTicket(data.address, eventInfo.price); setAlgo(false) }}
+              >
                 Buy
               </Button> :
-              <Button  onClick={() => router.push('/home')}>
-                  Seguir Explorando
-              </Button> }
-            </ModalFooter>
+              <Button
+                _hover={{ bg: "#5B68DF" }}
+                bg="#73E0A9"
+                borderRadius="full"
+                color="white"
+                fontSize="sm"
+                onClick={() => router.push('/home')}
+              >
+                Seguir Explorando
+              </Button>}
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </Container>
