@@ -95,7 +95,7 @@ export default function About() {
             <Feature
               icon={<Icon as={IoLockClosed} color="purple.500" h={5} w={5} />}
               iconBg={useColorModeValue("purple.100", "purple.900")}
-              text="Segurity during all the process"
+              text="Security during all the process"
             />
           </Stack>
         </Stack>

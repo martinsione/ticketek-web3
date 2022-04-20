@@ -41,7 +41,8 @@ export default function rootReducer(state: IState = initialState, action: IActio
 
   switch (action.type) {
     case "ADD_FAV": {
-      const findEvent = state.favs.find(event => event.address !== action.payload.addres)
+      const findEvent = state.favs.find(event => event.address === action.payload.addres)
+      console.log(findEvent, "evento encontrado")
       if(!findEvent) return {...state, favs: [...state.favs, action.payload]};
       return state
     }
