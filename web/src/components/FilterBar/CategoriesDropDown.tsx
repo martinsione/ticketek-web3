@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { Select } from "@chakra-ui/react";
 
 import { IState } from "../../redux/reducer";
@@ -12,6 +13,12 @@ interface FUNC {
 export default function CategoriesDropDown({ fn }: FUNC) {
   const dispatch = useDispatch();
   const { categories, events } = useSelector((state: IState) => state);
+  const { query } = useRouter();
+  const [category, setCategory] = useState(query.title); // Parece no tener sentido (title no existe), pero forza el render cuando cambia
+
+  useEffect(() => {
+    setCategory(query.cat);
+  }, []);
 
   useEffect(() => {
     if (!(categories as any).length) {
@@ -30,10 +37,17 @@ export default function CategoriesDropDown({ fn }: FUNC) {
       // p="10px"
       onChange={fn}
     >
-      <option style={{ backgroundColor: "#38665B" }} value="all">All categories...</option>
+      <option style={{ backgroundColor: "#38665B" }} value="all">
+        All categories...
+      </option>
       {categories &&
         categories.map((type: string) => (
-          <option key={type} style={{ backgroundColor: "#38665B" }} value={type}>
+          <option
+            key={type}
+            selected={!!(category && category === type)}
+            style={{ backgroundColor: "#38665B" }}
+            value={type}
+          >
             {type}
           </option>
         ))}

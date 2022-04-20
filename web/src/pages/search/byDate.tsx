@@ -2,12 +2,13 @@ import type { AppState } from "../../redux/store";
 
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import router, { useRouter } from "next/router";
 import { Box, Text } from "@chakra-ui/react";
 
 import { filterEvents, getEvents } from "../../redux/actions";
 import dateFilter from "../../components/Functional Components/dateFilter";
 import FilterBar from "../../components/FilterBar/FilterBar";
+import DatesDropDown from "../../components/FilterBar/DatesDropDown";
 import CitiesDropDown from "../../components/FilterBar/CitiesDropDown";
 import CategoriesDropDown from "../../components/FilterBar/CategoriesDropDown";
 import CardPage from "../../components/CardPage/CardPage";
@@ -24,12 +25,12 @@ export default function byDate() {
   const { events } = useSelector((state: AppState) => state);
 
   useEffect(() => {
-    if (!(events as any ).length) dispatch(getEvents());
+    if (!(events as any).length) dispatch(getEvents());
   }, [events]);
 
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const dateEvents = dateFilter(
-    useSelector((state: AppState) => (state.events as any)),
+    useSelector((state: AppState) => state.events as any),
     query.opt
   );
 
@@ -41,7 +42,7 @@ export default function byDate() {
         category: filterCategory,
       })
     );
-  }, [filterCategory, filterCity]);
+  }, [filterCategory, filterCity, query.opt]);
 
   function handleCategories(
     e:
@@ -53,6 +54,27 @@ export default function byDate() {
 
   function handleCities(e: React.ChangeEvent<HTMLInputElement>) {
     setFilterCity(e.target.value);
+  }
+  function handleDates(
+    e:
+      | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement>
+  ) {
+    if (e.target.id === "presetDate") {
+      router.push({
+        pathname: "/search/byDate",
+        query: {
+          opt: e.target.value,
+          // @ts-ignore
+          title: e.target[e.target.selectedIndex].innerText,
+        },
+      });
+    } else {
+      router.push({
+        pathname: "/search/byDate",
+        query: { opt: e.target.value },
+      });
+    }
   }
 
   const displayTitle = query.title
@@ -66,19 +88,29 @@ export default function byDate() {
           {/* eslint-disable-next-line react/jsx-no-bind */}
           <CategoriesDropDown fn={handleCategories} />
           {/* eslint-disable-next-line react/jsx-no-bind */}
+          <DatesDropDown fn={handleDates} />
+          {/* eslint-disable-next-line react/jsx-no-bind */}
           <CitiesDropDown fn={handleCities} />
         </FilterBar>
-        <Text borderBottom="2px" fontSize="3xl">
+
+        <Text
+          borderBottom="2px"
+          color="white"
+          fontSize="3xl"
+          textAlign="center"
+        >
           {displayTitle}
         </Text>
       </Box>
       {(filteredEvents as any).length ? (
-        <CardPage data={(filteredEvents as any)} />
+        <CardPage data={filteredEvents as any} />
       ) : (
-        <Box textAlign="center">
-          There are no{" "}
-          {filterCategory !== "all" && filterCategory.toLowerCase()} events{" "}
-          {filterCity !== "all" && `for ${filterCity}`} on these dates
+        <Box color="white" h="70vh">
+          <Text fontSize="58px" mt="150px" textAlign="center">
+            There are no{" "}
+            {filterCategory !== "all" && filterCategory.toLowerCase()} events{" "}
+            {filterCity !== "all" && `for ${filterCity}`} on these dates{" "}
+          </Text>
         </Box>
       )}
     </>
