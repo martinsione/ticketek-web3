@@ -5,8 +5,9 @@ export default async function Auth(
   callbackError: () => void,
   callbackSuccess: () => void
 ) {
-  verify(token, process.env.SECRET_WORD as string, async (error) => {
-    if (error) return callbackError();
-    return callbackSuccess();
+  verify(token, process.env.ADMIN_WORD as string, async (error) => {
+    if (error) {
+      callbackError();
+    } else callbackSuccess();
   });
 }
