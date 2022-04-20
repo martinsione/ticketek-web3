@@ -99,7 +99,7 @@ export default function Evento({ data }: DATA) {
             options: {
               address: data.address,
               symbol: data.symbol,
-              decimals: 10,
+              decimals: 0,
               image: eventInfo.metadata.image
             },
           },
