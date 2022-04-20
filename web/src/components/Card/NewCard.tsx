@@ -35,8 +35,10 @@ export default function Card(props: EventInfo) {
   const favCard = favs.find( event => event.address === address)
   const handleFav = ()=>{
       setLiked(!liked)
-      if(liked) dispatch(deleteFav(address))
-      if(!liked) dispatch(addFav(props))
+      if(favCard){
+        dispatch(deleteFav(address))}
+      if(!favCard) {
+        dispatch(addFav(props))}
   }
 
   return (
@@ -109,7 +111,7 @@ export default function Card(props: EventInfo) {
               >
                 <Text>{name}</Text>
                 <Text letterSpacing={0} m={0} p={0} whiteSpace="nowrap">
-                  {price/ethValue} ETH
+                  {price / ethValue} ETH
                 </Text>
               </Stack>
             </Stack>
