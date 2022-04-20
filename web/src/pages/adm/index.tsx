@@ -91,13 +91,13 @@ function User() {
   const {events} = useSelector((state: IState) => state);
 
   async function getAdd(){
-    const allAdd = axios.get("/api/addresses")
+    const allAdd = axios.get("/api/users")
     return allAdd
     }
     
     useEffect(()=>{
         dispatch(getEvents())
-        getAdd().then(res => setUsers(res.data))
+        getAdd().then(res => setUsers(res.data.message))
     },[])
     
 
@@ -192,12 +192,12 @@ function User() {
                       </Tr>
                     </Thead>
                     <Tbody>
-                            {users.length && users.map((u: string) => {
+                            {users.length && users.map((u: any) => {
                                 console.log(u)
                                 return(
                                     <Tr>
                                         <Td>
-                                            <Button color="teal" onClick={() => {getAct(u); onOpen();}}>{u}</Button>
+                                            <Button color="teal" onClick={() => {getAct(u.walletAddress); onOpen();}}>{u.walletAddress}</Button>
                                         </Td>
                                         <Modal isOpen={isOpen} onClose={onClose}>
                                             <ModalOverlay />
@@ -253,10 +253,10 @@ function User() {
                                             </ModalContent>
                                         </Modal>
                                         <Td>
-                                            <Text color="teal" onClick={onOpen}>{u}</Text>
+                                            <Text color="teal" onClick={onOpen}>{u.name}</Text>
                                         </Td>
                                         <Td>
-                                            <Text color="teal" onClick={onOpen}>{u}</Text>
+                                            <Text color="teal" onClick={onOpen}>{u.email}</Text>
                                         </Td>
                                     </Tr>
                                     
