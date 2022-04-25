@@ -36,10 +36,12 @@ export default async function handler(
     //   GET para traer todos los eventos
     // const response = await prisma.contract.findMany();
     // return res.status(200).json(response);
-    const addresses = (await prisma.contract.findMany()).map((e) => e.address);
+    const addresses = (await prisma.contract.findMany()).map(
+      (e: { address: string }) => e.address
+    );
     // eslint-disable-next-line @typescript-eslint/return-await
-    const data = addresses.map(async (e) => await getEventData(e));
-    const data2 = await Promise.all(data.map((e) => e)).then((r) => r);
+    const data = addresses.map(async (e: string) => await getEventData(e));
+    const data2 = await Promise.all(data.map((e: {}) => e)).then((r) => r);
     return res.status(200).json(data2);
   } catch (error) {
     return res.status(400).json({ error });
