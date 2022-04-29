@@ -1,7 +1,7 @@
 # NFTicket 🎫
 
 ### About �
-Tickets marketplace for all kind of events. Empowered by the Blockchain
+Tickets marketplace for all kind of events. Powered by the Blockchain
 ### Why NFT? 
 - Incomes directly linked to the artists 💸
 - Buy now and hodl for ever. Your ticket could became an invaluable collection piece 🎟
