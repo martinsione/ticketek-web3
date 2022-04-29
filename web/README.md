@@ -1,37 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NFTicket 🎫
 
-## Getting Started
+## About �
+Tickets marketplace for all kind of events. Empowered by the Blockchain
+Why NFT? 
+- Incomes directly linked to the artists 💸
+- Buy now and hodl for ever. Your ticket could became an invaluable collection piece 🎟
+- Security and transparency during all the process 🔐
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment
+The proyect is already deployed with Vercel. Check it on the following link
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+💻<a>https://nf-tickets.vercel.app/</a>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🛠 Build with:
+- Next.js
+- Redux
+- Typescript
+- Prisma
+- web3.js
+- Solidity
+- Chakra 
+    
+## The dream team 🌠
+<div style="display: flex">
+<a href="https://github.com/alejorrojas">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/alejorrojas.png">
+</a>
+<a href="https://github.com/diegozestudio">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/diegozestudio.png">
+</a>
+<a  href="https://github.com/martinsione">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/martinsione.png">
+</a>
+<a  href="https://github.com/francoa7">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/francoa7.png">
+</a>
+<a href="https://github.com/fedeprat">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/fedeprat.png">
+</a>
+<a  href="https://github.com/AlfredoBlanco" >
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/AlfredoBlanco.png">
+</a>
+<a  href="https://github.com/LNFrettes">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/LNFrettes.png">
+</a>
+<a  href="https://github.com/thecandybars">
+<img style="height: 100px; border-radius: 999px;  margin: 0 10px"  src="https://github.com/thecandybars.png">
+</div>
+</a>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+# Final View
+<img src='./src/assets/readme-img/nft-ticket (6).png' />
+<img src='./src/assets/readme-img/nft-ticket (7).png' />
+<img src='./src/assets/readme-img/nft-ticket (1).png' />
+<img src='./src/assets/readme-img/nft-ticket (5).png' />
+<img src='./src/assets/readme-img/nft-ticket (2).png' />
+<img src='./src/assets/readme-img/nft-ticket (3).png' />
+<img src='./src/assets/readme-img/nft-ticket (4).png' />
 
-# .env
-DATABASE_URL="postgres://postgres:17273747576777@localhost/nfticket" <br>
-REACT_APP_BASE_URL="http://localhost:3000"
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  
