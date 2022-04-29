@@ -6,6 +6,7 @@ Tickets marketplace for all kind of events. Powered by the Blockchain
 - Incomes directly linked to the artists 💸
 - Buy now and hodl for ever. Your ticket could became an invaluable collection piece 🎟
 - Security and transparency during all the process 🔐
+- No more imitation or fake entries issues. NFTs are unique 🔖
 
 
 
